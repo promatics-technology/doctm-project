@@ -1,0 +1,93 @@
+/*section 3*/
+.sec-3{
+    margin-top:50px;
+}
+.card-1{
+    width: 100%;
+    background: #00b0f0;
+    border-radius: 22px;
+    text-align: center;
+    margin:30px 0px; 
+    -webkit-box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.75);
+-moz-box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.75);
+box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.75);
+}
+.card-1 h3{
+    margin:0px;
+    line-height: 6;
+}
+.card-2{
+    background-color:#00f099; 
+}
+.card-3{
+    background-color:#f44336; 
+}
+.card-4{
+    background: #673ab7;
+}
+.anc_card,
+.anc_card:hover,
+.anc_card:active,
+.anc_card:focus{
+    display: block;
+    color:#ffff;
+    text-decoration: none;
+}
+
+/*ends*/
+
+/*sec-4*/
+.pay_tabs ul li{
+    width:100%;
+    margin-bottom:15px;
+}
+.pay_tabs ul.nav-tabs{
+    border-bottom:transparent;
+}
+.pay_tabs ul li a{
+    border: 1px solid #929292;
+    border-radius: 5px;
+    color:#929292;
+    font-size:20px; 
+}
+.pay_tabs ul li.active a{
+    background: #00b0f0;
+    font-size: 20px;
+    color: #fff;
+    border-color: #00b0f0;
+}
+.card_data{
+    background: #fff; 
+    -webkit-box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.75);
+    box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.75);
+    padding:15px 8em; 
+    position: relative;
+    overflow:hidden; 
+}
+.main_hd{
+    padding-bottom:15px;
+    margin-top: 0px;
+    border-bottom: 4px solid #00b0f0; 
+}
+.pay_inner ul li{
+    width:50%;
+    margin-bottom:15px;
+}
+.pay_inner ul.nav-tabs{
+    border-bottom:transparent;
+}
+.pay_inner ul li a{
+    border:transparent;
+    border-bottom:4px solid #929292;
+    color:#929292;
+    font-size:18px; 
+    border-radius:0px; 
+}
+.pay_inner ul li.active a{
+    background: #fff;
+    font-size: 18px;
+    color:  #000;
+    border-radius:0px; 
+    border-bottom-color: #00b0f0;
+}

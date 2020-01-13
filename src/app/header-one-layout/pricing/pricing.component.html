@@ -1,0 +1,196 @@
+<div class="loader-box" *ngIf="loading">
+    <img src="./assets/imgs/load.gif" />
+</div>
+<div class="container">
+  <div class="row">
+     <div class="col-lg-12">
+         <div id="generic_price_table">   
+            <section>
+             <div class="container">
+             </div>
+             <div class="container">
+              <!--BLOCK ROW START-->
+              <div class="row">
+                <div class="col-md-4" id="kk1">
+
+                    <!--PRICE CONTENT START-->
+                    <div class="generic_content clearfix">
+
+                        <!--HEAD PRICE DETAIL START-->
+                        <div class="generic_head_price clearfix">
+
+                            <!--HEAD CONTENT START-->
+                            <div class="generic_head_content clearfix">
+
+                                <!--HEAD START-->
+                                <div class="head_bg"></div>
+                                <div class="head">
+                                    <span>Monthly</span><span style="font-size:18px;font-weight:400;letter-spacing:3px;vertical-align:bottom;">PLAN</span>
+                                </div>
+                                <!--//HEAD END-->
+                                
+                            </div>
+                            <!--//HEAD CONTENT END-->
+                            
+                            <!--PRICE START-->
+                            <div class="generic_price_tag clearfix">    
+                                <span class="price">
+                                    <span class="sign">₹ </span>
+                                    <span class="currency">{{getData(monthlyAmount)}}</span>
+                                    <span class="month">/MON</span>
+                                </span>
+                            </div>
+                            <!--//PRICE END-->
+                            
+                        </div>                            
+                        <!--//HEAD PRICE DETAIL END-->
+                        
+                        <!--FEATURE LIST START-->
+                        <div class="generic_feature_list">
+                            <ul *ngFor = "let list of oneMonth[0] | slice: 0:4; let i = index"  >
+                                <li *ngIf="list.services_name">
+                                    <div>
+                                        <label class="cstm-chk">
+                                          <input type="checkbox"  [checked]="returnStatus[i]" (change)="oneMonthData(list.monthlyPlan, $event, list)" [(ngModel)]='list.monthly'/>
+                                          <span class="checkmark"></span>
+                                      </label>
+                                  </div>{{list.services_name}} - ₹ {{getData(list.monthlyPlan)}} </li>
+                              </ul>
+                          </div>
+                          <!--//FEATURE LIST END-->
+
+                          <!--BUTTON START-->
+                          <div class="generic_price_btn clearfix">
+                            <a class="" (click) = "monthlySubscribe()">Sign Up</a>
+                        </div>
+                        <!--//BUTTON END-->
+                        
+                    </div>
+                    <!--//PRICE CONTENT END-->  
+                </div>
+                <div class="col-md-4" id="kk2">
+
+                    <!--PRICE CONTENT START-->
+                    <div class="generic_content active clearfix">
+
+                        <!--HEAD PRICE DETAIL START-->
+                        <div class="generic_head_price clearfix">
+
+                            <!--HEAD CONTENT START-->
+                            <div class="generic_head_content clearfix">
+
+                                <!--HEAD START-->
+                                <div class="head_bg"></div>
+                                <div class="head">
+                                    <span>Quarterly</span><span style="font-size:18px;font-weight:400;letter-spacing:3px;vertical-align:bottom;">PLAN</span>
+                                </div>
+                                <!--//HEAD END-->
+                                
+                            </div>
+                            <!--//HEAD CONTENT END-->
+                            
+                            <!--PRICE START-->
+                            <div class="generic_price_tag clearfix">    
+                                <span class="price">
+                                    <span class="sign">₹ </span>
+                                    <span class="currency">{{getData(quarterlyAmount)}}</span>
+                                    <!-- <span class="cent">.99</span> -->
+                                    <span class="month">/Quarter</span>
+                                </span>
+                            </div>
+                            <!--//PRICE END-->
+                            
+                        </div>                            
+                        <!--//HEAD PRICE DETAIL END-->
+                        
+                        <!--FEATURE LIST START-->
+                        <div class="generic_feature_list">
+                            <ul *ngFor = "let list of sixMonths[0] | slice: 0:4; let i = index" >
+                                <li *ngIf="list.services_name">
+                                   <div>
+                                    <label class="cstm-chk">
+                                      <input type="checkbox" id='2'  [checked]="returnStatus[i]" (change)="sixMonthData(list.quarterPlan, $event, list)" [(ngModel)]='list.quarterly'>
+                                      <span class="checkmark"></span>
+                                  </label>
+                              </div> 
+                          {{list.services_name}} - ₹ {{getData(list.quarterPlan)}}</li>
+                      </ul>
+                  </div>
+                  <!--//FEATURE LIST END-->
+
+                  <!--BUTTON START-->
+                  <div class="generic_price_btn clearfix">
+                    <a class="" (click) = "quaterlySubscribe()">Sign Up</a>
+                </div>
+                <!--//BUTTON END-->
+
+            </div>
+            <!--//PRICE CONTENT END-->
+        </div>
+        <div class="col-md-4" id="kk3">
+
+            <!--PRICE CONTENT START-->
+            <div class="generic_content clearfix">
+
+                <!--HEAD PRICE DETAIL START-->
+                <div class="generic_head_price clearfix">
+
+                    <!--HEAD CONTENT START-->
+                    <div class="generic_head_content clearfix">
+
+                        <!--HEAD START-->
+                        <div class="head_bg"></div>
+                        <div class="head">
+                            <span>Yearly</span><span style="font-size:18px;font-weight:400;letter-spacing:3px;vertical-align:bottom;">PLAN</span>
+                        </div>
+                        <!--//HEAD END-->
+
+                    </div>
+                    <!--//HEAD CONTENT END-->
+
+                    <!--PRICE START-->
+                    <div class="generic_price_tag clearfix">    
+                        <span class="price">
+                            <span class="sign">₹ </span>
+                            <span class="currency">{{getData(yearlyAmount)}}</span>
+                            <!-- <span class="cent">.99</span> -->
+                            <span class="month">/Yearly</span>
+                        </span>
+                    </div>
+                    <!--//PRICE END-->
+
+                </div>                            
+                <!--//HEAD PRICE DETAIL END-->
+
+                <!--FEATURE LIST START-->
+                <div class="generic_feature_list">
+                    <ul *ngFor = "let list of oneYear[0] | slice: 0:4; let i = index;">
+                        <li *ngIf="list.services_name">
+                           <div>
+                            <label class="cstm-chk">
+                              <input type="checkbox" id='3'  [checked]="returnStatus[i]" (change)="oneYearData(list.annualPlan, $event, list)" [(ngModel)]='list.yearly'>
+                              <span class="checkmark"></span>
+                          </label>
+                      </div> 
+                  {{list.services_name}} - ₹ {{getData(list.annualPlan)}}</li>
+              </ul>
+          </div>
+          <!--//FEATURE LIST END-->
+
+          <!--BUTTON START-->
+          <div class="generic_price_btn clearfix">
+            <a class="" (click) = "yearlySubscribe()">Sign Up</a>
+        </div>
+        <!--//BUTTON END-->
+
+    </div>
+    <!--//PRICE CONTENT END-->    
+</div>
+</div>  
+<!--//BLOCK ROW END-->
+</div>
+</section>             
+</div>
+</div>
+</div>
+</div>

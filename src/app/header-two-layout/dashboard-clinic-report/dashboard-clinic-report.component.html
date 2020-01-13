@@ -1,0 +1,1622 @@
+<div class="loader-box" *ngIf="loading">
+	<img src="./assets/imgs/load.gif" />
+</div>
+<div class="ipd-body">
+	<div class="cus-sidebar-wrapper side-bar-cstm">
+		<div class="cus-sidebar">
+			<ul> 
+				<li>
+					<div class="">
+						<div class="col-lg-3">
+							<h4 class="pd-left"><b>From</b></h4>
+						</div>
+						<div class="col-lg-9">
+							<div class="cstm-mg">
+								<angular2-date-picker [(ngModel)]="fromDate1" [settings]="settings"></angular2-date-picker>
+							</div>
+						</div>
+					</div>
+				</li>
+				<li>
+					<div class="">
+						<div class="col-lg-3">
+							<h4 class="pd-left"><b>To</b></h4>
+						</div>
+						<div class="col-lg-9">
+							<div class="cstm-mg">
+								<angular2-date-picker [(ngModel)]="toDate1" [settings]="settings"></angular2-date-picker>
+							</div>
+						</div>
+					</div>
+				</li>
+				<li class="text-right brder-cstm">
+					<div class="col-lg-12 text-center">
+						<button class="btn btn-go" (click)="go()">Go</button>
+					</div>
+				</li>
+				<li class="li-cstm"> <a href="javascript:void(0);"> For Past</a> </li>
+				<!-- <li class="{{getClass(0)}}" (click)="activatetab(0)" class="active"> <a href="javascript:void(0);"> Current </a> </li> -->
+				<li class="{{getClass(1)}}" (click)="activatetab(1)"> <a href="javascript:void(0);"> 1 Week &nbsp;<small *ngIf="activatedtab==1">({{fromDate | date: 'dd/LL/yy'}} - {{toDate | date: 'dd/LL/yy'}})</small> </a> </li>
+				<li class="{{getClass(2)}}" (click)="activatetab(2)"> <a href="javascript:void(0);"> 2 Weeks &nbsp;<small *ngIf="activatedtab==2">({{fromDate | date: 'dd/LL/yy'}} - {{toDate | date: 'dd/LL/yy'}})</small>  </a> </li>
+				<li class="{{getClass(3)}}" (click)="activatetab(3)"> <a href="javascript:void(0);"> 1 Month &nbsp;<small *ngIf="activatedtab==3">({{fromDate | date: 'dd/LL/yy'}} - {{toDate | date: 'dd/LL/yy'}})</small> </a> </li>
+				<li class="{{getClass(4)}}" (click)="activatetab(4)"> <a href="javascript:void(0);"> 3 Month &nbsp;<small *ngIf="activatedtab==4">({{fromDate | date: 'dd/LL/yy'}} - {{toDate | date: 'dd/LL/yy'}})</small></a> </li>
+				<li class="{{getClass(5)}}" (click)="activatetab(5)"> <a href="javascript:void(0);"> 6 Month &nbsp;<small *ngIf="activatedtab==5">({{fromDate | date: 'dd/LL/yy'}} - {{toDate | date: 'dd/LL/yy'}})</small></a> </li>
+				<li class="{{getClass(6)}}" (click)="activatetab(6)"> <a href="javascript:void(0);"> 1 Year &nbsp;<small *ngIf="activatedtab==6">({{fromDate | date: 'dd/LL/yy'}} - {{toDate | date: 'dd/LL/yy'}})</small></a> </li>
+				<!-- <li class="{{getClass(7)}}" (click)="activatetab(7)"> <a href="javascript:void(0);"> All </a> </li> -->
+			</ul>
+		</div>
+	</div>
+	<div class="stock-tab">
+		<div class="col-lg-8 col-lg-offset-3 col-md-8 col-md-offset-3">
+			<div class="row">
+				<div class="col-lg-8 col-lg-offset-2 text-center">
+					<label class="cstm-chkmark">Summary Report
+						<input type="radio" [checked]="!radioFull" name="radio" (click)="changeRadio(1)">
+						<span class="checkmark"></span>
+					</label>
+					<label class="cstm-chkmark">Full Report
+						<input type="radio" [checked]="radioFull" name="radio" (click)="changeRadio(2)">
+						<span class="checkmark"></span>
+					</label>
+				</div>
+			</div>
+			<div class="cstm-tab-5">
+				<div  class="opd-report" style="page-break-after: always;height:970px;border:1px solid #000;margin-bottom:10px;position:relative;padding:25x;">
+					<div style="position: absolute;top:10px;right: 10px;">
+						<img src="./assets/imgs/logoDoctm.png" style="width:30px;height: auto;">
+					</div>
+					<div style="position: absolute;bottom: 0;left:0;background-color: #fff;width:100%;text-align: center;padding: 5px 0px;">
+						doctm “ Where technology meets healthcare”
+					</div>
+					<table style="width:100%; max-width: 100%; margin-bottom: 10px;">
+						<tr>
+							<td style="text-align: center;">
+								<img src="./assets/imgs/logoDoctm.png" style="width:160px;height: auto;margin: 20px 0px;">
+								<h4 style="margin: 0px;"><b>Doctm Clinic Report</b></h4><br><br><br>
+								<div><h3 style="color:#00b0f0;">{{adminClinicDoctor[0]?.clinic_details?.clinic_name}}</h3></div><br><br><br>
+								<h4 style="color:grey;">{{adminClinicDoctor[0]?.clinic_details?.address}} {{adminClinicDoctor[0]?.clinic_details?.area}} </h4>
+								<h4 style="color:grey;">{{adminClinicDoctor[0]?.clinic_details?.city}}</h4>
+								<h5 style="color:grey;">Clinic ID: {{adminClinicDoctor[0]?.clinic_details?.clinic_id}}</h5><br><br><br>
+								<h3>
+									<b *ngIf="activatedtab === 1">1 Week</b>
+									<b *ngIf="activatedtab === 2">2 Weeks</b>
+									<b *ngIf="activatedtab === 3">1 Month</b>
+									<b *ngIf="activatedtab === 4">3 Months</b>
+									<b *ngIf="activatedtab === 5">6 Months</b>
+									<b *ngIf="activatedtab === 6">1 Year</b>
+									<br>
+									<p style="font-size: 14px;">
+										({{fromDate1 | date: 'd'}}<sup>th</sup> {{fromDate1 | date: 'MMM'}} - {{toDate1 | date: 'd'}}<sup>th</sup> {{toDate1 | date: 'MMM'}}, {{fromDate1 | date: 'yyyy'}})
+									</p>
+								</h3>
+							</td>
+						</tr>
+					</table>
+				</div>
+				<div  class="opd-report" style="page-break-after: always;height:970px;border:1px solid #000;margin-bottom:10px;position:relative;padding:25x;">
+					<table style="width: 100%; margin:10px auto;">
+						<tr>
+							<td style="text-align: center;" colspan="4">
+								<h3 style="color:#00b0f0;text-transform: uppercase;"><b>CONTENT</b></h3>
+							</td>
+						</tr>
+						<tr style="border: 1px solid #989898; border-left:none;border-right: none;">
+							<td style="padding:8px;">SR NO</td>
+							<td style="padding:8px;">Chapter</td>
+							<td style="padding:8px;"><b>:</b></td>
+							<td style="padding:8px;"><b>Page</b></td>
+						</tr>
+						<tr *ngFor="let content of rpt_content; let i=index">
+							<td style="padding:8px;">{{i+1}}</td>
+							<td style="padding:8px;">{{content.col2}}</td>
+							<td style="padding:8px;"><b>{{content.col3}}</b></td>
+							<td style="padding:8px;"><b>{{i+1}}</b></td>
+						</tr>
+						<!--tr *ngIf="doctorData.clinic_services.Clinic_Pharmacy==true">
+							<td style="padding:8px;">2</td>
+							<td style="padding:8px;">Pharmacy Report</td>
+							<td style="padding:8px;"><b>:</b></td>
+							<td style="padding:8px;"><b>2</b></td>
+						</tr>
+						<tr *ngIf="doctorData.clinic_services.Clinic_Diagnostics==true">
+							<td style="padding:8px;">3</td>
+							<td style="padding:8px;">Diagnostic Report</td>
+							<td style="padding:8px;"><b>:</b></td>
+							<td style="padding:8px;"><b>3</b></td>
+						</tr>
+						<tr *ngIf="doctorData.clinic_services.Clinic_IPD==true">
+							<td style="padding:8px;">4</td>
+							<td style="padding:8px;">IPD Report</td>
+							<td style="padding:8px;"><b>:</b></td>
+							<td style="padding:8px;"><b>3</b></td>
+						</tr>
+						<tr>
+							<td style="padding:8px;">5</td>
+							<td style="padding:8px;">Clinic Summary Report</td>
+							<td style="padding:8px;"><b>:</b></td>
+							<td style="padding:8px;"><b>3</b></td>
+						</tr>
+						<tr>
+							<td style="padding:8px;">6</td>
+							<td style="padding:8px;">Annexure-1</td>
+							<td style="padding:8px;"><b>:</b></td>
+							<td style="padding:8px;"><b></b></td>
+						</tr>
+						<tr>
+							<td style="padding:8px;">7</td>
+							<td style="padding:8px;">Annexure-2</td>
+							<td style="padding:8px;"><b>:</b></td>
+							<td style="padding:8px;"><b></b></td>
+						</tr>
+						<tr>
+							<td style="padding:8px;">8</td>
+							<td style="padding:8px;">Annexure-3</td>
+							<td style="padding:8px;"><b>:</b></td>
+							<td style="padding:8px;"><b></b></td>
+						</tr-->
+					</table>	
+				</div>
+				<div class="opd-report" style="page-break-after: always;height:970px;border:1px solid #000;margin-bottom:10px;position:relative;padding:25x;">
+					<table style="width:100%; max-width: 100%; margin-bottom: 10px;">
+						<tr>
+							<td style="text-align: center;" colspan="7">
+							<h4 style="color:#00b0f0;border-bottom:1px solid #00b0f0; display: inline-block;margin-bottom: 10px;text-transform: uppercase;font-weight: bold;">OPD Report</h4>
+							</td>
+						</tr>
+					</table>
+					<table style="width:100%; max-width: 100%;margin-right:2px; ">
+						<tr style="background: rgb(241,241,241);">
+							<td style="padding:2px 15px 18px; "><b>OPD PARAMETERS</b></td>
+							<td style="padding:2px 15px 18px; " *ngFor="let data of doctorCollectionArray"><b>Dr. {{getDoctorName(data.id)}}</b></td>
+							<td style="padding:2px 15px 18px;"><b>CLINIC</b></td>
+						</tr>
+						<tr>
+							<td style="text-align:left;padding-left: 10px;" colspan="7">
+								<h5 style="border-bottom:1px solid black;display: inline-block;margin-bottom: 20px;"><b>OPD Report</b></h5>
+							</td>
+						</tr>
+						<tr style="">
+							<td style="padding:2px 15px 18px; ">Consultation collection</td>
+							<td style="padding:2px 15px 18px; " *ngFor="let data of doctorCollectionArray">{{data.sales}} ({{data.percentage}} %)</td>
+							<td style="padding:2px 15px 18px; ">{{getData(totalCollection)}}</td>
+						</tr>
+						<tr style="">
+							<td style="padding:2px 15px 18px; ">Avg daily collection</td>
+							<td style="padding:2px 15px 18px; " *ngFor="let data of doctorCollectionArray">{{data.avgDailyColl}}</td>
+							<td style="padding:2px 15px 18px; ">{{getData(avgDailyCollection)}}</td>
+						</tr>
+						<tr style="border-bottom:1px solid #4d4d4d;">
+							<td style="padding:2px 15px 18px; ">Avg collection per prescription</td>
+							<td style="padding:2px 15px 18px; " *ngFor="let data of doctorCollectionArray">{{data.avgColl}}</td>
+							<td style="padding:2px 15px 18px; ">{{getData(avgPatientCollection)}}</td>
+						</tr>
+						<tr>
+							<td style="text-align:left;padding-left: 10px;" colspan="7">
+								<h5 style="border-bottom:1px solid black;display: inline-block;margin-bottom: 20px;"><b>PRESCRIPTION </b></h5>
+							</td>
+						</tr>
+						<tr >
+							<td style="padding:2px 15px 18px; ">Prescriptions </td>
+							<td style="padding:2px 15px 18px; " *ngFor="let data of doctorCollectionArray">{{data.prescriptions}}</td>
+							<td style="padding:2px 15px 18px; ">{{totalPrescriptions}}</td>
+						</tr>
+						<tr style="border-bottom:1px solid #4d4d4d;">
+							<td style="padding:2px 15px 18px; ">Avg daily prescriptions </td>
+							<td style="padding:2px 15px 18px; " *ngFor="let data of doctorCollectionArray">{{getData(data.avgDailyPrescription)}}</td>
+							<td style="padding:2px 15px 18px; ">{{getData(avgTotalPrescriptions)}}</td>
+						</tr>
+						<tr>
+							<td style="text-align:left;padding-left: 10px;" colspan="7">
+								<h5 style="border-bottom:1px solid black;display: inline-block;margin-bottom: 20px;"><b>PATIENT</b></h5>
+							</td>
+						</tr>
+						<tr>
+							<td style="padding:2px 15px 18px; ">Patients </td>
+							<td style="padding:2px 15px 18px; " *ngFor="let data of doctorCollectionArray">{{data.totalPatients}}</td>
+							<td style="padding:2px 15px 18px; ">{{patientArray.length}}</td>
+						</tr>
+						<tr>
+							<td style="padding:2px 15px 18px; ">New patients added</td>
+							<td style="padding:2px 15px 18px; " *ngFor="let data of doctorCollectionArray">{{data.newPatients}} </td>
+							<td style="padding:2px 15px 18px; ">{{newPatientArray.length}}</td>
+						</tr>
+						<tr>
+							<td style="padding:2px 15px 18px; ">Avg daily patients</td>
+							<td style="padding:2px 15px 18px; " *ngFor="let data of doctorCollectionArray">{{data.avgDailyPatients}}</td>
+							<td style="padding:2px 15px 18px; ">{{totalAvgDailyPatients}}</td>
+						</tr>
+						<tr>
+							<td style="padding:2px 15px 18px; ">Frequent Patients ( >=2 visits)</td>
+							<td style="padding:2px 15px 18px; " *ngFor="let data of doctorCollectionArray">{{data.frequentPatients}}</td>
+							<td style="padding:2px 15px 18px; ">{{totalFreqPatients}}</td>
+						</tr>
+						<tr>
+							<td style="padding:2px 15px 18px; ">Male patients</td>
+							<td style="padding:2px 15px 18px; " *ngFor="let data of doctorCollectionArray">{{data.male}}</td>
+							<td style="padding:2px 15px 18px; ">{{totalMalePatients}}</td>
+						</tr>
+						<tr>
+							<td style="padding:2px 15px 18px; ">Female patients </td>
+							<td style="padding:2px 15px 18px; " *ngFor="let data of doctorCollectionArray">{{data.female}}</td>
+							<td style="padding:2px 15px 18px; ">{{totalFemalePatients}}</td>
+						</tr>
+						<tr>
+							<td style="padding:2px 15px 18px; ">Avg. Patient Age (Yrs)</td>
+							<td style="padding:2px 15px 18px; " *ngFor="let data of doctorCollectionArray">{{data.avgAge}}</td>
+							<td style="padding:2px 15px 18px; ">{{totalAvgAgePatients}}</td>
+						</tr>
+						<tr>
+							<td style="padding:2px 15px 18px; ">Walk-In patients</td>
+							<td style="padding:2px 15px 18px; " *ngFor="let data of doctorCollectionArray">{{data.walkin}}</td>
+							<td style="padding:2px 15px 18px; ">{{totalWalkinPatients}}</td>
+						</tr>
+						<tr>
+							<td style="padding:2px 15px 18px; ">Appointment patients</td>
+							<td style="padding:2px 15px 18px; " *ngFor="let data of doctorCollectionArray">{{data.appointment}}</td>
+							<td style="padding:2px 15px 18px; ">{{totalAppointmentPatients}}</td>
+						</tr>
+						<tr style="border-bottom:1px solid #4d4d4d;"> 
+							<td style="padding:2px 15px 18px; ">Emergency patients</td>
+							<td style="padding:2px 15px 18px; " *ngFor="let data of doctorCollectionArray">{{data.emergency}}</td>
+							<td style="padding:2px 15px 18px; ">{{totalEmergencyPatients}}</td>
+						</tr>
+					</table>
+				</div>
+				<div  class="time" style="page-break-after: always;height:970px;border:1px solid #000;margin-bottom:10px;position:relative;padding:25x;">
+					<table style="width:100%; max-width: 100%; margin-bottom: 10px; margin-top: 15px;">
+						<tr style="">
+							<td style="text-align:left;padding-left: 10px;" colspan="7">
+								<h5 style="border-bottom:1px solid black;display: inline-block;margin-bottom: 20px;"><b>TIME</b> </h5>
+							</td>
+						</tr>
+						<tr >
+							<td style="padding:2px 15px 18px; ">Avg CTU </td>
+							<td style="padding:2px 15px 18px; " *ngFor="let data of doctorCollectionArray">{{data.avgCtu}}%</td>
+							<td style="padding:2px 15px 18px; ">{{totalCtuUtilisedPerc}}%</td>
+						</tr>
+						<tr style="border-bottom:1px solid #4d4d4d;">
+							<td style="padding:2px 15px 18px; ">Avg time per patient </td>
+							<td style="padding:2px 15px 18px; " *ngFor="let data of doctorCollectionArray">{{data.totalSec}}</td>
+							<td style="padding:2px 15px 18px; ">{{totalAvgTime}}</td>
+						</tr>
+					</table>
+					<table style="max-width: 100%; margin:10px auto;">
+						<tr>
+							<td style="padding:2px 15px 18px;  font-size: 18px;">Total clinic consultation collection </td>
+							<td style="padding:2px 15px 18px; "><b>:</b></td>
+							<td style="padding:2px 15px 18px; "><b>Rs. {{getData(totalCollection)}}</b></td>
+						</tr>
+						<tr>
+							<td style="padding:2px 15px 18px;  font-size: 18px;">Total clinic prescriptions</td>
+							<td style="padding:2px 15px 18px; "><b>:</b></td>
+							<td style="padding:2px 15px 18px; "><b>{{totalPrescriptions}}</b></td>
+						</tr>
+						<tr>
+							<td style="padding:2px 15px 18px;  font-size: 18px;">Total clinic patients  </td>
+							<td style="padding:2px 15px 18px; "><b>:</b></td>
+							<td style="padding:2px 15px 18px; "><b>{{patientArray.length}}</b></td>
+						</tr>
+					</table>	
+				</div>
+				<div class="pharmacy-report" style="page-break-after: always;height:970px;border:1px solid #000;margin-bottom:10px;position:relative;padding:25x;" *ngIf="doctorData.clinic_services.Clinic_Pharmacy==true">
+					<table style="width:100%; max-width: 100%; margin-bottom: 10px;">
+						<tr>
+							<td style="text-align: center;" colspan="7">
+								<h4 style="color:#00b0f0;border-bottom:1px solid #00b0f0; display: inline-block;margin-bottom: 10px;text-transform: uppercase;font-weight: bold;">Pharmacy Report</h4>
+							</td>
+						</tr>
+						<tr>
+							<td style="text-align:left;" colspan="7">
+								<h4 style="color:#000;border-bottom:1px solid #000;display: inline-block;margin-bottom: 10px;">Sales</h4>
+							</td>
+						</tr>
+					</table>
+					<table style="width:100%; max-width: 100%; margin-bottom: 10px; border:1px solid #000;">
+						<tr style="background-color:rgb(241,241,241);">
+							<td style="text-align:center; border:1px solid #000;padding:10px;" rowspan="2">
+								<h4 style="color:#000;border-bottom:1px solid #000; display: inline-block;">Doctors </h4>
+							</td>
+							<td style="text-align:center; border:1px solid #000;padding:10px;" colspan="8">
+								<h4 style="color:#000;border-bottom:1px solid #000; display: inline-block;">PHARMACY </h4>
+							</td>
+						</tr>
+						<tr style="background-color:rgb(241,241,241);">
+							<td colspan="2"style="border:1px solid #000;padding:10px;text-align: center;" >
+								<h4 style="color:#000;border-bottom:1px solid #000; display: inline-block;">Sales</h4>
+							</td>
+							<td colspan="2"style="border:1px solid #000;padding:10px;text-align: center;">
+								<h4 style="color:#000;border-bottom:1px solid #000; display: inline-block;">Orders </h4>
+							</td>
+							<td colspan="2"style="border:1px solid #000;padding:10px;text-align: center;" >
+								<h4 style="color:#000;border-bottom:1px solid #000; display: inline-block;">Profit</h4>
+							</td>
+							<td colspan="2"style="border:1px solid #000;padding:10px;text-align: center;">
+								<h4 style="color:#000;border-bottom:1px solid #000; display: inline-block;">Per prescription sale</h4>
+							</td>
+						</tr>
+						<tr *ngFor="let dr of pharmacyDoctors">
+							<td colspan="1" style="text-align: center;border:1px solid #000;"><h4>Dr. {{getDoctorName(dr._id)}} </h4></td>
+							<td colspan="2" style="text-align: center;border:1px solid #000;">
+								<div><h5>{{dr.sales}}</h5></div>
+								<div><h6>({{dr.salesPerc}}%) </h6></div>
+							</td>
+							<td colspan="2" style="text-align: center;border:1px solid #000;">
+								<div><h5>{{dr.orders}}</h5></div>
+								<div><h6>({{dr.ordersPerc}}%) </h6></div>
+							</td>
+							<td colspan="2" style="text-align: center;border:1px solid #000;">
+								<div><h5>{{dr.profit}} </h5></div>
+								<div><h6>({{dr.profitPerc}}%) </h6></div>
+							</td>
+							<td colspan="2" style="text-align: center;border:1px solid #000;">
+								<div><h5>{{dr.perPresSale}}</h5></div>
+							</td>
+						</tr>
+						<tr>
+							<tr style="background-color:rgb(241,241,241);">
+								<td  colspan="1" style="text-align: center;border:1px solid #000;"><h4>Clinic Aggregate</h4></td>
+								<td  colspan="2" style="text-align: center;border:1px solid #000;"><h4>{{totalPharmacySales}}</h4></td>
+								<td  colspan="2" style="text-align: center;border:1px solid #000;"><h4>{{totalPharmacyOrders}}</h4></td>
+								<td  colspan="2" style="text-align: center;border:1px solid #000;"><h4>{{totalPharmacyProfit}}</h4></td>
+								<td  colspan="2" style="text-align: center;border:1px solid #000;"><h4>{{totalPharmacyPerPresSale}}</h4></td>
+							</tr>
+						</table>
+						
+						<table style="width:100%;">
+							<tr>
+								<td style="text-align: center;">
+									<h4>Over all Pharmacy profit: <span style="color:rgb(0,176,80);font-weight:22px;">{{overAllPharmacyProfit}} %</span> I  Patient conversion: <span style="color:rgb(0,176,80);font-weight:22px;">{{pharmacyPatientConversion}} %</span></h4>
+								</td>
+							</tr>
+						</table>
+						<table style="width:100%; max-width: 100%; margin-bottom: 10px;">
+							<tr>
+								<td style="text-align:left;" colspan="7">
+									<h4 style="color:#00b0f0;border-bottom:1px solid #00b0f0; display: inline-block;margin-bottom: 10px;text-transform: uppercase;font-weight: bold;">PURCHASE</h4>
+								</td>
+							</tr>
+						</table>
+						<table style="max-width: 100%; margin:10px auto;">
+							<tr >
+								<td style="padding:2px 15px 18px;  font-size: 18px;">Number of purchases </td>
+								<td style="padding:2px 15px 18px; "><b>:</b></td>
+								<td style="padding:2px 15px 18px; "><b>{{stockPurchases}}</b></td>
+							</tr>
+							<tr>
+								<td style="padding:2px 15px 18px;  font-size: 18px;">Number of products purchased</td>
+								<td style="padding:2px 15px 18px; "><b>:</b></td>
+								<td style="padding:2px 15px 18px; "><b>{{stockUniqueProducts.length}}</b></td>
+							</tr>
+							<tr>
+								<td style="padding:2px 15px 18px;  font-size: 18px;">Purchase value </td>
+								<td style="padding:2px 15px 18px; "><b>:</b></td>
+								<td style="padding:2px 15px 18px; "><b>Rs. {{stockProductsAmount}}</b></td>
+							</tr>
+						</table>
+					</div>
+					<div  class="stock-valuation" style="page-break-after: always;" *ngIf="doctorData.clinic_services.Clinic_Pharmacy==true">
+						<table style="width:100%; max-width: 100%; margin-bottom: 10px;">
+							<tr>
+								<td style="text-align:left;" colspan="7">
+									<h4 style="color:#00b0f0;border-bottom:1px solid #00b0f0; display: inline-block;margin-bottom: 10px;text-transform: uppercase;font-weight: bold;">PHARMACY CURRENT STOCK VALUATION </h4>
+								</td>
+							</tr>
+						</table>
+						<table style="max-width:350px;">
+							<tr>
+								<td colspan="5">
+									(As on 21 st Nov, 2019. 13:45)
+								</td>
+							</tr>
+							<tr>
+								<td style="padding:5px; "><b>1</b></td>
+								<td style="padding:5px;  font-size: 18px;">Total product items</td>
+								<td style="padding:5px; "><b>:</b></td>
+								<td style="padding:5px; "><b>{{stockArray.length}}</b></td>
+							</tr>
+							<tr>
+								<td style="padding:5px; "><b>2</b></td>
+								<td style="padding:5px;  font-size: 18px;">Purchase value of stock</td>
+								<td style="padding:5px; "><b>:</b></td>
+								<td style="padding:5px; "><b>Rs. {{getData(purchaseValueStock)}}</b></td>
+							</tr>
+							<tr >
+								<td style="padding:5px; "><b>3</b></td>
+								<td style="padding:5px;  font-size: 18px;">Sale value of stock</td>
+								<td style="padding:5px; "><b>:</b></td>
+								<td style="padding:5px; "><b>Rs. {{getData(saleValueStock)}}</b></td>
+							</tr>
+							<tr>
+								<td style="padding:5px; "><b>4</b></td>
+								<td style="padding:5px;  font-size: 18px;">Profit value of stock</td>
+								<td style="padding:5px; "><b>:</b></td>
+								<td style="padding:5px; "><b>Rs. {{getData(saleValueStock-purchaseValueStock)}}</b></td>
+							</tr>
+						<!-- <tr style="background-color:rgb(241,241,241);border:1px solid #989898; ">
+							<td colspan="5" style="padding-left: 15px;">
+								<h4><b>PAST MONTH</b></h4>
+							</td>
+						</tr>
+						<tr style="border: 1px solid #989898;">
+							<td style="padding:2px 15px 18px; "><b>4</b></td>
+							<td style="padding:2px 15px 18px;  font-size: 18px;">Stock valuation change (purchase value)</td>
+							<td style="padding:2px 15px 18px; "><b>:</b></td>
+							<td style="padding:2px 15px 18px; "><b>+/- Rs. 86500</b></td>
+						</tr> -->
+					</table>
+				</div>
+				<div class="diagnostics-report" style="page-break-after: always;height:970px;border:1px solid #000;margin-bottom:10px;position:relative;padding:25x;" *ngIf="doctorData.clinic_services.Clinic_Diagnostics==true">
+					<table style="width:100%; max-width: 100%; margin-bottom: 10px;">
+						<tr>
+							<td style="text-align: center;" colspan="7">
+								<h4 style="color:#00b0f0;border-bottom:1px solid #00b0f0;display: inline-block;margin-bottom: 10px;text-transform:uppercase;font-weight: bold;">Diagnostics Report </h4>
+							</td>
+						</tr>
+						
+					</table>
+					<table style="width:100%; max-width: 100%; margin-bottom: 10px; border:1px solid #000;">
+						<tr style="background-color:rgb(241,241,241);">
+							<td style="text-align:center; border:1px solid #000;padding:10px;" rowspan="2">
+								<h4 style="color:#000;border-bottom:1px solid #000; display: inline-block;">Doctors </h4>
+							</td>
+							<td style="text-align:center; border:1px solid #000;padding:10px;" colspan="8">
+								<h4 style="color:#000;border-bottom:1px solid #000; display: inline-block;">DIAGNOSTICS</h4>
+							</td>
+						</tr>
+						<tr style="background-color:rgb(241,241,241);">
+							<td colspan="2"style="border:1px solid #000;padding:10px;text-align: center;" >
+								<h4 style="color:#000;border-bottom:1px solid #000; display: inline-block;">Sales</h4>
+							</td>
+							<td colspan="2"style="border:1px solid #000;padding:10px;text-align: center;">
+								<h4 style="color:#000;border-bottom:1px solid #000; display: inline-block;">Orders </h4>
+							</td>
+							<td colspan="2"style="border:1px solid #000;padding:10px;text-align: center;">
+								<h4 style="color:#000;border-bottom:1px solid #000; display: inline-block;">Per prescription sale</h4>
+							</td>
+						</tr>
+						<tr *ngFor="let dr of diagnosticsDoctors">
+							<td colspan="1" style="text-align: center;border:1px solid #000;"><h4>Dr. {{getDoctorName(dr._id)}} </h4></td>
+							<td colspan="2" style="text-align: center;border:1px solid #000;">
+								<div><h5>{{dr.sales}}</h5></div>
+								<div><h6>({{dr.salesPerc}}%) </h6></div>
+							</td>
+							
+							<td colspan="2" style="text-align: center;border:1px solid #000;">
+								<div><h5>{{dr.orders}} </h5></div>
+								<div><h6>({{dr.ordersPerc}}%) </h6></div>
+							</td>
+							<td colspan="2" style="text-align: center;border:1px solid #000;">
+								<div><h5>{{dr.perPresSale}}</h5></div>
+							</td>
+						</tr>
+						<tr style="background-color:rgb(241,241,241);">
+							<td  colspan="1" style="text-align: center;border:1px solid #000;"><h4>Clinic Aggregate</h4></td>
+							<td  colspan="2" style="text-align: center;border:1px solid #000;"><h4>{{totalDiagnosticsSales}}</h4></td>
+
+							<td  colspan="2" style="text-align: center;border:1px solid #000;"><h4>{{totalDiagnosticsOrders}}</h4></td>
+							<td  colspan="2" style="text-align: center;border:1px solid #000;"><h4>{{totalDiagnosticsPerPresSale}}</h4></td>
+						</tr>
+					</table>
+					<table style="width:100%;">
+						<tr>
+							<td style="text-align: center;">
+								<h4>Patient conversion: <span style="color:rgb(0,176,80);font-weight:22px;"> {{diagnosticsPatientConversion}} % </span></h4>
+							</td>
+						</tr>
+					</table>
+				</div>
+				<div class="ipd-report" style="page-break-after: always;height:970px;border:1px solid #000;margin-bottom:10px;position:relative;padding:25x;" *ngIf="doctorData.clinic_services.Clinic_IPD==true">
+					<table style="width:100%; max-width: 100%; margin-bottom: 10px;">
+						<tr>
+							<td style="text-align: center;" colspan="7">
+								<h4 style="color:rgb(0,87,150);border-bottom:1px solid rgb(0,87,150);display: inline-block;margin-bottom: 10px;color:#00b0f0;text-transform: uppercase;font-weight: bold;">IPD Report</h4>
+							</td>
+						</tr>
+						
+					</table>
+					<table style="width:100%; max-width: 100%; margin-bottom: 10px; border:1px solid #000;">
+						<tr style="background-color:rgb(241,241,241);">
+							<td style="text-align:center; border:1px solid #000;padding:10px;" rowspan="2">
+								<h4 style="color:#000;border-bottom:1px solid #000; display: inline-block;">Consulting Doctors</h4>
+							</td>
+							<td style="text-align:center; border:1px solid #000;padding:10px;" colspan="9">
+								<h4 style="color:#000;border-bottom:1px solid #000; display: inline-block;">IPD REVENUE</h4>
+							</td>
+						</tr>
+						<tr style="background-color:rgb(241,241,241);">
+							<td colspan="2"style="border:1px solid #000;padding:10px;text-align: center;" >
+								<h4 style="color:#000;border-bottom:1px solid #000; display: inline-block;">Patients Discharged</h4>
+							</td>
+							<td colspan="2"style="border:1px solid #000;padding:10px;text-align: center;" >
+								<h4 style="color:#000;border-bottom:1px solid #000; display: inline-block;">Patients Admitted</h4>
+							</td>
+							<td colspan="2"style="border:1px solid #000;padding:10px;text-align: center;">
+								<h4 style="color:#000;border-bottom:1px solid #000; display: inline-block;">Revenue</h4>
+							</td>
+							<td colspan="2"style="border:1px solid #000;padding:10px;text-align: center;">
+								<h4 style="color:#000;border-bottom:1px solid #000; display: inline-block;">Admission Hrs</h4>
+							</td>
+							<td colspan="2"style="border:1px solid #000;padding:10px;text-align: center;">
+								<h4 style="color:#000;border-bottom:1px solid #000; display: inline-block;">Avg. Revenue per admission</h4>
+							</td>
+						</tr>
+						<tr *ngFor="let dr of dataArray">
+							<td colspan="1" style="text-align: center;border:1px solid #000;"><h4>Dr. {{getDoctorName(dr._id)}} </h4></td>
+							<td colspan="2" style="text-align: center;border:1px solid #000;">
+								<div><h5>{{dr.patientsDishcarge}}</h5></div>
+							</td>
+							
+							<td colspan="2" style="text-align: center;border:1px solid #000;">
+								<div><h5>{{dr.patientAdmitted}}</h5></div>
+							</td>
+							<td colspan="2" style="text-align: center;border:1px solid #000;">
+								<div><h5>{{dr.total_bill}}</h5></div>
+							</td>
+							<td colspan="2" style="text-align: center;border:1px solid #000;">
+								<div><h5>{{dr.admissionHours}}</h5></div>
+							</td>
+							<td colspan="2" style="text-align: center;border:1px solid #000;">
+								<div><h5>Rs. {{dr.avgRevenue}}</h5></div>
+							</td>
+						</tr>
+						<tr style="background-color:rgb(241,241,241);">
+							<td  colspan="1" style="text-align: center;border:1px solid #000;"><h4>Clinic </h4></td>
+							<td  colspan="2" style="text-align: center;border:1px solid #000;"><h4>{{totalIpdDischarged}}</h4></td>
+
+							<td  colspan="2" style="text-align: center;border:1px solid #000;"><h4>{{totalIpdAdmissions}}</h4></td>
+							<td  colspan="2" style="text-align: center;border:1px solid #000;"><h4>{{totalIpdBill}}</h4></td>
+							<td  colspan="2" style="text-align: center;border:1px solid #000;"><h4>{{totalIpdHours}}</h4></td>
+							<td  colspan="2" style="text-align: center;border:1px solid #000;"><h4>Rs. {{totalIpdAvgBill}}</h4></td>
+						</tr>
+					</table>
+					<table style="width:100%;">
+						<tr>
+							<td style="text-align: center;">
+								<h4>IPD Occupancy: <span style="color:rgb(0,176,80);font-weight:22px;"> {{ipdOccupancy}}% </span></h4>
+							</td>
+						</tr>
+					</table>
+				</div>
+				<div class="clinic-smry-report" style="page-break-after: always;height:970px;border:1px solid #000;margin-bottom:10px;position:relative;padding:25x;">
+					<table style="width:100%; max-width: 100%; margin-bottom: 10px;">
+						<tr>
+							<td style="text-align: center;" colspan="7">
+								<h4 style="color:#00b0f0;border-bottom:1px solid #00b0f0;display: inline-block;margin-bottom: 10px;text-transform: uppercase;font-weight: bold;">Clinic Summary Report</h4>
+							</td>
+						</tr>
+					</table>
+					<table class="table table-bordered new-tab-22">
+						<tbody>
+							<tr style="background-color:rgb(241,241,241);border:1px solid #989898; ">
+								<td rowspan="2" class="text-center">
+									<div>Services</div> <div>&</div><div> Doctors</div></td>
+									<td colspan="2" class="text-center"><b>OPD</b></td>
+									<td colspan="2" class="text-center" *ngIf="doctorData.clinic_services.Clinic_Pharmacy==true"><b>PHARMACY</b></td>
+									<td colspan="2" class="text-center"><b>DIAGNOSTICS</b></td>
+									<td colspan="2" class="text-center"><b>IPD</b></td>
+									<td rowspan="2" class="text-center"><div>TOTAL </div><small>(Rs.)</small></td>
+								</tr>
+								<tr style="background-color:rgb(241,241,241);border:1px solid #989898; ">
+									<td class="text-center">Collection</td>
+									<td class="text-center">Patients </td>
+									<td class="text-center">Sales</td>
+									<td class="text-center">Profit </td>
+									<td class="text-center">Collection </td>
+									<td class="text-center">Orders </td>
+									<td class="text-center">Collection</td>
+									<td class="text-center">Admission</td>
+								</tr>
+								<tr *ngFor="let dr of dataSummaryArray">
+									<td class="text-center"><div>Dr. {{getDoctorName(dr.doctor_id)}}</div></td>
+									<td class="text-center"><div><small>{{dr.collection}}</small></div><div><small>({{dr.collectionPerc}}%)</small></div></td>
+									<td class="text-center"><div><small>{{dr.patients}}</small></div><div><small>({{dr.patientsPerc}}%)</small></div></td>
+									<td class="text-center"><div><small>{{dr.sales}}</small></div><div><small>({{dr.salesPerc}}%)</small></div></td>
+									<td class="text-center"><div><small>{{dr.profit}}</small></div><div><small>({{dr.profitPerc}}%)</small></div></td>
+									<td class="text-center"><div><small>{{dr.collectionDiagnostics}}</small></div><div><small>({{dr.collectionDiagnosticsPerc}}%)</small></div></td>
+									<td class="text-center"><div><small>{{dr.orders}}</small></div><div><small>({{dr.ordersPerc}}%)</small></div></td>
+									<td class="text-center"><div><small>{{dr.collectionIpd}}</small></div><div><small>({{dr.collectionIpdPerc}}%)</small></div></td>
+									<td class="text-center"><div><small>{{dr.ordersIpd}}</small></div><div><small>({{dr.ordersIpdPerc}}%)</small></div></td>
+									<td class="text-center"><div>{{dr.totalCollection}}</div><div>({{dr.totalCollectionPerc}}%)</div></td>
+								</tr> 
+								<tr style="background-color:rgb(241,241,241);border:1px solid #989898; ">
+									<td class="text-center"><div><b>Total</b></div></td>
+									<td class="text-center"><div><b>{{opdCollection}}</b></div></td>
+									<td class="text-center"><div><b>{{patientsArray.length}}</b></div></td>
+									<td class="text-center"><div><b>{{pharmacySales}}</b></div></td>
+									<td class="text-center vlt"><div><b>{{pharmacyProfit}}</b></div></td>
+									<td class="text-center"><div><b>{{diagnosticsCollection}}</b></div></td>
+									<td class="text-center"><div><b>{{diagnosticsOrders}}</b></div></td>
+									<td class="text-center"><div><b>{{ipdCollection}}</b></div></td>
+									<td class="text-center"><div><b>{{ipdAdmission}}</b></div></td>
+									<td class="text-center" style="background-color:#46dc46;"><div>{{totalClinicCollection}}</div></td>
+								</tr>
+							</tbody>
+					 
+					</table>
+					<table style="max-width:350px;">
+						<tr>
+							<td style="text-align: center;" colspan="5">
+								<h4 style="color:#00b0f0;border-bottom:1px solid #00b0f0;display: inline-block;margin-bottom: 10px;text-transform: uppercase;font-weight: bold;">Total Clinic collection</h4>
+							</td>
+						</tr>
+						<tr>
+							<td style="padding: 5px;  font-size: 18px;">1</td>
+							<td style="padding: 5px;  font-size: 18px;">OPD consultation</td>
+							<td style="padding: 5px; "><b>:</b></td>
+							<td style="padding: 5px; "><b>Rs. {{opdCollection}}</b></td>
+						</tr>
+						<tr>
+							<td style="padding: 5px;  font-size: 18px;">2</td>
+							<td style="padding: 5px;  font-size: 18px;">Pharmacy sales</td>
+							<td style="padding: 5px; "><b>:</b></td>
+							<td style="padding: 5px; "><b>Rs. {{pharmacySales}}</b></td>
+						</tr>
+						<tr>
+							<td style="padding: 5px;  font-size: 18px;">3</td>
+							<td style="padding: 5px;  font-size: 18px;">Diagnostics sales</td>
+							<td style="padding: 5px; "><b>:</b></td>
+							<td style="padding: 5px; "><b>Rs. {{diagnosticsCollection}}</b></td>
+						</tr>
+						<tr>
+							<td style="padding: 5px;  font-size: 18px;">4</td>
+							<td style="padding: 5px;  font-size: 18px;">IPD collection</td>
+							<td style="padding: 5px; "><b>:</b></td>
+							<td style="padding: 5px; "><b>Rs. {{ipdCollection}}</b></td>
+						</tr>
+					</table>
+					<table style="width:100%;">
+						<tr>
+							<td style="text-align: center;">
+								<h4>TOTAL COLLECTION: Rs. <span style="color:rgb(0,176,80);font-weight:22px;"> {{totalClinicCollection}}</span></h4>
+							</td>
+						</tr>
+					</table>
+				</div>
+				<div class="anexchure" style="page-break-after: always;height:970px;border:1px solid #000;margin-bottom:10px;position:relative;padding:25x;" *ngIf="radioFull">
+					<table style="width:100%; margin-top: 15px;">
+						<tr>
+							<td colspan="20" style="text-align:right"><h4>Annexure -1</h4></td>
+						</tr>
+						<tr>
+							<td style="text-align:left;">
+								<h4>OPD Patient details of Dr. [login doctor]</h4>
+							</td>
+						</tr>
+					</table>
+					<table style="max-width: 100%; width:100%;">
+						<tr style="border:1px solid #000;border-right: transparent;border-left:transparent;">
+							<td style="padding:5px; "><b>SNo</b></td>
+							<td style="padding:5px; " width="130px"><b>Prescription ID</b></td>
+							<td style="padding:5px; "><b>Date</b></td>
+							<td style="padding:5px; " width="130px"><b>Patient name</b></td>
+							<td style="padding:5px; "><b>Age</b></td>
+							<td style="padding:5px; "><b>Gender</b></td>
+							<td style="padding:5px; "><b>Address</b></td>
+							<td style="padding:5px; "><b>Mobile no</b></td>
+							<!-- <td style="padding:2px 15px 18px; "><b>Diagnosis</b></td> -->
+						</tr>
+						<tr style="" *ngFor="let pt of patientDetails;let i = index">
+							<td style="padding:5px; "><b>{{i+1}}</b></td>
+							<td style="padding:5px; " width="130px">{{pt.prescription_id}}</td>
+							<td style="padding:5px; ">{{pt.createdAt | date: 'dd/LL/yy'}}</td>
+							<td style="padding:5px; " width="130px">{{pt.registration.pateintName}}</td>
+							<td style="padding:5px; ">{{pt.registration.age_in_years}}</td>
+							<td style="padding:5px; ">{{pt.registration.gender}}</td>
+							<td style="padding:5px; ">{{pt.registration.location}}, {{pt.registration.city}}</td>
+							<td style="padding:5px; ">{{pt.registration.pateintPhone}}</td>
+							<!-- <td style="padding:10px; "></td> -->
+						</tr>
+					</table>
+				</div>
+				<div class="anexchure-2" style="page-break-after: always;height:970px;border:1px solid #000;margin-bottom:10px;position:relative;padding:25x;" *ngIf="radioFull">
+					<table style="width:100%; margin-top: 15px;">
+						<tr>
+							<td colspan="20" style="text-align:right"><h4>Annexure -2</h4></td>
+						</tr>
+						<tr>
+							<td style="text-align:left;">
+								<h4>IPD contribution details of Dr. [login doctor]</h4>
+							</td>
+						</tr>
+					</table>
+					<table style="max-width: 100%; width:100%;">
+						<tr style="border:1px solid #000;border-right: transparent;border-left:transparent;">
+							<td style="padding:5px; "><b>SNo</b></td>
+							<td style="padding:5px; " width="130px"><b>Prescription ID</b></td>
+							<td style="padding:5px; "><b>Date</b></td>
+							<td style="padding:5px; " width="130px"><b>Patient name</b></td>
+							<td style="padding:5px; "><b>Age</b></td>
+							<td style="padding:5px; "><b>Gender</b></td>
+							<td style="padding:5px; "><b>Address</b></td>
+							<td style="padding:5px; "><b>Mobile no</b></td>
+							<!-- <td style="padding:2px 15px 18px; "><b>Diagnosis</b></td> -->
+						</tr>
+						<tr style="" *ngFor="let pt of patientDetails;let i = index">
+							<td style="padding:5px; "><b>{{i+1}}</b></td>
+							<td style="padding:5px; " width="130px">{{pt.prescription_id}}</td>
+							<td style="padding:5px; ">{{pt.createdAt | date: 'dd/LL/yy'}}</td>
+							<td style="padding:5px; " width="130px">{{pt.registration.pateintName}}</td>
+							<td style="padding:5px; ">{{pt.registration.age_in_years}}</td>
+							<td style="padding:5px; ">{{pt.registration.gender}}</td>
+							<td style="padding:5px; ">{{pt.registration.location}}, {{pt.registration.city}}</td>
+							<td style="padding:5px; ">{{pt.registration.pateintPhone}}</td>
+							<!-- <td style="padding:10px; "></td> -->
+						</tr>
+					</table>
+				</div>
+				<div class="anexchure-3" style="page-break-after: always;height:970px;border:1px solid #000;margin-bottom:10px;position:relative;padding:25x;" *ngIf="radioFull">
+					<table style="width:100%; margin-top: 15px;">
+						<tr>
+							<td colspan="20" style="text-align:right"><h4>Annexure -3</h4></td>
+						</tr>
+						<tr>
+							<td style="text-align:left;">
+								<h4>IPD details</h4>
+							</td>
+						</tr>
+					</table>
+					<table style="max-width: 100%; width:100%;">
+						<tr style="border: 1px solid #989898; background-color:rgb(241,241,241);border-bottom:1px solid green;border-top:1px solid green;">
+							<td style="padding:10px; "><b>SNo</b></td>
+							<td style="padding:2px 15px 18px; "><b>Patient Name </b></td>
+							<td style="padding:2px 15px 18px; "><b>Admission date</b></td>
+							<td style="padding:2px 15px 18px; "><b>Discharge date</b></td>
+							<td style="padding:2px 15px 18px; "><b>Bill value</b></td>
+							<td style="padding:2px 15px 18px; "><b>Contact number</b></td>
+						</tr>
+						<tr style="border: 1px solid #989898; background-color:rgb(230,238,213);" *ngFor="let pt of patientDetailsIpd;let i = index">
+							<td style="padding:10px; "><b>{{i+1}}</b></td>
+							<td style="padding:10px; "><b>{{pt.patientName}}</b></td>
+							<td style="padding:10px; ">{{pt.createdAt | date: 'dd/LL/yy'}}</td>
+							<td style="padding:10px; ">
+								<span *ngIf="pt.discharge">{{pt.discharge_date | date: 'dd/LL/yy'}}</span>
+								<span *ngIf="!pt.discharge">N.A</span>
+							</td>
+							<td style="padding:10px; ">
+								<span *ngIf="pt.discharge">{{pt.total_bill}}</span>
+								<span *ngIf="!pt.discharge">N.A</span>
+							</td>
+							<td style="padding:10px; ">{{pt.phone}}</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="container footer-cstm-an">
+		<div class="row">
+			<!-- <div class="col-lg-4 text-center">
+				<div>
+					<button class="btn btn-grin" (click)="getPdf()">PRINT</button>
+				</div>
+			</div> -->
+			<div class="col-lg-12 text-center">
+				<div>
+					<button class="btn btn-grin" (click)="getPdf()"><b>PRINT</b></button>
+				</div>
+			</div><!-- 
+			<div class="col-lg-6 text-left">
+				<div>
+					<button class="btn btn-pink" (click)="getPdf()"><b>SHARE</b></button>
+				</div>
+			</div> -->
+		</div>
+	</div>
+</div>
+
+<!-- show the pdf -->
+<div class="modal fade" id="pdfmodal" role="dialog">
+	<div class="modal-dialog">
+		<div class="modal-body"><div class="" id="clinicReport">
+			<div  class="opd-report" style="page-break-after: always;position: relative;height:970px;border:1px solid #000;padding: 3px;">
+        			<!-- <div style="position: absolute;bottom:15px; left:0;height: 3px;width:100%;background-color: black;z-index: 999;">
+        				zCzczcc
+        			</div> -->
+        			<table style="width:100%; max-width: 100%;height:970px; margin-bottom: 10px;">
+        				<tr>
+        					<td style="text-align: center;">
+        						<img src="./assets/imgs/logoDoctm.png" style="width:160px;height: auto;margin: 20px 0px;">
+        						<h4 style="margin: 0px;"><b>Doctm Clinic Report</b></h4><br><br><br>
+        						<div><h3 style="color:#00b0f0;">{{adminClinicDoctor[0]?.clinic_details?.clinic_name}}</h3></div><br><br><br>
+        						<h4 style="color:grey;">{{adminClinicDoctor[0]?.clinic_details?.address}} {{adminClinicDoctor[0]?.clinic_details?.area}} </h4>
+        						<h4 style="color:grey;">{{adminClinicDoctor[0]?.clinic_details?.city}}</h4>
+        						<h5 style="color:grey;">Clinic ID: {{adminClinicDoctor[0]?.clinic_details?.clinic_id}}</h5><br><br><br>
+        						<h3>
+        							<b *ngIf="activatedtab === 1">1 Week</b>
+        							<b *ngIf="activatedtab === 2">2 Weeks</b>
+        							<b *ngIf="activatedtab === 3">1 Month</b>
+        							<b *ngIf="activatedtab === 4">3 Months</b>
+        							<b *ngIf="activatedtab === 5">6 Months</b>
+        							<b *ngIf="activatedtab === 6">1 Year</b>
+        							<br>
+        							<p style="font-size: 14px;">
+        								({{fromDate1 | date: 'd'}}<sup>th</sup> {{fromDate1 | date: 'MMM'}} - {{toDate1 | date: 'd'}}<sup>th</sup> {{toDate1 | date: 'MMM'}}, {{fromDate1 | date: 'yyyy'}})
+        							</p>
+        						</h3>
+        					</td>
+        				</tr>
+        			</table>
+        		</div>
+        		<div  class="opd-report" style="page-break-after: always;position: relative;height:970px;border:1px solid #000;padding: 3px;">
+        			<table style="width: 100%; margin:10px auto;">
+        				<tr>
+        					<td style="text-align: center;" colspan="4">
+        						<h3><b>CONTENT</b></h3>
+        					</td>
+        				</tr>
+        				<tr style="border: 1px solid #989898; border-left:none;border-right: none;">
+        					<td style="padding:8px;">SR NO</td>
+        					<td style="padding:8px;">Chapter</td>
+        					<td style="padding:8px;"><b>:</b></td>
+        					<td style="padding:8px;"><b>Page</b></td>
+        				</tr>
+        				<tr>
+        					<td style="padding:8px;">1</td>
+        					<td style="padding:8px;">OPD Report</td>
+        					<td style="padding:8px;"><b>:</b></td>
+        					<td style="padding:8px;"><b>1</b></td>
+        				</tr>
+        				<tr>
+        					<td style="padding:8px;">2</td>
+        					<td style="padding:8px;">Pharmacy Report</td>
+        					<td style="padding:8px;"><b>:</b></td>
+        					<td style="padding:8px;"><b>2</b></td>
+        				</tr>
+        				<tr>
+        					<td style="padding:8px;">3</td>
+        					<td style="padding:8px;">Diagnostic Report</td>
+        					<td style="padding:8px;"><b>:</b></td>
+        					<td style="padding:8px;"><b>3</b></td>
+        				</tr>
+        				<tr>
+        					<td style="padding:8px;">4</td>
+        					<td style="padding:8px;">IPD Report</td>
+        					<td style="padding:8px;"><b>:</b></td>
+        					<td style="padding:8px;"><b>3</b></td>
+        				</tr>
+        				<tr>
+        					<td style="padding:8px;">5</td>
+        					<td style="padding:8px;">Clinic Summary Report</td>
+        					<td style="padding:8px;"><b>:</b></td>
+        					<td style="padding:8px;"><b>3</b></td>
+        				</tr>
+        				<tr>
+        					<td style="padding:8px;">6</td>
+        					<td style="padding:8px;">Annexure-1</td>
+        					<td style="padding:8px;"><b>:</b></td>
+        					<td style="padding:8px;"><b></b></td>
+        				</tr>
+        				<tr>
+        					<td style="padding:8px;">7</td>
+        					<td style="padding:8px;">Annexure-2</td>
+        					<td style="padding:8px;"><b>:</b></td>
+        					<td style="padding:8px;"><b></b></td>
+        				</tr>
+        				<tr>
+        					<td style="padding:8px;">8</td>
+        					<td style="padding:8px;">Annexure-3</td>
+        					<td style="padding:8px;"><b>:</b></td>
+        					<td style="padding:8px;"><b></b></td>
+        				</tr>
+        			</table>	
+        		</div>
+        		<div style="margin: 30px;">
+        			<div class="opd-report" style="page-break-after: always;position: relative;height:940px;border:1px solid #000;padding: 3px;">
+        				<table style="width:100%; max-width: 100%; margin-bottom: 10px;">
+        					<tr>
+        						<td style="text-align: center;" colspan="7">
+        							<h4 style="color: #00b0f0;border-bottom:1px solid #00b0f0;display: inline-block;margin-bottom: 10px;text-transform: uppercase;">OPD ggggggfReport</h4>
+        						</td>
+        					</tr>
+        				</table>
+        				<table style="border: 1px solid #989898; width:100%; max-width: 100%;">
+        					<tr style="background: rgb(241,241,241);">
+        						<td style="padding:2px 15px 18px; "><b>OPD PARAMETERS</b></td>
+        						<td style="padding:2px 15px 18px; " *ngFor="let data of doctorCollectionArray"><b>Dr. {{getDoctorName(data.id)}}</b></td>
+        						<td style="padding:2px 15px 18px;border-right: 1px solid #000;"><b>CLINIC</b></td>
+        					</tr>
+        					<tr>
+        						<td style="text-align:left;padding-left: 10px;" colspan="7">
+        							<h5 style="border-bottom:1px solid black;display: inline-block;margin-bottom: 20px;"><b>OPD Report</b></h5>
+        						</td>
+        					</tr>
+        					<tr style="border: 1px solid #989898;">
+        						<td style="padding:2px 15px 18px; ">Consultation collection</td>
+        						<td style="padding:2px 15px 18px; " *ngFor="let data of doctorCollectionArray">{{data.sales}} ({{data.percentage}} %)</td>
+        						<td style="padding:2px 15px 18px; ">{{getData(totalCollection)}}</td>
+        					</tr>
+        					<tr style="border: 1px solid #989898;">
+        						<td style="padding:2px 15px 18px; ">Avg daily collection</td>
+        						<td style="padding:2px 15px 18px; " *ngFor="let data of doctorCollectionArray">{{data.avgDailyColl}}</td>
+        						<td style="padding:2px 15px 18px; ">{{getData(avgDailyCollection)}}</td>
+        					</tr>
+        					<tr style="border: 1px solid #989898;">
+        						<td style="padding:2px 15px 18px; ">Avg collection per prescription</td>
+        						<td style="padding:2px 15px 18px; " *ngFor="let data of doctorCollectionArray">{{data.avgColl}}</td>
+        						<td style="padding:2px 15px 18px; ">{{getData(avgPatientCollection)}}</td>
+        					</tr>
+        					<tr>
+        						<td style="text-align:left;padding-left: 10px;" colspan="7">
+        							<h5 style="border-bottom:1px solid black;display: inline-block;margin-bottom: 20px;">
+        								<b>PRESCRIPTION</b> </h5>
+        							</td>
+        						</tr>
+        						<tr style="border: 1px solid #989898;">
+        							<td style="padding:2px 15px 18px; ">Prescriptions </td>
+        							<td style="padding:2px 15px 18px; " *ngFor="let data of doctorCollectionArray">{{data.prescriptions}}</td>
+        							<td style="padding:2px 15px 18px; ">{{totalPrescriptions}}</td>
+        						</tr>
+        						<tr style="border: 1px solid #989898;">
+        							<td style="padding:2px 15px 18px; ">Avg daily prescriptions </td>
+        							<td style="padding:2px 15px 18px; " *ngFor="let data of doctorCollectionArray">{{getData(data.avgDailyPrescription)}}</td>
+        							<td style="padding:2px 15px 18px; ">{{getData(avgTotalPrescriptions)}}</td>
+        						</tr>
+        						<tr>
+        							<td style="text-align:left;padding-left: 10px;" colspan="7">
+        								<h5 style="border-bottom:1px solid black;display: inline-block;margin-bottom: 20px;"><b>PATIENT</b></h5>
+        							</td>
+        						</tr>
+        						<tr style="border: 1px solid #989898;">
+        							<td style="padding:2px 15px 18px; ">Patients </td>
+        							<td style="padding:2px 15px 18px; " *ngFor="let data of doctorCollectionArray">{{data.totalPatients}}</td>
+        							<td style="padding:2px 15px 18px; ">{{patientArray.length}}</td>
+        						</tr>
+        						<tr style="border: 1px solid #989898;">
+        							<td style="padding:2px 15px 18px; ">New patients added</td>
+        							<td style="padding:2px 15px 18px; " *ngFor="let data of doctorCollectionArray">{{data.newPatients}} </td>
+        							<td style="padding:2px 15px 18px; ">{{newPatientArray.length}}</td>
+        						</tr>
+        						<tr style="border: 1px solid #989898;">
+        							<td style="padding:2px 15px 18px; ">Avg daily patients</td>
+        							<td style="padding:2px 15px 18px; " *ngFor="let data of doctorCollectionArray">{{data.avgDailyPatients}}</td>
+        							<td style="padding:2px 15px 18px; ">{{totalAvgDailyPatients}}</td>
+        						</tr>
+        						<tr style="border: 1px solid #989898;">
+        							<td style="padding:2px 15px 18px; ">Frequent Patients ( >=2 visits)</td>
+        							<td style="padding:2px 15px 18px; " *ngFor="let data of doctorCollectionArray">{{data.frequentPatients}}</td>
+        							<td style="padding:2px 15px 18px; ">{{totalFreqPatients}}</td>
+        						</tr>
+        						<tr style="border: 1px solid #989898;">
+        							<td style="padding:2px 15px 18px; ">Male patients</td>
+        							<td style="padding:2px 15px 18px; " *ngFor="let data of doctorCollectionArray">{{data.male}}</td>
+        							<td style="padding:2px 15px 18px; ">{{totalMalePatients}}</td>
+        						</tr>
+        						<tr style="border: 1px solid #989898;">
+        							<td style="padding:2px 15px 18px; ">Female patients </td>
+        							<td style="padding:2px 15px 18px; " *ngFor="let data of doctorCollectionArray">{{data.female}}</td>
+        							<td style="padding:2px 15px 18px; ">{{totalFemalePatients}}</td>
+        						</tr>
+        						<tr style="border: 1px solid #989898;">
+        							<td style="padding:2px 15px 18px; ">Avg. Patient Age (Yrs)</td>
+        							<td style="padding:2px 15px 18px; " *ngFor="let data of doctorCollectionArray">{{data.avgAge}}</td>
+        							<td style="padding:2px 15px 18px; ">{{totalAvgAgePatients}}</td>
+        						</tr>
+        						<tr style="border: 1px solid #989898;">
+        							<td style="padding:2px 15px 18px; ">Walk-In patients</td>
+        							<td style="padding:2px 15px 18px; " *ngFor="let data of doctorCollectionArray">{{data.walkin}}</td>
+        							<td style="padding:2px 15px 18px; ">{{totalWalkinPatients}}</td>
+        						</tr>
+        						<tr style="border: 1px solid #989898;">
+        							<td style="padding:2px 15px 18px; ">Appointment patients</td>
+        							<td style="padding:2px 15px 18px; " *ngFor="let data of doctorCollectionArray">{{data.appointment}}</td>
+        							<td style="padding:2px 15px 18px; ">{{totalAppointmentPatients}}</td>
+        						</tr>
+        						<tr style="border: 1px solid #989898;">
+        							<td style="padding:2px 15px 18px; ">Emergency patients</td>
+        							<td style="padding:2px 15px 18px; " *ngFor="let data of doctorCollectionArray">{{data.emergency}}</td>
+        							<td style="padding:2px 15px 18px; ">{{totalEmergencyPatients}}</td>
+        						</tr>
+        					</table>
+        				</div>
+        				<div  class="time" style="page-break-after: always;position: relative;height:970px;border:1px solid #000;padding: 3px;">
+        					<table style="width:100%; max-width: 100%; margin-bottom: 10px; margin-top: 15px;">
+        						<tr style="border: 1px solid #989898;">
+        							<td style="text-align:left;padding-left: 10px;" colspan="7">
+        								<h5 style="border-bottom:1px solid black;display: inline-block;margin-bottom: 20px;">TIME </h5>
+        							</td>
+        						</tr>
+        						<tr style="border: 1px solid #989898;">
+        							<td style="padding:2px 15px 18px; ">Avg CTU </td>
+        							<td style="padding:2px 15px 18px; " *ngFor="let data of doctorCollectionArray">{{data.avgCtu}}%</td>
+        							<td style="padding:2px 15px 18px; ">{{totalCtuUtilisedPerc}}%</td>
+        						</tr>
+        						<tr style="border: 1px solid #989898; ">
+        							<td style="padding:2px 15px 18px; ">Avg time per patient </td>
+        							<td style="padding:2px 15px 18px; " *ngFor="let data of doctorCollectionArray">{{data.totalSec}}</td>
+        							<td style="padding:2px 15px 18px; ">{{totalAvgTime}}</td>
+        						</tr>
+        					</table>
+        					<table style="max-width: 100%; margin:10px auto;">
+        						<tr style="border: 1px solid #989898;">
+        							<td style="padding:2px 15px 18px;  font-size: 18px;">Total clinic consultation collection </td>
+        							<td style="padding:2px 15px 18px; "><b>:</b></td>
+        							<td style="padding:2px 15px 18px; "><b>Rs. {{getData(totalCollection)}}</b></td>
+        						</tr>
+        						<tr style="border: 1px solid #989898;">
+        							<td style="padding:2px 15px 18px;  font-size: 18px;">Total clinic prescriptions</td>
+        							<td style="padding:2px 15px 18px; "><b>:</b></td>
+        							<td style="padding:2px 15px 18px; "><b>{{totalPrescriptions}}</b></td>
+        						</tr>
+        						<tr style="border: 1px solid #989898;">
+        							<td style="padding:2px 15px 18px;  font-size: 18px;">Total clinic patients  </td>
+        							<td style="padding:2px 15px 18px; "><b>:</b></td>
+        							<td style="padding:2px 15px 18px; "><b>{{patientArray.length}}</b></td>
+        						</tr>
+        					</table>	
+        				</div>
+        				<div class="pharmacy-report" style="page-break-after: always;position: relative;height:970px;border:1px solid #000;padding: 3px;" *ngIf="doctorData.clinic_services.Clinic_Pharmacy">
+        					<table style="width:100%; max-width: 100%; margin-bottom: 10px;">
+        						<tr>
+        							<td style="text-align: center;" colspan="7">
+        								<h4 style="color:rgb(0,87,150);border-bottom:1px solid rgb(0,87,150);display: inline-block;margin-bottom: 10px;">Pharmacy Report</h4>
+        							</td>
+        						</tr>
+        						<tr>
+        							<td style="text-align:left;" colspan="7">
+        								<h4 style="color:#000;border-bottom:1px solid #000;display: inline-block;margin-bottom: 10px;">Sales</h4>
+        							</td>
+        						</tr>
+        					</table>
+        					<table style="width:100%; max-width: 100%; margin-bottom: 10px; border:1px solid #000;">
+        						<tr style="background-color:rgb(241,241,241);">
+        							<td style="text-align:center; border:1px solid #000;padding:10px;" rowspan="2">
+        								<h4 style="color:#000;border-bottom:1px solid #000; display: inline-block;">Doctors </h4>
+        							</td>
+        							<td style="text-align:center; border:1px solid #000;padding:10px;" colspan="8">
+        								<h4 style="color:#000;border-bottom:1px solid #000; display: inline-block;">PHARMACY </h4>
+        							</td>
+        						</tr>
+        						<tr style="background-color:rgb(241,241,241);">
+        							<td colspan="2"style="border:1px solid #000;padding:10px;text-align: center;" >
+        								<h4 style="color:#000;border-bottom:1px solid #000; display: inline-block;">Sales</h4>
+        							</td>
+        							<td colspan="2"style="border:1px solid #000;padding:10px;text-align: center;">
+        								<h4 style="color:#000;border-bottom:1px solid #000; display: inline-block;">Orders </h4>
+        							</td>
+        							<td colspan="2"style="border:1px solid #000;padding:10px;text-align: center;" >
+        								<h4 style="color:#000;border-bottom:1px solid #000; display: inline-block;">Profit</h4>
+        							</td>
+        							<td colspan="2"style="border:1px solid #000;padding:10px;text-align: center;">
+        								<h4 style="color:#000;border-bottom:1px solid #000; display: inline-block;">Per prescription sale</h4>
+        							</td>
+        						</tr>
+        						<tr *ngFor="let dr of pharmacyDoctors">
+        							<td colspan="1" style="text-align: center;border:1px solid #000;"><h4>Dr. {{getDoctorName(dr._id)}} </h4></td>
+        							<td colspan="2" style="text-align: center;border:1px solid #000;">
+        								<div><h5>{{dr.sales}}</h5></div>
+        								<div><h6>({{dr.salesPerc}}%) </h6></div>
+        							</td>
+        							<td colspan="2" style="text-align: center;border:1px solid #000;">
+        								<div><h5>{{dr.orders}}</h5></div>
+        								<div><h6>({{dr.ordersPerc}}%) </h6></div>
+        							</td>
+        							<td colspan="2" style="text-align: center;border:1px solid #000;">
+        								<div><h5>{{dr.profit}} </h5></div>
+        								<div><h6>({{dr.profitPerc}}%) </h6></div>
+        							</td>
+        							<td colspan="2" style="text-align: center;border:1px solid #000;">
+        								<div><h5>{{dr.perPresSale}}</h5></div>
+        							</td>
+        						</tr>
+        						<tr>
+        							<tr style="background-color:rgb(241,241,241);">
+        								<td  colspan="1" style="text-align: center;border:1px solid #000;"><h4>Clinic Aggregate</h4></td>
+        								<td  colspan="2" style="text-align: center;border:1px solid #000;"><h4>{{totalPharmacySales}}</h4></td>
+        								<td  colspan="2" style="text-align: center;border:1px solid #000;"><h4>{{totalPharmacyOrders}}</h4></td>
+        								<td  colspan="2" style="text-align: center;border:1px solid #000;"><h4>{{totalPharmacyProfit}}</h4></td>
+        								<td  colspan="2" style="text-align: center;border:1px solid #000;"><h4>{{totalPharmacyPerPresSale}}</h4></td>
+        							</tr>
+        						</table>
+        						<table style="width:100%;">
+        							<tr>
+        								<td style="text-align: center;">
+        									<h4>Over all Pharmacy profit: <span style="color:rgb(0,176,80);font-weight:22px;">{{overAllPharmacyProfit}} %</span> I  Patient conversion: <span style="color:rgb(0,176,80);font-weight:22px;">{{pharmacyPatientConversion}} %</span></h4>
+        								</td>
+        							</tr>
+        						</table>
+        						<table style="width:100%; max-width: 100%; margin-bottom: 10px;">
+        							<tr>
+        								<td style="text-align:left;" colspan="7">
+        									<h4 style="color:#000;border-bottom:1px solid #000;display: inline-block;margin-bottom: 10px;">PURCHASE</h4>
+        								</td>
+        							</tr>
+        						</table>
+        						<table style="max-width: 100%; margin:10px auto;">
+        							<tr style="border: 1px solid #989898;">
+        								<td style="padding:2px 15px 18px;  font-size: 18px;">Number of purchases </td>
+        								<td style="padding:2px 15px 18px; "><b>:</b></td>
+        								<td style="padding:2px 15px 18px; "><b>{{stockPurchases}}</b></td>
+        							</tr>
+        							<tr style="border: 1px solid #989898;">
+        								<td style="padding:2px 15px 18px;  font-size: 18px;">Number of products purchased</td>
+        								<td style="padding:2px 15px 18px; "><b>:</b></td>
+        								<td style="padding:2px 15px 18px; "><b>{{stockUniqueProducts.length}}</b></td>
+        							</tr>
+        							<tr style="border: 1px solid #989898;">
+        								<td style="padding:2px 15px 18px;  font-size: 18px;">Purchase value </td>
+        								<td style="padding:2px 15px 18px; "><b>:</b></td>
+        								<td style="padding:2px 15px 18px; "><b>Rs. {{stockProductsAmount}}</b></td>
+        							</tr>
+        						</table>
+        					</div>
+        					<div  class="stock-valuation" style="page-break-after: always;position: relative;height:970px;border:1px solid #000;padding: 3px;" *ngIf="doctorData.clinic_services.Clinic_Pharmacy">
+        						<table style="width:100%; max-width: 100%; margin-bottom: 10px;">
+        							<tr>
+        								<td style="text-align:left;" colspan="7">
+        									<h4 style="color:#000;border-bottom:1px solid #000;display: inline-block;margin-bottom: 10px;">STOCK VALUATION </h4>
+        								</td>
+        							</tr>
+        						</table>
+        						<table style="max-width: 100%; margin:10px auto;">
+        							<tr style="background-color:rgb(241,241,241); border:1px solid #989898; ">
+        								<td colspan="5" style="padding-left: 15px;">
+        									<h4><b>CURRENT</b></h4>
+        								</td>
+        							</tr>
+        							<tr style="border: 1px solid #989898;">
+        								<td style="padding:2px 15px 18px; "><b>1</b></td>
+        								<td style="padding:2px 15px 18px;  font-size: 18px;">Total product items</td>
+        								<td style="padding:2px 15px 18px; "><b>:</b></td>
+        								<td style="padding:2px 15px 18px; "><b>{{stockArray.length}}</b></td>
+        							</tr>
+        							<tr style="border: 1px solid #989898;">
+        								<td style="padding:2px 15px 18px; "><b>2</b></td>
+        								<td style="padding:2px 15px 18px;  font-size: 18px;">Purchase value of stock</td>
+        								<td style="padding:2px 15px 18px; "><b>:</b></td>
+        								<td style="padding:2px 15px 18px; "><b>Rs. {{getData(purchaseValueStock)}}</b></td>
+        							</tr>
+        							<tr style="border: 1px solid #989898;">
+        								<td style="padding:2px 15px 18px; "><b>3</b></td>
+        								<td style="padding:2px 15px 18px;  font-size: 18px;">Sale value of stock</td>
+        								<td style="padding:2px 15px 18px; "><b>:</b></td>
+        								<td style="padding:2px 15px 18px; "><b>Rs. {{getData(saleValueStock)}}</b></td>
+        							</tr>
+        							<tr style="border: 1px solid #989898;">
+        								<td style="padding:2px 15px 18px; "><b>4</b></td>
+        								<td style="padding:2px 15px 18px;  font-size: 18px;">Profit value of stock</td>
+        								<td style="padding:2px 15px 18px; "><b>:</b></td>
+        								<td style="padding:2px 15px 18px; "><b>Rs. {{getData(saleValueStock-purchaseValueStock)}}</b></td>
+        							</tr>
+						<!-- <tr style="background-color:rgb(241,241,241);border:1px solid #989898; ">
+							<td colspan="5" style="padding-left: 15px;">
+								<h4><b>PAST MONTH</b></h4>
+							</td>
+						</tr>
+						<tr style="border: 1px solid #989898;">
+							<td style="padding:2px 15px 18px; "><b>4</b></td>
+							<td style="padding:2px 15px 18px;  font-size: 18px;">Stock valuation change (purchase value)</td>
+							<td style="padding:2px 15px 18px; "><b>:</b></td>
+							<td style="padding:2px 15px 18px; "><b>+/- Rs. 86500</b></td>
+						</tr> -->
+					</table>
+				</div>
+				<div class="diagnostics-report" style="page-break-after: always;position: relative;height:970px;border:1px solid #000;padding: 3px;">
+					<table style="width:100%; max-width: 100%; margin-bottom: 10px;">
+						<tr>
+							<td style="text-align: center;" colspan="7">
+								<h4 style="color:rgb(0,87,150);border-bottom:1px solid rgb(0,87,150);display: inline-block;margin-bottom: 10px;">Diagnostics Report </h4>
+							</td>
+						</tr>
+						<tr>
+							<td style="text-align:left;" colspan="7">
+								<h4 style="color:#000;border-bottom:1px solid #000;display: inline-block;margin-bottom: 10px;">Sales</h4>
+							</td>
+						</tr>
+					</table>
+					<table style="width:100%; max-width: 100%; margin-bottom: 10px; border:1px solid #000;">
+						<tr style="background-color:rgb(241,241,241);">
+							<td style="text-align:center; border:1px solid #000;padding:10px;" rowspan="2">
+								<h4 style="color:#000;border-bottom:1px solid #000; display: inline-block;">Doctors </h4>
+							</td>
+							<td style="text-align:center; border:1px solid #000;padding:10px;" colspan="8">
+								<h4 style="color:#000;border-bottom:1px solid #000; display: inline-block;">DIAGNOSTICS</h4>
+							</td>
+						</tr>
+						<tr style="background-color:rgb(241,241,241);">
+							<td colspan="2"style="border:1px solid #000;padding:10px;text-align: center;" >
+								<h4 style="color:#000;border-bottom:1px solid #000; display: inline-block;">Sales</h4>
+							</td>
+							<td colspan="2"style="border:1px solid #000;padding:10px;text-align: center;">
+								<h4 style="color:#000;border-bottom:1px solid #000; display: inline-block;">Orders </h4>
+							</td>
+							<td colspan="2"style="border:1px solid #000;padding:10px;text-align: center;">
+								<h4 style="color:#000;border-bottom:1px solid #000; display: inline-block;">Per prescription sale</h4>
+							</td>
+						</tr>
+						<tr *ngFor="let dr of diagnosticsDoctors">
+							<td colspan="1" style="text-align: center;border:1px solid #000;"><h4>Dr. {{getDoctorName(dr._id)}} </h4></td>
+							<td colspan="2" style="text-align: center;border:1px solid #000;">
+								<div><h5>{{dr.sales}}</h5></div>
+								<div><h6>({{dr.salesPerc}}%) </h6></div>
+							</td>
+							
+							<td colspan="2" style="text-align: center;border:1px solid #000;">
+								<div><h5>{{dr.orders}} </h5></div>
+								<div><h6>({{dr.ordersPerc}}%) </h6></div>
+							</td>
+							<td colspan="2" style="text-align: center;border:1px solid #000;">
+								<div><h5>{{dr.perPresSale}}</h5></div>
+							</td>
+						</tr>
+						<tr style="background-color:rgb(241,241,241);">
+							<td  colspan="1" style="text-align: center;border:1px solid #000;"><h4>Clinic Aggregate</h4></td>
+							<td  colspan="2" style="text-align: center;border:1px solid #000;"><h4>{{totalDiagnosticsSales}}</h4></td>
+
+							<td  colspan="2" style="text-align: center;border:1px solid #000;"><h4>{{totalDiagnosticsOrders}}</h4></td>
+							<td  colspan="2" style="text-align: center;border:1px solid #000;"><h4>{{totalDiagnosticsPerPresSale}}</h4></td>
+						</tr>
+					</table>
+					<table style="width:100%;">
+						<tr>
+							<td style="text-align: center;">
+								<h4>Patient conversion: <span style="color:rgb(0,176,80);font-weight:22px;"> {{diagnosticsPatientConversion}} % </span></h4>
+							</td>
+						</tr>
+					</table>
+				</div>
+				<div class="ipd-report" style="page-break-after: always;position: relative;height:970px;border:1px solid #000;padding: 3px;">
+					<table style="width:100%; max-width: 100%; margin-bottom: 10px;">
+						<tr>
+							<td style="text-align: center;" colspan="7">
+								<h4 style="color:rgb(0,87,150);border-bottom:1px solid rgb(0,87,150);display: inline-block;margin-bottom: 10px;">IPD Report</h4>
+							</td>
+						</tr>
+						<tr>
+							<td style="text-align:left;" colspan="7">
+								<h4 style="color:#000;border-bottom:1px solid #000;display: inline-block;margin-bottom: 10px;">Sales</h4>
+							</td>
+						</tr>
+					</table>
+					<table style="width:100%; max-width: 100%; margin-bottom: 10px; border:1px solid #000;">
+						<tr style="background-color:rgb(241,241,241);">
+							<td style="text-align:center; border:1px solid #000;padding:10px;" rowspan="2">
+								<h4 style="color:#000;border-bottom:1px solid #000; display: inline-block;">Consulting Doctors</h4>
+							</td>
+							<td style="text-align:center; border:1px solid #000;padding:10px;" colspan="9">
+								<h4 style="color:#000;border-bottom:1px solid #000; display: inline-block;">IPD</h4>
+							</td>
+						</tr>
+						<tr style="background-color:rgb(241,241,241);">
+							<td colspan="2"style="border:1px solid #000;padding:10px;text-align: center;" >
+								<h4 style="color:#000;border-bottom:1px solid #000; display: inline-block;">Patients Discharged</h4>
+							</td>
+							<td colspan="2"style="border:1px solid #000;padding:10px;text-align: center;" >
+								<h4 style="color:#000;border-bottom:1px solid #000; display: inline-block;">Patients Admitted</h4>
+							</td>
+							<td colspan="2"style="border:1px solid #000;padding:10px;text-align: center;">
+								<h4 style="color:#000;border-bottom:1px solid #000; display: inline-block;">Revenue</h4>
+							</td>
+							<td colspan="2"style="border:1px solid #000;padding:10px;text-align: center;">
+								<h4 style="color:#000;border-bottom:1px solid #000; display: inline-block;">Admission Hrs</h4>
+							</td>
+							<td colspan="2"style="border:1px solid #000;padding:10px;text-align: center;">
+								<h4 style="color:#000;border-bottom:1px solid #000; display: inline-block;">Avg. Revenue per admission</h4>
+							</td>
+						</tr>
+						<tr *ngFor="let dr of dataArray">
+							<td colspan="1" style="text-align: center;border:1px solid #000;"><h4>Dr. {{getDoctorName(dr._id)}} </h4></td>
+							<td colspan="2" style="text-align: center;border:1px solid #000;">
+								<div><h5>{{dr.patientsDishcarge}}</h5></div>
+							</td>
+							
+							<td colspan="2" style="text-align: center;border:1px solid #000;">
+								<div><h5>{{dr.patientAdmitted}}</h5></div>
+							</td>
+							<td colspan="2" style="text-align: center;border:1px solid #000;">
+								<div><h5>{{dr.total_bill}}</h5></div>
+							</td>
+							<td colspan="2" style="text-align: center;border:1px solid #000;">
+								<div><h5>{{dr.admissionHours}}</h5></div>
+							</td>
+							<td colspan="2" style="text-align: center;border:1px solid #000;">
+								<div><h5>Rs. {{dr.avgRevenue}}</h5></div>
+							</td>
+						</tr>
+						<tr style="background-color:rgb(241,241,241);">
+							<td  colspan="1" style="text-align: center;border:1px solid #000;"><h4>Clinic </h4></td>
+							<td  colspan="2" style="text-align: center;border:1px solid #000;"><h4>{{totalIpdDischarged}}</h4></td>
+
+							<td  colspan="2" style="text-align: center;border:1px solid #000;"><h4>{{totalIpdAdmissions}}</h4></td>
+							<td  colspan="2" style="text-align: center;border:1px solid #000;"><h4>{{totalIpdBill}}</h4></td>
+							<td  colspan="2" style="text-align: center;border:1px solid #000;"><h4>{{totalIpdHours}}</h4></td>
+							<td  colspan="2" style="text-align: center;border:1px solid #000;"><h4>Rs. {{totalIpdAvgBill}}</h4></td>
+						</tr>
+					</table>
+					<table style="width:100%;">
+						<tr>
+							<td style="text-align: center;">
+								<h4>IPD Occupancy: <span style="color:rgb(0,176,80);font-weight:22px;"> {{ipdOccupancy}}% </span></h4>
+							</td>
+						</tr>
+					</table>
+				</div>
+				<div class="clinic-smry-report" style="page-break-after: always;position: relative;height:970px;border:1px solid #000;padding: 3px;">
+					<table style="width:100%; max-width: 100%; margin-bottom: 10px;">
+						<tr>
+							<td style="text-align: center;" colspan="7">
+								<h4 style="color:rgb(0,87,150);border-bottom:1px solid rgb(0,87,150);display: inline-block;margin-bottom: 10px;">Clinic Summary Report</h4>
+							</td>
+						</tr>
+					</table>
+					<table class="table table-bordered new-tab-22">
+						<tbody>
+							<tr style="background-color:rgb(241,241,241);border:1px solid #989898; ">
+								<td rowspan="2" class="text-center">
+									<div>Services</div> <div>&</div><div> Doctors</div></td>
+									<td colspan="2" class="text-center"><b>OPD</b></td>
+									<td colspan="2" class="text-center"><b>PHARMACY</b></td>
+									<td colspan="2" class="text-center"><b>DIAGNOSTICS</b></td>
+									<td colspan="2" class="text-center"><b>IPD</b></td>
+									<td rowspan="2" class="text-center"><div>TOTAL </div><small>(Rs.)</small></td>
+								</tr>
+								<tr style="background-color:rgb(241,241,241);border:1px solid #989898; ">
+									<td class="text-center">Collection</td>
+									<td class="text-center">Patients </td>
+									<td class="text-center">Sales</td>
+									<td class="text-center">Profit </td>
+									<td class="text-center">Collection </td>
+									<td class="text-center">Orders </td>
+									<td class="text-center">Collection</td>
+									<td class="text-center">Admission</td>
+								</tr>
+								<tr *ngFor="let dr of dataSummaryArray">
+									<td class="text-center"><div>Dr. {{getDoctorName(dr.doctor_id)}}</div></td>
+									<td class="text-center"><div><small>{{dr.collection}}</small></div><div><small>({{dr.collectionPerc}}%)</small></div></td>
+									<td class="text-center"><div><small>{{dr.patients}}</small></div><div><small>({{dr.patientsPerc}}%)</small></div></td>
+									<td class="text-center"><div><small>{{dr.sales}}</small></div><div><small>({{dr.salesPerc}}%)</small></div></td>
+									<td class="text-center"><div><small>{{dr.profit}}</small></div><div><small>({{dr.profitPerc}}%)</small></div></td>
+									<td class="text-center"><div><small>{{dr.collectionDiagnostics}}</small></div><div><small>({{dr.collectionDiagnosticsPerc}}%)</small></div></td>
+									<td class="text-center"><div><small>{{dr.orders}}</small></div><div><small>({{dr.ordersPerc}}%)</small></div></td>
+									<td class="text-center"><div><small>{{dr.collectionIpd}}</small></div><div><small>({{dr.collectionIpdPerc}}%)</small></div></td>
+									<td class="text-center"><div><small>{{dr.ordersIpd}}</small></div><div><small>({{dr.ordersIpdPerc}}%)</small></div></td>
+									<td class="text-center"><div>{{dr.totalCollection}}</div><div>({{dr.totalCollectionPerc}}%)</div></td>
+								</tr> 
+								<tr style="background-color:rgb(241,241,241);border:1px solid #989898; ">
+									<td class="text-center"><div><b>Total</b></div></td>
+									<td class="text-center"><div><b>{{opdCollection}}</b></div></td>
+									<td class="text-center"><div><b>{{patientsArray.length}}</b></div></td>
+									<td class="text-center"><div><b>{{pharmacySales}}</b></div></td>
+									<td class="text-center vlt"><div><b>{{pharmacyProfit}}</b></div></td>
+									<td class="text-center"><div><b>{{diagnosticsCollection}}</b></div></td>
+									<td class="text-center"><div><b>{{diagnosticsOrders}}</b></div></td>
+									<td class="text-center"><div><b>{{ipdCollection}}</b></div></td>
+									<td class="text-center"><div><b>{{ipdAdmission}}</b></div></td>
+									<td class="text-center" style="background-color:#46dc46;"><div>{{totalClinicCollection}}</div></td>
+								</tr>
+							</tbody>
+					    <!-- <tbody>
+							<tr style="background-color:rgb(241,241,241);border:1px solid #989898; ">
+								<td rowspan="2" class="text-center">
+									<div>Services</div> <div>&</div><div> Doctors</div></td>
+								<td colspan="2" class="text-center"><b>OPD</b></td>
+								<td colspan="2" class="text-center"><b>PHARMACY</b></td>
+								<td colspan="2" class="text-center"><b>DIAGNOSTICS</b></td>
+								<td colspan="2" class="text-center"><b>IPD</b></td>
+								<td rowspan="2" class="text-center"><div>TOTAL </div><small>(Rs.)</small></td>
+							</tr>
+							<tr  style="background-color:rgb(241,241,241);border:1px solid #989898; ">
+								<td class="text-center">Collection</td>
+								<td class="text-center">Patients </td>
+								<td class="text-center">Sales</td>
+								<td class="text-center">Profit </td>
+								<td class="text-center">Collection </td>
+								<td class="text-center">Orders </td>
+								<td class="text-center">Collection</td>
+								<td class="text-center">Admission</td>
+							</tr>
+							<tr>
+								<td class="text-center"><div>DOC1</div></td>
+								<td class="text-center"><div><small>12500</small></div><div><small>(30%)</small></div></td>
+								<td class="text-center"><div><small>130</small></div><div><small>(30%)</small></div></td>
+								<td class="text-center"><div class="ornge"><small>12500</small></div><div class="ornge"><small>(30%)</small></div></td>
+								<td class="text-center"><div><small>125</small></div><div><small>(30%)</small></div></td>
+								<td class="text-center"><div><small>125</small></div><div><small>(30%)</small></div></td>
+								<td class="text-center"><div><small>125</small></div><div><small>(30%)</small></div></td>
+								<td class="text-center"><div><small>125</small></div><div><small>(30%)</small></div></td>
+								<td class="text-center"><div><small>125</small></div><div><small>(30%)</small></div></td>
+								<td class="text-center"><div>50000</div><div>(35%)</div></td>
+							</tr>
+							<tr>
+								<td class="text-center"><div>DOC2</div></td>
+								<td class="text-center"><div><small>12500</small></div><div><small>(30%)</small></div></td>
+								<td class="text-center"><div><small>12500</small></div><div><small>(30%)</small></div></td>
+								<td class="text-center"><div><small>125</small></div><div><small>(30%)</small></div></td>
+								<td class="text-center"><div><small>125</small></div><div><small>(30%)</small></div></td>
+								<td class="text-center"><div><small>125</small></div><div><small>(30%)</small></div></td>
+								<td class="text-center"><div><small>125</small></div><div><small>(30%)</small></div></td>
+								<td class="text-center"><div><small>125</small></div><div><small>(30%)</small></div></td>
+								<td class="text-center"><div><small>125</small></div><div><small>(30%)</small></div></td>
+								<td class="text-center"><div>50000</div><div>(35%)</div></td>
+							</tr>
+							<tr>
+								<td class="text-center"><div>DOC3</div></td>
+								<td class="text-center"><div><small>12500</small></div><div><small>(30%)</small></div></td>
+								<td class="text-center"><div><small>12500</small></div><div><small>(30%)</small></div></td>
+								<td class="text-center"><div><small>125</small></div><div><small>(30%)</small></div></td>
+								<td class="text-center"><div><small>125</small></div><div><small>(30%)</small></div></td>
+								<td class="text-center"><div><small>125</small></div><div><small>(30%)</small></div></td>
+								<td class="text-center"><div><small>125</small></div><div><small>(30%)</small></div></td>
+								<td class="text-center"><div><small>125</small></div><div><small>(30%)</small></div></td>
+								<td class="text-center"><div><small>125</small></div><div><small>(30%)</small></div></td>
+								<td class="text-center"><div>50000</div><div>(35%)</div></td>
+							</tr>
+							<tr>
+								<td class="text-center"><div>DOC4</div></td>
+								<td class="text-center"><div><small>12500</small></div><div><small>(30%)</small></div></td>
+								<td class="text-center"><div><small>12500</small></div><div><small>(30%)</small></div></td>
+								<td class="text-center"><div><small>125</small></div><div><small>(30%)</small></div></td>
+								<td class="text-center"><div><small>125</small></div><div><small>(30%)</small></div></td>
+								<td class="text-center"><div><small>125</small></div><div><small>(30%)</small></div></td>
+								<td class="text-center"><div><small>125</small></div><div><small>(30%)</small></div></td>
+								<td class="text-center"><div><small>125</small></div><div><small>(30%)</small></div></td>
+								<td class="text-center"><div><small>125</small></div><div><small>(30%)</small></div></td>
+								<td class="text-center"><div>50000</div><div>(35%)</div></td>
+							</tr>
+							<tr>
+								<td class="text-center"><div>DOC5</div></td>
+								<td class="text-center"><div><small>12500</small></div><div><small>(30%)</small></div></td>
+								<td class="text-center"><div><small>12500</small></div><div><small>(30%)</small></div></td>
+								<td class="text-center"><div><small>125</small></div><div><small>(30%)</small></div></td>
+								<td class="text-center"><div><small>125</small></div><div><small>(30%)</small></div></td>
+								<td class="text-center"><div><small>125</small></div><div><small>(30%)</small></div></td>
+								<td class="text-center"><div><small>125</small></div><div><small>(30%)</small></div></td>
+								<td class="text-center"><div><small>125</small></div><div><small>(30%)</small></div></td>
+								<td class="text-center"><div><small>125</small></div><div><small>(30%)</small></div></td>
+								<td class="text-center"><div>50000</div><div>(35%)</div></td>
+							</tr>
+							<tr style="background-color:rgb(241,241,241);border:1px solid #989898; ">
+								<td class="text-center"><div><b>Total</b></div></td>
+								<td class="text-center"><div><b>35500</b></div></td>
+								<td class="text-center"><div><b>355</b></div></td>
+								<td class="text-center"><div><b>35500</b></div></td>
+								<td class="text-center vlt" style="background-color:violet;"><div><b>3550</b></div></td>
+								<td class="text-center"><div><b>35500</b></div></td>
+								<td class="text-center"><div><b>3550</b></div></td>
+								<td class="text-center"><div><b>35500</b></div></td>
+								<td class="text-center"><div><b>34</b></div></td>
+								<td class="text-center grin-new" style="background-color:#46dc46;"><div>142000</div></td>
+							</tr>
+						</tbody> -->
+					</table>
+					<table style="max-width: 100%; margin:10px auto;">
+						<tr>
+							<td style="text-align: center;" colspan="5">
+								<h4 style="color:rgb(0,87,150);border-bottom:1px solid rgb(0,87,150);display: inline-block;margin-bottom: 10px;">Total Clinic collection</h4>
+							</td>
+						</tr>
+						<tr style="border: 1px solid #989898;">
+							<td style="padding:2px 15px 18px;  font-size: 18px;">1</td>
+							<td style="padding:2px 15px 18px;  font-size: 18px;">OPD consultation</td>
+							<td style="padding:2px 15px 18px; "><b>:</b></td>
+							<td style="padding:2px 15px 18px; "><b>Rs. {{opdCollection}}</b></td>
+						</tr>
+						<tr style="border: 1px solid #989898;">
+							<td style="padding:2px 15px 18px;  font-size: 18px;">2</td>
+							<td style="padding:2px 15px 18px;  font-size: 18px;">Pharmacy sales</td>
+							<td style="padding:2px 15px 18px; "><b>:</b></td>
+							<td style="padding:2px 15px 18px; "><b>Rs. {{pharmacySales}}</b></td>
+						</tr>
+						<tr style="border: 1px solid #989898;">
+							<td style="padding:2px 15px 18px;  font-size: 18px;">3</td>
+							<td style="padding:2px 15px 18px;  font-size: 18px;">Diagnostics sales</td>
+							<td style="padding:2px 15px 18px; "><b>:</b></td>
+							<td style="padding:2px 15px 18px; "><b>Rs. {{diagnosticsCollection}}</b></td>
+						</tr>
+						<tr style="border: 1px solid #989898;">
+							<td style="padding:2px 15px 18px;  font-size: 18px;">4</td>
+							<td style="padding:2px 15px 18px;  font-size: 18px;">IPD collection</td>
+							<td style="padding:2px 15px 18px; "><b>:</b></td>
+							<td style="padding:2px 15px 18px; "><b>Rs. {{ipdCollection}}</b></td>
+						</tr>
+					</table>
+					<table style="width:100%;">
+						<tr>
+							<td style="text-align: center;">
+								<h4>TOTAL COLLECTION: Rs. <span style="color:rgb(0,176,80);font-weight:22px;"> {{totalClinicCollection}}</span></h4>
+							</td>
+						</tr>
+					</table>
+				</div>
+				<div class="anexchure" style="page-break-after: always;position: relative;height:970px;border:1px solid #000;padding: 3px;" *ngIf="radioFull">
+					<table style="width:100%; margin-top: 15px;">
+						<tr>
+							<td colspan="20" style="text-align:right"><h4>Annexure -1</h4></td>
+						</tr>
+						<tr>
+							<td style="text-align:left;">
+								<h4>Patient details</h4>
+							</td>
+						</tr>
+					</table>
+					<table style="max-width: 100%; width:100%;">
+						<tr style="border: 1px solid #989898; background-color:rgb(241,241,241);border-bottom:1px solid green;border-top:1px solid green;">
+							<td style="padding:2px 15px 18px; "><b>SNo</b></td>
+							<td style="padding:2px 15px 18px; "><b>Prescription ID</b></td>
+							<td style="padding:2px 15px 18px; "><b>Date</b></td>
+							<td style="padding:2px 15px 18px; "><b>Patient name</b></td>
+							<td style="padding:2px 15px 18px; "><b>Age</b></td>
+							<td style="padding:2px 15px 18px; "><b>Gender</b></td>
+							<td style="padding:2px 15px 18px; "><b>Address</b></td>
+							<td style="padding:2px 15px 18px; "><b>Mobile no</b></td>
+							<!-- <td style="padding:2px 15px 18px; "><b>Diagnosis</b></td> -->
+						</tr>
+						<tr style="border: 1px solid #989898; background-color:rgb(230,238,213);" *ngFor="let pt of patientDetails;let i = index">
+							<td style="padding:10px; "><b>{{i+1}}</b></td>
+							<td style="padding:10px; ">{{pt.prescription_id}}</td>
+							<td style="padding:10px; ">{{pt.createdAt | date: 'dd/LL/yy'}}</td>
+							<td style="padding:10px; ">{{pt.registration.pateintName}}</td>
+							<td style="padding:10px; ">{{pt.registration.age_in_years}}</td>
+							<td style="padding:10px; ">{{pt.registration.gender}}</td>
+							<td style="padding:10px; ">{{pt.registration.location}}, {{pt.registration.city}}</td>
+							<td style="padding:10px; ">{{pt.registration.pateintPhone}}</td>
+							<!-- <td style="padding:10px; "></td> -->
+						</tr>
+					</table>
+				</div>
+				<div class="anexchure-2" style="page-break-after: always;position: relative;height:970px;border:1px solid #000;padding: 3px;" *ngIf="radioFull">
+					<table style="width:100%; margin-top: 15px;">
+						<tr>
+							<td colspan="20" style="text-align:right"><h4>Annexure -2</h4></td>
+						</tr>
+						<tr>
+							<td style="text-align:left;">
+								<h4>Diagnostic details</h4>
+							</td>
+						</tr>
+					</table>
+					<table style="max-width: 100%; width:100%;">
+						<tr style="border: 1px solid #989898; background-color:rgb(241,241,241);border-bottom:1px solid green;border-top:1px solid green;">
+							<td style="padding:2px 15px 18px; "><b>SNo</b></td>
+							<td style="padding:2px 15px 18px; "><b>Test Name </b></td>
+							<td style="padding:2px 15px 18px; "><b>Test Category</b></td>
+							<td style="padding:2px 15px 18px; "><b>Number</b></td>
+						</tr>
+						<tr style="border: 1px solid #989898; background-color:rgb(230,238,213);" *ngFor="let pt of uniqueDiagnosticsArray;let i = index">
+							<td style="padding:10px; "><b>{{i+1}}</b></td>
+							<td style="padding:10px; ">{{pt.product}}</td>
+							<td style="padding:10px; ">{{pt.opt}}</td>
+							<td style="padding:10px; ">{{pt.count}}</td>
+							
+						</tr>
+					</table>
+				</div>
+				<div class="anexchure-3" style="page-break-after: always;position: relative;height:970px;border:1px solid #000;padding: 3px;" *ngIf="radioFull">
+					<table style="width:100%; margin-top: 15px;">
+						<tr>
+							<td colspan="20" style="text-align:right"><h4>Annexure -3</h4></td>
+						</tr>
+						<tr>
+							<td style="text-align:left;">
+								<h4>IPD details</h4>
+							</td>
+						</tr>
+					</table>
+					<table style="max-width: 100%; width:100%;">
+						<tr style="border: 1px solid #989898; background-color:rgb(241,241,241);border-bottom:1px solid green;border-top:1px solid green;">
+							<td style="padding:10px; "><b>SNo</b></td>
+							<td style="padding:2px 15px 18px; "><b>Patient Name </b></td>
+							<td style="padding:2px 15px 18px; "><b>Admission date</b></td>
+							<td style="padding:2px 15px 18px; "><b>Discharge date</b></td>
+							<td style="padding:2px 15px 18px; "><b>Bill value</b></td>
+							<td style="padding:2px 15px 18px; "><b>Contact number</b></td>
+						</tr>
+						<tr style="border: 1px solid #989898; background-color:rgb(230,238,213);" *ngFor="let pt of patientDetailsIpd;let i = index">
+							<td style="padding:10px; "><b>{{i+1}}</b></td>
+							<td style="padding:10px; "><b>{{pt.patientName}}</b></td>
+							<td style="padding:10px; ">{{pt.createdAt | date: 'dd/LL/yy'}}</td>
+							<td style="padding:10px; ">
+								<span *ngIf="pt.discharge">{{pt.discharge_date | date: 'dd/LL/yy'}}</span>
+								<span *ngIf="!pt.discharge">N.A</span>
+							</td>
+							<td style="padding:10px; ">
+								<span *ngIf="pt.discharge">{{pt.total_bill}}</span>
+								<span *ngIf="!pt.discharge">N.A</span>
+							</td>
+							<td style="padding:10px; ">{{pt.phone}}</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

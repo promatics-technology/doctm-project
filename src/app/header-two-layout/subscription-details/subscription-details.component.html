@@ -1,0 +1,105 @@
+<div class="container">
+<div class="row">
+	<!--div class="col-lg-12">
+		<h3><u>Service Rates & Discounts</u><small> (applicable through out)</small></h3>
+	</div-->
+
+	<div class="col-lg-10 col-lg-offset-1" style="margin-top:3%">
+		<table class="table table-bordered">
+            <tbody>
+                <tr class="tb-bl-1">
+                    <td class="text-center" width="50px">
+                        <b>Sr.No</b> 
+                    </td>
+                    <td class="text-center" width="300px">
+                        <b>Modules</b>
+                    </td>
+                    <td  class="text-center">
+                        <b>Plan Duration</b>
+                    </td>
+                    <td  class="text-center">
+                        <b>Base Rate</b>
+                    </td>
+                    <td  class="text-center">
+                        <b>Discount(%)</b>
+                    </td>
+                    <td  class="text-center">
+                        <b>Amount Payable (INR)</b>
+                    </td>
+                </tr>
+                <tr class="evn-drk" *ngFor="let planItem of plan.services; let i=index">
+                    <td width="50px">
+                        <h5><b>{{i+1}}</b></h5>
+                    </td>
+                    <td width="300px" class="text-left">
+                        <b>{{planItem}}</b>
+                    </td>
+                    <td>
+                    	<b *ngIf="plan?.plan?.name=='monthly'">1 Month</b>
+                    	<b *ngIf="plan?.plan?.name=='quarterly'">3 Months</b>
+                    	<b *ngIf="plan?.plan?.name=='yearly'">12 Months</b>
+                    </td>
+                    <td>
+                    	<b>{{getServicePrice(planItem)}}</b>
+                    </td>
+                    <td>
+                       <b>{{getDiscount(planItem)}}</b>
+                    </td>
+                    <td>
+                    	<b>{{getAmount(planItem)}}</b>
+                    </td>
+                </tr>
+              
+                <tr class="evn-drk">
+                    <td width="50px" colspan="3">
+                        <h3><b>TOTAL</b></h3>
+                    </td>
+                    <td class="text-left">
+                        <h3><b>{{plan.max_price}}</b></h3>
+                    </td>
+                    <td>
+                    	<h3><b></b></h3>
+                    </td>
+                    <td>
+                    	<h3><b>{{plan.total}}</b></h3>
+                    </td>
+                </tr>
+                <tr class="odd-lyt">
+                    <td width="50px">
+                        <h5><b>{{plan.services.length+1}}</b></h5>
+                    </td>
+                    <td width="300px" class="text-left">
+                        <b>Service Tax(GST)</b>
+                    </td>
+                    <td colspan="3" class="text-center">
+                    	<b>{{plan.gst}}%</b>
+                    </td>
+                    <td>
+                    	<b>{{getGST(plan.total, plan.gst)}}</b>
+                    </td>
+                </tr>
+                <tr class="text-center">
+                	<td class="last text-left" colspan="5">
+                		<h3 class="mg-top"><b>Total Payable</b></h3>
+                	</td>
+                	<td class="last">
+                		<h3 class="mg-top"><b>{{plan.total+getGST(plan.total, plan.gst)}}</b></h3>
+                		<small>(You Save <b>₹  {{plan.max_price-plan.total}}</b>)</small>
+                	</td>
+                </tr>
+            </tbody>
+        </table>
+	</div>
+</div>
+<div class="row" style="margin-top:5%">
+				<div class="col-lg-6">
+					<div class="bck_pay">
+						<a href="javascript:void(0)" (click)="backClicked()" class="btn-1">BACK</a>
+					</div>
+				</div>
+				<div class="col-lg-6">
+					<div class="bck_pay">
+						<a href="javascript:void(0);" class="btn-2" (click)="createSubscription()"><b>PAY</b>&nbsp;&nbsp;<span style="color:#fff;font-weight: bolder;">₹ {{plan.total+getGST(plan.total, plan.gst)}}</span></a>
+					</div>
+				</div>
+			</div>

@@ -1,0 +1,128 @@
+/*section 2*/
+.table_paymnt{
+    margin-top: 30px;
+}
+.table_paymnt table{
+    font-size: 22px;
+}
+.bck_pay a{
+    display:inline-block;
+    padding:20px;
+    text-decoration: none;
+    border-radius:15px;
+    font-size:24px;
+    color:#000; 
+    width:100%;
+    text-align: center;
+}
+.bck_pay a.btn-1{
+    background: rgba(255,195,0);
+}
+.bck_pay a.btn-2{
+    background:#00b0f0;
+}
+/*ends*/
+.hdr{
+	    font-weight: bold;
+    color: #fff;
+    padding: 10px;
+    background: #00b0f0;
+}
+.clinic-2 input, clini-2 button{
+	display:inline-block;
+}
+.clinic-2 input{
+	width:95%;
+}
+.clinic-2 button.bt-green{
+	    margin-left: 7px!important;
+    background: #24bf24!important;
+    font-weight: bold!important;
+    margin-top: -5px!important;
+}
+.fixed_data div.wrap-data{
+	background-color: #deddd9;
+    padding:0px 0px;
+	width:20%;
+	float:left; 
+	font-weight: bold;
+
+}
+.fixed_data div.ft{
+	color:#ea5a5a;
+	/*font-size:22px;  */
+}
+.fixed_data div.lt{
+	color:#09a541;
+	/*font-size:22px; */
+}
+.fixed-2{
+	border:8px solid #3e82f7;
+	margin-top:10px;
+}
+.fixed-2 h6{
+	margin:10px;
+}
+.txt_green{
+	color:#24bf24!important;
+}
+
+.mat-sort-header-container {
+  align-items: center;
+}
+.tr_sort th{
+	background:#24bf24;
+}
+.mat-sort-header-arrow{
+    /* opacity: 0; */
+    color:red!important;
+}
+.tb-1 td{
+	background-color: #7ee632;
+	color:#000;
+	font-weight: bold;
+}
+.tb-1-blue td{
+	background-color:#3e3e3e;
+	color:#fff; 
+}
+.evn-drk td{
+	background-color:#cfcfd0;
+}
+.odd-lyt td{
+	background-color:#eaeaea;
+}
+.inner-table{
+	padding-left:0px;
+	padding-right:0px;
+}
+.act{
+	cursor:pointer;
+}
+.txt-danger{
+	color:red;
+}
+td  a{
+	color:#00b0f0;
+}
+.tb-bl-1{
+	background-color:#5477de;
+	color:#fff;
+}
+.btn-cyan{
+	background:#99f1e9;
+	border-radius:0px;
+	color:#000;
+	border:1px solid #000; 
+	font-size: 18px;
+    width: 12%;
+}
+.tr_sort td{
+	background:#99f1e9; 
+}
+.last{
+	background: #5bd85b;
+}
+.mg-top{
+	margin-top: 0px;
+}

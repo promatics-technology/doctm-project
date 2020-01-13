@@ -1,0 +1,186 @@
+<style type="text/css"> 
+	
+	a.cstm-sb-menu:hover{
+		color:#01b0f0!important;
+	}
+</style>
+<div class="loader-box" *ngIf="loading">
+    <img src="./assets/imgs/load.gif" />
+</div>
+<div class="headersidebar-wrap" [ngClass]="nosidebar" >
+	<div class="dashboard-header">
+		<div class="dashboard-header-one">
+			<div class="close-dashboard-sidebar">
+		        <button type="button" class="navbar-toggle" (click)="sidebarclose()" >
+		            <span class="icon-bar"></span>
+		            <span class="icon-bar"></span>
+		            <span class="icon-bar"></span>
+		        </button>
+		    </div>
+
+		    <div class="welcomename">
+		    	{{headertitle}}
+		    </div>
+
+		    <div class="dashboard-signout">
+		    	<a routerLink="/" (click)="signOut()"> Sign-out </a>
+		    </div>
+		</div>
+
+		<div class="dashboard-header-two" *ngIf="hideElement=='global'">
+			<div class="dashboard-header-logo" routerLink="/header-six-layout/dashboard-diagnostic">
+				<img src="./assets/imgs/logoDoctm.png" class="img-responsive" />
+			</div>
+			<div class="dashboard-header-smartclinic">
+				SmartClinic
+				<div class="fingertip-slogan"> Clinic at your fingertips </div>
+			</div>
+			<div class="dashboard-subscription">
+			 	<p> Subscription expires on  </p>
+			 	<p> 15<sup>th</sup> June, 2018 </p>
+			</div>
+		</div>
+
+		<div class="dashboard-header-two" *ngIf="stock">
+			<div class="">
+				<div class="col-lg-4">
+					<div class="dashboard-header-logo" routerLink="/header-six-layout/dashboard-diagnostic">
+						<img src="./assets/imgs/logoDoctm.png" class="img-responsive" />
+					</div>
+					<div *ngIf="diagnosticsDetail">
+						<div class="dshbrd-btn">
+							<button class="btn btn-custom" routerLink="/header-six-layout/dashboard-diagnostic"> Dashboard </button>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-2 text-center">
+                        <div class="main-date">
+                            <h3 class="dt">
+                                {{day}} {{month}} , {{year}}
+                                <small>
+                                    {{hoursIST}}:{{getMin()}}
+                                </small>
+                            </h3>
+                        </div>
+                    </div>
+				<div class="col-lg-6" >
+					<div class="dashboard-subscription">
+						<div class="row">
+							<div class="col-lg-4">
+								<div class="dashboard-btns new-reg" >
+									<button class="btn btn-custom btn-1" data-dismiss="modal" data-toggle="modal" data-target="#registrationForm" routerLink="/header-six-layout/sales-entry-diagnostics">
+										<i class="fa fa-plus-square"></i>
+										<div>SALE ENTRY </div>
+									</button>
+								</div>
+							</div>
+							<div class="col-lg-4">
+								<div class="dashboard-btns">
+									<button class="btn btn-custom btn-2" routerLink="/header-six-layout/diagnostics-progress">
+										<div> PROGRESS </div>
+										<div> TODAY </div>
+									</button>
+								</div>
+							</div>
+							<!-- <div class="col-lg-4">
+								<div class="dashboard-btns app-list">
+									<button class="btn btn-custom btn-3" data-dismiss="modal" data-toggle="modal" data-target="#stck-prchse-header">
+										<div> RETURN </div>
+										<div> SALE </div>
+									</button>
+								</div>
+							</div> -->
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="page-sidebar-wrapper">
+		<div id="bs-example-navbar-collapse-1" class="dashbrd-sidbar navbar-collapse p-0" >
+
+			<ul class="dshbrd-sidebar-menu m-0 p-0" type="none">
+
+				<li class="sidebar-item">
+					<a class="sidebar-link" href="javascript:void(0);" routerLink="/header-six-layout/diagnostic-detail">
+						<span class="title"> Diagnostic Details </span>
+					</a>
+				</li>
+
+				<li class="sidebar-item">
+					<a class="sidebar-link" href="javascript:void(0);" data-toggle="modal" data-target="#tst-entry">
+						<span class="title"> Test Entry </span>
+					</a>
+				</li>
+
+				<li class="sidebar-item">
+					<a class="sidebar-link" href="javascript:void(0);" routerLink="/header-six-layout/test-catalogue">
+						<span class="title"> Test Catalogue </span>
+					</a>
+				</li>
+
+				<li class="sidebar-item">
+					<a class="sidebar-link" href="javascript:void(0);" routerLink="/header-six-layout/sales-bookd">
+						<span class="title"> Sales Book </span>
+					</a>
+				</li>
+
+			</ul>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="tst-entry" role="dialog">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" (click)="reset()">&times;</button>
+				<h4 class="modal-title text-center">Make a Test Entry</h4>
+			</div>
+			<form [formGroup] = "detailsForm">
+				<div class="modal-body">
+					<div class="row">
+						<div class="col-lg-12">
+							<div class="form-group">
+								<select  class="form-control" class="form-control txtfield" [(ngModel)]="reqData.category" required=""  [formControl]="detailsForm.controls['category']" (change)="onChange($event)">
+									<option selected="" value="" disabled="">Category</option>
+									<option value="{{option}}" *ngFor="let option of diagnosticsData.dataSmartDiagnostics.diagnostics_services">{{option}}</option>
+								</select>
+							</div>
+							<p style="color: #FF0000" *ngIf="!detailsForm.controls['category'].valid  && ( detailsForm.controls['category'].touched)">Invalid Category !!!</p>
+						</div>
+						<div class="col-lg-12">
+							<div class="form-group">
+								<input type="text" class="form-control" placeholder="Test Name" [(ngModel)]="reqData.testName" required="" [formControl]="detailsForm.controls['testName']" (keyup)="onTextChange(reqData.category,$event.target.value)" [matAutocomplete]="auto">
+								<mat-autocomplete #auto="matAutocomplete" >
+                                  <mat-option *ngFor="let option of testNameSuggestion" [value]="option" >
+                                    {{option}}
+                                  </mat-option>
+                                </mat-autocomplete>
+							</div>
+							<p style="color: #FF0000" *ngIf="!detailsForm.controls['testName'].valid  && ( detailsForm.controls['testName'].touched)">Invalid Test Name !!!</p>
+						</div>
+						<div class="col-lg-12">
+							<div class="form-group">
+								<input type="text" class="form-control" placeholder="Rate" pattern="[0-9]+" [(ngModel)]="reqData.rate" required=""  [formControl]="detailsForm.controls['rate']">
+							</div><p style="color: #FF0000" *ngIf="!detailsForm.controls['rate'].valid  && ( detailsForm.controls['rate'].touched)">Invalid Rate !!!</p>
+						</div>
+						<div class="col-lg-12">
+							<div class="form-group">
+								<input type="text" class="form-control" maxlength="3" pattern="[0-9]+" placeholder="Discount(%)" [(ngModel)]="reqData.discount" required=""  [formControl]="detailsForm.controls['discount']">
+							</div>
+							<p style="color: #FF0000" *ngIf="!detailsForm.controls['discount'].valid  && ( detailsForm.controls['discount'].touched)">Invalid Discount !!!</p>
+						</div>
+						<div class="col-lg-12 text-center">
+							<button class="btn btn-custom btn-grin" type="submit" [disabled]="!detailsForm.valid" (click)="submitForm()">SUBMIT
+							</button>
+						</div>
+					</div>
+				</div>
+			</form>
+      <!--   <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div> -->
+  		</div>
+	</div>
+</div>

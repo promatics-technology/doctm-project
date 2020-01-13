@@ -1,0 +1,10 @@
+<div>
+  <div mat-dialog-content>
+ <button type="button" class="fa fa-print" style="background-color:#00B0F0; color:white;" (click)="printDocument()"></button>
+    <div style="position: relative;" id="mydoc">
+      <span class="fa fa-times" style="position: absolute;top:5px;right:5px;"></span>
+      <pdf-viewer src="{{data.url}}{{data.pdf}}" [original-size]="true" style="display: block;">
+      </pdf-viewer>
+    </div>
+  </div>
+</div>

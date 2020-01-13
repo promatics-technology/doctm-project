@@ -1,0 +1,192 @@
+<div class="loader-box" *ngIf="loading">
+	<img src="./assets/imgs/load.gif" />
+</div>
+<div class="analytics-sec">
+	
+	<div class="ipd-deatil-sec">
+	<!-- 	<div class="md-tab">
+	      
+	      	<ul class="nav nav-tabs" role="tablist">
+	          	<li role="presentation" class="active"><a href="javascript:void(0);" routerLink="/header-two-layout/dashboard-consultation-prescription"> Consultation </a></li>
+	          	<li role="presentation"><a href="javascript:void(0);" routerLink="/header-two-layout/dashboard-pharmacy-detail"> Clinic Services </a></li>
+	      	</ul>
+	      </div> -->
+
+	      <div class="inner-tab">
+	      	<!-- Nav tabs -->
+	      	<ul class="nav nav-tabs" role="tablist">
+	      		<li role="presentation" ><a href="javascript:void(0);" routerLink="/header-two-layout/dashboard-progress"> Patient </a></li>
+	      		<li role="presentation" class="active"><a href="javascript:void(0);" routerLink="/header-two-layout/dashboard-progress-time"> Time</a></li>
+	      		<li role="presentation"><a href="javascript:void(0);" routerLink="/header-two-layout/dashboard-progress-prescription">Prescription</a></li>
+				<!--li role="presentation"><a href="javascript:void(0);" routerLink="/header-two-layout/dashboard-progress-pharmacy"> Pharmacy</a></li>
+	          	<li role="presentation"><a href="javascript:void(0);" routerLink="/header-two-layout/dashboard-progress-diagnosis"> Diagnostics </a></li>
+	          	<li role="presentation"><a href="javascript:void(0);" routerLink="/header-two-layout/dashboard-progress-ipd"> IPD </a></li-->
+	          		<li role="presentation"><a href="javascript:void(0);" routerLink="/header-two-layout/dashboard-progress-pharmacy" *ngIf="doctorData.clinic_services.Clinic_Pharmacy==true"> Pharmacy</a></li>
+	          		<li role="presentation"><a href="javascript:void(0);" routerLink="/header-two-layout/dashboard-progress-diagnosis" *ngIf="doctorData.clinic_services.Clinic_Diagnostics==true"> Diagnostics </a></li>
+	          		<li role="presentation"><a href="javascript:void(0);" routerLink="/header-two-layout/dashboard-progress-ipd" *ngIf="doctorData.clinic_services.Clinic_IPD==true"> IPD </a></li>
+	          	</ul>
+	          </div>
+
+	          <div class="ipd-body">
+	    	<!-- <div class="cus-sidebar-wrapper side-bar-cstm">
+	    		<div class="cus-sidebar">
+	    			<ul> 
+	    				<li>
+	    					<div class="">
+	    						<div class="col-lg-3">
+	    							<h4 class="pd-left"><b>From</b></h4>
+	    						</div>
+	    						<div class="col-lg-9">
+	    							<div class="cstm-mg">
+	    								<angular2-date-picker [(ngModel)]="fromDate1" [settings]="settings"></angular2-date-picker>
+	    							</div>
+	    						</div>
+	    					</div>
+	    				</li>
+	    				<li>
+	    					<div class="">
+	    						<div class="col-lg-3">
+	    							<h4 class="pd-left"><b>To</b></h4>
+	    						</div>
+	    						<div class="col-lg-9">
+	    							<div class="cstm-mg">
+	    								<angular2-date-picker [(ngModel)]="toDate1" [settings]="settings"></angular2-date-picker>
+	    							</div>
+	    						</div>
+	    					</div>
+	    				</li>
+	    				<li class="text-right brder-cstm">
+	    					<div class="col-lg-12 text-center">
+	    						<button class="btn btn-go" (click)="go()">Go</button>
+	    					</div>
+	    				</li>
+	    				
+	    				<li class="li-cstm"> <a href="javascript:void(0);"> For Past</a> </li>
+	    				<li class="{{getClass(1)}}" (click)="activatetab(1)"> <a href="javascript:void(0);"> 1 Week &nbsp;<small *ngIf="activatedtab==1">({{fromDate | date: 'dd/LL/yy'}} - {{toDate | date: 'dd/LL/yy'}})</small> </a> </li>
+	    				<li class="{{getClass(2)}}" (click)="activatetab(2)"> <a href="javascript:void(0);"> 2 Weeks &nbsp;<small *ngIf="activatedtab==2">({{fromDate | date: 'dd/LL/yy'}} - {{toDate | date: 'dd/LL/yy'}})</small>  </a> </li>
+	    				<li class="{{getClass(3)}}" (click)="activatetab(3)"> <a href="javascript:void(0);"> 1 Month &nbsp;<small *ngIf="activatedtab==3">({{fromDate | date: 'dd/LL/yy'}} - {{toDate | date: 'dd/LL/yy'}})</small> </a> </li>
+	    				<li class="{{getClass(4)}}" (click)="activatetab(4)"> <a href="javascript:void(0);"> 3 Month &nbsp;<small *ngIf="activatedtab==4">({{fromDate | date: 'dd/LL/yy'}} - {{toDate | date: 'dd/LL/yy'}})</small></a> </li>
+	    				<li class="{{getClass(5)}}" (click)="activatetab(5)"> <a href="javascript:void(0);"> 6 Month &nbsp;<small *ngIf="activatedtab==5">({{fromDate | date: 'dd/LL/yy'}} - {{toDate | date: 'dd/LL/yy'}})</small></a> </li>
+	    				<li class="{{getClass(6)}}" (click)="activatetab(6)"> <a href="javascript:void(0);"> 1 Year &nbsp;<small *ngIf="activatedtab==6">({{fromDate | date: 'dd/LL/yy'}} - {{toDate | date: 'dd/LL/yy'}})</small></a> </li>
+	    				<li class="{{getClass(7)}}" (click)="activatetab(7)"> <a href="javascript:void(0);"> All </a> </li>
+	    			</ul>
+	    		</div>
+	    	</div>
+	    -->
+	    <div class="cus-content-wrapper" style="position: relative;">
+	    	<div class="cus-content">
+	    		<div class="">
+	    			<div class="consult-time">
+	    				<div class="col-lg-12">
+	    					<div class="text-center">
+	    						<h2> Consultation Time Utilization  
+	    						</h2>
+	    					</div>
+	    				</div>
+	    				<div class="col-lg-4">
+
+	    					<h3 style="line-height: 1.3;font-family: 'Josefin Sans', sans-serif;">“CTU is the fraction of your total clinic time for which you are actually engaged in consultation process. Higher the CTU busier you are. “</h3>
+
+	    				</div>
+	    				<div class="col-lg-8" style="padding-top: 35px;">
+	    					<div class="">
+	    						<div class="progress">
+
+	    							<div class="progress-bar {{classColor}} main-wr" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" [style.width.%]="value" style="width: 50%;line-height:2.2!important;font-size: 20px!important;">
+	    								<div class="ani-bar">
+
+	    								</div>
+	    								<span class="">{{value}}%</span>
+	    							</div>
+	    						</div>
+
+	    					</div>
+
+	    				<div class="row">
+							<div class="col-lg-6 text-left">
+								0%
+							</div>
+							<div class="col-lg-6 text-right">
+								100%
+							</div>
+						</div>
+						<div class="row" style="padding-bottom: 21px;">
+							<div class="form-group col-md-3 col-sm-3 col-xs-12 pad-marg">
+								<span class="box box-1"></span>
+								<label>< 30%, Poor </label>
+
+							</div>
+							<div class="form-group col-md-3 col-sm-3 col-xs-12  pad-marg">
+								<span class="box box-2"></span>
+								<label>30 - 50%, Good</label>
+							</div>
+							<div class="form-group col-md-3 col-sm-3 col-xs-12  pad-marg">
+								<span class="box box-3"></span>
+								<label>50-70%, Very Good</label>
+
+							</div>
+							<div class="form-group col-md-3 col-sm-3 col-xs-12 pad-marg">
+								<span class="box box-4"></span>
+								<label>>70%, Excellent</label>
+
+							</div>
+						</div>
+	    				</div>
+
+	    				<div class="row">
+	    					<div class="col-lg-5  col-lg-offset-1 text-center">
+	    						<button class="btn btn-custm"><b>Total Consultation Time Available : <span class="cstm-font">{{totalHours}} Hrs {{totalMin}} Min</span> </b></button>
+	    						<button class="btn btn-custm"><b>Total Consultation Tome Utilised : <span class="cstm-font">{{totalTimeUtilizedHours}} Hrs {{totalTimeUtilizedMin}} Min</span></b> </button>
+	    						<!-- <button class="btn btn-custm btn-wh"><b> <span class="cstm-font-1">Avg. CTU <br><span class="cstm-font">{{getData(avgCtuPercentage)}} %</span></span></b></button> -->
+	    					</div>
+	    					<div class="col-lg-5 text-center">
+	    						<button class="btn btn-custm"><b>Longest consultation : <span class="cstm-font">{{longestConsultationMin}} Min {{longestConsultationSec}} Sec</span></b> </button>
+	    						<button class="btn btn-custm"><b>Shortest consultation : <span class="cstm-font">{{shortestConsultationMin}} Min {{shortestConsultationSec}} Sec</span></b> </button>
+	    					</div>
+	    					<div class="col-lg-8 col-lg-offset-2 text-center">
+	    						<button class="btn btn-custm btn-wh"><b> <span class="cstm-font-1">Avg. time per patient <br><span class="cstm-font">{{avgTimePerPatient}} </span></span></b><span> minutes</span></button>
+	    					</div>
+	    				</div>
+
+	    			</div>
+	    		</div>
+	    	</div>
+	    	<div class="row">
+	    		<div class="blank-ftr">	    			
+	    		</div>
+	    	</div>
+	    </div>
+
+	</div>
+
+</div>
+
+</div>
+
+
+
+
+<!-- The Modal -->
+<div class="modal fade" id="undertaking-modal">
+	<div class="modal-dialog modal-sm">
+		<div class="modal-content">
+
+			<!-- Modal Header -->
+			<div class="modal-header">
+				<h4 class="modal-title">Consultation Time Utilization</h4>
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+			</div>
+			
+			<!-- Modal body -->
+			<div class="modal-body">
+				{{helpText[8]?.text}}
+			</div>
+			
+			<!-- Modal footer -->
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+			</div>
+			
+		</div>
+	</div>
+</div>

@@ -1,0 +1,427 @@
+<div class="loader-box" *ngIf="loading">
+    <img src="./assets/imgs/load.gif" />
+</div>
+<div class="cstm-hdr">
+	<div class="">
+		<div  class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
+			<div  class="dashboard-header-logo" tabindex="0" ng-reflect-router-link="/header-six-layout/dashboard-">
+				<img  _ngcontent-c3="" class="img-responsive" src="./assets/imgs/logoDoctm.png" routerLink="/header-six-layout/dashboard-diagnostic">
+			</div>
+			<div >
+				<div  _ngcontent-c3="" class="dshbrd-btn">
+					<button  class="btn btn-custom" routerLink="/header-six-layout/dashboard-diagnostic" tabindex="0" ng-reflect-router-link="/header-six-layout/dashboard-"> Cancel </button>
+				</div>
+			</div>
+		</div>
+		<div class="col-lg-10 col-md-10 col-sm-12 col-xs-12">
+			<div class="row cstm-row">
+				<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 ">
+					<div class="form-group">
+					    <input class="form-control" [(ngModel)]="reqData.patientMobile" placeholder="Mobile Number" type="text" pattern="[0-9.]+" maxLength="10" (blur)="findPatientAppointmentByPhone($event.target.value)" >
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 ">
+					<div class="form-group">
+					    <input type="text" class="form-control" [(ngModel)]="reqData.patientName" placeholder="Patient Name" [ngModelOptions]="{standalone: true}" (keyup)="SearchPatientNameReg($event.target.value)" [matAutocomplete]="autoPatNameReg"/>
+                        <mat-autocomplete #autoPatNameReg="matAutocomplete" >
+                          <mat-option *ngFor="let patient of patientListReg" [value]="patient.name">
+                            {{patient.name}}
+                          </mat-option>
+                        </mat-autocomplete>
+					</div> 
+				</div>
+				<div class="col-lg-2 col-md-4 col-sm-4 col-xs-12 text-right txt_m_cen">
+					<div class="form-group">
+						<h3 class="mg-top"><label>{{today | date:'mediumDate' }}</label></h3>
+					</div>
+				</div>
+				<div class="col-lg-5 col-md-6 col-sm-6 col-xs-12 mg-t">
+					<div class="cstm-drpdown-cnsulted-doc ">
+						<span  class="caret cstm-caret-big crt_big"></span>
+						<select [(ngModel)]="reqData.doctorName">
+							<option value="" disabled="">Select Doctor</option>	
+							<option selected="" value="undefined" >Other</option>	
+							<option *ngFor="let doctor of dataDoctors" value="{{doctor._id}}">{{doctor.first_name}}</option>
+						</select>
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-6 col-sm-6 col-xs-12 mg-t">
+					<div class="cstm-drpdown-cnsulted-doc">
+                        <span  class="caret cstm-caret-big crt_big"></span>
+                        <select [(ngModel)]="payment_mode">
+                            <option disabled="" selected="" value="">Payment mode</option>
+                            <option value="Cash">Cash </option>
+                            <option value="Online">Online </option>    
+                        </select>
+                    </div>
+				</div>
+			</div>
+		</div>
+	</div>
+<!-- table  strt-->
+
+
+	<div class="col-lg-12 col-md-12 col-xs-12 col-sm-12">
+		<div class="table-responsive">
+			<table cellpadding="20px" class="table cstm-table" style="position: relative;">
+		    	<thead class="table-head-2 table_cstm_55" style="position: absolute;">
+				  	<tr>
+					  	<th class="text-center" width="100px"><h4>Type</h4></th>
+					    <th class="text-center" width="200px"><h4>Test Name</h4></th>
+					    <th class="text-center" width="90px"><h4>M.R.P./P</h4></th>
+					    <th class="text-center" width="90px"><h4>Disc(%)</h4></th>
+					    <th class="text-center" width="90px"><h4>Amount</h4></th>
+					    <th class="text-center" width="100px"><h4>Action</h4></th>
+					</tr>
+				</thead>
+			</table>
+			<div class="table-scroll-outside" style="margin-top: 50px;margin-bottom:8px;">
+				<table style="width:100%;">
+					<tbody class="tbod-max-w my-tbdy">
+						<tr class="table-row" *ngFor="let tr of totalTr;let i = index;">
+							<td width="100px">
+								<select  class="form-control" [(ngModel)]="reqData.opt[i]">
+									<option selected="" value="" disabled="">Category</option>
+									<option value="{{option}}" *ngFor="let option of diagnosticsData.dataSmartDiagnostics.diagnostics_services">{{option}}</option>
+								</select>
+							</td>
+							<td width="200px" class="text-center">
+								<div class="cstm-input-2">
+									<input type="text" name="" class="form-control" placeholder="Test name" [(ngModel)]="reqData.product[i]" (keyup)="onTextChangeOfMedName(reqData.opt[i],$event.target.value)" [matAutocomplete]="auto" (blur)="findSingleMedicinesFromStock(i,reqData.opt[i],reqData.product[i])">
+									<mat-autocomplete #auto="matAutocomplete" style="width:100%" (optionSelected)='findSingleMedicinesFromStock(i,reqData.opt[i],reqData.product[i])'>
+									  <mat-option *ngFor="let option of productNameSuggestion" [value]="option.name">
+										{{option.name}}
+									  </mat-option>
+									</mat-autocomplete>		
+								</div>
+							</td>
+
+							<td width="90px" class="text-center">
+								<div class="cstm-input-2">
+									<input type="number" name="" class="form-control" placeholder="" [(ngModel)]="reqData.mrp[i]" readonly="" disabled="" (blur)="getTotalRecord(i)">
+								</div>
+							</td>
+							<td width="90px" class="text-center">
+								<div class="cstm-input-2">
+									<input type="number" name="" class="form-control" placeholder="" [(ngModel)]="reqData.discount[i]" (blur)="getTotalRecord(i)">
+								</div>
+							</td>
+							<td width="90px" class="text-center">
+								<div class="cstm-input-2">
+									<input type="number" name="" class="form-control" placeholder="" [(ngModel)]="reqData.amount[i]" (blur)="getTotalRecord(i)" readonly="" disabled="">
+								</div>
+							</td>
+							<td width="100px" class="text-center">
+								<span class="min ico_cal">
+									<i class="fa fa-minus" (click)="removeRow(i)">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</i>
+								</span>
+								<span class="add ico_cal">
+									<i class="fa fa-plus" (click)="addRow()" *ngIf="i==totalTr.length-1"></i>
+								</span>
+							</td>
+						</tr>
+			  		</tbody>
+				</table>
+			</div>
+		</div>
+		
+	</div>
+
+<div class="col-lg-10 col-lg-offset-1 col-md-12 col-sm-12 col-xs-12 foot-btm">
+		<div class="row">
+			<div class="col-lg-10 col-md-10 col-sm-12 col-xs-12">
+				<div class="">
+					<table class="table table-bordered">
+					    <thead>
+					      <tr style="background:#EAF1DD;">
+					        <th class="text-center">TOTAL ITEMS</th>
+					        <th class="text-center">SUB TOTAL</th>
+					        <th class="text-center">GRAND TOTAL</th>
+					      </tr>
+					    </thead>
+					    <tbody>
+					    	<tr>
+					    		<td class="text-center" *ngIf="totalTr">{{totalTr.length}}</td>
+					    		<td class="text-center">{{getData(totalNetAmount)}}</td>
+					    		<td class="text-center">{{partyTotal}}</td>
+					    	</tr>
+					    </tbody>
+					</table>
+				</div>
+			</div>
+			<div class="col-lg-2 col-md-2 col-sm-12 col-xs-12 text-right txt_m_cen">
+				<button class="btn btn-custom btn-grin btn-grin-2" (click)='saveSalesDetails()'>
+					<div> PRINT </div>
+				</button>
+			</div>
+		</div>
+	</div>
+<div class="modal fade" id="stck-prchse" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content modal-lg modal-cstm">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" (click)="resetReturn()">&times;</button>
+          <h3 class="modal-title text-center">Return Sale</h3>
+        </div>
+        <div class="modal-body">
+	        <div class="col-lg-3 col-lg-offset-1 text-right">
+	         	<b class="bill-no">Receipt Number</b>
+	        </div>
+	        <div class="col-lg-4">
+	         	<div class="form-group">
+	         		<input type="number" name="" class="form-control" [(ngModel)]="receiptNumberSearch" (keyup)="onKey($event,'bill')">
+	         	</div>
+	        </div>
+	        <div class="col-lg-4">
+	         	<button class="btn btn-custom" (click)="fetchBill()">
+					<div> Search </div>
+				</button>
+	        </div>
+	        <div class="stock-tab" *ngIf="billFetched">
+	        	<div class="col-lg-12 text-center">
+	        		<h3>{{receiptPatient}}</h3>
+	        	</div>
+				<div class="col-lg-12">
+					<div class="table tab-stock tab-stock-2">
+						<table>
+							<thead class="table-head tble-new">
+							  	<tr>
+								  	<th  class="text-center"  width="120px"><h4>Return item</h4></th>
+								    <th  class="text-center"><h4>Type</h4></th>
+								    <th  class="text-center"><h4>Product Name</h4></th>
+								    <th  class="text-center"><h4>Pack</h4></th>
+								    <th  class="text-center"><h4>M.R.P</h4></th>
+								    <th  class="text-center"><h4>Return QTY</h4></th>
+								    <th  class="text-center"><h4>Disc%</h4></th>
+								    <th  class="text-center"><h4>Amount</h4></th>
+								    <th  class="text-center"><h4>Batch</h4></th>
+								</tr>
+							</thead>
+						</table>
+						<table>
+							<tr class="mg-top" *ngFor="let tr of returnPurchaseArray.opt;let i = index;">
+								<td width="120px">
+									<label class="cstm-chk">
+									  <input type="checkbox" [(ngModel)]="returnStatus[i]" [checked]="returnStatus[i]" (change)="getTotalReturn()">
+									  <span class="checkmark"></span>
+									</label>
+								</td>
+								<td>
+									<div class="trans-input">
+										<input type="text" placeholder="" class="cstm-put" value="{{returnPurchaseArray.opt[i]}}" readonly="">
+									</div>
+								</td>
+								<td>
+									<div class="pro-trans-input">
+										<input type="text" placeholder="" class="cstm-put" value="{{returnPurchaseArray.product[i]}}" readonly="">
+									</div>
+								</td>
+								<td>
+									<div class="trans-input">
+										<input type="text" placeholder="" class="cstm-put" value="{{returnPurchaseArray.pack1[i]}} x {{returnPurchaseArray.pack2[i]}}" readonly="">
+									</div>
+								</td>
+								<td>
+									<div class="trans-input">
+										<input type="text" placeholder="" class="cstm-put" value="{{returnPurchaseArray.mrp[i]}}" readonly="">
+									</div>
+								</td>
+								<td>
+									<div class="trans-input">
+										<input type="number" placeholder="" class="cstm-put" [(ngModel)]="returnQty[i]" max="{{returnPurchaseArray.quantity[i]}}" (blur)="getTotalReturn()" disabled="{{getReturnStatus(i)}}">
+									</div>
+								</td>
+								<td>
+									<div class="trans-input">
+										<input type="text" placeholder="" class="cstm-put" value="{{returnPurchaseArray.discount[i]}}" readonly="">
+									</div>
+								</td>
+								<td>
+									<div class="trans-input">
+										<input type="text" placeholder="0" class="cstm-put" value="{{returnPurchaseArray.amount[i]}}" disabled="{{getReturnStatus(i)}}" readonly="">
+									</div>
+								</td>
+								<td>
+									<div class="trans-input">
+										<input type="text" placeholder="" class="cstm-put" value="{{returnPurchaseArray.batch[i]}}" readonly="">
+									</div>
+								</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</div>
+        </div>
+        <div class="modal-footer" *ngIf="billFetched">
+         <div class="col-lg-6">
+         	<div class="row">
+         		<div class="col-lg-6">
+         			<h3 class="mg-top">Total Refund Amount</h3>
+         		</div>
+         		<div class="col-lg-6 text-left">
+         			<button class="btn data-div" readonly="" disabled="">
+						<div> {{quantityReturn}}</div>
+					</button>
+         		</div>
+         	</div>
+         </div>
+         <div class="col-lg-6">
+         	<button class="btn btn-custom" (click)="openConfirmation()">
+				<div> Update </div>
+			</button>
+         </div>
+        </div>
+        <div class="clearfix"></div>
+      </div>      
+    </div>
+</div>
+<!-- show the pdf -->
+<div class="modal fade" id="pdfmodal" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content modal-lg modal-cstm">
+        <div class="modal-body">
+        	<div class="modal-body"><div class="" id="receiptPdf" >
+                <table width="700" style="border:1px solid #4d4d4d; border-right:1px solid #4d4d4d;">
+                    <tr style="border-bottom: 1px solid #4d4d4d;">
+                        <td style="text-align: left;" colspan="2">
+
+                            <h3 style="margin-top: 10px; padding-left:15px; font-weight: lighter;">GST Invoice </h3>
+
+                        </td>
+                        <td style="text-align:right;" colspan="2">
+
+                            <h5 style="padding-right:15px; font-weight: lighter;">GSTIN: {{reqData.gstinNumber}}</h5>
+
+                        </td>
+                    </tr>
+                    <tr  style="border-bottom: 1px solid #4d4d4d;">
+                        <td style="padding-left: 10px; padding-top: 10px; padding-bottom: 10px; border-right: 1px solid #4d4d4d;">
+                            <h3 style="text-transform: uppercase;text-align:left; margin-top: 0px ">
+                                {{reqData.diagnosticsName}}
+                            </h3>
+                            <h5 style="text-transform: uppercase;text-align:left; ">
+                                {{reqData.address}}
+                            </h5>
+                            <h5>Phone: {{reqData.phone}}</h5>
+                            <h5>DL. No.: {{reqData.drugLicense}}</h5>
+                        </td>
+                        <td style="padding-left: 10px; padding-top: 10px; padding-bottom: 10px;">
+                            <h5 style="text-transform: uppercase;text-align:left; margin-top: 0px;">
+                                Inv No
+                            </h5>
+                            <h5 style="text-transform: uppercase;text-align:left; ">
+                                Patient Name:
+                            </h5>
+                            <h5 style="text-transform: uppercase;text-align:left; ">
+                                P .mob
+                            </h5>
+                            <h5 style="text-transform: uppercase;text-align:left;">Dr. name</h5>
+                            <h5 style="text-transform: uppercase;text-align:left;">time</h5>
+                        </td>
+
+                        <td colspan="1" style="padding-left: 10px; padding-top: 10px; padding-bottom: 10px;border-right: 1px solid #4d4d4d;">
+                            <h4 style="text-transform: uppercase;text-align:left; margin-top: 0px;">
+                                : {{savedInvoiceId}}
+                            </h4>
+                            <h5 style="text-transform: uppercase;text-align:left; ">
+                                :{{reqData.patientName}}
+                            </h5>
+                            <h5 style="text-transform: uppercase;text-align:left; ">
+                                : {{reqData.patientMobile}}
+                            </h5>
+                            <h5 style="text-transform: uppercase;text-align:left;" *ngIf="reqData.doctorName">: &nbsp;{{getDoctorName(reqData.doctorName)}}</h5>
+                            <h5 style="text-transform: uppercase;text-align:left;" *ngIf="!reqData.doctorName">: &nbsp;Other</h5>
+                            <h5 style="text-transform: uppercase;text-align:left;"> : &nbsp;{{today | date&nbsp;:&nbsp;'shortTime' }}</h5>
+                        </td>
+                    </tr>
+                </table>
+                <table width="700" style="border:1px solid #4d4d4d; border-right:1px solid #4d4d4d; border-top: transparent;">
+                    <tr>
+                        <td style="padding:5px; text-align:center; border-right:1px solid #4d4d4d; border-bottom: 1px solid #4d4d4d; font-weight: bold; background-color: grey;">Sr.</td>
+                        <td style="padding:5px; text-align:center; border-right:1px solid #4d4d4d; border-bottom: 1px solid #4d4d4d; font-weight: bold; background-color: grey;">Type</td>
+                        <td style="padding:5px; text-align:center; border-right:1px solid #4d4d4d; border-bottom: 1px solid #4d4d4d; font-weight: bold; background-color: grey;">Product Name</td>
+                        <td style="padding:5px; text-align:center; border-right:1px solid #4d4d4d; border-bottom: 1px solid #4d4d4d; font-weight: bold; background-color: grey;">MRP</td>
+                        <td style="padding:5px; text-align:center; border-right:1px solid #4d4d4d; border-bottom: 1px solid #4d4d4d; font-weight: bold; background-color: grey;">Disc. %</td>
+                        <td style="padding:5px; text-align:center; border-right:1px solid #4d4d4d; border-bottom: 1px solid #4d4d4d; font-weight: bold; background-color: grey;">Amount</td>
+                    </tr>
+                    <tr *ngFor="let list of totalTr;let i=index;">
+                        <td style="padding:5px; text-align:center; border-right:1px solid #4d4d4d;">{{i+1}}</td>
+                        <td style="padding:5px; text-align:center; border-right:1px solid #4d4d4d;">{{reqData.opt[i]}}</td>
+                        <td style="padding:5px; text-align:center; border-right:1px solid #4d4d4d;">{{reqData.product[i]}}</td>
+                        <td style="padding:5px; text-align:center; border-right:1px solid #4d4d4d;">{{reqData.mrp[i]}}</td>
+                        <td style="padding:5px; text-align:center; border-right:1px solid #4d4d4d;">{{reqData.discount[i]}}</td>
+                        <td style="padding:5px; text-align:center; border-right:1px solid #4d4d4d;">{{reqData.amount[i]}}</td>
+                    </tr>
+                </table>
+                <table width="700" style="border:1px solid #4d4d4d; border-top:transparent;border-bottom: transparent;" >
+                    <tr  style="">
+                        <td style="padding-left: 10px; padding-top: 1px; padding-bottom: 1px;" width="500px;">
+                            <h4 style="text-transform: uppercase;padding-top:15px;text-align:left; float: left; width:50%; margin-top:-45px;">
+                                TOTAL ITEMS
+                            </h4>
+                            <h4 style="text-transform: uppercase;padding-top:15px;text-align:right;  float: right; width:50%;margin-top:-45px;" *ngIf="totalTr">
+                                {{totalTr.length}}
+                            </h4>
+                        </td>
+                        <td style="padding-right: 10px; padding-top: 1px; padding-bottom: 1px;" width="200px;">
+                            <table width="450px">
+                                <tr  style="">
+                                    <td style="padding-right: 10px; width:80%; padding-top: 1px; padding-bottom: 1px;">
+                                        <h4 style="text-transform: uppercase;text-align:right; ">
+                                            SUB TOTAL
+                                        </h4>
+                                    </td>
+                                    <td style="padding-right: 10px; width:20%; padding-top: 1px; padding-bottom: 1px;">
+                                        <h4 style="text-transform: uppercase;text-align:right; ">
+                                            {{getData(totalNetAmount)}}
+                                        </h4>
+                                    </td>
+                                </tr>
+                                <tr  style="">
+                                    <td style="padding-right: 10px; width:80%; padding-top: 1px; padding-bottom: 1px;">
+                                        <h4 style="text-transform: uppercase;text-align:right; ">
+                                            GRAND TOTAL
+                                        </h4>
+                                    </td>
+                                    <td style="padding-right: 10px; width:20%; padding-top: 1px; padding-bottom: 1px;">
+                                        <h4 style="text-transform: uppercase;text-align:right; ">
+                                           {{partyTotal}}
+                                        </h4>
+                                    </td>
+                                </tr>
+                                
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+                <table width="700" style="border:1px solid #4d4d4d; border-right:1px solid #4d4d4d;border-top:transparent;">
+                    <tr  style="border-top:1px solid #4d4d4d; border-bottom:1px solid #4d4d4d;">
+                        <td  style="padding-left: 10px; padding-top: 10px; padding-bottom: 10px;">
+                            <h4 style="text-transform: titlecase;text-align:left; ">
+                                 {{partyTotal|showInWords}} Only
+                            </h4>
+                        </td>
+                    </tr>
+                </table>
+                <table width="700" style="border:1px solid #4d4d4d; border-right:1px solid #4d4d4d;border-top:transparent;">
+                    <tr  style="">
+                        <td  style="width:70%;padding-left: 10px; padding-top: 10px; padding-bottom: 10px; padding-right: 1px;">
+                            <h4>
+                                <h4><b>Terms & Conditions</b></h4>
+                                <p style="font-size: 14px; margin:8px 0px;" *ngIf="diagnosticsData.dataSmartDiagnostics.term1">{{diagnosticsData.dataSmartDiagnostics.term1}}</p>
+                                <p style="font-size: 14px; margin:8px 0px;" *ngIf="diagnosticsData.dataSmartDiagnostics.term2">{{diagnosticsData.dataSmartDiagnostics.term2}}</p>
+                                <p style="font-size: 14px; margin:8px 0px;" *ngIf="diagnosticsData.dataSmartDiagnostics.term3">{{diagnosticsData.dataSmartDiagnostics.term3}}</p>
+                                <p style="font-size: 14px; margin:8px 0px;" *ngIf="diagnosticsData.dataSmartDiagnostics.term4">{{diagnosticsData.dataSmartDiagnostics.term4}}</p>
+                            </h4>
+                        </td>
+                        <td style="width:30%;text-align: right;">
+                            <div style="margin-top: 100px;padding-right: 10px;">For {{reqData.diagnosticsName}}</div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+      </div>      
+    </div>
+</div>

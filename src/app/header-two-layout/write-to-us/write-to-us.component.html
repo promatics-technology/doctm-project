@@ -1,0 +1,27 @@
+<br>
+<div class="container" style="padding-top: 60px;">
+	<form [formGroup]="Form">
+	<div class="row">
+		<div class="col-lg-8 col-lg-offset-2">
+			<div class="form-group cstm-txt-ar">
+				<label for="comment">Subject:</label>
+				 <input type="text"  [(ngModel)]="reqData.subject" [formControl]="Form.controls['subject']" class="form-control" placeholder="Enter the subject">
+				 <p style="color: #E80358"  *ngIf="!Form.controls['subject'].valid  && ( Form.controls['subject'].touched)" >Enter valid subject</p>
+			</div>
+			<div class="form-group cstm-txt-ar">
+				<label for="comment">Message:</label>
+				<textarea class="form-control" [formControl]="Form.controls['message']" [(ngModel)] ="reqData.message" s="5" id="comment" rows="9" style="width:100%;" placeholder="Max 150 characters" maxlength="150"></textarea>
+				<p class="counter">{{150 - reqData?.message?.length}}</p>
+			</div>
+				<p style="color: #E80358"  *ngIf="!Form.controls['message'].valid  && ( Form.controls['message'].touched)" >Enter the message  [Maxmimum 150 words]</p>
+			<p><i>Note: ​We will respond to your query shortly on your registered e-mail</i></p>
+			<br>
+			<div class="text-center">
+			<button  (click) = "save()" [disabled]="!Form.valid" class="btn btn-sve text-center">Submit</button>
+			</div>
+		</div>
+
+	</div>
+	</form>
+	
+</div>

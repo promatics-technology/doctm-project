@@ -1,0 +1,297 @@
+<!-- section 3 -->
+<div class="container sec-3" *ngIf="!itemSelected">
+	<div class="row">
+		<div class="col-lg-12">
+			<h1>Choose Payment mode to Proceed</h1>
+		</div>
+		<div class="col-lg-3">
+			<a href="javascript:void(0);" (click)="selectItem()" class="anc_card">
+			<div class="card-1">
+				<h3>Credit Cards</h3>
+			</div>
+		</a>
+		</div>
+		<div class="col-lg-3">
+			<a href="javascript:void(0);" (click)="selectItem()" class="anc_card">
+			<div class="card-1 card-2">
+				<h3>Debit Cards</h3>
+			</div>
+		</a>
+		</div>
+		<div class="col-lg-3">
+			<a href="javascript:void(0);" (click)="selectItem()" class="anc_card">
+			<div class="card-1 card-3">
+				<h3>Net Banking</h3>
+			</div>
+		</a>
+		</div>
+		<div class="col-lg-3">
+			<a href="javascript:void(0);"  (click)="selectItem()" class="anc_card">
+				<div class="card-1 card-4">
+					<h3>Paytm</h3>
+				</div>
+			</a>
+		</div>
+	</div>
+</div>
+<!-- ends-->
+<!-- SEC-4	 -->
+<div class="container" *ngIf="itemSelected">
+	<div class="row">
+		<div class="col-lg-12">
+			<h3 class="text-right">
+				Payment Amount <b>1767.0</b>
+			</h3><br>
+		</div>
+		<div class="col-lg-4">
+			<div class="pay_tabs">
+				<ul class="nav nav-tabs">
+				    <li class="active"><a data-toggle="tab" href="#home">Saved cards</a></li>
+				    <li><a data-toggle="tab" href="#menu1">Credit Card</a></li>
+				    <li><a data-toggle="tab" href="#menu2">Debit Card</a></li>
+				    <li><a data-toggle="tab" href="#menu3">Debit Card + ATM PIN</a></li>
+				    <li><a data-toggle="tab" href="#menu4">Internet Banking</a></li>
+				 </ul>
+			</div>
+		</div>
+		<div class="col-lg-8">
+		  <div class="tab-content">
+		    <div id="home" class="tab-pane fade in active">
+		      <h3>HOME</h3>
+		      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+		    </div>
+		    <div id="menu1" class="tab-pane fade">
+		      	<div class="card_data">
+		      		<div class="pay_inner">
+						<ul class="nav nav-tabs">
+						    <li class="active"><a data-toggle="tab" href="#in-1">Pay by Credit Card</a></li>
+						    <li><a data-toggle="tab" href="#in-2">Pay by Amex ezeClick</a></li>
+						 </ul>
+					</div>
+					<div class="tab-content">
+					 	<div id="in-1" class="tab-pane fade in active">
+					 		<div class="form_data">
+					 			<br>
+					 			<div class="row">
+					 				<div class="col-lg-12">
+					 					<div class="form-group card_img">
+										  <input type="text" class="form-control" id="usr" placeholder="Card Number">
+										  <img src="assets/imgs/card.png" width="92px" height="auto">
+										</div>
+										<br>
+					 				</div>
+					 				<div class="col-lg-12">
+					 					<div class="form-group">
+										  <input type="text" class="form-control" id="usr" placeholder="Name of Card Holder's Name">
+										</div>
+										<br>
+					 				</div>
+					 				<div class="col-lg-2">
+					 					<div class="form-group">
+										  <input type="text" class="form-control" id="usr" placeholder="MM">
+										</div>
+										<br>
+					 				</div>
+					 				<div class="col-lg-2">
+					 					<div class="form-group">
+										  <input type="text" class="form-control" id="usr" placeholder="YY">
+										</div>
+										<br>
+					 				</div>
+					 				<div class="col-lg-4">
+					 					<div class="form-group cvv_icon">
+					 						<i class="fa fa-credit-card"></i>
+										  <input type="text" class="form-control" id="usr" placeholder="CVV">
+										</div>
+										<br>
+					 				</div>
+					 				<div class="col-lg-12">
+					 					<label class="cstm_chk">Save this card for faster checkout
+										  <input type="checkbox">
+										  <span class="checkmark"></span>
+										</label>
+					 				</div>
+					 				<div class="col-lg-12 text-center mke-paymnt">
+					 					<br>
+					 					<a href="#" style="display: inline-block;">Cancel</a>&nbsp;&nbsp;     
+					 					 <button class="btn btn-primary">MAKE PAYMENT</button>
+					 				</div>
+					 			</div>
+					 		</div>
+					 	</div>
+					 	<div id="in-2" class="tab-pane fade">
+					 		inner-2
+					 	</div>
+					</div>
+		      	</div>
+		    </div>
+		    <div id="menu2" class="tab-pane fade">
+		      	<div class="card_data">
+					<div class="form_data">
+					 			<br>
+					 			<div class="row">
+					 				<div class="col-lg-12">
+					 					<div class="form-group">
+										 	<select class="form-control">
+										 		<option selected="" disabled="">We Accept</option>
+										 		<option>Maestro Debit Card</option>
+										 		<option>Master Card</option>
+										 		<option>Debit Card</option>
+										 		<option>RuPay</option>
+										 		<option>Visa Debit Card</option>
+										 	</select>
+										</div>
+										<br>
+					 				</div>
+					 				<div class="col-lg-12">
+					 					<div class="form-group card_img">
+										  <input type="text" class="form-control" id="usr" placeholder="Card Number">
+										  <img src="assets/imgs/card.png" width="92px" height="auto">
+										</div>
+										<br>
+					 				</div>
+					 				<div class="col-lg-12">
+					 					<div class="form-group">
+										  <input type="text" class="form-control" id="usr" placeholder="Name of Card Holder's Name">
+										</div>
+										<br>
+					 				</div>
+					 				<div class="col-lg-2">
+					 					<div class="form-group">
+										  <input type="text" class="form-control" id="usr" placeholder="MM">
+										</div>
+										<br>
+					 				</div>
+					 				<div class="col-lg-2">
+					 					<div class="form-group">
+										  <input type="text" class="form-control" id="usr" placeholder="YY">
+										</div>
+										<br>
+					 				</div>
+					 				<div class="col-lg-4">
+					 					<div class="form-group cvv_icon">
+					 						<i class="fa fa-credit-card"></i>
+										  <input type="text" class="form-control" id="usr" placeholder="CVV">
+										</div>
+										<br>
+					 				</div>
+					 				<div class="col-lg-12">
+					 					<label class="cstm_chk">Save this card for faster checkout
+										  <input type="checkbox">
+										  <span class="checkmark"></span>
+										</label>
+					 				</div>
+					 				<div class="col-lg-12 text-center mke-paymnt">
+					 					<br>
+					 					<a href="#" style="display: inline-block;">Cancel</a>&nbsp;&nbsp;     
+					 					 <button class="btn btn-primary">MAKE PAYMENT</button>
+					 				</div>
+					 			</div>
+					</div>
+		      	</div>
+		    </div>
+		    <div id="menu3" class="tab-pane fade">
+		      <h3>i bankin3</h3>
+		      <p>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+		    </div>
+		    <div id="menu4" class="tab-pane fade">
+		    	<div class="card_data">
+					<div class="form_data">
+			 			<br>
+			 			<div class="row">
+			 				<div class="col-lg-4">
+			 					<div class="wrap_img">
+				 					<img src="assets/imgs/sb.jpg" class="img-responsive">
+				 				</div>
+			 				</div>
+			 				<div class="col-lg-4">
+			 					<div class="wrap_img">
+				 					<img src="assets/imgs/ic.jpg" class="img-responsive">
+				 				</div>
+			 				</div>
+			 				<div class="col-lg-4">
+			 					<div class="wrap_img">
+				 					<img src="assets/imgs/hdfc.jpg" class="img-responsive">
+				 				</div>
+			 				</div>
+			 				<div class="col-lg-4">
+			 					<div class="wrap_img">
+				 					<img src="assets/imgs/city.jpg" class="img-responsive">
+				 				</div>
+			 				</div>
+			 				<div class="col-lg-4">
+			 					<div class="wrap_img">
+				 					<img src="assets/imgs/kotak.jpg" class="img-responsive">
+				 				</div>
+			 				</div>
+			 				<div class="col-lg-4">
+			 					<div class="wrap_img">
+				 					<img src="assets/imgs/axis.jpg" class="img-responsive">
+				 				</div>
+			 				</div>
+			 			</div>
+			 			<div class="row">
+			 				<div class="col-lg-12">
+			 					<div class="form-group">
+								 	<select class="form-control">
+								 		<option selected="" disabled="">Others Banks</option>
+								 		<option>Maestro Debit Card</option>
+								 		<option>Master Card</option>
+								 		<option>Debit Card</option>
+								 		<option>RuPay</option>
+								 		<option>Visa Debit Card</option>
+								 	</select>
+								 	<small><b>Note:</b>You will be redirected to bank page for verification of credentials & payment processing.</small>
+								</div>
+			 				</div>
+			 				<!-- <div class="col-lg-12">
+			 					<div class="form-group card_img">
+								  <input type="text" class="form-control" id="usr" placeholder="Card Number">
+								  <img src="assets/imgs/card.png" width="92px" height="auto">
+								</div>
+								<br>
+			 				</div>
+			 				<div class="col-lg-12">
+			 					<div class="form-group">
+								  <input type="text" class="form-control" id="usr" placeholder="Name of Card Holder's Name">
+								</div>
+								<br>
+			 				</div>
+			 				<div class="col-lg-2">
+			 					<div class="form-group">
+								  <input type="text" class="form-control" id="usr" placeholder="MM">
+								</div>
+								<br>
+			 				</div>
+			 				<div class="col-lg-2">
+			 					<div class="form-group">
+								  <input type="text" class="form-control" id="usr" placeholder="YY">
+								</div>
+								<br>
+			 				</div>
+			 				<div class="col-lg-4">
+			 					<div class="form-group cvv_icon">
+			 						<i class="fa fa-credit-card"></i>
+								  <input type="text" class="form-control" id="usr" placeholder="CVV">
+								</div>
+								<br>
+			 				</div> -->
+			 				<!-- <div class="col-lg-12">
+			 					<label class="cstm_chk">Save this card for faster checkout
+								  <input type="checkbox">
+								  <span class="checkmark"></span>
+								</label>
+			 				</div> -->
+			 				<div class="col-lg-12 text-center mke-paymnt">
+			 					<a href="#" style="display: inline-block;">Cancel</a>&nbsp;&nbsp;     
+			 					 <button class="btn btn-primary">MAKE PAYMENT</button>
+			 				</div>
+			 			</div>
+					</div>
+		      	</div>
+		    </div>
+		  </div>
+		</div>
+	</div>
+</div>
+<!-- ends -->

@@ -1,0 +1,1209 @@
+<div class="analytics-sec">
+	
+	<div class="ipd-deatil-sec">
+		<div class="md-tab">
+	      	<!-- Nav tabs -->
+	      	<ul class="nav nav-tabs" role="tablist">
+	          	<li role="presentation"><a href="javascript:void(0);" routerLink="/header-two-layout/dashboard-consultation-prescription"> Consultation </a></li>
+	          	<li role="presentation" class="active"><a href="javascript:void(0);" routerLink="/header-two-layout/dashboard-pharmacy-detail"> Clinic Services </a></li>
+	      	</ul>
+	    </div>
+
+	    <div class="inner-tab">
+	    	<!-- Nav tabs -->
+	      	<ul class="nav nav-tabs" role="tablist">
+	          	<li role="presentation"><a href="javascript:void(0);" routerLink="/header-two-layout/dashboard-pharmacy-detail"> Pharmacy </a></li>
+	          	<li role="presentation"><a href="javascript:void(0);" routerLink="/header-two-layout/dashboard-diagnostics-detail"> Diagnostics </a></li>
+	          	<li role="presentation" class="active"><a href="javascript:void(0);" routerLink="/header-two-layout/dashboard-ipd-detail"> IPD </a></li>
+	      	</ul>
+	    </div>
+
+	    <div class="ipd-body">
+	    	<div class="cus-sidebar-wrapper">
+	    		<div class="cus-sidebar">
+	    			<ul>
+	    				<li class="{{getClass(0)}}" (click)="activatetab(0)" class="active"> <a href="javascript:void(0);"> Current </a> </li>
+	    				<li class="{{getClass(1)}}" (click)="activatetab(1)"> <a href="javascript:void(0);"> 7 Days </a> </li>
+	    				<li class="{{getClass(2)}}" (click)="activatetab(2)"> <a href="javascript:void(0);"> 14 Days </a> </li>
+	    				<li class="{{getClass(3)}}" (click)="activatetab(3)"> <a href="javascript:void(0);"> 1 Month </a> </li>
+	    				<li class="{{getClass(4)}}" (click)="activatetab(4)"> <a href="javascript:void(0);"> 3 Month </a> </li>
+	    				<li class="{{getClass(5)}}" (click)="activatetab(5)"> <a href="javascript:void(0);"> 6 Month </a> </li>
+	    				<li class="{{getClass(6)}}" (click)="activatetab(6)"> <a href="javascript:void(0);"> 1 Year </a> </li>
+	    				<li class="{{getClass(7)}}" (click)="activatetab(7)"> <a href="javascript:void(0);"> Max </a> </li>
+	    			</ul>
+	    		</div>
+	    	</div>
+
+    		<div class="cus-content-wrapper">
+    			<div class="cus-content">
+	    			<div class="" *ngIf="activatedtab==0">
+	    				<div class="inner-tab">
+					    	<!-- Nav tabs -->
+					      	<ul class="nav nav-tabs" role="tablist">
+					          	<li role="presentation" class="active"><a href="#general" aria-controls="general" role="tab" data-toggle="tab"> General Bed </a></li>
+					          	<li role="presentation"><a href="#semiprivate" aria-controls="semiprivate" role="tab" data-toggle="tab"> Semi-Private Bed </a></li>
+					          	<li role="presentation"><a href="#private" aria-controls="private" role="tab" data-toggle="tab"> Private Bed </a></li>
+					      	</ul>
+
+					      	<!-- Tab panes -->
+					      	<div class="tab-content">
+					          	<div role="tabpanel" class="tab-pane active" id="general">
+					          		
+					          		<ul class="list-bedul">
+					          			<li class="success">
+					          				Available: <span> 6 </span>
+					          			</li>
+					          			<li class="danger">
+					          				Not Available: <span> 6 </span>
+					          			</li>
+					          			<li class="blue">
+					          				Total:
+					          				<span>
+					          					<input type="text" name="" class="form-control" value="10" disabled="" />
+					          					<i class="fa fa-pencil"></i>
+					          				</span>
+					          			</li>
+					          		</ul>
+
+					          		<div class="row">
+						          		<div class="col-md-8 col-sm-12 col-xs-12">
+						          			<div class="beds-panel">
+							          			<ul>
+							          				<li>
+							          					<a href="#addpatientModal" data-dismiss="modal" data-toggle="modal">
+							          						<p> 101 </p>
+							          						<img src="./assets/imgs/no-icons.png" class="img-responsive" /> 
+							          						<p> ------ </p>
+							          					</a>
+							          				</li>
+							          				<li>
+							          					<a href="#patientModal" data-dismiss="modal" data-toggle="modal">
+							          						<p> 101 </p>
+							          						<img src="./assets/imgs/icons.png" class="img-responsive" /> 
+							          						<p> John Mayer </p>
+							          					</a>
+							          				</li>
+							          				<li>
+							          					<a href="#addpatientModal" data-dismiss="modal" data-toggle="modal">
+							          						<p> 101 </p>
+							          						<img src="./assets/imgs/no-icons.png" class="img-responsive" /> 
+							          						<p> ------ </p>
+							          					</a>
+							          				</li>
+							          				<li>
+							          					<a href="#addpatientModal" data-dismiss="modal" data-toggle="modal">
+							          						<p> 101 </p>
+							          						<img src="./assets/imgs/no-icons.png" class="img-responsive" /> 
+							          						<p> ------ </p>
+							          					</a>
+							          				</li>
+							          				<li>
+							          					<a href="#addpatientModal" data-dismiss="modal" data-toggle="modal">
+							          						<p> 101 </p>
+							          						<img src="./assets/imgs/no-icons.png" class="img-responsive" /> 
+							          						<p> ------ </p>
+							          					</a>
+							          				</li>
+							          				<li>
+							          					<a href="#patientModal" data-dismiss="modal" data-toggle="modal">
+							          						<p> 101 </p>
+							          						<img src="./assets/imgs/icons.png" class="img-responsive" /> 
+							          						<p> John Mayer </p>
+							          					</a>
+							          				</li>
+							          				<li>
+							          					<a href="#patientModal" data-dismiss="modal" data-toggle="modal">
+							          						<p> 101 </p>
+							          						<img src="./assets/imgs/icons.png" class="img-responsive" /> 
+							          						<p> John Mayer </p>
+							          					</a>
+							          				</li>
+							          				<li>
+							          					<a href="#patientModal" data-dismiss="modal" data-toggle="modal">
+							          						<p> 101 </p>
+							          						<img src="./assets/imgs/icons.png" class="img-responsive" /> 
+							          						<p> John Mayer </p>
+							          					</a>
+							          				</li>
+
+							          			</ul>
+						          			</div>
+						          		</div>
+						          		<div class="col-md-4 col-sm-12 col-xs-12">
+						          			<h4 class="m-t-0"> Doctor wise break up </h4>
+						          			<div class="row">
+						          				<div class="table-responsive col-md-12 col-sm-12 col-xs-12">
+						          					<table class="table table-striped table-bordered">
+						          						<thead>
+						          							<tr>
+						          								<th> Clinic Doctor Name </th>
+						          								<th> IPD Contribution (Patients) </th>
+						          								<th> Bed Number </th>
+						          							</tr>
+						          						</thead>
+						          						<tbody>
+						          							<tr>
+						          								<td> Dr. Deepak Gupta (Admin) </td>
+						          								<td> 3 Patients </td>
+						          								<td> 201, 102, 103 </td>
+						          							</tr>
+						          							<tr>
+						          								<td> Dr. Ashutosh Singh </td>
+						          								<td> 2 Patients </td>
+						          								<td> 105, 104 </td>
+						          							</tr>
+						          							<tr>
+						          								<td> Pallavi Rana </td>
+						          								<td> 3 Patients </td>
+						          								<td> 107, 101, 106 </td>
+						          							</tr>
+						          						</tbody>
+						          					</table>
+						          				</div>
+						          			</div>
+						          		</div>
+						          	</div>
+					          	</div>
+					          	<div role="tabpanel" class="tab-pane" id="semiprivate">
+					          		<ul class="list-bedul">
+					          			<li class="success">
+					          				Available: <span> 10 </span>
+					          			</li>
+					          			<li class="danger">
+					          				Not Available: <span> 10 </span>
+					          			</li>
+					          			<li class="blue">
+					          				Total:
+					          				<span>
+					          					<input type="text" name="" class="form-control" value="20" disabled="" />
+					          					<i class="fa fa-pencil"></i>
+					          				</span>
+					          			</li>
+					          		</ul>
+
+					          		<div class="row">
+						          		<div class="col-md-8 col-sm-12 col-xs-12">
+						          			<div class="beds-panel">
+							          			<ul>
+							          				<li>
+							          					<a href="#addpatientModal" data-dismiss="modal" data-toggle="modal">
+							          						<p> 101 </p>
+							          						<img src="./assets/imgs/no-icons.png" class="img-responsive" /> 
+							          						<p> ------ </p>
+							          					</a>
+							          				</li>
+							          				<li>
+							          					<a href="#patientModal" data-dismiss="modal" data-toggle="modal">
+							          						<p> 101 </p>
+							          						<img src="./assets/imgs/icons.png" class="img-responsive" /> 
+							          						<p> John Mayer </p>
+							          					</a>
+							          				</li>
+							          				<li>
+							          					<a href="#patientModal" data-dismiss="modal" data-toggle="modal">
+							          						<p> 101 </p>
+							          						<img src="./assets/imgs/icons.png" class="img-responsive" /> 
+							          						<p> John Mayer </p>
+							          					</a>
+							          				</li>
+							          				<li>
+							          					<a href="#addpatientModal" data-dismiss="modal" data-toggle="modal">
+							          						<p> 101 </p>
+							          						<img src="./assets/imgs/no-icons.png" class="img-responsive" /> 
+							          						<p> ------ </p>
+							          					</a>
+							          				</li>
+							          				<li>
+							          					<a href="#addpatientModal" data-dismiss="modal" data-toggle="modal">
+							          						<p> 101 </p>
+							          						<img src="./assets/imgs/no-icons.png" class="img-responsive" /> 
+							          						<p> ------ </p>
+							          					</a>
+							          				</li>
+							          				<li>
+							          					<a href="#patientModal" data-dismiss="modal" data-toggle="modal">
+							          						<p> 101 </p>
+							          						<img src="./assets/imgs/icons.png" class="img-responsive" /> 
+							          						<p> John Mayer </p>
+							          					</a>
+							          				</li>
+							          				<li>
+							          					<a href="#patientModal" data-dismiss="modal" data-toggle="modal">
+							          						<p> 101 </p>
+							          						<img src="./assets/imgs/icons.png" class="img-responsive" /> 
+							          						<p> John Mayer </p>
+							          					</a>
+							          				</li>
+							          				<li>
+							          					<a href="#addpatientModal" data-dismiss="modal" data-toggle="modal">
+							          						<p> 101 </p>
+							          						<img src="./assets/imgs/no-icons.png" class="img-responsive" /> 
+							          						<p> ------ </p>
+							          					</a>
+							          				</li>
+							          				<li>
+							          					<a href="#addpatientModal" data-dismiss="modal" data-toggle="modal">
+							          						<p> 101 </p>
+							          						<img src="./assets/imgs/no-icons.png" class="img-responsive" /> 
+							          						<p> ------ </p>
+							          					</a>
+							          				</li>
+
+							          				<li>
+							          					<a href="#patientModal" data-dismiss="modal" data-toggle="modal">
+							          						<p> 101 </p>
+							          						<img src="./assets/imgs/icons.png" class="img-responsive" /> 
+							          						<p> John Mayer </p>
+							          					</a>
+							          				</li>
+							          				<li>
+							          					<a href="#patientModal" data-dismiss="modal" data-toggle="modal">
+							          						<p> 101 </p>
+							          						<img src="./assets/imgs/icons.png" class="img-responsive" /> 
+							          						<p> John Mayer </p>
+							          					</a>
+							          				</li>
+							          				<li>
+							          					<a href="#patientModal" data-dismiss="modal" data-toggle="modal">
+							          						<p> 101 </p>
+							          						<img src="./assets/imgs/icons.png" class="img-responsive" /> 
+							          						<p> John Mayer </p>
+							          					</a>
+							          				</li>	
+							          				<li>
+							          					<a href="#patientModal" data-dismiss="modal" data-toggle="modal">
+							          						<p> 101 </p>
+							          						<img src="./assets/imgs/icons.png" class="img-responsive" /> 
+							          						<p> John Mayer </p>
+							          					</a>
+							          				</li>
+							          				<li>
+							          					<a href="#patientModal" data-dismiss="modal" data-toggle="modal">
+							          						<p> 101 </p>
+							          						<img src="./assets/imgs/icons.png" class="img-responsive" /> 
+							          						<p> John Mayer </p>
+							          					</a>
+							          				</li>
+							          				<li>
+							          					<a href="#addpatientModal" data-dismiss="modal" data-toggle="modal">
+							          						<p> 101 </p>
+							          						<img src="./assets/imgs/no-icons.png" class="img-responsive" /> 
+							          						<p> ------ </p>
+							          					</a>
+							          				</li>
+							          				<li>
+							          					<a href="#addpatientModal" data-dismiss="modal" data-toggle="modal">
+							          						<p> 101 </p>
+							          						<img src="./assets/imgs/no-icons.png" class="img-responsive" /> 
+							          						<p> ------ </p>
+							          					</a>
+							          				</li>
+
+							          			</ul>
+						          			</div>
+						          		</div>
+						          		<div class="col-md-4 col-sm-12 col-xs-12">
+						          			<h4 class="m-t-0"> Doctor wise break up </h4>
+						          			<div class="row">
+						          				<div class="table-responsive col-md-12 col-sm-12 col-xs-12">
+						          					<table class="table table-striped table-bordered">
+						          						<thead>
+						          							<tr>
+						          								<th> Clinic Doctor Name </th>
+						          								<th> IPD Contribution (Patients) </th>
+						          								<th> Bed Number </th>
+						          							</tr>
+						          						</thead>
+						          						<tbody>
+						          							<tr>
+						          								<td> Dr. Deepak Gupta (Admin) </td>
+						          								<td> 3 Patients </td>
+						          								<td> 201, 102, 103 </td>
+						          							</tr>
+						          							<tr>
+						          								<td> Dr. Ashutosh Singh </td>
+						          								<td> 2 Patients </td>
+						          								<td> 105, 104 </td>
+						          							</tr>
+						          							<tr>
+						          								<td> Pallavi Rana </td>
+						          								<td> 3 Patients </td>
+						          								<td> 107, 101, 106 </td>
+						          							</tr>
+						          						</tbody>
+						          					</table>
+						          				</div>
+						          			</div>
+						          		</div>
+						          	</div>
+					          	</div>
+					          	<div role="tabpanel" class="tab-pane" id="private">
+					          		<ul class="list-bedul">
+					          			<li class="success">
+					          				Available: <span> 6 </span>
+					          			</li>
+					          			<li class="danger">
+					          				Not Available: <span> 6 </span>
+					          			</li>
+					          			<li class="blue">
+					          				Total:
+					          				<span>
+					          					<input type="text" name="" class="form-control" value="10" disabled="" />
+					          					<i class="fa fa-pencil"></i>
+					          				</span>
+					          			</li>
+					          		</ul>
+
+					          		<div class="row">
+						          		<div class="col-md-8 col-sm-12 col-xs-12">
+						          			<div class="beds-panel">
+							          			<ul>
+							          				<li>
+							          					<a href="#addpatientModal" data-dismiss="modal" data-toggle="modal">
+							          						<p> 101 </p>
+							          						<img src="./assets/imgs/no-icons.png" class="img-responsive" /> 
+							          						<p> ------ </p>
+							          					</a>
+							          				</li>
+							          				<li>
+							          					<a href="#patientModal" data-dismiss="modal" data-toggle="modal">
+							          						<p> 101 </p>
+							          						<img src="./assets/imgs/icons.png" class="img-responsive" /> 
+							          						<p> John Mayer </p>
+							          					</a>
+							          				</li>
+							          				<li>
+							          					<a href="#addpatientModal" data-dismiss="modal" data-toggle="modal">
+							          						<p> 101 </p>
+							          						<img src="./assets/imgs/no-icons.png" class="img-responsive" /> 
+							          						<p> ------ </p>
+							          					</a>
+							          				</li>
+							          				<li>
+							          					<a href="#addpatientModal" data-dismiss="modal" data-toggle="modal">
+							          						<p> 101 </p>
+							          						<img src="./assets/imgs/no-icons.png" class="img-responsive" /> 
+							          						<p> ------ </p>
+							          					</a>
+							          				</li>
+							          				<li>
+							          					<a href="#addpatientModal" data-dismiss="modal" data-toggle="modal">
+							          						<p> 101 </p>
+							          						<img src="./assets/imgs/no-icons.png" class="img-responsive" /> 
+							          						<p> ------ </p>
+							          					</a>
+							          				</li>
+							          				<li>
+							          					<a href="#patientModal" data-dismiss="modal" data-toggle="modal">
+							          						<p> 101 </p>
+							          						<img src="./assets/imgs/icons.png" class="img-responsive" /> 
+							          						<p> John Mayer </p>
+							          					</a>
+							          				</li>
+							          				<li>
+							          					<a href="#patientModal" data-dismiss="modal" data-toggle="modal">
+							          						<p> 101 </p>
+							          						<img src="./assets/imgs/icons.png" class="img-responsive" /> 
+							          						<p> John Mayer </p>
+							          					</a>
+							          				</li>
+							          				<li>
+							          					<a href="#patientModal" data-dismiss="modal" data-toggle="modal">
+							          						<p> 101 </p>
+							          						<img src="./assets/imgs/icons.png" class="img-responsive" /> 
+							          						<p> John Mayer </p>
+							          					</a>
+							          				</li>
+
+							          			</ul>
+						          			</div>
+						          		</div>
+						          		<div class="col-md-4 col-sm-12 col-xs-12">
+						          			<h4 class="m-t-0"> Doctor wise break up </h4>
+						          			<div class="row">
+						          				<div class="table-responsive col-md-12 col-sm-12 col-xs-12">
+						          					<table class="table table-striped table-bordered">
+						          						<thead>
+						          							<tr>
+						          								<th> Clinic Doctor Name </th>
+						          								<th> IPD Contribution (Patients) </th>
+						          								<th> Bed Number </th>
+						          							</tr>
+						          						</thead>
+						          						<tbody>
+						          							<tr>
+						          								<td> Dr. Deepak Gupta (Admin) </td>
+						          								<td> 3 Patients </td>
+						          								<td> 201, 102, 103 </td>
+						          							</tr>
+						          							<tr>
+						          								<td> Dr. Ashutosh Singh </td>
+						          								<td> 2 Patients </td>
+						          								<td> 105, 104 </td>
+						          							</tr>
+						          							<tr>
+						          								<td> Pallavi Rana </td>
+						          								<td> 3 Patients </td>
+						          								<td> 107, 101, 106 </td>
+						          							</tr>
+						          						</tbody>
+						          					</table>
+						          				</div>
+						          			</div>
+						          		</div>
+						          	</div>
+					          	</div>
+
+					        </div>
+
+					    </div>
+	    			</div>
+			    	
+			    	<div class="" *ngIf="activatedtab==1">
+
+			    		<div class="row">
+			    			<div class="form-group col-md-6 col-sm-6 col-xs-12">
+			    				<label> Total Patients Admitted </label>
+			    				<p> 12 </p>
+			    			</div>
+			    			<div class="form-group col-md-6 col-sm-6 col-xs-12">
+			    				<label> Total Patients Discharged </label>
+			    				<p> 8 </p>
+			    			</div>
+			    			<div class="form-group col-md-6 col-sm-6 col-xs-12">
+			    				<label> Total IPD Revenue (Rs.) </label>
+			    				<p> 45,000.00 </p>
+			    			</div>
+			    			<div class="form-group col-md-6 col-sm-6 col-xs-12">
+			    				<label> Clinic Admission Ratio <i class="fa fa-info-circle"></i> </label>
+			    				<p> 45,000.00 </p>
+			    			</div>
+			    			<div class="col-md-12 col-sm-12 col-xs-12">
+			    				<h4> Bed occupancy (days/hrs) </h4>
+			    			</div>
+			    			<div class="form-group col-md-6 col-sm-6 col-xs-12">
+			    				<label>1. Private </label>
+			    				<p> 1.2d, 16 Hrs </p>
+			    			</div>
+			    			<div class="form-group col-md-6 col-sm-6 col-xs-12">
+			    				<label>2. Semi-Private </label>
+			    				<p> 2.18 Hrs </p>
+			    			</div>
+			    			<div class="form-group col-md-6 col-sm-6 col-xs-12">
+			    				<label>3. General </label>
+			    				<p> 3.2d, 11Hrs </p>
+			    			</div>
+			    			<div class="form-group col-md-6 col-sm-6 col-xs-12">
+			    				<label>4. Total </label>
+			    				<p> 4.5d, 21Hrs </p>
+			    			</div>
+
+			    			<div class="form-group col-md-6 col-sm-6 col-xs-12">
+			    				<label>Occupany Ratio <i class="fa fa-info-circle"></i> </label>
+			    				<p> 0.84 </p>
+			    			</div>
+
+			    			<div class="col-md-12 col-sm-12 col-xs-12">
+			    				<h4> Doctor-wise break-up </h4>
+			    			</div>
+
+			    			<div class="table-responsive col-md-12 col-sm-12 col-xs-12">
+			    				<table class="table table-striped">
+			    					<thead>
+			    						<tr>
+			    							<th> Clinic Doctor Name </th>
+			    							<th> IPD Contribution (Patients) </th>
+			    							<th> IPD Contribution (Revenue) </th>
+			    							<th> Admission Ratio </th>
+			    						</tr>
+			    					</thead>
+			    					<tbody>
+			    						<tr>
+			    							<td> Dr. Deepak Gupta (admin) </td>
+			    							<td> 6 Patients (50%) </td>
+			    							<td> 21,000.00 (40%) </td>
+			    							<td> 2% </td>
+			    						</tr>
+			    						<tr>
+			    							<td> Dr. Deepak Gupta (admin) </td>
+			    							<td> 6 Patients (50%) </td>
+			    							<td> 21,000.00 (40%) </td>
+			    							<td> 2% </td>
+			    						</tr>
+			    						<tr>
+			    							<td> Dr. Deepak Gupta (admin) </td>
+			    							<td> 6 Patients (50%) </td>
+			    							<td> 21,000.00 (40%) </td>
+			    							<td> 2% </td>
+			    						</tr>
+			    						<tr>
+			    							<td> Dr. Deepak Gupta (admin) </td>
+			    							<td> 6 Patients (50%) </td>
+			    							<td> 21,000.00 (40%) </td>
+			    							<td> 2% </td>
+			    						</tr>
+			    					</tbody>
+			    				</table>
+			    			</div>
+
+			    		</div>
+
+			    	</div>
+
+			    	<div class="" *ngIf="activatedtab==2">
+			    		
+			    		<div class="row">
+			    			<div class="form-group col-md-6 col-sm-6 col-xs-12">
+			    				<label> Total Patients Admitted </label>
+			    				<p> 12 </p>
+			    			</div>
+			    			<div class="form-group col-md-6 col-sm-6 col-xs-12">
+			    				<label> Total Patients Discharged </label>
+			    				<p> 8 </p>
+			    			</div>
+			    			<div class="form-group col-md-6 col-sm-6 col-xs-12">
+			    				<label> Total IPD Revenue (Rs.) </label>
+			    				<p> 45,000.00 </p>
+			    			</div>
+			    			<div class="form-group col-md-6 col-sm-6 col-xs-12">
+			    				<label> Clinic Admission Ratio <i class="fa fa-info-circle"></i> </label>
+			    				<p> 45,000.00 </p>
+			    			</div>
+			    			<div class="col-md-12 col-sm-12 col-xs-12">
+			    				<h4> Bed occupancy (days/hrs) </h4>
+			    			</div>
+			    			<div class="form-group col-md-6 col-sm-6 col-xs-12">
+			    				<label>1. Private </label>
+			    				<p> 1.2d, 16 Hrs </p>
+			    			</div>
+			    			<div class="form-group col-md-6 col-sm-6 col-xs-12">
+			    				<label>2. Semi-Private </label>
+			    				<p> 2.18 Hrs </p>
+			    			</div>
+			    			<div class="form-group col-md-6 col-sm-6 col-xs-12">
+			    				<label>3. General </label>
+			    				<p> 3.2d, 11Hrs </p>
+			    			</div>
+			    			<div class="form-group col-md-6 col-sm-6 col-xs-12">
+			    				<label>4. Total </label>
+			    				<p> 4.5d, 21Hrs </p>
+			    			</div>
+
+			    			<div class="form-group col-md-6 col-sm-6 col-xs-12">
+			    				<label>Occupany Ratio <i class="fa fa-info-circle"></i> </label>
+			    				<p> 0.84 </p>
+			    			</div>
+
+			    			<div class="col-md-12 col-sm-12 col-xs-12">
+			    				<h4> Doctor-wise break-up </h4>
+			    			</div>
+
+			    			<div class="table-responsive col-md-12 col-sm-12 col-xs-12">
+			    				<table class="table table-striped">
+			    					<thead>
+			    						<tr>
+			    							<th> Clinic Doctor Name </th>
+			    							<th> IPD Contribution (Patients) </th>
+			    							<th> IPD Contribution (Revenue) </th>
+			    							<th> Admission Ratio </th>
+			    						</tr>
+			    					</thead>
+			    					<tbody>
+			    						<tr>
+			    							<td> Dr. Deepak Gupta (admin) </td>
+			    							<td> 6 Patients (50%) </td>
+			    							<td> 21,000.00 (40%) </td>
+			    							<td> 2% </td>
+			    						</tr>
+			    						<tr>
+			    							<td> Dr. Deepak Gupta (admin) </td>
+			    							<td> 6 Patients (50%) </td>
+			    							<td> 21,000.00 (40%) </td>
+			    							<td> 2% </td>
+			    						</tr>
+			    						<tr>
+			    							<td> Dr. Deepak Gupta (admin) </td>
+			    							<td> 6 Patients (50%) </td>
+			    							<td> 21,000.00 (40%) </td>
+			    							<td> 2% </td>
+			    						</tr>
+			    						<tr>
+			    							<td> Dr. Deepak Gupta (admin) </td>
+			    							<td> 6 Patients (50%) </td>
+			    							<td> 21,000.00 (40%) </td>
+			    							<td> 2% </td>
+			    						</tr>
+			    					</tbody>
+			    				</table>
+			    			</div>
+
+			    		</div>
+
+			    	</div>
+
+			    	<div class="" *ngIf="activatedtab==3">
+			    		<div class="row">
+			    			<div class="form-group col-md-6 col-sm-6 col-xs-12">
+			    				<label> Total Patients Admitted </label>
+			    				<p> 12 </p>
+			    			</div>
+			    			<div class="form-group col-md-6 col-sm-6 col-xs-12">
+			    				<label> Total Patients Discharged </label>
+			    				<p> 8 </p>
+			    			</div>
+			    			<div class="form-group col-md-6 col-sm-6 col-xs-12">
+			    				<label> Total IPD Revenue (Rs.) </label>
+			    				<p> 45,000.00 </p>
+			    			</div>
+			    			<div class="form-group col-md-6 col-sm-6 col-xs-12">
+			    				<label> Clinic Admission Ratio <i class="fa fa-info-circle"></i> </label>
+			    				<p> 45,000.00 </p>
+			    			</div>
+			    			<div class="col-md-12 col-sm-12 col-xs-12">
+			    				<h4> Bed occupancy (days/hrs) </h4>
+			    			</div>
+			    			<div class="form-group col-md-6 col-sm-6 col-xs-12">
+			    				<label>1. Private </label>
+			    				<p> 1.2d, 16 Hrs </p>
+			    			</div>
+			    			<div class="form-group col-md-6 col-sm-6 col-xs-12">
+			    				<label>2. Semi-Private </label>
+			    				<p> 2.18 Hrs </p>
+			    			</div>
+			    			<div class="form-group col-md-6 col-sm-6 col-xs-12">
+			    				<label>3. General </label>
+			    				<p> 3.2d, 11Hrs </p>
+			    			</div>
+			    			<div class="form-group col-md-6 col-sm-6 col-xs-12">
+			    				<label>4. Total </label>
+			    				<p> 4.5d, 21Hrs </p>
+			    			</div>
+
+			    			<div class="form-group col-md-6 col-sm-6 col-xs-12">
+			    				<label>Occupany Ratio <i class="fa fa-info-circle"></i> </label>
+			    				<p> 0.84 </p>
+			    			</div>
+
+			    			<div class="col-md-12 col-sm-12 col-xs-12">
+			    				<h4> Doctor-wise break-up </h4>
+			    			</div>
+
+			    			<div class="table-responsive col-md-12 col-sm-12 col-xs-12">
+			    				<table class="table table-striped">
+			    					<thead>
+			    						<tr>
+			    							<th> Clinic Doctor Name </th>
+			    							<th> IPD Contribution (Patients) </th>
+			    							<th> IPD Contribution (Revenue) </th>
+			    							<th> Admission Ratio </th>
+			    						</tr>
+			    					</thead>
+			    					<tbody>
+			    						<tr>
+			    							<td> Dr. Deepak Gupta (admin) </td>
+			    							<td> 6 Patients (50%) </td>
+			    							<td> 21,000.00 (40%) </td>
+			    							<td> 2% </td>
+			    						</tr>
+			    						<tr>
+			    							<td> Dr. Deepak Gupta (admin) </td>
+			    							<td> 6 Patients (50%) </td>
+			    							<td> 21,000.00 (40%) </td>
+			    							<td> 2% </td>
+			    						</tr>
+			    						<tr>
+			    							<td> Dr. Deepak Gupta (admin) </td>
+			    							<td> 6 Patients (50%) </td>
+			    							<td> 21,000.00 (40%) </td>
+			    							<td> 2% </td>
+			    						</tr>
+			    						<tr>
+			    							<td> Dr. Deepak Gupta (admin) </td>
+			    							<td> 6 Patients (50%) </td>
+			    							<td> 21,000.00 (40%) </td>
+			    							<td> 2% </td>
+			    						</tr>
+			    					</tbody>
+			    				</table>
+			    			</div>
+
+			    		</div>
+			    	</div>
+
+			    	<div class="" *ngIf="activatedtab==4">
+			    		<div class="row">
+			    			<div class="form-group col-md-6 col-sm-6 col-xs-12">
+			    				<label> Total Patients Admitted </label>
+			    				<p> 12 </p>
+			    			</div>
+			    			<div class="form-group col-md-6 col-sm-6 col-xs-12">
+			    				<label> Total Patients Discharged </label>
+			    				<p> 8 </p>
+			    			</div>
+			    			<div class="form-group col-md-6 col-sm-6 col-xs-12">
+			    				<label> Total IPD Revenue (Rs.) </label>
+			    				<p> 45,000.00 </p>
+			    			</div>
+			    			<div class="form-group col-md-6 col-sm-6 col-xs-12">
+			    				<label> Clinic Admission Ratio <i class="fa fa-info-circle"></i> </label>
+			    				<p> 45,000.00 </p>
+			    			</div>
+			    			<div class="col-md-12 col-sm-12 col-xs-12">
+			    				<h4> Bed occupancy (days/hrs) </h4>
+			    			</div>
+			    			<div class="form-group col-md-6 col-sm-6 col-xs-12">
+			    				<label>1. Private </label>
+			    				<p> 1.2d, 16 Hrs </p>
+			    			</div>
+			    			<div class="form-group col-md-6 col-sm-6 col-xs-12">
+			    				<label>2. Semi-Private </label>
+			    				<p> 2.18 Hrs </p>
+			    			</div>
+			    			<div class="form-group col-md-6 col-sm-6 col-xs-12">
+			    				<label>3. General </label>
+			    				<p> 3.2d, 11Hrs </p>
+			    			</div>
+			    			<div class="form-group col-md-6 col-sm-6 col-xs-12">
+			    				<label>4. Total </label>
+			    				<p> 4.5d, 21Hrs </p>
+			    			</div>
+
+			    			<div class="form-group col-md-6 col-sm-6 col-xs-12">
+			    				<label>Occupany Ratio <i class="fa fa-info-circle"></i> </label>
+			    				<p> 0.84 </p>
+			    			</div>
+
+			    			<div class="col-md-12 col-sm-12 col-xs-12">
+			    				<h4> Doctor-wise break-up </h4>
+			    			</div>
+
+			    			<div class="table-responsive col-md-12 col-sm-12 col-xs-12">
+			    				<table class="table table-striped">
+			    					<thead>
+			    						<tr>
+			    							<th> Clinic Doctor Name </th>
+			    							<th> IPD Contribution (Patients) </th>
+			    							<th> IPD Contribution (Revenue) </th>
+			    							<th> Admission Ratio </th>
+			    						</tr>
+			    					</thead>
+			    					<tbody>
+			    						<tr>
+			    							<td> Dr. Deepak Gupta (admin) </td>
+			    							<td> 6 Patients (50%) </td>
+			    							<td> 21,000.00 (40%) </td>
+			    							<td> 2% </td>
+			    						</tr>
+			    						<tr>
+			    							<td> Dr. Deepak Gupta (admin) </td>
+			    							<td> 6 Patients (50%) </td>
+			    							<td> 21,000.00 (40%) </td>
+			    							<td> 2% </td>
+			    						</tr>
+			    						<tr>
+			    							<td> Dr. Deepak Gupta (admin) </td>
+			    							<td> 6 Patients (50%) </td>
+			    							<td> 21,000.00 (40%) </td>
+			    							<td> 2% </td>
+			    						</tr>
+			    						<tr>
+			    							<td> Dr. Deepak Gupta (admin) </td>
+			    							<td> 6 Patients (50%) </td>
+			    							<td> 21,000.00 (40%) </td>
+			    							<td> 2% </td>
+			    						</tr>
+			    					</tbody>
+			    				</table>
+			    			</div>
+
+			    		</div>
+			    	</div>
+
+			    	<div class="" *ngIf="activatedtab==5">
+			    		<div class="row">
+			    			<div class="form-group col-md-6 col-sm-6 col-xs-12">
+			    				<label> Total Patients Admitted </label>
+			    				<p> 12 </p>
+			    			</div>
+			    			<div class="form-group col-md-6 col-sm-6 col-xs-12">
+			    				<label> Total Patients Discharged </label>
+			    				<p> 8 </p>
+			    			</div>
+			    			<div class="form-group col-md-6 col-sm-6 col-xs-12">
+			    				<label> Total IPD Revenue (Rs.) </label>
+			    				<p> 45,000.00 </p>
+			    			</div>
+			    			<div class="form-group col-md-6 col-sm-6 col-xs-12">
+			    				<label> Clinic Admission Ratio <i class="fa fa-info-circle"></i> </label>
+			    				<p> 45,000.00 </p>
+			    			</div>
+			    			<div class="col-md-12 col-sm-12 col-xs-12">
+			    				<h4> Bed occupancy (days/hrs) </h4>
+			    			</div>
+			    			<div class="form-group col-md-6 col-sm-6 col-xs-12">
+			    				<label>1. Private </label>
+			    				<p> 1.2d, 16 Hrs </p>
+			    			</div>
+			    			<div class="form-group col-md-6 col-sm-6 col-xs-12">
+			    				<label>2. Semi-Private </label>
+			    				<p> 2.18 Hrs </p>
+			    			</div>
+			    			<div class="form-group col-md-6 col-sm-6 col-xs-12">
+			    				<label>3. General </label>
+			    				<p> 3.2d, 11Hrs </p>
+			    			</div>
+			    			<div class="form-group col-md-6 col-sm-6 col-xs-12">
+			    				<label>4. Total </label>
+			    				<p> 4.5d, 21Hrs </p>
+			    			</div>
+
+			    			<div class="form-group col-md-6 col-sm-6 col-xs-12">
+			    				<label>Occupany Ratio <i class="fa fa-info-circle"></i> </label>
+			    				<p> 0.84 </p>
+			    			</div>
+
+			    			<div class="col-md-12 col-sm-12 col-xs-12">
+			    				<h4> Doctor-wise break-up </h4>
+			    			</div>
+
+			    			<div class="table-responsive col-md-12 col-sm-12 col-xs-12">
+			    				<table class="table table-striped">
+			    					<thead>
+			    						<tr>
+			    							<th> Clinic Doctor Name </th>
+			    							<th> IPD Contribution (Patients) </th>
+			    							<th> IPD Contribution (Revenue) </th>
+			    							<th> Admission Ratio </th>
+			    						</tr>
+			    					</thead>
+			    					<tbody>
+			    						<tr>
+			    							<td> Dr. Deepak Gupta (admin) </td>
+			    							<td> 6 Patients (50%) </td>
+			    							<td> 21,000.00 (40%) </td>
+			    							<td> 2% </td>
+			    						</tr>
+			    						<tr>
+			    							<td> Dr. Deepak Gupta (admin) </td>
+			    							<td> 6 Patients (50%) </td>
+			    							<td> 21,000.00 (40%) </td>
+			    							<td> 2% </td>
+			    						</tr>
+			    						<tr>
+			    							<td> Dr. Deepak Gupta (admin) </td>
+			    							<td> 6 Patients (50%) </td>
+			    							<td> 21,000.00 (40%) </td>
+			    							<td> 2% </td>
+			    						</tr>
+			    						<tr>
+			    							<td> Dr. Deepak Gupta (admin) </td>
+			    							<td> 6 Patients (50%) </td>
+			    							<td> 21,000.00 (40%) </td>
+			    							<td> 2% </td>
+			    						</tr>
+			    					</tbody>
+			    				</table>
+			    			</div>
+
+			    		</div>
+			    	</div>
+
+			    	<div class="" *ngIf="activatedtab==6">
+			    		<div class="row">
+			    			<div class="form-group col-md-6 col-sm-6 col-xs-12">
+			    				<label> Total Patients Admitted </label>
+			    				<p> 12 </p>
+			    			</div>
+			    			<div class="form-group col-md-6 col-sm-6 col-xs-12">
+			    				<label> Total Patients Discharged </label>
+			    				<p> 8 </p>
+			    			</div>
+			    			<div class="form-group col-md-6 col-sm-6 col-xs-12">
+			    				<label> Total IPD Revenue (Rs.) </label>
+			    				<p> 45,000.00 </p>
+			    			</div>
+			    			<div class="form-group col-md-6 col-sm-6 col-xs-12">
+			    				<label> Clinic Admission Ratio <i class="fa fa-info-circle"></i> </label>
+			    				<p> 45,000.00 </p>
+			    			</div>
+			    			<div class="col-md-12 col-sm-12 col-xs-12">
+			    				<h4> Bed occupancy (days/hrs) </h4>
+			    			</div>
+			    			<div class="form-group col-md-6 col-sm-6 col-xs-12">
+			    				<label>1. Private </label>
+			    				<p> 1.2d, 16 Hrs </p>
+			    			</div>
+			    			<div class="form-group col-md-6 col-sm-6 col-xs-12">
+			    				<label>2. Semi-Private </label>
+			    				<p> 2.18 Hrs </p>
+			    			</div>
+			    			<div class="form-group col-md-6 col-sm-6 col-xs-12">
+			    				<label>3. General </label>
+			    				<p> 3.2d, 11Hrs </p>
+			    			</div>
+			    			<div class="form-group col-md-6 col-sm-6 col-xs-12">
+			    				<label>4. Total </label>
+			    				<p> 4.5d, 21Hrs </p>
+			    			</div>
+
+			    			<div class="form-group col-md-6 col-sm-6 col-xs-12">
+			    				<label>Occupany Ratio <i class="fa fa-info-circle"></i> </label>
+			    				<p> 0.84 </p>
+			    			</div>
+
+			    			<div class="col-md-12 col-sm-12 col-xs-12">
+			    				<h4> Doctor-wise break-up </h4>
+			    			</div>
+
+			    			<div class="table-responsive col-md-12 col-sm-12 col-xs-12">
+			    				<table class="table table-striped">
+			    					<thead>
+			    						<tr>
+			    							<th> Clinic Doctor Name </th>
+			    							<th> IPD Contribution (Patients) </th>
+			    							<th> IPD Contribution (Revenue) </th>
+			    							<th> Admission Ratio </th>
+			    						</tr>
+			    					</thead>
+			    					<tbody>
+			    						<tr>
+			    							<td> Dr. Deepak Gupta (admin) </td>
+			    							<td> 6 Patients (50%) </td>
+			    							<td> 21,000.00 (40%) </td>
+			    							<td> 2% </td>
+			    						</tr>
+			    						<tr>
+			    							<td> Dr. Deepak Gupta (admin) </td>
+			    							<td> 6 Patients (50%) </td>
+			    							<td> 21,000.00 (40%) </td>
+			    							<td> 2% </td>
+			    						</tr>
+			    						<tr>
+			    							<td> Dr. Deepak Gupta (admin) </td>
+			    							<td> 6 Patients (50%) </td>
+			    							<td> 21,000.00 (40%) </td>
+			    							<td> 2% </td>
+			    						</tr>
+			    						<tr>
+			    							<td> Dr. Deepak Gupta (admin) </td>
+			    							<td> 6 Patients (50%) </td>
+			    							<td> 21,000.00 (40%) </td>
+			    							<td> 2% </td>
+			    						</tr>
+			    					</tbody>
+			    				</table>
+			    			</div>
+
+			    		</div>
+			    	</div>
+
+			    	<div class="" *ngIf="activatedtab==7">
+			    		<div class="row">
+			    			<div class="form-group col-md-6 col-sm-6 col-xs-12">
+			    				<label> Total Patients Admitted </label>
+			    				<p> 12 </p>
+			    			</div>
+			    			<div class="form-group col-md-6 col-sm-6 col-xs-12">
+			    				<label> Total Patients Discharged </label>
+			    				<p> 8 </p>
+			    			</div>
+			    			<div class="form-group col-md-6 col-sm-6 col-xs-12">
+			    				<label> Total IPD Revenue (Rs.) </label>
+			    				<p> 45,000.00 </p>
+			    			</div>
+			    			<div class="form-group col-md-6 col-sm-6 col-xs-12">
+			    				<label> Clinic Admission Ratio <i class="fa fa-info-circle"></i> </label>
+			    				<p> 45,000.00 </p>
+			    			</div>
+			    			<div class="col-md-12 col-sm-12 col-xs-12">
+			    				<h4> Bed occupancy (days/hrs) </h4>
+			    			</div>
+			    			<div class="form-group col-md-6 col-sm-6 col-xs-12">
+			    				<label>1. Private </label>
+			    				<p> 1.2d, 16 Hrs </p>
+			    			</div>
+			    			<div class="form-group col-md-6 col-sm-6 col-xs-12">
+			    				<label>2. Semi-Private </label>
+			    				<p> 2.18 Hrs </p>
+			    			</div>
+			    			<div class="form-group col-md-6 col-sm-6 col-xs-12">
+			    				<label>3. General </label>
+			    				<p> 3.2d, 11Hrs </p>
+			    			</div>
+			    			<div class="form-group col-md-6 col-sm-6 col-xs-12">
+			    				<label>4. Total </label>
+			    				<p> 4.5d, 21Hrs </p>
+			    			</div>
+
+			    			<div class="form-group col-md-6 col-sm-6 col-xs-12">
+			    				<label>Occupany Ratio <i class="fa fa-info-circle"></i> </label>
+			    				<p> 0.84 </p>
+			    			</div>
+
+			    			<div class="col-md-12 col-sm-12 col-xs-12">
+			    				<h4> Doctor-wise break-up </h4>
+			    			</div>
+
+			    			<div class="table-responsive col-md-12 col-sm-12 col-xs-12">
+			    				<table class="table table-striped">
+			    					<thead>
+			    						<tr>
+			    							<th> Clinic Doctor Name </th>
+			    							<th> IPD Contribution (Patients) </th>
+			    							<th> IPD Contribution (Revenue) </th>
+			    							<th> Admission Ratio </th>
+			    						</tr>
+			    					</thead>
+			    					<tbody>
+			    						<tr>
+			    							<td> Dr. Deepak Gupta (admin) </td>
+			    							<td> 6 Patients (50%) </td>
+			    							<td> 21,000.00 (40%) </td>
+			    							<td> 2% </td>
+			    						</tr>
+			    						<tr>
+			    							<td> Dr. Deepak Gupta (admin) </td>
+			    							<td> 6 Patients (50%) </td>
+			    							<td> 21,000.00 (40%) </td>
+			    							<td> 2% </td>
+			    						</tr>
+			    						<tr>
+			    							<td> Dr. Deepak Gupta (admin) </td>
+			    							<td> 6 Patients (50%) </td>
+			    							<td> 21,000.00 (40%) </td>
+			    							<td> 2% </td>
+			    						</tr>
+			    						<tr>
+			    							<td> Dr. Deepak Gupta (admin) </td>
+			    							<td> 6 Patients (50%) </td>
+			    							<td> 21,000.00 (40%) </td>
+			    							<td> 2% </td>
+			    						</tr>
+			    					</tbody>
+			    				</table>
+			    			</div>
+
+			    		</div>
+			    	</div>
+			    	
+	    		</div>
+	    	</div>
+
+
+
+	    </div>
+
+	</div>
+
+</div>
+
+
+
+<!-- Modal -->
+<div class="modal fade cus-modal" id="patientModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  	<div class="modal-dialog" role="document">
+    	<div class="modal-content">
+    		<div class="modal-header">
+    			<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    			<h4 class="modal-title"> Patient Details </h4>
+    		</div>
+    		<div class="modal-body newform-margin">
+        		<div class="row">
+		    		<div class="col-md-12 col-sm-12 col-xs-12">
+		    			<div class="patient-popup">
+		    				<div class="pat-center">
+			    				<div class="pat-img">
+			    					<img src="./assets/imgs/teach-4.jpg" class="img-responsive" />
+			    				</div>
+			    				<p> John Mayer (M), 25Y </p>
+			    			</div>
+			    			<p> <label>Patient ID:</label> PAT123456 </p>
+			    			<p> <label>Prescription ID:</label> PRE225466 </p>
+			    			<p> <label>Mobile Number:</label> +91-9874563210 </p>
+			    			<p> <label>Consulting Doctor Name:</label> Dr. S.N. Jain </p>
+			    			<p> <label>Admit date and Time:</label> 26-08-18, 08:00 AM </p>
+		    			</div>
+		    		</div>
+        		</div>
+      		</div>
+
+      		<div class="modal-footer">
+      			<div class="form-group col-md-6 col-sm-6 col-xs-12">
+      				<button class="full-width btn btn-custom" type="button"> Discharge </button>
+      			</div>
+      			<div class="form-group col-md-6 col-sm-6 col-xs-12">
+      				<button class="full-width btn btn-custom" type="button"> Activity Sheet </button>
+      			</div>
+
+      		</div>
+
+		</div>
+  	</div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade cus-modal" id="addpatientModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  	<div class="modal-dialog" role="document">
+    	<div class="modal-content">
+    		<div class="modal-header">
+    			<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    			<h4 class="modal-title"> General Bed - 102  </h4>
+    		</div>
+    		<div class="modal-body newform-margin">
+        		<div class="row">
+		    		<div class="col-md-12 col-sm-12 col-xs-12">
+		    			<div class="patient-popup">
+		    				<div class="pat-center">
+			    				<div class="pat-img">
+			    					<img src="./assets/imgs/placeholder.png" class="img-responsive" />
+			    					<input type="file" class="inpt-file" name="">
+			    				</div>
+			    			</div>
+			    			<div class="form-group col-md-12 col-sm-12 col-xs-12">
+	        					<div class="fieldDesign">
+		        					<input id="field1" type="text" class="form-control txtfield" name="" required="" />
+		        					<label for="field1" class="labelFloat"> Enter Mobile Number </label>
+		        				</div>
+	        				</div>
+	        				<div class="form-group col-md-12 col-sm-12 col-xs-12">
+	        					<div class="fieldDesign">
+		        					<input id="field2" type="text" class="form-control txtfield" name="" required="" />
+		        					<label for="field2" class="labelFloat"> Patient Name </label>
+		        				</div>
+	        				</div>
+	        				<div class="form-group col-md-6 col-sm-6 col-xs-12">
+	        					<div class="fieldDesign">
+		        					<input id="field3" type="text" class="form-control txtfield" name="" required="" />
+		        					<label for="field3" class="labelFloat"> Age </label>
+		        				</div>
+	        				</div>
+	        				<div class="form-group col-md-6 col-sm-6 col-xs-12">
+	        					<select class="form-control txtfield">
+	        						<option> Gender </option>
+	        						<option> Male </option>
+	        						<option> FeMale </option>
+	        					</select>
+	        				</div>
+	        				<div class="form-group col-md-12 col-sm-12 col-xs-12">
+	        					<div class="cus-datetimepicker">
+		        					<!-- <input id="field4" type="text" class="form-control txtfield" name="" required="" /> -->
+		        					<angular2-date-picker [(ngModel)]="date" [settings]="settings"></angular2-date-picker>
+	        						<!-- <label for="field4" class="labelFloat"> Admit date with time </label> -->
+	        					</div>
+	        				</div>
+
+
+		    			</div>
+		    		</div>
+        		</div>
+      		</div>
+
+      		<div class="modal-footer">
+				<div class="form-group col-md-12 col-sm-12 col-xs-12 text-center">
+					<button class="btn btn-custom" type="submit"> Register </button>
+				</div>
+      		</div>
+
+		</div>
+  	</div>
+</div>

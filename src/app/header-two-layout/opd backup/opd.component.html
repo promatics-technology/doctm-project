@@ -1,0 +1,458 @@
+<div class="loader-box" *ngIf="loadingMyClinicScore">
+    <img src="./assets/imgs/load.gif" />
+</div>
+<div class="analytics-sec">
+	<div class="ipd-deatil-sec">
+	    <!-- <div class="inner-tab">
+	      	<ul class="nav nav-tabs" role="tablist">
+	          	<li role="presentation"><a href="javascript:void(0);" routerLink="/header-two-layout/dashboard-consultation-prescription">Prescription</a></li>
+	          	<li role="presentation"><a href="javascript:void(0);" routerLink="/header-two-layout/dashboard-consultation-time"> Time</a></li>
+	          	<li role="presentation"><a href="javascript:void(0);" routerLink="/header-two-layout/dashboard-consultation-patient"> Patient </a></li>
+				<li role="presentation"><a href="javascript:void(0);" routerLink="/header-two-layout/dashboard-consultation-treatment"> Treatment</a></li>
+	          	<li role="presentation"><a href="javascript:void(0);" routerLink="/header-two-layout/dashboard-consultation-diagnosis"> Diagnostics </a></li>
+	          	<li role="presentation"><a href="javascript:void(0);" routerLink="/header-two-layout/dashboard-consultation-investigation"> Investigation </a></li>
+	          	<li role="presentation"  class="active"><a href="javascript:void(0);" routerLink="/header-two-layout/opd">Clinic Score</a></li>
+	      	</ul>
+	    </div> -->
+	    <div class="ipd-body">
+	    	<div class="cus-sidebar-wrapper">
+	    		<div class="cus-sidebar" style="height: initial;">
+	    			<ul>
+	    				<li> <h4 class="text-center">For Past</h4> </li>
+	    				<li class="{{getClass(3)}}" (click)="activatetab(3)"> <a href="javascript:void(0);"> 1 Month &nbsp;<small *ngIf="activatedtab==3">({{fromDate | date: 'dd/LL/yy'}} - {{toDate | date: 'dd/LL/yy'}})</small> </a> </li>
+	    				<li class="{{getClass(4)}}" (click)="activatetab(4)"> <a href="javascript:void(0);"> 3 Month &nbsp;<small *ngIf="activatedtab==4">({{fromDate | date: 'dd/LL/yy'}} - {{toDate | date: 'dd/LL/yy'}})</small></a> </li>
+	    				<li class="{{getClass(5)}}" (click)="activatetab(5)"> <a href="javascript:void(0);"> 6 Month &nbsp;<small *ngIf="activatedtab==5">({{fromDate | date: 'dd/LL/yy'}} - {{toDate | date: 'dd/LL/yy'}})</small></a> </li>
+	    				<li class="{{getClass(6)}}" (click)="activatetab(6)"> <a href="javascript:void(0);"> 1 Year &nbsp;<small *ngIf="activatedtab==6">({{fromDate | date: 'dd/LL/yy'}} - {{toDate | date: 'dd/LL/yy'}})</small></a> </li>
+	    				<li class="{{getClass(7)}}" (click)="activatetab(7)"> <a href="javascript:void(0);"> All </a> </li>
+	    			</ul>
+	    		</div>
+	    	</div>
+    		<div class="cus-content-wrapper">
+    			<div class="cus-content">
+	    			<div class="row">
+	    				<div class="col-lg-12">
+							<ul class="nav nav-tabs tabs-cstm">
+								<li class="text-center active"><a data-toggle="tab" href="#home"><b>MY OPD SCORE</b></a></li>
+								<li class="text-center"><a data-toggle="tab" href="#menu1"><b>MY CLINIC SCORE</b></a></li>
+							</ul>
+							<div class="tab-content">
+							    <div id="home" class="tab-pane fade in active">
+								    <div class="table-3">
+			    						<table class="cstm-tbl">
+			    							<thead>
+			    								<th  width="400px" class="text-left clr-bl-2"><h4>OPD Parameters</h4></th>
+			    								<th class="text-left clr-bl-2"><h4>Performance</h4></th>
+			    								<th class="text-right clr-bl-2"><h4>Trend</h4></th>
+			    							</thead>
+			    							<tr>
+			    								<td class="text-left" width="500px">
+			    									<h4>>Prescriptions</h4>
+			    								</td>
+			    								<td class="text-left">
+			    									<h4><b>: {{totalPrescriptions}}, <span class="grin">+9%</span></b></h4>
+			    								</td>
+			    								<td class="text-right">
+			    									<h4><b class="clr-blue" data-toggle="modal" data-target="#Modal-can" (click)="getChart(1)">: View</b></h4>
+			    								</td>
+			    							</tr>
+			    							<tr>
+			    								<td class="text-left"  width="500px">
+			    									<h4>>Collection</h4>
+			    								</td>
+			    								<td class="text-left">
+			    									<h4><b>: {{getData(opdPharmacySales+opdDiagonsSales)}}, <span class="red-u">+9%</span></b></h4>
+			    								</td>
+			    								<td class="text-right">
+			    									<h4><b class="clr-blue" data-toggle="modal" data-target="#Modal-can" (click)="getChart(2)">: View</b></h4>
+			    								</td>
+			    							</tr>
+			    							<tr>
+			    								<td class="text-left"  width="500px">
+			    									<h4>>CTU</h4>
+			    								</td>
+			    								<td class="text-left">
+			    									<h4><b>: {{getData(avgCtuPercentage)}}%, <span class="red-u">-3%</span></b></h4>
+			    								</td>
+			    								<td class="text-right">
+			    									<h4><b class="clr-blue" data-toggle="modal" data-target="#Modal-can" (click)="getChart(12)">: View</b></h4>
+			    								</td>
+			    							</tr>
+			    							<tr>
+			    								<td class="text-left"  width="500px">
+			    									<h4>>AVG Consultation Time Per Patient</h4>
+			    								</td>
+			    								<td class="text-left">
+			    									<h4><b>: {{getData(avgTime)}} min, <span class="red-u">+25%</span></b></h4>
+			    								</td>
+			    								<td class="text-right">
+			    									<h4><b class="clr-blue" data-toggle="modal" data-target="#Modal-can" (click)="getChart(7)">: View</b></h4>
+			    								</td>
+			    							</tr>
+			    							<tr>
+			    								<td class="text-left"  width="500px">
+			    									<h4>>Frequent Patients</h4>
+			    								</td>
+			    								<td class="text-left">
+			    									<h4><b>: {{oldPatients}}, <small>({{getData(freqPatientPercentage)}}%)</small> </b></h4>
+			    								</td>
+			    								<td class="text-right">
+			    									<h4><b class="clr-blue" data-toggle="modal" data-target="#Modal-can" (click)="getChart(3)">: View</b></h4>
+			    								</td>
+			    							</tr>
+			    							<tr>
+			    								<td class="text-left"  width="500px">
+			    									<h4>>New Patients </h4>
+			    								</td>
+			    								<td class="text-left">
+			    									<h4><b>: {{getData(newPatients)}}, <small>({{getData(newPatientsPrercenatge)}}%)</small> </b></h4>
+			    								</td>
+			    								<td class="text-right">
+			    									<h4><b class="clr-blue" data-toggle="modal" data-target="#Modal-can" (click)="getChart(4)">: View</b></h4>
+			    								</td>
+			    							</tr>
+			    						</table>
+			    						<div class="col-lg-12 text-center">
+											<div>
+												<button class="btn btn-success cstm-btn" data-toggle="modal" data-target="#Modal-1-mnth"><h4>COMPUTE MY OPD SCORE</h4></button>
+											</div>
+										</div>
+			    					</div>
+							    </div>
+							    <div id="menu1" class="tab-pane fade">
+							     	<div class="table-3">
+			    						<table class="cstm-tbl cstm-table-55">
+			    							<tr>
+			    								<td  width="500px" class="text-left clr-bl-2"><h4>1. OPD Parameters</h4></td>
+			    								<td class="text-left clr-bl-2"><h4>Performance</h4></td>
+			    								<td class="text-center clr-bl-2"><h4>Trend</h4></td>
+			    								<td class="text-right clr-bl-2"><h4>Score</h4></td>
+			    							</tr>
+			    							<tr>
+			    								<td class="text-left" width="500px">
+			    									<h4>>Prescriptions</h4>
+			    								</td>
+			    								<td class="text-left">
+			    									<h4><b>: {{totalPrescriptions}}, <span class="grin">+9%</span></b></h4>
+			    								</td>
+			    								<td class="text-center">
+			    									<h4><b class="clr-blue" data-toggle="modal" data-target="#Modal-can" (click)="getChart(1)">: View</b></h4>
+			    								</td>
+			    							</tr>
+			    							<tr>
+			    								<td class="text-left"  width="500px">
+			    									<h4>>Collection</h4>
+			    								</td>
+			    								<td class="text-left">
+			    									<h4><b>: {{getData(opdPharmacySales+opdDiagonsSales)}}, <span class="red-u">+9%</span></b></h4>
+			    								</td>
+			    								<td class="text-center">
+			    									<h4><b class="clr-blue" data-toggle="modal" data-target="#Modal-can" (click)="getChart(2)">: View</b></h4>
+			    								</td>
+			    							</tr>
+			    							<tr>
+			    								<td class="text-left"  width="500px">
+			    									<h4>>CTU</h4>
+			    								</td>
+			    								<td class="text-left">
+			    									<h4><b>: {{getData(avgCtuPercentage)}}%, <span class="red-u">-3%</span></b></h4>
+			    								</td>
+			    								<td class="text-center">
+			    									<h4><b class="clr-blue" data-toggle="modal" data-target="#Modal-can" (click)="getChart(12)">: View</b></h4>
+			    								</td>
+			    								<td>
+			    									<div class="text-center pull-right">
+			    										<h4 class="ylo">7.6 Very Good</h4>
+			    									</div>
+			    								</td>
+			    							</tr>
+			    							<tr>
+			    								<td class="text-left"  width="500px">
+			    									<h4>>AVG Consultation Time Per Patient</h4>
+			    								</td>
+			    								<td class="text-left">
+			    									<h4><b>: {{getData(avgTime)}} min, <span class="red-u">+25%</span></b></h4>
+			    								</td>
+			    								<td class="text-center">
+			    									<h4><b class="clr-blue" data-toggle="modal" data-target="#Modal-can" (click)="getChart(7)">: View</b></h4>
+			    								</td>
+			    							</tr>
+			    							<tr>
+			    								<td class="text-left"  width="500px">
+			    									<h4>>Frequent Patients</h4>
+			    								</td>
+			    								<td class="text-left">
+			    									<h4><b>: {{oldPatients}}, <small>({{getData(freqPatientPercentage)}}%)</small> </b></h4>
+			    								</td>
+			    								<td class="text-center">
+			    									<h4><b class="clr-blue" data-toggle="modal" data-target="#Modal-can" (click)="getChart(3)">: View</b></h4>
+			    								</td>
+			    							</tr>
+			    							<tr>
+			    								<td class="text-left"  width="500px">
+			    									<h4>>New Patients </h4>
+			    								</td>
+			    								<td class="text-left">
+			    									<h4><b>: {{newPatients}}, <small>({{getData(newPatientsPrercenatge)}}%)</small> </b></h4>
+			    								</td>
+			    								<td class="text-center">
+			    									<h4><b class="clr-blue" data-toggle="modal" data-target="#Modal-can" (click)="getChart(4)">: View</b></h4>
+			    								</td>
+			    							</tr>
+			    							<tr>
+			    								<td  colspan="4" class="text-left clr-bl-2 cstm-th"><h4>2. Pharmacy Parameters</h4></td>
+			    							</tr>
+			    							<tr>
+			    								<td class="text-left"  width="500px">
+			    									<h4>>Sales</h4>
+			    								</td>
+			    								<td class="text-left">
+			    									<h4><b>: {{opdPharmacySales}}, <span class="grin">+9%</span></b></h4>
+			    								</td>
+			    								<td class="text-center">
+			    									<h4><b class="clr-blue" data-toggle="modal" data-target="#Modal-can" (click)="getChart(5)">: View</b></h4>
+			    								</td>
+			    								<td>
+			    									<div class="text-center pull-right">
+			    										<h4 class="clr-blue">5.6 <span class="ylo">Very Good</span></h4>
+			    									</div>
+			    								</td>
+			    							</tr>
+			    							<tr>
+			    								<td class="text-left"  width="500px">
+			    									<h4>>Conversion Ratio</h4>
+			    								</td>
+			    								<td class="text-left">
+			    									<h4><b>: {{getData(pharmacyConversion)}}% <span class="red-u">-3%</span></b></h4>
+			    								</td>
+			    								<td class="text-center">
+			    									<h4><b class="clr-blue" data-toggle="modal" data-target="#Modal-can" (click)="getChart(8)">: View</b></h4>
+			    								</td>
+			    							</tr>
+			    							<tr>
+			    								<td  colspan="4" class="text-left clr-bl-2 cstm-th"><h4>3. Diagnostics Parameters</h4></td>
+			    							</tr>
+			    							<tr>
+			    								<td class="text-left"  width="500px">
+			    									<h4>>Sales</h4>
+			    								</td>
+			    								<td class="text-left">
+			    									<h4><b>: {{opdDiagonsSales}}, <span class="grin">+9%</span></b></h4>
+			    								</td>
+			    								<td class="text-center">
+			    									<h4><b class="clr-blue" data-toggle="modal" data-target="#Modal-can" (click)="getChart(6)">: View</b></h4>
+			    								</td>
+			    								<td>
+			    									<div class="text-center pull-right">
+			    										<h4 class="grin">6.6 Very Good</h4>
+			    									</div>
+			    								</td>
+			    							</tr>
+			    							<tr>
+			    								<td class="text-left"  width="500px">
+			    									<h4>>Conversion Ratio</h4>
+			    								</td>
+			    								<td class="text-left">
+			    									<h4><b>: {{getData(diagnosisConversion)}}%, <span class="red-u">-3%</span></b></h4>
+			    								</td>
+			    								<td class="text-center">
+			    									<h4><b class="clr-blue" data-toggle="modal" data-target="#Modal-can" (click)="getChart(9)">: View</b></h4>
+			    								</td>
+			    							</tr>
+			    							<tr>
+			    								<td  colspan="4" class="text-left clr-bl-2 cstm-th"><h4>4. IPD Parameters</h4></td>
+			    							</tr>
+			    							<tr>
+			    								<td class="text-left"  width="500px">
+			    									<h4>>Sales</h4>
+			    								</td>
+			    								<td class="text-left">
+			    									<h4><b>: {{ipdfinalTotal}}, <span class="grin">+9%</span></b></h4>
+			    								</td>
+			    								<td class="text-center">
+			    									<h4><b class="clr-blue" data-toggle="modal" data-target="#Modal-can2" (click)="getChart(10)">: View</b></h4>
+			    								</td>
+			    								<td>
+			    									<div class="text-center pull-right">
+			    										<h4 class="red-u">4.6 Poor</h4>
+			    									</div>
+			    								</td>
+			    							</tr>
+			    							<tr class="last-child">
+			    								<td class="text-left"  width="500px">
+			    									<h4>>Conversion Ratio</h4>
+			    								</td>
+			    								<td class="text-left">
+			    									<h4><b>: {{getData(ipdConversion)}}%, <span class="red-u">-3%</span></b></h4>
+			    								</td>
+			    								<td class="text-center">
+			    									<h4><b class="clr-blue" data-toggle="modal" data-target="#Modal-can2" (click)="getChart(11)">: View</b></h4>
+			    								</td>
+			    								<td></td>
+			    							</tr>
+			    						</table>
+			    					</div>
+			    						<div class="row">
+											<div class="col-lg-4 col-lg-offset-3  text-center">
+												<div class="cstm-tab-3">
+													<button class="btn btn-success cstm-btn" data-toggle="modal" data-target="#Modal-can"><h4>COMPUTE MY OPD SCORE</h4></button>
+												</div>
+											</div>
+											<div class="col-lg-12" style="border-bottom: 1px solid #ddd;">
+												
+											</div>
+											<div class="col-lg-6 col-lg-offset-2 text-center">
+												<h4 class="btm-stts">
+													Score Rating < 5:<span class="red-u">Poor</span>,&nbsp;&nbsp;&nbsp; 5-6:<span class="clr-blue">Good </span>, &nbsp;&nbsp;&nbsp;6-8:<span class="ylo">Very Good</span> ,&nbsp;&nbsp;&nbsp;>8:<span class="grin">Excellent</span>
+												</h4>
+											</div>
+										</div>
+							    </div>
+							</div>
+	    				</div>
+	    			</div>
+	    		</div>
+	    	</div>
+	    </div>
+	</div>
+
+</div>
+
+  <!-- Modal -->
+<!-- <div class="modal fade" id="Modal-can" role="dialog">
+	<div class="modal-dialog">
+	  <div class="modal-content">
+	    <div class="modal-body">
+	        <div class="modal-header text-center">
+	          <button type="button" class="close" data-dismiss="modal">&times;</button>
+	          <h4 class="modal-title">Prescription Vs Time</h4>
+	          <small>(03/01/2019 - 02/02/2019)</small>
+	        </div>
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="chart-diagnos chart-box wrap-canavas" *ngIf="!loadingMyClinicScore">
+						<canvas baseChart
+		                [datasets]="lineChartData"
+		                [labels]="lineChartLabels"
+		                [options]="lineChartOptions"
+		                [colors]="lineChartColors"
+		                [legend]="lineChartLegend"
+		                [chartType]="lineChartType"
+		                (chartHover)="chartHovered($event)"
+		                (chartClick)="chartClicked($event)"></canvas>
+		            </div>		
+				</div>
+			</div>
+	    </div>
+	  </div>
+	</div>
+</div> -->
+<div class="modal fade" id="Modal-1-mnth" role="dialog">
+	<div class="modal-dialog">
+	  <div class="modal-content">
+	    <div class="modal-body">
+	        <div class="modal-header hder-2 text-center">
+	          <button type="button" class="close cl-2" data-toggle="modal" data-target="#Modal-1-mnth">&times;</button>
+	          <h4 class="modal-title title-2 clr-bl-2">Your OPD Score for past onme month <span class="ylo">7.6 (Very Good)</span></h4>
+	        </div>
+			<div class="row">
+				<div class="col-lg-12 globl">
+					<h4 class="snp"><b>Snapshots</b></h4>
+					<h5>1. The OPD revenue showed <span class="grin">Rising </span>trend of <span class="grin"> +15%</span></h5>
+					<h5>2.  Your patient inflow <span class="red-u"> fell</span> by <span class="red-u"> -15%</span></h5>
+					<h5>3. Your clinic added <span class="grin">5</span> new patients</h5>
+					<h5>4. The patient retention rate was <span class="ylo"> GOOD</span>  ie. <span class="ylo">80%</span></h5>
+					<h5>Your CTU was  <span class="grin">80%. You are doing excellent. </span></h5>
+					<h5>6. Your avg consultation time per patient was  <span class="grin">7</span>  minutes. <span class="grin">25 decrease</span> decrease during the period. </h5>
+				</div>
+				<div class="col-lg-12 img-star">
+					<img src="assets\imgs\star.png" class="img-responsive">
+				</div>
+			</div>
+	    </div>
+	  </div>
+	</div>
+</div>
+<div class="modal fade" id="Modal-2-mnth" role="dialog">
+	<div class="modal-dialog">
+	  <div class="modal-content">
+	    <div class="modal-body">
+	        <div class="modal-header hder-2 text-center">
+	          <button type="button" class="close cl-2" class="modal fade" id="Modal-1-mnth" role="dialog">&times;</button>
+	          <h4 class="modal-title title-2 clr-bl-2">Your Clinic Score for past <span class="ylo">one month </span><span class="grin">8.63 (Excellent)</span></h4>
+	        </div>
+			<div class="row">
+				<div class="col-lg-12 globl globl-2">
+					<h4 class="snp"><b>Snapshots</b></h4>
+					<h5>1. The OPD revenue showed <span class="grin">Rising </span>trend of <span class="grin"> +15%</span></h5>
+					<h5>2.  Your patient inflow <span class="red-u"> fell</span> by <span class="red-u"> -15%</span></h5>
+					<h5>3. Your clinic added <span class="grin">5</span> new patients</h5>
+					<h5>4. The patient retention rate was <span class="ylo"> GOOD</span>  ie. <span class="ylo">80%</span></h5>
+					<h5>Your CTU was  <span class="grin">80%. You are doing excellent. </span></h5>
+					<h5>6. Your avg consultation time per patient was  <span class="grin">7</span>  minutes. <span class="grin">25 decrease</span> decrease during the period. </h5>
+				</div>
+				<div class="col-lg-12 img-star">
+					<img src="assets\imgs\star.png" class="img-responsive">
+				</div>
+			</div>
+	    </div>
+	  </div>
+	</div>
+</div>
+
+<div class="modal fade" id="Modal-can" role="dialog">
+	<div class="modal-dialog">
+	  <div class="modal-content">
+	    <div class="modal-body">
+	        <div class="modal-header text-center">
+	          <button type="button" class="close" data-dismiss="modal">&times;</button>
+	          <h4 class="modal-title">Prescription Vs Time</h4>
+	          <small>(03/01/2019 - 02/02/2019)</small>
+	        </div>
+			<div class="row">
+				<div class="col-lg-12">  
+					<div class="chart-diagnos chart-box wrap-canavas" *ngIf="!loadingMyClinicScore">
+						<canvas baseChart
+		                [datasets]="lineChartData"
+		                [labels]="lineChartLabels"
+		                [options]="lineChartOptions"
+		                [colors]="lineChartColors"
+		                [legend]="lineChartLegend"
+		                [chartType]="lineChartType"
+		                (chartHover)="chartHovered($event)"
+		                (chartClick)="chartClicked($event)"></canvas>
+		            </div>		
+				</div>
+			</div>
+	    </div>
+	  </div>
+	</div>
+</div>
+
+<div class="modal fade" id="Modal-can2" role="dialog">
+	<div class="modal-dialog">
+	  <div class="modal-content">
+	    <div class="modal-body">
+	        <div class="modal-header text-center">
+	          <button type="button" class="close" data-dismiss="modal">&times;</button>
+	          <h4 class="modal-title">Prescription Vs Time</h4>
+	          <small>(03/01/2019 - 02/02/2019)</small>
+	        </div>
+			<div class="row">
+				<div class="col-lg-12">  
+					<div class="chart-diagnos chart-box wrap-canavas" *ngIf="!loadingMyClinicScore">
+						<canvas baseChart
+		                [datasets]="lineChartData"
+		                [labels]="lineChartLabels2"
+		                [options]="lineChartOptions"
+		                [colors]="lineChartColors"
+		                [legend]="lineChartLegend"
+		                [chartType]="lineChartType"
+		                (chartHover)="chartHovered($event)"
+		                (chartClick)="chartClicked($event)"></canvas>
+		            </div>		
+				</div>
+			</div>
+	    </div>
+	  </div>
+	</div>
+</div>

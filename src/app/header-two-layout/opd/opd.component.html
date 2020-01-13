@@ -1,0 +1,688 @@
+<div class="loader-box" *ngIf="loading">
+    <img src="./assets/imgs/load.gif" />
+</div>
+<div class="analytics-sec">
+	<div class="ipd-deatil-sec">
+		<div class="ipd-body">
+			<div class="cus-sidebar-wrapper">
+				<div class="cus-sidebar" style="height: initial;">
+					<ul>
+						<li> <h4 class="text-center">For Past</h4> </li>
+						<li class="{{getClass(3)}}" (click)="activatetab(3)"> <a href="javascript:void(0);"> 1 Month &nbsp;<small *ngIf="activatedtab==3">({{fromDate | date: 'dd/LL/yy'}} - {{toDate | date: 'dd/LL/yy'}})</small> </a> </li>
+						<li class="{{getClass(4)}}" (click)="activatetab(4)"> <a href="javascript:void(0);"> 3 Month &nbsp;<small *ngIf="activatedtab==4">({{fromDate | date: 'dd/LL/yy'}} - {{toDate | date: 'dd/LL/yy'}})</small></a> </li>
+						<li class="{{getClass(5)}}" (click)="activatetab(5)"> <a href="javascript:void(0);"> 6 Month &nbsp;<small *ngIf="activatedtab==5">({{fromDate | date: 'dd/LL/yy'}} - {{toDate | date: 'dd/LL/yy'}})</small></a> </li>
+						<li class="{{getClass(6)}}" (click)="activatetab(6)"> <a href="javascript:void(0);"> 1 Year &nbsp;<small *ngIf="activatedtab==6">({{fromDate | date: 'dd/LL/yy'}} - {{toDate | date: 'dd/LL/yy'}})</small></a> </li>
+						<li class="{{getClass(7)}}" (click)="activatetab(7)"> <a href="javascript:void(0);"> All </a> </li>
+					</ul>
+				</div>
+			</div>
+			<div class="cus-content-wrapper">
+				<div class="cus-content">
+					<div class="row">
+						<div class="col-lg-12">
+							<ul class="nav nav-tabs tabs-cstm">
+								<li class="text-center active"><a data-toggle="tab" href="#home"><b>MY OPD SCORE</b></a></li>
+								<li class="text-center"><a data-toggle="tab" href="#menu1" *ngIf = "doctorData.type_of_doctor == 'admin_doctor'"><b>MY CLINIC SCORE</b></a></li>
+							</ul>
+							<div class="tab-content tab-cstm-cont">
+								<div id="home" class="tab-pane fade in active">
+									<div class="row">
+										<div class="col-lg-7">
+											<div class="table-3">
+												<table class="cstm-tbl">
+													<thead>
+														<th  width="300px" class="text-left clr-bl-2"><h4>OPD Parameters</h4></th>
+														<th class="text-left clr-bl-2"><h4>Performance</h4></th>
+														<th class="text-right clr-bl-2"><h4>Trend</h4></th>
+													</thead>
+													<tr>
+														<td class="text-left" width="300px">
+															<h4>>Prescriptions</h4>
+														</td>
+														<td class="text-left">
+															<h4><b>: {{totalPrescriptions}},
+															 <span *ngIf ="totalOrderTrends>0" class="grin">+{{totalOrderTrends}}%</span>
+															  <span *ngIf ="totalOrderTrends<0" class="red-u">{{totalOrderTrends}}%</span>
+															  <span *ngIf ="totalOrderTrends==0" >{{totalOrderTrends}}%</span>
+															</b></h4>
+														</td>
+														<td class="text-right">
+															<h4><b class="clr-blue" data-toggle="modal" data-target="#Modal-can" (click)="getChart(1)">: View</b></h4>
+														</td>
+													</tr>
+													<tr>
+														<td class="text-left"  width="300px">
+															<h4>>Collection</h4>
+														</td>
+														<td class="text-left">
+															<h4><b>: {{getData(totalCollection)}}, 
+																<span *ngIf = "opdCollectionTrend>0" class="grin">+{{opdCollectionTrend}}%</span>
+																<span *ngIf = "opdCollectionTrend<0" class="red-u">{{opdCollectionTrend}}%</span>
+																<span *ngIf = "opdCollectionTrend==0">{{opdCollectionTrend}}%</span>
+
+															</b></h4>
+														</td>
+														<td class="text-right">
+															<h4><b class="clr-blue" data-toggle="modal" data-target="#Modal-can" (click)="getChart(2)">: View</b></h4>
+														</td>
+													</tr>
+													<tr>
+														<td class="text-left"  width="300px">
+															<h4>>CTU</h4>
+														</td>
+														<td class="text-left">
+															<h4><b>: {{getData(avgCtuPercentage)}}%,
+															 <span *ngIf ="ctuTrend>0" class="grin">+{{ctuTrend}}%</span>
+															 <span *ngIf ="ctuTrend<0" class="red-u">{{ctuTrend}}%</span>
+															 <span *ngIf ="ctuTrend==0">{{ctuTrend}}%</span>
+															
+															</b></h4>
+														</td>
+														<td class="text-right">
+															<h4><b class="clr-blue" data-toggle="modal" data-target="#Modal-can" (click)="getChart(12)">: View</b></h4>
+														</td>
+													</tr>
+													<tr>
+														<td class="text-left"  width="300px">
+															<h4>>AVG Consultation Time Per Patient</h4>
+														</td>
+														<td class="text-left">
+															<h4><b>: {{getData(avgTime)}} min, 
+																<span *ngIf = "timePatientTrend>0" class="grin">+{{timePatientTrend}}%</span>
+																<span *ngIf = "timePatientTrend<0" class="red-u">{{timePatientTrend}}%</span>
+																<span *ngIf = "timePatientTrend==0" class="red-u">{{timePatientTrend}}%</span>
+															</b></h4>
+														</td>
+														<td class="text-right">
+															<h4><b class="clr-blue" data-toggle="modal" data-target="#Modal-can" (click)="getChart(7)">: View</b></h4>
+														</td>
+													</tr>
+													<tr>
+														<td class="text-left"  width="300px">
+															<h4>>Frequent Patients</h4>
+														</td>
+														<td class="text-left">
+															<h4><b>: {{oldPatients}}, <small>({{getData(freqPatientPercentage)}}%)</small> </b></h4>
+														</td>
+														<td class="text-right">
+															<h4><b class="clr-blue" data-toggle="modal" data-target="#Modal-can" (click)="getChart(3)">: View</b></h4>
+														</td>
+													</tr>
+													<tr>
+														<td class="text-left"  width="300px">
+															<h4>>New Patients </h4>
+														</td>
+														<td class="text-left">
+															<h4><b>: {{getData(newPatients)}}, <small>({{getData(newPatientsPrercenatge)}}%)</small> </b></h4>
+														</td>
+														<td class="text-right">
+															<h4><b class="clr-blue" data-toggle="modal" data-target="#Modal-can" (click)="getChart(4)">: View</b></h4>
+														</td>
+													</tr>
+												</table>
+												<div class="col-lg-4 col-lg-offset-1 text-center footer-inner-fix">
+													<div>
+														<button class="btn btn-success cstm-btn" (click) = "showChartOpd()"><h4>COMPUTE MY OPD SCORE</h4></button>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="col-lg-5 cstm-brdr-left" *ngIf = "showChartOpdNow">
+											<div class="cstm-range">
+												<img src="./assets/imgs/mtr.png" class="img-responsive">
+												<img src="./assets/imgs/needle.png" class="img-responsive needle {{value}}" [ngStyle]="{'transform': 'translateX(' + $value + 'px)'}">
+											</div>
+											<h2 class="text-center mg-all">{{diagnosisWeighted}}</h2>
+											<h3 class="text-center gldn mg-all">{{getNotes(diagnosisWeighted)}}</h3>
+											<div class="table-new-bn">
+												<table>
+													<tr>
+														<td colspan="4" class="heading-cstm"><h4 class="h4-mg">Snapshots</h4></td>
+													</tr>
+													<tr>
+														<td>OPD collection</td>
+														<td *ngIf ="opdCollectionTrend>0">Rising</td>
+														<td *ngIf ="opdCollectionTrend<0">Falling</td>
+														<td *ngIf ="opdCollectionTrend==0">Neutral</td>
+														<td *ngIf ="opdCollectionTrend>0">+{{opdCollectionTrend}}%</td>
+														<td *ngIf ="opdCollectionTrend<0">{{opdCollectionTrend}}%</td>
+														<td *ngIf ="opdCollectionTrend==0">{{opdCollectionTrend}}%</td>
+													</tr>
+													<tr>
+														<td>Patient Inflow</td>
+														<td *ngIf = "totalOrderTrends>0"> Rising</td>
+														<td *ngIf = "totalOrderTrends<0">Falling</td>
+														<td *ngIf = "totalOrderTrends==0">Neutral</td>
+														<td *ngIf = "totalOrderTrends>0">+{{totalOrderTrends}}%</td>
+														<td *ngIf = "totalOrderTrends<0">{{totalOrderTrends}}%</td>
+														<td *ngIf = "totalOrderTrends==0">{{totalOrderTrends}}%</td>
+													</tr>
+													<tr>
+														<td>New Patient Added</td>
+														<td>{{newPatients}}</td>
+														<td *ngIf = "newPatientTrend>0">+{{newPatientTrend}}%</td>
+														<td *ngIf = "newPatientTrend<0">{{newPatientTrend}}%</td>
+														<td *ngIf = "newPatientTrend==0">{{newPatientTrend}}%</td>
+													</tr>
+													<tr>
+														<td>Patient retention rate</td>
+														<td *ngIf ="oldPatientTrend>0">Rising</td>
+														<td *ngIf ="oldPatientTrend<0">Falling</td>
+														<td *ngIf ="oldPatientTrend==0">Neutral</td>
+														<td *ngIf ="oldPatientTrend>0">+{{getData(oldPatientTrend)}}%</td>
+														<td *ngIf ="oldPatientTrend<0">{{getData(oldPatientTrend)}}%</td>
+														<td *ngIf ="oldPatientTrend==0">{{getData(oldPatientTrend)}}%</td>
+													</tr>
+													<tr>
+														<td>CTU</td>
+														<td *ngIf ="ctuTrend>0">Rising</td>
+														<td *ngIf ="ctuTrend<0">Falling</td>
+														<td *ngIf ="ctuTrend==0">Neutral</td>
+														<td *ngIf = "ctuTrend>0">+{{ctuTrend}}%</td>
+														<td *ngIf = "ctuTrend<0">{{ctuTrend}}%</td>
+														<td *ngIf = "ctuTrend==0">{{ctuTrend}}%</td>
+													</tr>
+													<tr>
+														<td>Time per patient</td>
+														<td>{{TimePerPatient}} min</td>
+														<td *ngIf = "timePatientTrend>0">+{{timePatientTrend}}%</td>
+														<td *ngIf = "timePatientTrend<0">{{timePatientTrend}}%</td>
+														<td *ngIf = "timePatientTrend==0">{{timePatientTrend}}%</td>
+													</tr>
+													<!-- <tr>
+														<td colspan="4" class="text-center">
+															<h4><b class="grin">You are doing Great</b></h4>
+														</td>
+													</tr> -->
+												</table>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div id="menu1" class="tab-pane fade">
+									<div class="row">
+										<div class="col-lg-7">
+											<ul class="nav nav-tabs tabs-cstm tabs-new-sum">
+												<li class="text-center active li-1"><a data-toggle="tab" href="#tab-1"><b>OPD <small>(All doctors)</small></b></a></li>
+												<li class="text-center li-2" *ngIf="doctorData.clinic_services.Clinic_Pharmacy==true"><a data-toggle="tab" href="#tab-2"><b>PHARMACY</b></a></li>
+												<li class="text-center li-3" *ngIf="doctorData.clinic_services.Clinic_Diagnostics==true"><a data-toggle="tab" href="#tab-3"><b>DIAGNOSTICS</b></a></li>
+												<li class="text-center li-4"><a data-toggle="tab" href="#tab-4" *ngIf="doctorData.clinic_services.Clinic_IPD==true"><b>IPD</b></a></li>
+											</ul>
+											<div class="tab-content">
+												<div id="tab-1" class="tab-pane fade in active">
+													<div class="table-3">
+														<table class="cstm-tbl cstm-table-55 new-tab-56">
+															<tr>
+																<td class="text-left" width="250px;">
+																	<h4>>Prescriptions</h4>
+																</td>
+																<td class="text-left">
+																	<h4><b>: {{totalPrescriptions}}, 
+																		<span *ngIf ="totalOrderTrends>0" class="grin">+{{totalOrderTrends}}%</span>
+																	  <span *ngIf ="totalOrderTrends<0" class="red-u">{{totalOrderTrends}}%</span>
+																	  <span *ngIf ="totalOrderTrends==0" >{{totalOrderTrends}}%</span>
+																	</b></h4>
+																</td>
+																<td class="text-center">
+																	<h4><b class="clr-blue" data-toggle="modal" data-target="#Modal-can" (click)="getChart(1)">: View</b></h4>
+																</td>
+															</tr>
+															<tr>
+																<td class="text-left"  width="250px;">
+																	<h4>>Collection</h4>
+																</td>
+																<td class="text-left">
+																	<h4><b>: {{getData(totalCollection)}},
+																	<span *ngIf = "opdCollectionTrend>0" class="grin">+{{opdCollectionTrend}}%</span>
+																	<span *ngIf = "opdCollectionTrend<0" class="red-u">{{opdCollectionTrend}}%</span>
+																	<span *ngIf = "opdCollectionTrend==0">{{opdCollectionTrend}}%</span>
+
+																	</b></h4>
+																</td>
+																<td class="text-center">
+																	<h4><b class="clr-blue" data-toggle="modal" data-target="#Modal-can" (click)="getChart(2)">: View</b></h4>
+																</td>
+															</tr>
+															<tr>
+																<td class="text-left"  width="250px;">
+																	<h4>>CTU</h4>
+																</td>
+																<td class="text-left">
+																	<h4><b>: {{getData(avgCtuPercentage)}}%, 
+																		<span *ngIf ="ctuTrend>0" class="grin">+{{ctuTrend}}%</span>
+																		 <span *ngIf ="ctuTrend<0" class="red-u">{{ctuTrend}}%</span>
+																		 <span *ngIf ="ctuTrend==0">{{ctuTrend}}%</span>
+																	</b></h4>
+																</td>
+																<td class="text-center">
+																	<h4><b class="clr-blue" data-toggle="modal" data-target="#Modal-can" (click)="getChart(12)">: View</b></h4>
+																</td>
+																<td>
+																	<div class="text-center pull-right">
+																		<h4 class="ylo">{{overAllRating}} {{getNotes(overAllRating)}}</h4>
+																	</div>
+																</td>
+															</tr>
+															<tr>
+																<td class="text-left"  width="250px;">
+																	<h4>>AVG Consultation Time Per Patient</h4>
+																</td>
+																<td class="text-left">
+																	<h4><b>: {{getData(avgTime)}} min, 
+																		<span *ngIf = "timePatientTrend>0" class="grin">+{{timePatientTrend}}%</span>
+																		<span *ngIf = "timePatientTrend<0" class="red-u">{{timePatientTrend}}%</span>
+																		<span *ngIf = "timePatientTrend==0">{{timePatientTrend}}%</span>
+																	</b></h4>
+																</td>
+																<td class="text-center">
+																	<h4><b class="clr-blue" data-toggle="modal" data-target="#Modal-can" (click)="getChart(7)">: View</b></h4>
+																</td>
+															</tr>
+															<tr>
+																<td class="text-left"  width="250px;">
+																	<h4>>Frequent Patients</h4>
+																</td>
+																<td class="text-left">
+																	<h4><b>: {{oldPatients}}, <small>({{getData(freqPatientPercentage)}}%)</small> </b></h4>
+																</td>
+																<td class="text-center">
+																	<h4><b class="clr-blue" data-toggle="modal" data-target="#Modal-can" (click)="getChart(3)">: View</b></h4>
+																</td>
+															</tr>
+															<tr>
+																<td class="text-left"  width="250px;">
+																	<h4>>New Patients </h4>
+																</td>
+																<td class="text-left">
+																	<h4><b>: {{newPatients}}, <small>({{getData(newPatientsPrercenatge)}}%)</small> </b></h4>
+																</td>
+																<td class="text-center">
+																	<h4><b class="clr-blue" data-toggle="modal" data-target="#Modal-can" (click)="getChart(4)">: View</b></h4>
+																</td>
+															</tr>
+														</table>
+													</div>
+													<div class="col-lg-4 col-lg-offset-1  text-center footer-inner-fix ">
+														<div class="cstm-tab-3">
+															<a data-toggle="tab" href="#tab-2"  class="btn btn-success cstm-btn btn-blue" (click)="tabClicked()"><h4>NEXT</h4></a>&nbsp;&nbsp;&nbsp;&nbsp;
+															<button class="btn btn-default btn-big"><b>{{opdCollectionWeighted}}</b><span class="in-span">OPD sub-score</span></button>
+														</div>
+													</div>
+												</div>
+												<div id="tab-2" class="tab-pane fade">
+													<div class="table-3">
+														<table class="cstm-tbl cstm-table-55 new-tab-56">
+															<tr>
+																<td class="text-left" width="250px;">
+																	<h4>>Sales</h4>
+																</td>
+																<td class="text-left">
+																	<h4><b>: {{opdPharmacySales}}, 
+																		<span *ngIf ="pharmacyTrends>0" class="grin">+{{pharmacyTrends}}%</span>
+																		<span *ngIf ="pharmacyTrends<0" class="red-u">{{pharmacyTrends}}%</span> <span  *ngIf ="pharmacyTrends==0" class="grin">{{pharmacyTrends}}%</span>
+																	</b></h4>
+																</td>
+																<td class="text-center">
+																	<h4><b class="clr-blue" data-toggle="modal" data-target="#Modal-can" (click)="getChart(5)">: View</b></h4>
+																</td>
+															</tr>
+															<tr>
+																<td class="text-left" width="250px;">
+																	<h4>>Profit</h4>
+																</td>
+																<td class="text-left">
+																	<h4><b>: {{opdPhrmacyProfit}}, 
+																		<span *ngIf ="PharmacyprofitTrends>0" class="grin">+{{PharmacyprofitTrends}}%</span>
+																		<span *ngIf ="PharmacyprofitTrends<0" class="red-u">{{PharmacyprofitTrends}}%</span>
+																		<span *ngIf ="PharmacyprofitTrends==0">{{PharmacyprofitTrends}}%</span>
+																	</b></h4>
+																</td>
+																<td class="text-center">
+																	<h4><b class="clr-blue" data-toggle="modal" data-target="#Modal-can" (click)="getChart(13)">: View</b></h4>
+																</td>
+															</tr>
+															<tr>
+																<td class="text-left" width="250px;">
+																	<h4>>Conversion</h4>
+																</td>
+																<td class="text-left">
+																	<h4><b>: {{getData(pharmacyConversion)}}% 
+																		<<span *ngIf ="PharmacyconversionTrend>0" class="red-u">+{{PharmacyconversionTrend}}%</span>
+																		<span *ngIf ="PharmacyconversionTrend<0" class="red-u">{{PharmacyconversionTrend}}%</span>
+																		<span *ngIf ="PharmacyconversionTrend==0">{{PharmacyconversionTrend}}%</span>
+																	</b></h4>
+																</td>
+																<td class="text-center">
+																	<h4><b class="clr-blue" data-toggle="modal" data-target="#Modal-can" (click)="getChart(8)">: View</b></h4>
+																</td>
+															</tr>
+														</table>
+													</div>
+													<div class="col-lg-4 col-lg-offset-1  text-center footer-inner-fix ">
+														<div class="cstm-tab-3">
+															<a data-toggle="tab" href="#tab-3"  class="btn btn-success cstm-btn btn-blue" (click)="tabClicked2()"><h4>NEXT</h4></a>&nbsp;&nbsp;&nbsp;&nbsp;
+															<button class="btn btn-default btn-big"><b>{{pharmacyWeighted}}</b><span class="in-span">Pharmacy sub-score</span></button>
+														</div>
+													</div>
+												</div>
+												<div id="tab-3" class="tab-pane fade">
+													<div class="table-3">
+														<table class="cstm-tbl cstm-table-55 new-tab-56">
+															<tr>
+																<td class="text-left" width="250px;">
+																	<h4>>Sales</h4>
+																</td>
+																<td class="text-left">
+																	<h4><b>: {{opdDiagonsSales}}, 
+																		<span *ngIf ="diagnosticsTrends>0" class="grin">+{{diagnosticsTrends}}%</span>
+																		<span *ngIf ="diagnosticsTrends<0" class="red-u">{{diagnosticsTrends}}%</span>
+																		<span *ngIf ="diagnosticsTrends==0">{{diagnosticsTrends}}%</span>
+																	</b></h4>
+																</td>
+																<td class="text-center">
+																	<h4><b class="clr-blue" data-toggle="modal" data-target="#Modal-can" (click)="getChart(6)">: View</b></h4>
+																</td>
+															</tr>
+															<tr>
+																<td class="text-left" width="250px;">
+																	<h4>>Conversion</h4>
+																</td>
+																<td class="text-left">
+																	<h4><b>: {{getData(diagnosisConversion)}}%
+																	 <span *ngIf ="diagnosticsConversionTrends>0" class="grin">+{{diagnosticsConversionTrends}}%</span>
+																	 <span *ngIf ="diagnosticsConversionTrends<0" class="red-u">{{diagnosticsConversionTrends}}%</span>
+																	 <span *ngIf ="diagnosticsConversionTrends==0">{{diagnosticsConversionTrends}}%</span>
+																	</b></h4>
+																</td>
+																<td class="text-center">
+																	<h4><b class="clr-blue" data-toggle="modal" data-target="#Modal-can" (click)="getChart(9)">: View</b></h4>
+																</td>
+															</tr>
+														</table>
+													</div>
+													<div class="col-lg-4 col-lg-offset-1  text-center footer-inner-fix ">
+														<div class="cstm-tab-3">
+															<a data-toggle="tab" href="#tab-4"  class="btn btn-success cstm-btn btn-blue" (click)="tabClicked3()"><h4>NEXT</h4></a>&nbsp;&nbsp;&nbsp;&nbsp;
+															<button class="btn btn-default btn-big"><b>{{diagnosisWeighted}}</b><span class="in-span">Diagnostics sub-score</span></button>
+														</div>
+													</div>
+												</div>
+												<div id="tab-4" class="tab-pane fade">
+													<div class="table-3">
+														<table class="cstm-tbl cstm-table-55 new-tab-56">
+															<tr>
+																<td class="text-left" width="250px;">
+																	<h4>>Revenue</h4>
+																</td>
+																<td class="text-left">
+																	<h4><b>: {{ipdfinalTotal}}, 
+																		<span *ngIf ="ipdTrends>0" class="grin">+{{ipdTrends}}%</span>
+																		<span *ngIf ="ipdTrends<0" class="red-u">{{ipdTrends}}%</span>
+																		<span *ngIf ="ipdTrends==0">{{ipdTrends}}%</span>
+																	</b></h4>
+																</td>
+																<td class="text-center">
+																	<h4><b class="clr-blue" data-toggle="modal" data-target="#Modal-can" (click)="getChart(10)">: View</b></h4>
+																</td>
+															</tr>
+															<tr>
+																<td class="text-left" width="250px;">
+																	<h4>>Occupancy</h4>
+																</td>
+																<td class="text-left">
+																	<h4><b>: {{getData(ipdOccupancy)}}%, 
+																	</b></h4>
+																</td>
+																<td class="text-center">
+																	<h4><b class="clr-blue" data-toggle="modal" data-target="#Modal-can" (click)="getChart(15)">: View</b></h4>
+																</td>
+															</tr>
+															<tr>
+																<td class="text-left" width="250px;">
+																	<h4>>Admission Rate</h4>
+																</td>
+																<td class="text-left">
+																	<h4><b>: {{getData(admissionRate)}}%</b></h4>
+																</td>
+																<td class="text-center">
+																	<h4><b class="clr-blue" data-toggle="modal" data-target="#Modal-can" (click)="getChart(14)">: View</b></h4>
+																</td>
+															</tr>
+														</table>
+													</div>
+													<div class="col-lg-4 col-lg-offset-1  text-center footer-inner-fix ">
+														<div class="cstm-tab-3">
+															<a  class="btn btn-success cstm-btn btn-blue" (click)="showChart()"><h4>COMPUTE MY CLINIC SCORE</h4></a>&nbsp;&nbsp;&nbsp;&nbsp;
+															<button class="btn btn-default btn-big blck-color"><b>{{ipdWeighted}}</b><span class="in-span" >IPD sub-score</span></button>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="col-lg-5 cstm-brdr-left" *ngIf = "showChartNow">
+											<div class="cstm-range">
+												<img src="./assets/imgs/mtr.png" class="img-responsive">
+												<img src="./assets/imgs/needle.png" class="img-responsive needle">
+											</div>
+											<h2 class="text-center mg-a">{{overAllRating}}</h2>
+											<h3 class="text-center gldn mg-all">{{getNotes(overAllRating)}}</h3>
+											<div class="table-new-bn">
+												<table>
+													<tr>
+														<td colspan="4" class="heading-cstm"><h4 class="h4-mg">Snapshots</h4></td>
+													</tr>
+													<tr>
+														<td>OPD collection</td>
+														<td *ngIf ="opdCollectionTrend>0">Rising</td>
+														<td *ngIf ="opdCollectionTrend<0">Falling</td>
+														<td *ngIf ="opdCollectionTrend==0">Neutral</td>
+														<td *ngIf ="opdCollectionTrend>0">+{{opdCollectionTrend}}%</td>
+														<td *ngIf ="opdCollectionTrend<0">{{opdCollectionTrend}}%</td>
+														<td *ngIf ="opdCollectionTrend==0">{{opdCollectionTrend}}%</td>
+													</tr>
+													<tr>
+														<td>Pharmacy sales</td>
+														<td *ngIf ="pharmacyTrends>0">Rising</td>
+														<td *ngIf ="pharmacyTrends<0">Falling</td>
+														<td *ngIf ="pharmacyTrends==0">Neutral</td>
+														<td *ngIf ="pharmacyTrends>0">+{{pharmacyTrends}}%</td>
+														<td *ngIf ="pharmacyTrends<0">{{pharmacyTrends}}%</td>
+														<td *ngIf ="pharmacyTrends==0">{{pharmacyTrends}}%</td>
+													</tr>
+													<tr>
+														<td>Diagnostics Sales</td>
+														<td *ngIf ="diagnosticsTrends>0">Rising</td>
+														<td *ngIf ="diagnosticsTrends<0">Falling</td>
+														<td *ngIf ="diagnosticsTrends==0">Neutral</td>
+														<td *ngIf ="diagnosticsTrends>0">+{{diagnosticsTrends}}%</td>
+														<td *ngIf ="diagnosticsTrends<0">{{diagnosticsTrends}}%</td>
+														<td *ngIf ="diagnosticsTrends==0">{{diagnosticsTrends}}%</td>
+													</tr>
+													<tr>
+														<td>IPD revenue</td>
+														<td *ngIf ="ipdTrends>0">Rising</td>
+														<td *ngIf ="ipdTrends<0">Falling</td>
+														<td *ngIf ="ipdTrends==0">Neutral</td>
+														<td *ngIf ="ipdTrends>0">+{{ipdTrends}}%</td>
+														<td *ngIf ="ipdTrends<0">{{ipdTrends}}%</td>
+														<td *ngIf ="ipdTrends==0">{{ipdTrends}}%</td>
+													</tr>
+													<tr>
+														<td colspan="4" class="text-center">
+															<h4><b class="grin">{{getNotes(overAllRating)}}</b></h4>
+														</td>
+													</tr>
+												</table>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="Modal-can" role="dialog">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-body">
+				<div class="modal-header text-center">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">{{showDataOnGraph}}</h4>
+					<small>{{fromDate | date:'dd/MM/yyyy'}}- {{toDate | date:'dd/MM/yyyy'}}</small>
+				</div>
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="chart-diagnos chart-box wrap-canavas" *ngIf="!loading">
+							<canvas baseChart
+							[datasets]="lineChartData"
+							[labels]="lineChartLabels"
+							[options]="lineChartOptions"
+							[colors]="lineChartColors"
+							[legend]="lineChartLegend"
+							[chartType]="lineChartType"
+							(chartHover)="chartHovered($event)"
+							(chartClick)="chartClicked($event)"></canvas>
+						</div>		
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="Modal-1-mnth" role="dialog">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-body">
+				<div class="modal-header hder-2 text-center">
+					<button type="button" class="close cl-2" data-toggle="modal" data-target="#Modal-1-mnth">&times;</button>
+					<h4 class="modal-title title-2 clr-bl-2">Your OPD Score for past onme month <span class="ylo">7.6 (Very Good)</span></h4>
+				</div>
+				<div class="row">
+					<div class="col-lg-12 globl">
+						<h4 class="snp"><b>Snapshots</b></h4>
+						<h5>1. The OPD revenue showed <span class="grin">Rising </span>trend of <span class="grin"> +15%</span></h5>
+						<h5>2.  Your patient inflow <span class="red-u"> fell</span> by <span class="red-u"> -15%</span></h5>
+						<h5>3. Your clinic added <span class="grin">5</span> new patients</h5>
+						<h5>4. The patient retention rate was <span class="ylo"> GOOD</span>  ie. <span class="ylo">80%</span></h5>
+						<h5>Your CTU was  <span class="grin">80%. You are doing excellent. </span></h5>
+						<h5>6. Your avg consultation time per patient was  <span class="grin">7</span>  minutes. <span class="grin">25 decrease</span> decrease during the period. </h5>
+					</div>
+					<div class="col-lg-12 img-star">
+						<img src="assets\imgs\star.png" class="img-responsive">
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="Modal-2-mnth" role="dialog">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-body">
+				<div class="modal-header hder-2 text-center">
+					<button type="button" class="close cl-2" class="modal fade" id="Modal-1-mnth" role="dialog">&times;</button>
+					<h4 class="modal-title title-2 clr-bl-2">Your Clinic Score for past <span class="ylo">one month </span><span class="grin">8.63 (Excellent)</span></h4>
+				</div>
+				<div class="row">
+					<div class="col-lg-12 globl globl-2">
+						<h4 class="snp"><b>Snapshots</b></h4>
+						<h5>1. The OPD revenue showed
+						 <span *ngIf ="opdCollectionTrend>0" class="grin">Rising </span>
+						 <span *ngIf ="opdCollectionTrend<0" class="red-u">Falling </span>
+						 <span *ngIf ="opdCollectionTrend==0">Neutral </span>trend of 
+						 <span *ngIf ="opdCollectionTrend>0" class="grin"> +{{opdCollectionTrend}}%</span>
+						<span *ngIf ="opdCollectionTrend<0" class="red-u"> {{opdCollectionTrend}}%</span>
+						<span *ngIf ="opdCollectionTrend==0"> {{opdCollectionTrend}}%</span>
+						</h5>
+						<h5>2.  Your patient inflow 
+							<span *ngIf = "totalOrderTrends>0" class="red-u"> rise</span>
+							<span *ngIf = "totalOrderTrends<0" class="red-u"> fell</span>
+							<span *ngIf = "totalOrderTrends==0"> netural</span> by
+							<span *ngIf = "totalOrderTrends>0" class="red-u"> +{{totalOrderTrends}}%</span>
+							<span *ngIf = "totalOrderTrends<0" class="red-u"> {{totalOrderTrends}}%</span>
+						</h5>
+							<span *ngIf = "totalOrderTrends==0"> {{totalOrderTrends}}%</span>
+						<h5>3. Your clinic added 
+							<span class="grin">{{newPatients}}
+							</span> new patients</h5>
+						<h5>4. The patient retention rate was
+						 <span class="ylo"> GOOD</span> 
+						  ie. <span class="ylo">80%</span></h5>
+						<h5>Your CTU was 
+						 <span class="grin">80%. You are doing excellent. </span></h5>
+						<h5>6. Your avg consultation time per patient was  <span class="grin">7</span>  minutes.
+						 <span class="grin">25</span> decrease during the period. </h5>
+					</div>
+					<div class="col-lg-12 img-star">
+						<img src="assets\imgs\star.png" class="img-responsive">
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- <div class="modal fade" id="Modal-can" role="dialog">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-body">
+				<div class="modal-header text-center">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">Prescription Vs Time</h4>
+					<small>(03/01/2019 - 02/02/2019)</small>
+				</div>
+				<div class="row">
+					<div class="col-lg-12">  
+						<div class="chart-diagnos chart-box wrap-canavas" *ngIf="!loadingMyClinicScore">
+							<canvas baseChart
+							[datasets]="lineChartData"
+							[labels]="lineChartLabels"
+							[options]="lineChartOptions"
+							[colors]="lineChartColors"
+							[legend]="lineChartLegend"
+							[chartType]="lineChartType"
+							(chartHover)="chartHovered($event)"
+							(chartClick)="chartClicked($event)"></canvas>
+						</div>		
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="Modal-can2" role="dialog">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-body">
+				<div class="modal-header text-center">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">Prescription Vs Time</h4>
+					<small>(03/01/2019 - 02/02/2019)</small>
+				</div>
+				<div class="row">
+					<div class="col-lg-12">  
+						<div class="chart-diagnos chart-box wrap-canavas" *ngIf="!loadingMyClinicScore">
+							<canvas baseChart
+							[datasets]="lineChartData"
+							[labels]="lineChartLabels2"
+							[options]="lineChartOptions"
+							[colors]="lineChartColors"
+							[legend]="lineChartLegend"
+							[chartType]="lineChartType"
+							(chartHover)="chartHovered($event)"
+							(chartClick)="chartClicked($event)"></canvas>
+						</div>		
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div> -->

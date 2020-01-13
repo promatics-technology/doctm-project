@@ -1,0 +1,188 @@
+<div class="headersidebar-wrap" [ngClass]="nosidebar" >
+	<div class="dashboard-header">
+		<div class="dashboard-header-one">
+			<div class="close-dashboard-sidebar">
+		        <button type="button" class="navbar-toggle" (click)="sidebarclose()" >
+		            <span class="icon-bar"></span>
+		            <span class="icon-bar"></span>
+		            <span class="icon-bar"></span>
+		        </button>
+		    </div>
+
+		    <div class="welcomename">
+		    	Smart IPD - {{headerHeading}}
+		    </div>
+		    <div class="dashboard-signout">
+		    	<a routerLink="/" (click)="signOut()"> Sign-out </a>
+		    </div>
+		</div>
+
+		<div class="dashboard-header-pthree" *ngIf="heading != 'IPD Book'">
+			<div class="dashboard-header-logo" routerLink="/header-four-layout/dashboard-ipd">
+				<img src="./assets/imgs/logoDoctm.png" class="img-responsive" />
+				<div class="dshbrd-btn" *ngIf="ipd">
+					<button class="btn btn-custom" routerLink="/header-four-layout/dashboard-ipd"> Dashboard </button>
+				</div>
+			</div>
+			<div>
+				<h1>{{heading}}
+				</h1>
+			</div>
+		</div>
+	</div>
+	<div class="page-sidebar-wrapper">
+	    <div id="bs-example-navbar-collapse-1" class="dashbrd-sidbar navbar-collapse p-0" >
+	        <ul class="dshbrd-sidebar-menu m-0 p-0" type="none">
+	            <li class="sidebar-item">
+	                <!-- <a class="sidebar-link" href="javascript:void(0);" data-target="#clinicDetailModal" data-dismiss="modal"> -->
+	                <a class="sidebar-link" href="javascript:void(0);" data-toggle="modal" data-target="#clinicDetailModal">
+	                    <span class="title"> Clinic IPD details </span>	                    
+	                </a>
+	            </li>
+	            <li class="sidebar-item">
+	                <a class="sidebar-link" href="javascript:void(0);" (click)="GetIPDPatients()">
+	                    <span class="title"> Consulting doctors </span>	                    
+	                </a>
+	            </li>
+	            <li class="sidebar-item">
+	                <a class="sidebar-link" href="javascript:void(0);" routerLink="/header-four-layout/ipd-book" (click)="sidebarclose()">
+	                    <span class="title"> IPD Book </span>	                    
+	                </a>
+	            </li>
+	        </ul>
+	    </div>
+	</div>
+</div>
+<!-- modal -->
+<div class="modal fade cus-modal" id="clinicDetailModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-keyboard="false" data-backdrop="static">
+  	<div class="modal-dialog mdl-dlg" role="document">
+    	<div class="modal-content">
+    		<div class="modal-header mod-head">
+    			<h4 class="modal-title"> Clinic IPD details </h4>
+	    		<button type="button" class="close" aria-label="Close" (click)="closeClinicModal()">
+	                <span aria-hidden="true">×</span>
+	            </button>
+	        </div>
+	        <div class="modal-body text-center" *ngIf="adminDoctor">
+	        	<div class="row">
+	        		<div class="col-lg-6">
+	        			 <div class="form-group text-left">
+						      <label for="usr" class="txt-theme">Clinic Name</label>
+						      <input type="text" class="form-control" [(ngModel)]="clinic_name" [ngModelOptions]="{standalone: true}">
+						</div>
+	        		</div>
+	        		<div class="col-lg-6">
+	        			<div class="form-group text-left">
+					      <label for="pwd" class="txt-theme">Clinic Address</label>
+					      <input type="text" class="form-control" [(ngModel)]="address" [ngModelOptions]="{standalone: true}">
+					    </div>
+	        		</div>
+	        	</div>
+	       		<div class="row">
+	       			<div class="col-lg-6">
+	       				<div class="form-group text-left">
+					      <label for="pwd" class="txt-theme">Clinic IPD Phone</label>
+					      <input type="number" maxlength="10" class="form-control" [(ngModel)]="mobile" [ngModelOptions]="{standalone: true}">
+					    </div>
+	       			</div>
+	       			<div class="col-lg-6">
+	       				<div class="form-group text-left">
+					     <label for="pwd" class="txt-theme">Clinic ID</label>
+					     <input type="" class="form-control" readonly="" disabled="" value="{{adminDoctor.doctm_clinic_id}}">
+					    </div>
+	       			</div>
+	       		</div>
+			    <div class="row">
+			    	<div class="col-lg-12 text-left">
+			    		<label for="pwd" class="txt-theme">Bed Charges(per day)</label>
+			    	</div>
+			    	<div class="col-lg-4">
+			    		<div class="row">
+			    			<div class="col-lg-5">
+					    		<div class="form-group text-left">
+							      <label for="pwd" class="">General</label>
+							    </div>
+					    	</div>
+					    	<div class="col-lg-7">
+					    		<div class="form-group text-left">
+							      <input type="number" class="form-control" [(ngModel)]="general_bed_charges" [ngModelOptions]="{standalone: true}" min="0" max="999999">
+							    </div>
+					    	</div>
+			    		</div>
+			    	</div>
+			    	<div class="col-lg-4">
+			    		<div class="row">
+			    			<div class="col-lg-5">
+					    		<div class="form-group text-left">
+							      <label for="pwd" class="">Semi - Private</label>
+							    </div>
+					    	</div>
+					    	<div class="col-lg-7">
+					    		<div class="form-group text-left">
+							      <input type="number" class="form-control" [(ngModel)]="semi_private_bed_charges" [ngModelOptions]="{standalone: true}" min="0" max="999999">
+							    </div>
+					    	</div>
+			    		</div>
+			    	</div>
+			    	<div class="col-lg-4">
+			    		<div class="row">
+			    			<div class="col-lg-5">
+					    		<div class="form-group text-left">
+							      <label for="pwd" class="">Private</label>
+							    </div>
+					    	</div>
+					    	<div class="col-lg-7">
+					    		<div class="form-group text-left">
+							      <input type="number" class="form-control" [(ngModel)]="private_bed_charges" [ngModelOptions]="{standalone: true}" min="0" max="999999">
+							    </div>
+					    	</div>
+			    		</div>
+			    	</div>
+			    	<div class="col-lg-12 text-center">
+			    		<button class="btn btn-custom" (click)="updateBedCharges()"> Save </button>
+			    	</div>
+			    </div>			   
+	        </div>
+        </div>
+	</div>
+</div>
+
+<div class="modal fade cus-modal" id="consultingDoctorModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  	<div class="modal-dialog" role="document">
+    	<div class="modal-content">
+    		<div class="modal-header mod-head">
+    			<h4 class="modal-title"> Consulting Doctors  </h4>
+	    		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	                <span aria-hidden="true">×</span>
+	            </button>
+	        </div>
+	        <div class="modal-body">
+	        	<div class="row">
+	        		<div class="col-md-8 col-sm-8 col-xs-12">
+		        		<div class="ipd-connected doctors">
+		        			<h5 class=""> Connected doctors </h5>
+		        			<ul class="patient-status"> 
+								<li *ngFor="let doctor of totalPendingPatients">Dr. {{GetDoctorNameById(doctor._id)}}</li>
+							</ul>
+		        		</div>
+		        	</div>
+		        	<div class="col-md-4 col-sm-4 col-xs-12">
+		        		<div class="ipd-connected doctors">
+		        			<h5 class=""> Current occupancy </h5>
+		        			<ul class="patient-status">
+								<li *ngFor="let doctor of totalPendingPatients">{{doctor.doctor.length}}-Patient</li>
+							</ul>
+		        		</div>
+		        	</div>
+	        	</div>
+	        	<!-- <h4 class=""> Connected doctors - <span>Current occupancy</span></h4> -->
+				<!-- <ul class="patient-status">
+					<li>Dr. Gagandeep Sethi - <span class="patient-status-span">3 patients</span></li>
+					<li>Dr. Gagandeep Sethi - <span class="patient-status-span">3 patients</span></li>
+					<li>Dr. Gagandeep Sethi - <span class="patient-status-span">3 patients</span></li>
+					<li>Dr. Gagandeep Sethi - <span class="patient-status-span">3 patients</span></li>
+				</ul> -->
+    		</div>
+		</div>
+	</div>
+</div>

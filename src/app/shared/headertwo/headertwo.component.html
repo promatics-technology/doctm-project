@@ -1,0 +1,371 @@
+<div class="loader-box" *ngIf="loading">
+	<img src="./assets/imgs/load.gif" />
+</div>
+<style type="text/css">
+	
+	a.cstm-sb-menu:hover{
+		color:#01b0f0!important;
+	}
+</style>
+<div class="headersidebar-wrap" [ngClass]="nosidebar" >
+	<div class="dashboard-header">
+		<div class="dashboard-header-one">
+			<div class="close-dashboard-sidebar">
+				<button type="button" class="navbar-toggle" (click)="sidebarclose()" >
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a routerLink="/header-two-layout/dashboard"><i *ngIf ="showHome" class="fa fa-home hme-icn" aria-hidden="true"></i></a>
+			</div>
+			<!-- <div *ngIf="headertitle=='Area of Influence'">
+			</div> -->
+			<div class="welcomename">
+
+				<!-- <a   href=""></a> -->
+				{{headertitle}}
+			</div>
+
+			<div class="dashboard-signout">
+				<a routerLink="/" (click)="signOut()"> Sign-out </a>
+			</div>
+		</div>
+
+		<div class="dashboard-header-two" *ngIf="hideElement=='editProfile'">
+			<div class="dashboard-header-logo" routerLink="/header-two-layout/dashboard">
+				<img src="./assets/imgs/logoDoctm.png" class="img-responsive" />
+			</div>
+			<!-- <div class="dashboard-header-smartclinic">
+				SmartClinic
+				<div class="fingertip-slogan"> Clinic at your fingertips </div>
+			</div>
+			<div class="dashboard-subscription">
+			 	<p> Subscription expires on  </p>
+			 	<p> 15<sup>th</sup> June, 2018 </p>
+			 </div> -->
+			</div>
+
+		<!--div class="dashboard-header-two" *ngIf="hideElement=='global'">
+			<div class="dashboard-header-logo" routerLink="/header-two-layout/dashboard">
+				<img src="./assets/imgs/logoDoctm.png" class="img-responsive" />
+			</div>
+			<div class="dashboard-header-smartclinic">
+				SmartClinic
+				<div class="fingertip-slogan"> Clinic at your fingertips </div>
+			</div>
+			<div class="dashboard-subscription" *ngIf = "checkTrial && subscriptionData?.subscription.status!='active'">
+			 	<p > Trial expires on</p>
+			 	<p>{{compareDate | date: 'dd-MMMM-yyyy'}}</p>
+			</div>
+			<div class="dashboard-subscription" *ngIf = "subscriptionData?.subscription">
+			 	<p><b>Subscription Activated On</b></p>
+			 	<p>{{start_date | date: 'dd-MMMM-yyyy'}}</p>
+			</div>
+			<div class="dashboard-subscription" *ngIf = "!checkTrial && subscriptionData?.subscription.status!='active'">
+			 	<a href="javascript:void(0);" routerLink="/header-two-layout/edit-profile/clinic_services" style="color:red"><b>Subscribe/Activate Trial For Your Account</b></a>
+			</div>
+		</div-->
+		
+		
+		<div class="dashboard-header-two" *ngIf="hideElement=='global'">
+			<div class="dashboard-header-logo" routerLink="/header-two-layout/dashboard">
+				<img src="./assets/imgs/logoDoctm.png" class="img-responsive" />
+			</div>
+			<div class="dashboard-header-smartclinic">
+				SmartClinic
+				<div class="fingertip-slogan"> Clinic at your fingertips </div>
+			</div>
+			<div class="dashboard-subscription" *ngIf="!isExpired">
+				<p > {{plan}} plan expires on</p>
+				<p>{{dd1}}<sup>{{th1}}</sup> {{month1}} {{year1}}</p>
+			</div>
+			<div class="dashboard-subscription" *ngIf="isExpired">
+				<p style="color:red; font-weight:bold">TRIAL EXPIRED</p>
+
+			</div>
+		</div>
+
+		<div class="dashboard-header-two" *ngIf="hideElement=='prescription'">
+			<div class="dashboard-header-logo" routerLink="/header-two-layout/dashboard">
+				<img src="./assets/imgs/logoDoctm.png" class="img-responsive" />
+			</div>
+			<div class="dashboard-header-smartclinic">
+				{{subheaderTitle}} 
+				<h4 *ngIf="subbottomTitle==true">(Real-time) </h4>
+			</div>
+			<div class="dashboard-subscription">
+				<button class="btn btn-custom btn-orng" routerLink="/header-two-layout/dashboard-prescription" *ngIf="prescbutton=='progress'"> Back to Consultation </button>
+				<button class="btn btn-custom btn-orng" routerLink="/header-two-layout/dashboard-savedpreset" *ngIf="prescbutton=='preset'"> My Saved Presets </button>			 	
+				<button class="btn btn-custom btn-orng" routerLink="/header-two-layout/dashboard-prescription" *ngIf="prescbutton=='preset'"> Back to Consultation </button>		
+				<button class="btn btn-custom btn-orng" routerLink="/header-two-layout/dashboard-preset" *ngIf="prescbutton=='savedpreset'"> Create Presets </button>			 	 	
+				<button class="btn btn-custom btn-orng" routerLink="/header-two-layout/dashboard-prescription"*ngIf="prescbutton=='savedpreset'"> Back to Consultation </button>
+			</div>
+		</div>
+		
+		<div class="dashboard-header-ptwo" *ngIf="hideElement=='onlyOne'">
+			<!-- <div class="col-lg-2">
+				<div class="dashboard-header-logo" routerLink="/header-two-layout/dashboard">
+					<img src="./assets/imgs/logoDoctm.png" class="img-responsive" />
+					<div class="dshbrd-btn">
+						<button class="btn btn-custom" routerLink="/header-two-layout/dashboard"> Dashboard </button>
+					</div>
+				</div>
+			</div> -->
+			
+			<div class="">
+				<div class="col-lg-6">
+					<h4> Consultation Time Utilization <span data-toggle="tooltip" data-placement="left" title="{{helpText[8]?.text}}"> <i class="fa fa-info-circle color-red"></i> </span>
+					</h4>
+					<!-- <div class="progress-outer"> -->
+						<div class="progress">
+
+							<div class="progress-bar {{classColor}} main-wr" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" [style.width.%]="value" style="width: 50%;line-height:2.2!important;font-size: 20px!important;">
+								<div class="ani-bar">
+
+								</div>
+								<span class="">{{value}}%</span>
+							</div>
+						</div>
+
+						<!-- </div> -->
+						<div class="row">
+							<div class="col-lg-6 text-left">
+								0%
+							</div>
+							<div class="col-lg-6 text-right">
+								100%
+							</div>
+						</div>
+						<div class="row">
+							<div class="form-group col-md-3 col-sm-3 col-xs-12 pad-marg">
+								<span class="box box-1"></span>
+								<label>< 30%, Poor </label>
+
+							</div>
+							<div class="form-group col-md-3 col-sm-3 col-xs-12  pad-marg">
+								<span class="box box-2"></span>
+								<label>30 - 50%, Good</label>
+							</div>
+							<div class="form-group col-md-3 col-sm-3 col-xs-12  pad-marg">
+								<span class="box box-3"></span>
+								<label>50-70%, Very Good</label>
+
+							</div>
+							<div class="form-group col-md-3 col-sm-3 col-xs-12 pad-marg">
+								<span class="box box-4"></span>
+								<label>>70%, Excellent</label>
+
+							</div>
+						</div>
+						<!-- <div><b> <span class="cstm-font-1">Avg. time per patient <span class="cstm-font">{{avgTimePerPatient}} </span></span></b><span> min</span></div> -->
+					</div>
+					<div class="col-lg-2">
+						<div class="dashboard-btns prgres">
+							<button class="btn btn-custom" routerLink="/header-two-layout/dashboard-progress">
+								Progress
+								<div> Today </div>
+								<span data-toggle="tooltip" data-placement="left" title="{{helpText[5]?.text}}"> <i class="fa fa-info-circle color-red"></i> </span>
+							</button>
+						</div>
+					</div>
+					<div class="col-lg-2">
+						<div class="dashboard-btns prescription">
+							<button class="btn btn-custom" routerLink="/header-two-layout/dashboard-ongoprescription">
+								ON-THE-GO
+								<div> Prescription </div>
+								<span data-toggle="tooltip" data-placement="left" title="{{helpText[6]?.text}}"> <i class="fa fa-info-circle color-red"></i> </span>
+							</button>
+						</div>
+					</div>
+					<div class="col-lg-2">
+						<div class="dashboard-btns preset">
+							<button class="btn btn-custom" routerLink="/header-two-layout/dashboard-preset">
+								Create
+								<div> Preset </div>
+								<span data-toggle="tooltip" data-placement="left" title="{{helpText[7]?.text}}"> <i class="fa fa-info-circle color-red"></i> </span>
+							</button>
+						</div>
+					</div>
+				</div>
+				<!-- <div class="progress-outer">
+					<div class="progress">
+						<div class="progress-bar {{classColor}}" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" [style.width.%]="value" >
+							<span class="">{{value}}% Complete</span>
+						</div> 
+					</div> -->
+		<!-- 	<div class="dashboard-header-smartclinic">
+				SmartClinic
+				<div class="fingertip-slogan"> Clinic at your fingertips </div>
+				<div class="dashboard-subscription" *ngIf = "!isExpired">
+			 	<p> {{plan}} plan expires on  </p>
+			 	<p>{{dd1}}<sup>{{th1}}</sup> {{month1}} {{year1}}</p>
+				</div>
+			<div class="dashboard-subscription" *ngIf = "isExpired">
+			 	<p style="color:red; font-weight:bold"> Trial Expired  </p>
+				</div>		
+			</div> -->
+
+
+		</div>
+
+		<div class="dashboard-header-none" *ngIf="hideElement=='none'">
+
+		</div>
+	</div>
+	<div class="page-sidebar-wrapper">
+		<div id="bs-example-navbar-collapse-1" class="dashbrd-sidbar navbar-collapse p-0" >
+			<div class="sidebar-switch">
+				<div class="form-group col-md-12 co-sm-12 col-xs-12">
+					<div class="cus-switch" *ngIf="doctorData.digital_precipitation">
+						<span class="switch-text"> Digital Prescription</span>
+						<label class="switch">
+							<input type="checkbox"   value="{{doctorData.digital_precipitation}}" (change)="checkDigital($event, doctorData.itemId)" [checked]="(doctorData.digital_precipitation? 'checked' : '')" />
+							<span class="slider round"></span>
+						</label>
+					</div>
+
+					<div class="cus-switch" *ngIf="!doctorData.digital_precipitation">
+						<span class="switch-text"> Digital Prescription</span>
+						<label class="switch">
+							<input type="checkbox"   value="{{doctorData.digital_precipitation}}" (change)="checkDigital($event, doctorData.itemId)" />
+							<span class="slider round"></span>
+						</label>
+					</div>
+				</div>   
+				<!--{{doctorData.clinic_services | json}}-->
+				<!--div class="form-group col-md-12 co-sm-12 col-xs-12">
+					<div class="cus-switch">
+						<span class="switch-text"> Notes </span>
+						<label class="switch">
+						  	<input type="checkbox" checked="">
+						  	<span class="slider round"></span>
+						</label>
+					</div>
+				</div-->				
+			</div>
+			<ul class="dshbrd-sidebar-menu m-0 p-0" type="none">
+
+				<li class="sidebar-item">
+					<a class="sidebar-link" href="javascript:void(0)" routerLink="/header-two-layout/subscription">
+						<span class="title"> Subscription </span>	                    
+					</a>
+				</li>
+
+				<li class="sidebar-item">
+					<a class="sidebar-link" href="javascript:void(0)" routerLink="/header-two-layout/tutorials-doctor">
+						<span class="title"> Tutorials </span>
+					</a>
+				</li>
+
+				<li class="sidebar-item">
+					<a class="sidebar-link" href="javascript:void(0)" routerLink="/header-two-layout/opd-holiday">
+						<span class="title">Set OPD Holiday </span>
+					</a>
+				</li>
+
+				<li class="sidebar-item dropdown sidebar-dropdown">
+					<a class="sidebar-link dropdown-toggle" (click)="openDropdownList('Settings')" href="javascript:void(0)">
+						<span class="title">
+							Edit <span class="caret"></span>
+						</span>
+					</a>
+					<ul class="dropdown-menu" [ngClass]="(settingDropdown)?'active':''">
+<!-- 		        		<li class="sidebar-item dropdown sidebar-dropdown cstm-sb-menu">
+					        <a class="sidebar-link dropdown-toggle cstm-sb-menu" (click)="openDropdownList('Profile')" href="javascript:void(0)" style="color:#000;">
+					        	<span class="title">
+					        		Edit Profile <span class="caret"></span>
+					        	</span>
+					        </a>
+				        	<ul class="dropdown-menu" [ngClass]="(editProfileList)?'active':''">
+								<li class="sidebar-item"><a (click)="editProfile('change_mobile')" href="javascript:void(0)" class="sidebar-link"><span class="title"> Update Mobile </span> </a></li>
+								<li class="sidebar-item"><a (click)="editProfile('change_email')" href="javascript:void(0)" class="sidebar-link"><span class="title"> Update Email </span> </a></li>
+										
+							</ul>
+						</li> -->
+						<li class="sidebar-item"><a (click)="editProfile('edit_profile')" href="javascript:void(0)" class="sidebar-link"><span class="title">Profile </span> </a></li>
+						<li class="sidebar-item"><a (click)="editProfile('change_schedule')" href="javascript:void(0)" class="sidebar-link"><span class="title">Schedule </span> </a></li>
+						<li class="sidebar-item" *ngIf="doctorData.type_of_doctor == 'admin_doctor'"><a (click)="editProfile('edit_clinic')" href="javascript:void(0)" class="sidebar-link"><span class="title">Clinic Details </span> </a></li>
+						<li class="sidebar-item"><a (click)="editProfile('pad_customization')" href="javascript:void(0)" class="sidebar-link"><span class="title"> Prescription</span> </a></li>
+						<li class="sidebar-item"><a (click)="editProfile('change_password')" href="javascript:void(0)" class="sidebar-link"><span class="title">Password / PIN </span> </a></li>
+						
+					</ul>
+				</li>
+
+				<li class="sidebar-item dropdown sidebar-dropdown">
+					<a class="sidebar-link dropdown-toggle" (click)="openDropdownList('Clinic')" href="javascript:void(0)">
+						<span class="title">
+							Clinic Setup <span class="caret"></span>
+						</span>
+					</a>
+					<ul class="dropdown-menu" [ngClass]="(clinicSetupList)?'active':''">
+						<li class="sidebar-item"><a (click)="editProfile('clinic_doctors')" href="javascript:void(0)" class="sidebar-link"><span class="title"> Clinic Doctors </span> </a></li>
+						<li class="sidebar-item"><a (click)="editProfile('smart_assistant')" href="javascript:void(0)" class="sidebar-link"><span class="title"> SmartAssistant </span> </a></li>
+						<li class="sidebar-item"><a (click)="editProfile('clinic_services')" href="javascript:void(0)" class="sidebar-link"><span class="title"> Clinic Services </span> </a></li>
+						<li class="sidebar-item" *ngIf = "doctorData?.clinic_services?.Clinic_Pharmacy == true" ><a (click)="editProfile('smart_pharmacy')"  href="javascript:void(0)" class="sidebar-link"><span class="title"> SmartPharmacy </span> </a></li>
+						<li class="sidebar-item" *ngIf = "doctorData?.clinic_services?.Clinic_Diagnostics==true"><a (click)="editProfile('smart_diagnostics')"  href="javascript:void(0)" class="sidebar-link dropdown-toggle"><span class="title"> SmartDiagnostics </span> </a></li>
+						<!--li class="sidebar-item"  *ngIf="checkService('Smart IPD')"><a (click)="editProfile('smart_ipd')" *ngIf = "doctorData.clinic_services.clinicServicesStatus == 'Yes'" href="javascript:void(0)"  class="sidebar-link"><span class="title"> Smart IPD </span> </a></li-->
+						
+
+					</ul>
+				</li>
+
+
+
+				<li class="sidebar-item" *ngIf="doctorData?.clinic_services?.Clinic_IPD==true">
+					<a class="sidebar-link" href="javascript:void(0)"(click)="editProfile('smart_ipd')">
+						<span class="title"> SmartIPD</span>
+					</a>
+				</li>
+				<li class="sidebar-item" *ngIf="doctorData?.clinic_services?.Clinic_IPD==true">
+					<a class="sidebar-link" href="javascript:void(0)" routerLink="/header-two-layout/discharge-patient">
+						<span class="title"> Discharge <span class="badge">{{dataIpd}}</span></span>
+					</a>
+				</li>
+				<li class="sidebar-item">
+					<a class="sidebar-link" href="javascript:void(0)" routerLink="/header-two-layout/delete-records">
+						<span class="title"> Delete Records </span>
+					</a>
+				</li>
+
+				<li class="sidebar-item">
+					<a class="sidebar-link" href="javascript:void(0)" routerLink="/header-two-layout/write-to-us">
+						<span class="title"> Write To Us </span>
+					</a>
+				</li>
+
+				<li class="sidebar-item">
+					<a class="sidebar-link" href="javascript:void(0)" routerLink="/header-two-layout/rate-clinic">
+						<span class="title"> Rate us </span>
+					</a>
+				</li>
+
+				<li class="sidebar-item">
+					<a class="sidebar-link" href="javascript:void(0)" routerLink="/header-two-layout/share">
+						<span class="title"> Share </span>
+					</a>
+				</li>
+				<li class="sidebar-item dropdown sidebar-dropdown">
+					<a class="sidebar-link dropdown-toggle" (click)="openDropdownDownload('Settings1')" href="javascript:void(0)">
+						<span class="title">
+							Download <span class="caret"></span>
+						</span>
+					</a>
+					<ul class="dropdown-menu" [ngClass]="(settingDropdown1)?'active':''">
+						<li class="sidebar-item"><a href="{{userGuidePath}}{{userGuide[0]?.fileName}}" target="_blank" class="sidebar-link"><span class="title">User Guide </span> </a></li>
+						<li class="sidebar-item"><a href="{{userGuidePath}}{{userGuide[1]?.fileName}}" target="_blank" class="sidebar-link"><span class="title">Brochure </span> </a></li>
+					</ul>
+				</li>
+
+
+
+	            <li class="sidebar-item">
+	            	<a class="sidebar-link" href="javascript:void(0)">
+	            		<span class="title" routerLink="/" (click)="signOut()"> Sign Out </span>
+	            	</a>
+	            </li>
+
+	        </ul>
+	    </div>
+	</div>
+</div>
+

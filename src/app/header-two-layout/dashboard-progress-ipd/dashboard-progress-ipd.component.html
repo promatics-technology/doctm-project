@@ -1,0 +1,333 @@
+<div class="loader-box" *ngIf="loading">
+	<img src="./assets/imgs/load.gif" />
+</div>
+<div class="analytics-sec">
+	
+	<div class="ipd-deatil-sec">
+		<div class="inner-tab">
+			<ul class="nav nav-tabs" role="tablist">
+				<li role="presentation"><a href="javascript:void(0);" routerLink="/header-two-layout/dashboard-progress"> Patient </a></li>
+				<li role="presentation"><a href="javascript:void(0);" routerLink="/header-two-layout/dashboard-progress-time"> Time</a></li>
+				<li role="presentation"><a href="javascript:void(0);" routerLink="/header-two-layout/dashboard-progress-prescription">Prescription</a></li>
+				<!--li role="presentation"><a href="javascript:void(0);" routerLink="/header-two-layout/dashboard-progress-pharmacy"> Pharmacy</a></li>
+				<li role="presentation"><a href="javascript:void(0);" routerLink="/header-two-layout/dashboard-progress-diagnosis"> Diagnostics </a></li>
+				<li role="presentation" class="active"><a href="javascript:void(0);" routerLink="/header-two-layout/dashboard-progress-ipd"> IPD </a></li-->
+				<li role="presentation"><a href="javascript:void(0);" routerLink="/header-two-layout/dashboard-progress-pharmacy" *ngIf="doctorData.clinic_services.Clinic_Pharmacy==true"> Pharmacy</a></li>
+	          	<li role="presentation"><a href="javascript:void(0);" routerLink="/header-two-layout/dashboard-progress-diagnosis" *ngIf="doctorData.clinic_services.Clinic_Diagnostics==true"> Diagnostics </a></li>
+	          	<li role="presentation" class="active"><a href="javascript:void(0);" routerLink="/header-two-layout/dashboard-progress-ipd" *ngIf="doctorData.clinic_services.Clinic_IPD==true"  > IPD </a></li>
+			</ul>
+		</div>
+	
+		<div class="ipd-body">
+			<div class="cus-content-wrapper">
+				<div class="cus-content">
+					<div class="row brdr">
+						<div class="col-lg-5 col-lg-offset-1 text-center">
+							<div class="box-cstm">
+								<h2 class="blue-txt">Occupancy Status ({{newDate | date:'dd/MM/yyyy'}})</h2>
+							<p>TOTAL BEDS : <b>{{getData(total_general_beds+total_private_beds+total_semi_private_beds)}} | </b> OCCUPIED : <b>{{getData((total_general_beds+total_private_beds+total_semi_private_beds)-(genLength+privateLen +semiprivateLen))}} | </b> VACANT : <b>{{getData(genLength+privateLen +semiprivateLen)}}</b></p>
+							</div>
+						</div>
+						<div class="col-lg-5 text-center">
+							<div class="box-cstm">
+							<h2 class="blue-txt">Collection</h2>
+							<p>TOTAL -<span class="blue-txt"> <b>Rs. {{totalIpdAmount}} |</b></span> ADVANCE - <span class="blue-txt"><b>Rs. {{totalAdvanceAmount}}</b></span></p>
+						</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-12">
+				<ul class="nav nav-tabs cstm-ul-new">
+				<li class="active"><a data-toggle="tab" href="#home-cstm" (click)="getDoctorId(0)">IPD Aggregate ({{dataIpdPatient?.length}})</a></li>
+				<li *ngFor="let doctor of dataDoctors"><a data-toggle="tab" href="#menu1-cstm" (click)="getDoctorId(getDoctorFirstName(doctor._id))">Dr. {{getDoctorFirstName(doctor?.first_name)}} ({{doctor?.patients}})</a></li>
+			</ul>
+			<div class="tab-content cstm-tab-22" *ngIf="adminDoctor">
+				<div role="tabpanel" class="tab-pane active" id="total">
+					<div>
+						<div class="row">
+				<!-- <h4 class="text-center">GENERAL</h4> -->
+							<div class="col-md-12 col-sm-12 col-xs-12">
+								<div class="beds-panel">
+									<ul *ngIf="dataIpdPatient.length > 0">
+										<li *ngFor="let patient of dataIpdPatient;let i = index;">
+											<a (click)="openPatientModal(patient.vacant,patient.bed_number,'General Bed',patient)" class="{{getPatientListClassBorder(patient)}}" data-dismiss="modal" data-toggle="modal" href="#javascript:void(0)">
+												<p class="{{getPatientListClass(patient)}}">
+													G-{{patient.bed_number}}
+												</p>
+												<img class="img-responsive" src="{{getImgPatient(patient)}}"/>
+												<p *ngIf="!patient.vacant" class="{{getPatientListClass(patient)}}">
+													{{patient.patientName}}
+												</p>
+												<p *ngIf="!patient.vacant" class="grey">
+													Dr. {{patient.consultDoc.first_name}}
+												</p>
+											</a>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- <div *ngIf="adminDoctor.clinic_services.semi_private_beds && adminDoctor.clinic_services.semi_private_beds>0">
+						<div class="row">
+						<h4 class="text-center">SEMI-PRIVATE</h4>
+							<div class="col-md-12 col-sm-12 col-xs-12">
+								<div class="beds-panel">
+									<ul *ngIf="semiPatients.length > 0">
+										<li *ngFor="let patient of semiPatients;let i = index;">
+											<a (click)="openPatientModal(patient.vacant,patient.bed_number,'Semi Private Bed',patient)" class="{{getPatientListClassBorder(patient)}}" data-dismiss="modal" data-toggle="modal" href="#javascript:void(0)">
+												<p class="{{getPatientListClass(patient)}}">
+													SP-{{patient.bed_number}}
+												</p>
+												<img class="img-responsive" src="{{getImgPatient(patient)}}"/>
+												<p *ngIf="!patient.vacant" class="{{getPatientListClass(patient)}}">
+													{{patient.patientName}}
+												</p>
+												<p *ngIf="!patient.vacant" class="grey">
+													Dr. {{patient.consultDoc.first_name}}
+												</p>
+											</a>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div *ngIf="adminDoctor.clinic_services.private_beds && adminDoctor.clinic_services.private_beds>0">
+						<div class="row">
+						<h4 class="text-center">PRIVATE</h4>
+							<div class="col-md-12 col-sm-12 col-xs-12">
+								<div class="beds-panel" >
+									<ul *ngIf="privatePatients.length > 0">
+										<li *ngFor="let patient of privatePatients;let i = index;">
+											<a (click)="openPatientModal(patient.vacant,patient.bed_number,'Private Bed',patient)" class="{{getPatientListClassBorder(patient)}}" data-dismiss="modal" data-toggle="modal" href="#javascript:void(0)">
+												<p class="{{getPatientListClass(patient)}}">
+													P-{{patient.bed_number}}
+												</p>
+												<img class="img-responsive" src="{{getImgPatient(patient)}}"/>
+												<p *ngIf="!patient.vacant" class="{{getPatientListClass(patient)}}">
+													{{patient.patientName}}
+												</p>
+												<p *ngIf="!patient.vacant" class="grey">
+													Dr. {{patient.consultDoc.first_name}}
+												</p>
+											</a>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div> -->
+				</div>
+				<div role="tabpanel" class="tab-pane" id="general" >
+					<ul class="list-bedul">
+						<li class="success">
+							Vacant: <span class="bed-no" >{{genLength}}</span>
+						</li>
+						<li class="danger">
+							Occupied: <span class="bed-no"> {{total_general_beds-genLength}} </span>
+						</li>
+					</ul>
+
+					<div class="row">
+						<div class="col-md-12 col-sm-12 col-xs-12">
+							<div class="beds-panel">
+								<ul>
+									<li *ngFor="let patient of generalPatients;let i = index;">
+										<a (click)="openPatientModal(patient.vacant,patient.bed_number,'General Bed',patient)" class="{{getPatientListClassBorder(patient)}}" data-dismiss="modal" data-toggle="modal" href="#javascript:void(0)">
+											<p class="{{getPatientListClass(patient)}}">
+												G-{{patient.bed_number}}
+											</p>
+											<img class="img-responsive" src="{{getImgPatient(patient)}}"/>
+											<p *ngIf="!patient.vacant" class="{{getPatientListClass(patient)}}">
+												{{patient.patientName}}
+											</p>
+											<p *ngIf="!patient.vacant" class="grey">
+												Dr. {{patient.consultDoc.first_name}}
+											</p>
+										</a>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div role="tabpanel" class="tab-pane" id="semiprivate">  
+					<ul class="list-bedul">
+						<li class="success">
+							Vacant: <span class="bed-no"> {{semiprivateLen}} </span>
+						</li>
+						<li class="danger">
+							Occupied: <span class="bed-no"> {{total_semi_private_beds-semiprivateLen}} </span>
+						</li>
+					</ul>
+
+					<div class="row">
+						<div class="col-md-12 col-sm-12 col-xs-12">
+							<div class="beds-panel">
+								<ul>
+									<li *ngFor="let patient of semiPatients;let i = index;">
+										<a (click)="openPatientModal(patient.vacant,patient.bed_number,'Semi Private Bed',patient)"class="{{getPatientListClassBorder(patient)}}" data-dismiss="modal" data-toggle="modal" href="#javascript:void(0)">
+											<p class="{{getPatientListClass(patient)}}">
+												SP-{{patient.bed_number}}
+											</p>
+											<img class="img-responsive" src="{{getImgPatient(patient)}}"/>
+											<p *ngIf="!patient.vacant" class="{{getPatientListClass(patient)}}">
+												{{patient.patientName}}
+											</p>
+											<p *ngIf="!patient.vacant" class="grey">
+												Dr. {{patient.consultDoc.first_name}}
+											</p>
+										</a>
+									</li>	
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div role="tabpanel" class="tab-pane" id="private">
+					<ul class="list-bedul">
+						<li class="success">
+							Vacant: <span class="bed-no">  {{privateLen}} </span>
+						</li>
+						<li class="danger">
+							Occupied: <span class="bed-no"> {{total_private_beds-privateLen}} </span>
+						</li>
+					</ul>
+
+					<div class="row">
+						<div class="col-md-12 col-sm-12 col-xs-12">
+							<div class="beds-panel">
+								<ul>
+									<li *ngFor="let patient of privatePatients;let i = index;">
+										<a (click)="openPatientModal(patient.vacant,patient.bed_number,'Private Bed',patient)"class="{{getPatientListClassBorder(patient)}}" data-dismiss="modal" data-toggle="modal" href="#javascript:void(0)">
+											<p class="{{getPatientListClass(patient)}}">
+												P-{{patient.bed_number}}
+											</p>
+											<img class="img-responsive" src="{{getImgPatient(patient)}}"/>
+											<p *ngIf="!patient.vacant" class="{{getPatientListClass(patient)}}">
+												{{patient.patientName}}
+											</p>
+											<p *ngIf="!patient.vacant" class="grey">
+												Dr. {{patient.consultDoc.first_name}}
+											</p>
+										</a>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div role="tabpanel" class="tab-pane" id="approved">
+					<div *ngFor="let approvals of approvedPatients">
+						<h3 class="approvedDoctor">
+							Dr. {{getDoctorName(approvals._id)}}
+						</h3>
+						<div class="row">
+							<div class="col-md-12 col-sm-12 col-xs-12">
+								<div class="beds-panel">
+									<ul>
+										<li *ngFor="let patient of approvals.approvedPatients;let i = index;">
+											<a (click)="openPatientModal(patient.vacant,patient.bed_number,'Semi Private Bed',patient)" class="blueborder" data-dismiss="modal" data-toggle="modal" href="#javascript:void(0)">
+												<p class="blue">
+													<span *ngIf="patient.type=='general'">G</span>
+													<span *ngIf="patient.type=='private'">P</span>
+													<span *ngIf="patient.type=='semi_private'">SP</span>-{{patient.bed_number}}
+												</p>
+												<img class="img-responsive" src="{{getImgPatient(patient)}}"/>
+												<p class="blue">
+													{{patient.patientName}}
+												</p>
+								                            <!-- <p class="grey">
+								                                Dr. {{getDoctorName(approvals._id)}}
+								                            </p> -->
+								                        </a>
+								                    </li>
+								                </ul>
+								        </div>
+								    </div>
+								</div>
+							</div>
+						</div>
+					</div>
+			</div>
+			</div>
+			</div>
+			
+			<div class="modal fade cus-modal" id="patientModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+			  	<div class="modal-dialog" role="document">
+			    	<div class="modal-content">
+			    		<div class="modal-header">
+			    			<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			    			<h4 class="modal-title"> Patient Details </h4>
+			    		</div>
+			    		<div class="modal-body newform-margin" *ngIf="openedPatientDetail">
+			        		<div class="row">
+					    		<div class="col-md-12 col-sm-12 col-xs-12">
+					    			<div class="patient-popup">
+					    				<div class="pat-center">
+						    				<div class="pat-img">
+						    					<img src="./assets/imgs/no-person.jpg" class="img-responsive" *ngIf="!openedPatientDetail.imgSrc"/>
+				                                <img src="{{pateintPicPath}}{{openedPatientDetail.imgSrc}}" class="img-responsive" *ngIf="openedPatientDetail.imgSrc"/>
+						    				</div>
+						    				<p> {{openedPatientDetail.patientName}} ({{openedPatientDetail.gender}}), {{openedPatientDetail.age}}Y </p>
+						    			</div>
+						    			<table class="table table-bordered table-cstm">
+						    				<tr>
+						    					<th>Bed Number</th>
+						    					<td> {{bedType.print}}-{{openedPatientDetail.bed_number}}</td>
+						    				</tr>
+						    			
+						    				<tr>
+						    					<th>Ailment/Procedure</th>
+						    					<td>{{openedPatientDetail.procedure}}</td>
+						    				</tr>
+						    				
+						    				<tr *ngIf="openedPatientDetail.prescription_id">
+						    					<th>Prescription ID</th>
+						    					<td> {{openedPatientDetail.prescription_id}}</td>
+						    				</tr>
+						    			
+						    				<tr>
+						    					<th>Mobile Number</th>
+						    					<td> +91-{{openedPatientDetail.phone}}</td>
+						    				</tr>
+						    			
+						    				<tr>
+						    					<th>Consulting Doctor Name</th>
+						    					<td>Dr. {{openedPatientDetail.consultDoc.first_name}}</td>
+						    				</tr>
+						    			
+						    				<tr>
+						    					<th>Admit date and Time</th>
+						    					<td>{{openedPatientDetail.createdAt | date:'d MMM yy ,h:mm a' }} </td>
+						    				</tr>
+						    			</table>
+					    			</div>
+					    		</div>
+			        		</div>
+			      		</div>
+					</div>
+			  	</div>
+			</div>
+			<div class="container footer-cstm-an">
+				<div class="row">
+					<div class="col-lg-4 text-center">
+						<div>
+							<p>CURRENT OCCUPANCY: <b>{{getData(occupency)}}% </b></p>
+						</div>
+					</div>
+					<div class="col-lg-4 text-center">
+						<div>
+							<p>ADMISSIONS TODAY : <b>{{patientAdmitted}}</b></p>
+						</div>
+					</div>
+					<div class="col-lg-4 text-center">
+						<div>
+							<p>DISCHARGES TODAY : <b>{{patientDischarge}}</b></p>
+						</div>
+					</div>
+				</div>
+			</div>
+

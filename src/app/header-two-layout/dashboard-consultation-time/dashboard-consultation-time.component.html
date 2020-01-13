@@ -1,0 +1,201 @@
+<div class="loader-box" *ngIf="loading">
+    <img src="./assets/imgs/load.gif" />
+</div>
+<div class="analytics-sec">
+	
+	<div class="ipd-deatil-sec">
+	<!-- 	<div class="md-tab">
+	      
+	      	<ul class="nav nav-tabs" role="tablist">
+	          	<li role="presentation" class="active"><a href="javascript:void(0);" routerLink="/header-two-layout/dashboard-consultation-prescription"> Consultation </a></li>
+	          	<li role="presentation"><a href="javascript:void(0);" routerLink="/header-two-layout/dashboard-pharmacy-detail"> Clinic Services </a></li>
+	      	</ul>
+	    </div> -->
+
+	    <div class="inner-tab">
+	    	<!-- Nav tabs -->
+	      	<ul class="nav nav-tabs" role="tablist">
+	          	<li role="presentation" ><a href="javascript:void(0);" routerLink="/header-two-layout/dashboard-consultation-patient"> OPD </a></li>
+	          	<li role="presentation" class="active"><a href="javascript:void(0);" routerLink="/header-two-layout/dashboard-consultation-time"> Time</a></li>
+	          	<li role="presentation" *ngIf = "doctorData.digital_precipitation"><a href="javascript:void(0);" routerLink="/header-two-layout/dashboard-consultation-prescription" >Prescription</a></li>
+				<!--li role="presentation" *ngIf = "doctorData.type_of_doctor == 'admin_doctor'"><a href="javascript:void(0);" routerLink="/header-two-layout/dashboard-consultation-treatment"> Pharmacy</a></li>
+	          	<li role="presentation" *ngIf = "doctorData.type_of_doctor == 'admin_doctor'"><a href="javascript:void(0);" routerLink="/header-two-layout/dashboard-consultation-diagnosis"> Diagnostics </a></li>
+	          	<li role="presentation" *ngIf = "doctorData.type_of_doctor == 'admin_doctor'"><a href="javascript:void(0);" routerLink="/header-two-layout/dashboard-consultation-investigation"> IPD </a></li-->
+	      	<li role="presentation" *ngIf = "doctorData.type_of_doctor == 'admin_doctor' && doctorData.clinic_services.Clinic_Pharmacy==true"><a href="javascript:void(0);" routerLink="/header-two-layout/dashboard-consultation-treatment"> Pharmacy</a></li>
+	          	<li role="presentation" *ngIf = "doctorData.type_of_doctor == 'admin_doctor' && doctorData.clinic_services.Clinic_Diagnostics==true"><a href="javascript:void(0);" routerLink="/header-two-layout/dashboard-consultation-diagnosis"> Diagnostics </a></li>
+	          	<li role="presentation" *ngIf = "doctorData.type_of_doctor == 'admin_doctor' && doctorData.clinic_services.Clinic_IPD==true"><a href="javascript:void(0);" routerLink="/header-two-layout/dashboard-consultation-investigation"> IPD </a></li>
+			</ul>
+	    </div>
+
+	   <div class="ipd-body">
+	    	<div class="cus-sidebar-wrapper side-bar-cstm">
+	    		<div class="cus-sidebar">
+	    			<ul> 
+	    				<li>
+	    					<div class="">
+	    						<div class="col-lg-3">
+	    							<h4 class="pd-left"><b>From</b></h4>
+	    						</div>
+	    						<div class="col-lg-9">
+	    							<div class="cstm-mg">
+	    								<angular2-date-picker [(ngModel)]="fromDate1" [settings]="settings"></angular2-date-picker>
+	    							</div>
+	    						</div>
+	    					</div>
+	    				</li>
+	    				<li>
+	    					<div class="">
+	    						<div class="col-lg-3">
+	    							<h4 class="pd-left"><b>To</b></h4>
+	    						</div>
+	    						<div class="col-lg-9">
+	    							<div class="cstm-mg">
+	    								<angular2-date-picker [(ngModel)]="toDate1" [settings]="settings"></angular2-date-picker>
+	    							</div>
+	    						</div>
+	    					</div>
+	    				</li>
+	    				<li class="text-right brder-cstm">
+	    					<div class="col-lg-12 text-center">
+	    						<button class="btn btn-go" (click)="go()">Go</button>
+	    					</div>
+	    				</li>
+	    				
+	    				<li class="li-cstm"> <a href="javascript:void(0);"> For Past</a> </li>
+	    				<!-- <li class="{{getClass(0)}}" (click)="activatetab(0)" class="active"> <a href="javascript:void(0);"> Current </a> </li> -->
+	    				<li class="{{getClass(1)}}" (click)="activatetab(1)"> <a href="javascript:void(0);"> 1 Week &nbsp;<small *ngIf="activatedtab==1">({{fromDate | date: 'dd/LL/yy'}} - {{toDate | date: 'dd/LL/yy'}})</small> </a> </li>
+	    				<li class="{{getClass(2)}}" (click)="activatetab(2)"> <a href="javascript:void(0);"> 2 Weeks &nbsp;<small *ngIf="activatedtab==2">({{fromDate | date: 'dd/LL/yy'}} - {{toDate | date: 'dd/LL/yy'}})</small>  </a> </li>
+	    				<li class="{{getClass(3)}}" (click)="activatetab(3)"> <a href="javascript:void(0);"> 1 Month &nbsp;<small *ngIf="activatedtab==3">({{fromDate | date: 'dd/LL/yy'}} - {{toDate | date: 'dd/LL/yy'}})</small> </a> </li>
+	    				<li class="{{getClass(4)}}" (click)="activatetab(4)"> <a href="javascript:void(0);"> 3 Month &nbsp;<small *ngIf="activatedtab==4">({{fromDate | date: 'dd/LL/yy'}} - {{toDate | date: 'dd/LL/yy'}})</small></a> </li>
+	    				<li class="{{getClass(5)}}" (click)="activatetab(5)"> <a href="javascript:void(0);"> 6 Month &nbsp;<small *ngIf="activatedtab==5">({{fromDate | date: 'dd/LL/yy'}} - {{toDate | date: 'dd/LL/yy'}})</small></a> </li>
+	    				<li class="{{getClass(6)}}" (click)="activatetab(6)"> <a href="javascript:void(0);"> 1 Year &nbsp;<small *ngIf="activatedtab==6">({{fromDate | date: 'dd/LL/yy'}} - {{toDate | date: 'dd/LL/yy'}})</small></a> </li>
+	    				<li class="{{getClass(7)}}" (click)="activatetab(7)"> <a href="javascript:void(0);"> All </a> </li>
+	    			</ul>
+	    		</div>
+	    	</div>
+
+    		<div class="cus-content-wrapper" style="position: relative;">
+    			<div class="cus-content">
+	    			<div class="">
+	    				<div class="consult-time">
+	    					<div class="row">
+	    						<div class="col-lg-6 text-center brdr-btm"  *ngIf="!loading">
+	    							<h4 class="bg-h4"> Consultation Time Utilization (CTU)<span [matTooltipPosition]="position" [matTooltip]="helpText[9]?.text"> <i class="fa fa-exclamation-circle sign-war" aria-hidden="true"></i></span></h4>
+									<div class="chart-diagnos chart-box wrap-canavas">
+					    				<canvas baseChart
+						                [datasets]="lineChartData"
+						                [labels]="lineChartLabels"
+						                [options]="lineChartOptions"
+						                [colors]="lineChartColors"
+						                [legend]="lineChartLegend"
+						                [chartType]="lineChartType"
+						                (chartHover)="chartHovered($event)"
+						                (chartClick)="chartClicked($event)"></canvas>
+						            </div>
+	    						</div>
+	    						<div class="col-lg-6 text-center brdr-left brdr-btm"  *ngIf="!loading">
+	    							<h4 class="bg-h4"> Average Time Per Patient <span [matTooltipPosition]="position" [matTooltip]="helpText[10]?.text"> <i class="fa fa-exclamation-circle sign-war" aria-hidden="true"></i></span></h4>
+	    							<div class="chart-diagnos chart-box wrap-canavas">
+					    				<canvas baseChart
+						                [datasets]="lineChartData1"
+						                [labels]="lineChartLabels1"
+						                [options]="lineChartOptions"
+						                [colors]="lineChartColors"
+						                [legend]="lineChartLegend"
+						                [chartType]="lineChartType"
+						                (chartHover)="chartHovered($event)"
+						                (chartClick)="chartClicked($event)"></canvas>
+					            	</div>
+	    						</div>
+	    					</div>
+	    					
+	    					<div class="row">	
+		    					<!-- <div class="col-lg-7">
+		    						<div class="text-left">
+			    						<h5> Consultation Time Utilization <i class="fa fa-info-circle color-red"></i> 
+			    						</h5>
+			    					</div>
+		    						“CTU is the fraction of your total clinic time for which you are actually engaged in consultation process. Higher the CTU busier you are. “
+		    						<div class="wrap-tbl">
+	    								<div class="">
+											<table class="">
+											  <tbody>
+											      <tr class="evn">
+											        <td width="400px">Total Clinic Time Available</td>
+											        <td width="300px">: <b>480</b> min </td>
+											        <td width="300px" class="text-right">Total Clinic Time Utilized</td>
+											        <td width="300px" class="text-right">: <b>380</b> min </td>
+											      </tr>
+											      <tr class="evn">
+											        <td width="400px">Longest Consultation</td>
+											        <td width="300px">: <b>20</b> min </td>
+											        <td width="300px" class="text-right">Shortest Consultation</td>
+											        <td width="300px" class="text-right">: <b>4</b> min </td>
+											      </tr>
+											  </tbody>
+											</table>
+										</div>
+	    							</div>
+	    							<h5 class="mg-top">Average Consultation Time Per Minute : 8 min Average CTU : 68%</h5>
+		    					</div>
+		    					<div class="col-lg-5">
+		    						<div class="progress">
+									  	<div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:70%">
+									    	<span class="">70% Complete</span>
+									  	</div>
+									</div>
+									<div class="row">
+										<div class="col-lg-6 text-left">
+											0%
+										</div>
+										<div class="col-lg-6 text-right">
+											100%
+										</div>
+									</div>
+									<div class="row">
+										<div class="form-group col-md-4 col-sm-4 col-xs-12">
+											<span class="box box-1"></span>
+											<label>< 25%, Poor </label>
+											
+										</div>
+										<div class="form-group col-md-4 col-sm-4 col-xs-12 text-center">
+											<span class="box box-2"></span>
+											<label>25 - 50%, Good</label>
+										</div>
+										<div class="form-group col-md-4 col-sm-4 col-xs-12 text-right">
+											<span class="box box-3"></span>
+											<label>50%, Excellent</label>
+											
+										</div>
+									</div>
+		    					</div> -->
+		    					<div class="col-lg-6 text-center">
+		    						<button class="btn btn-custm"><b>Total clinic time available : <span class="cstm-font">{{totalHours}}:{{totalMin}}</span> </b><span> hrs</span></button>
+		    						<button class="btn btn-custm"><b>Total clinic time utilized : <span class="cstm-font">{{totalTimeUtilizedHours}}:{{totalTimeUtilizedMin}}</span></b> <span> hrs</span></button>
+		    						<button class="btn btn-custm btn-wh"><b> <span class="cstm-font-1">Avg. CTU <br><span class="cstm-font">{{getData(avgCtuPercentage)}} %</span></span></b></button>
+		    					</div>
+		    					<div class="col-lg-6 text-center">
+		    						<button class="btn btn-custm"><b>Longest consultation : <span class="cstm-font">{{longestConsultationMin}}:{{longestConsultationSec}}</span></b> min</button>
+		    						<button class="btn btn-custm"><b>Shortest consultation : <span class="cstm-font">{{shortestConsultationMin}}:{{shortestConsultationSec}}</span></b> <span> min</span></button>
+		    						<button class="btn btn-custm btn-wh"><b> <span class="cstm-font-1">Avg. time per patient <br><span class="cstm-font">{{avgTimePerPatient}} </span></span></b><span> min</span></button>
+		    					</div>
+	    					</div>
+	    				
+	    				</div>
+	    			</div>
+	    		</div>
+	    		<div class="row">
+		    		<div class="blank-ftr">	    			
+					</div>
+	    		</div>
+	    	</div>
+
+	    </div>
+
+	</div>
+		
+</div>
+
+
+
+

@@ -1,0 +1,178 @@
+<div class="headersidebar-wrap" [ngClass]="nosidebar" >
+	<div class="dashboard-header">
+		<div class="dashboard-header-one">
+			<div class="close-dashboard-sidebar">
+		        <button type="button" class="navbar-toggle" (click)="sidebarclose()" >
+		            <span class="icon-bar"></span>
+		            <span class="icon-bar"></span>
+		            <span class="icon-bar"></span>
+		        </button>
+		    </div>
+		    <div>
+			    <div *ngIf="!showDashboardButton">
+				    <div class="welcomename" *ngIf="smartAssistantData.doctorsRegisteredForSmartClinic.length>0"> 
+				     Smart Assistant - {{smartAssistantData.doctorsRegisteredForSmartClinic[0].clinic_details.clinic_name}}
+				    </div>
+				</div>
+				<div class="welcomename" *ngIf="showDashboardButton">
+				Appointment List
+			</div>
+			</div>
+
+		    <div class="dashboard-signout">
+		    	<a routerLink="/" (click)="signOut()"> Sign-out </a>
+		    </div>
+		</div>
+
+		<div class="dashboard-header-pthree" *ngIf="!showDashboardButton">
+		
+		<div class="col-lg-2">
+			<div class="dashboard-header-logo" routerLink="/header-three-layout/smartassistant">
+				<img src="./assets/imgs/logoDoctm.png" class="img-responsive" />
+				<div class="dshbrd-btn" *ngIf="showDashboardButton">
+					<button class="btn btn-custom" routerLink="/header-three-layout/smartassistant"> Dashboard </button>
+				</div>
+			</div>
+		</div>
+		<div class="col-lg-2" style="font-size:22pt">
+		{{currentDate}}
+		</div>
+		<div class="col-lg-2">
+			<div class="dashboard-btns new-reg" *ngIf="!showDashboardButton">
+				<button class="btn btn-custom" data-dismiss="modal" data-toggle="modal" data-target="#registrationForm">
+					<i class="fa fa-plus-square"></i>
+					<div> Registration </div>
+				</button>
+			</div>
+		</div>
+		<div class="col-lg-2">
+			<div class="dashboard-btns" *ngIf="!showDashboardButton">
+				<button class="btn btn-custom" data-dismiss="modal" data-toggle="modal" data-target="#appointmentForm">
+					<i class="fa fa-plus-square"></i>
+					<div> APPOINTMENT </div>
+				</button>
+			</div>
+		</div>
+		<div class="col-lg-2">
+				<div class="dashboard-btns app-list" *ngIf="!showDashboardButton">
+				<button class="btn btn-custom" routerLink="/header-three-layout/smartassistantappointmentList">
+					APPOINTMENT
+					<div> LIST </div>
+				</button>
+			</div>
+		</div>	
+		</div>
+	</div>
+	<div class="page-sidebar-wrapper">
+	    <div id="bs-example-navbar-collapse-1" class="dashbrd-sidbar navbar-collapse p-0" >
+	        <ul class="dshbrd-sidebar-menu m-0 p-0" type="none">
+	            <li class="sidebar-item dropdown sidebar-dropdown">
+			        <a class="sidebar-link dropdown-toggle" (click)="openDropdown()" href="javascript:void(0)">
+			        	<span class="title">
+			        		Settings <span class="caret"></span>
+			        	</span>
+			        </a>
+		        	<ul class="dropdown-menu" [ngClass]="dropdownMenu">
+						<li class="sidebar-item"><a href="" data-dismiss="modal" data-target="#personalDetailModal" data-toggle="modal" class="sidebar-link"><span class="title"> Personal details </span> </a></li>
+						<li class="sidebar-item"><a href="" data-dismiss="modal" data-target="#connectedDoctorModal" data-toggle="modal" class="sidebar-link"><span class="title"> Connected Doctors </span> </a></li>
+					</ul>
+			    </li>
+	        </ul>
+	    </div>
+	</div>
+
+</div>
+
+<!-- Modal  -->
+<div class="modal fade cus-modal" id="personalDetailModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  	<div class="modal-dialog" role="document">
+    	<div class="modal-content">
+    		<div class="modal-header">
+	    		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	                <span aria-hidden="true">×</span>
+	            </button>
+	            <div class="row">
+	    			<div class="regis-modal-body">
+	    				<form [formGroup]="form">
+	        				<div class="form-group col-md-12 col-sm-12 col-xs-12">
+								<label class="col-md-4 col-sm-4 col-xs-12"> Mobile Number </label>
+								<div class="col-md-8 col-sm-8 col-xs-12">
+									<input type="text" class="form-control txtfield" name="" pattern="[0-9.]+" maxLength="10" [(ngModel)]="smartAssiMob" [formControl]="form.controls['phone']"/>
+                                    <p style="color: #FF0000" *ngIf="!form.controls['phone'].valid  && (form.controls['phone'].touched)">Invalid mobile number !!!</p>
+								</div>
+							</div>
+							<div class="form-group col-md-12 col-sm-12 col-xs-12">
+								<label class="col-md-4 col-sm-4 col-xs-12"> Assistant Name  </label>
+								<div class="col-md-8 col-sm-8 col-xs-12">
+									<input type="text" class="form-control txtfield" name="" [(ngModel)]="smartAssiName" [formControl]="form.controls['name']" />
+	                                <p style="color: #FF0000" *ngIf="!form.controls['name'].valid  && (form.controls['name'].touched)">Invalid name !!!</p>
+								</div>
+							</div>
+						</form>
+						<div class="form-group col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 col-xs-12 text-center">
+							<button class="btn btn-custom" type="button" (click)="updateSmartAssistant()" [disabled]="(!form.valid)"> SAVE </button>
+						</div>
+	        		</div>
+	        	</div>
+	        </div>
+		</div>
+  	</div>
+</div>
+<div class="modal fade cus-modal" id="connectedDoctorModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  	<div class="modal-dialog" role="document">
+    	<div class="modal-content connected-doctors-modal">
+    		<div class="modal-header">
+    			<h4 class="modal-title"> Connected Doctors  </h4>
+	    		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	                <span aria-hidden="true">×</span>
+	            </button>
+    			<div class="cstm-modal-body">
+    				<div class="connected-doctors">
+						<div class="doctor-detail">
+							<table class="" width="100%">
+								<thead>
+									<tr>
+										<th class="con-dr">Doctor Name</th>
+										<th>Doctor ID</th>
+										<th>Avg. consultation time/patient</th>
+										<th>Appointment Waiting time</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr *ngFor="let doctor of doctorsRegisteredForSmartClinic; let i=index">
+										<td><p>{{i+1}}. Dr. {{doctor.first_name}}</p></td>
+										<td><p>{{doctor.doctm_id}}</p></td>
+										<td><p>{{doctor.avgConsTime}}</p></td>
+										<td><p>{{doctor.waitingTime}}</p></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+					<div class="form-group col-md-12 col-sm-12 col-xs-12 text-right" *ngIf="doctorsRegisteredForSmartClinic && doctorsOfSameClinic && doctorsRegisteredForSmartClinic.length<5 && doctorsOfSameClinic.length>0">
+						<button [ngClass]="addViewDiv ? 'btn btn-custom reg-btn add active':'btn btn-custom reg-btn add'" type="button" (click)="addViewDivClicked()">ADD NEW</button>
+					</div>
+
+					<div class="col-md-12 col-sm-12 col-xs-12 text-right">
+						<div class="add-new-feilds{{getAddDoctorClass()}}">
+							<div class="form-group col-md-8 col-md-offset-2 col-sm-12 col-xs-12">
+								<select class="form-control txtfield" [(ngModel)]="doctorToAdd" [ngModelOptions]="{standalone: true}">
+	        					<option selected="" disabled="" value=""> Select clinic doctor </option>
+	        					<option value="{{doctor._id}}" *ngFor="let doctor of doctorsOfSameClinic" value="">Dr. {{doctor.first_name}}</option>
+	        				</select>
+							</div>
+							<div class="form-group col-md-8 col-md-offset-2 col-sm-12 col-xs-12">
+								<input type="text" class="form-control txtfield" name="" placeholder="doctm Doctor id"  [(ngModel)]="doctorItemId" [ngModelOptions]="{standalone: true}" />
+							</div>
+						</div>
+						<div class="col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 col-xs-12 text-center">
+							<button class="btn btn-custom" type="button" *ngIf="addViewDiv" (click)="addDcotorBySmartAssistant(doctorItemId)">ADD</button>
+							<button class="btn btn-custom" data-dismiss="modal" data-toggle="modal" type="button" *ngIf="!addViewDiv">OK</button>
+						</div>
+					</div>
+        		</div>
+	        </div>
+		</div>
+  	</div>
+</div>
+<!-- model end -->

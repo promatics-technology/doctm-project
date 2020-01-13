@@ -1,0 +1,152 @@
+<div class="loader-box" *ngIf="loading">
+    <img src="./assets/imgs/load.gif" />
+</div>
+<div class="cstm-hdr">
+	<div class="">
+		<div  class="col-lg-2 col-md-2 col-sm-12 col-xs-12 ">
+			<div  class="dashboard-header-logo" tabindex="0" ng-reflect-router-link="/header-five-layout/dashboard-">
+				<img _ngcontent-c3="" class="img-responsive" src="./assets/imgs/logoDoctm.png" routerLink="/header-five-layout/dashboard-pharmacy">
+			</div>
+			<div >
+				<div _ngcontent-c3="" class="dshbrd-btn">
+					<button  class="btn btn-custom" routerLink="/header-five-layout/dashboard-pharmacy" tabindex="0" ng-reflect-router-link="/header-five-layout/dashboard-"> Dashboard </button>
+				</div>
+			</div>
+		</div>
+		<!-- <div class="col-lg-6 cstm-input cstm-row">
+			<button  class="btn btn-custom btn-block">PRODUCTS BELOW MINIMUM STOCK LEVEL AS ON {{todayDate | date:'mediumDate'}}</button>
+		</div> -->
+		<div class="col-lg-7 col-md-7 col-sm-12  col-xs-12 cstm-input cstm-row btn-small-s">
+			<button  class="btn btn-custom btn-block cstm-medim-date-hding mgg-top" tabindex="0">PRODUCTS BELOW MINIMUM STOCK LEVEL AS ON {{todayDate | date:'mediumDate'}}</button>
+		</div>
+		<div class="col-lg-3 col-md-3 col-sm-12  col-xs-12 cstm-input cstm-row">
+	        <div class="">
+	           <div class="cstm-put">
+	           		<input type="text" name="" class="form-control cstm-inpt mgg-top" placeholder="Search by product" (input)="search()" [(ngModel)]="searchInput" >
+	           </div>
+	        </div>
+	    </div>
+		
+	</div>
+</div>
+<div class="stock-tab">
+	<div class="col-lg-12">
+		<div class="tbl-cntrol my_tab_5" style="margin-top:12px;">
+			<table class="table table-bordered" matSort (matSortChange)="sortData($event)" *ngIf="reorderArray.length>0">
+				<thead class="new-thd">
+					<tr>
+						<th mat-sort-header="product" width="10%" class="{{getTableHeaderClass(1)}} text-center" (click)="setTableHeaderClass(1)"><h4 style="width: 100%; text-align: center;">Product</h4></th>
+						<th mat-sort-header="type" width="10%" class="{{getTableHeaderClass(2)}} text-center" (click)="setTableHeaderClass(2)"><h4 style="width: 100%; text-align: center;">Type</h4></th>
+						<th mat-sort-header="packing" width="10%" class="{{getTableHeaderClass(3)}} text-center" (click)="setTableHeaderClass(3)"><h4 style="width: 100%; text-align: center;">Packing</h4></th>
+						<th mat-sort-header="batch" width="10%" class="{{getTableHeaderClass(4)}} text-center" (click)="setTableHeaderClass(4)"><h4 style="width: 100%; text-align: center;">Batch</h4></th>
+						<th mat-sort-header="stock" width="10%" class="{{getTableHeaderClass(5)}} text-center" (click)="setTableHeaderClass(5)"><h4 style="width: 100%; text-align: center;">Stock</h4></th>
+						<th width="10%" class="text-center"><h4 style="width: 100%; text-align: center;">Action</h4></th>
+					</tr>
+				</thead>	
+				<tbody>
+					<tr *ngFor="let list of reorderArray">
+						<td width="10%" class="text-center vrt-mdl">{{list.product}}</td>
+						<td width="10%" class="text-center">{{list.type}}</td>
+						<td width="10%" class="text-center vrt-mdl">{{list.pack_units}} x {{list.pack_quantity}}</td>
+						<td width="10%" class="text-center vrt-mdl">{{list.batch}}</td>
+						<td width="10%" class="text-center vrt-mdl">{{list.newPacking}} <b>:</b> {{list.newPackingReminder}}</td>
+						<td width="10%" class="text-center vrt-mdl"><i class="fa fa-trash dlt-icon" (click)="DeletePharmacyProduct(list)"></i></td>
+					</tr>
+				</tbody>
+			</table>
+			<div class="col-lg-12" *ngIf="reorderArray.length<1">
+             	<h3 class="text-center">No product found ...</h3>
+            </div> 
+		</div>
+	</div>
+</div>
+<div class="col-lg-11 col-lg-offset-1 col-xs-12 col-sm-12 foot-sb" style="position: fixed ;bottom: 0; margin-bottom: 15px; ">
+	<div class="btn-wrap row">
+		<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 text-center  txt_cent">
+			<button class="btn btn-custom btn-1" data-toggle="modal" data-target="#myModal" style="background-color:rgb(57, 96, 157);color:#fff;border-color:rgb(57, 96, 157); font-size: 14px; ">
+				<div>Generate Purchase Order</div>
+			</button>
+		</div>
+		<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 text-center txt_centt">
+			<button class="btn btn-custom" style="background-color: rgb(134, 173, 68);color:#fff;border-color:rgb(134, 173, 68); font-size: 14px; ">
+				<div>Products below min stock: {{reorderArray.length}}</div>
+			</button>
+		</div>
+		<div class="col-lg-2 col-md-3 col-sm-6 col-xs-12 text-center  txt_cent" >
+			<button class="btn btn-custom" routerLink="/header-five-layout/reorder-book" style="background-color: rgb(226, 127, 42);color:#fff;border-color:rgb(226, 127, 42); font-size: 14px;">
+				<div>Set Min Stock Level</div>
+			</button>
+		</div>
+		<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 text-center  txt_cent">
+			<button class="btn btn-custom btn-grin" style="font-size: 14px;color:#fff;border-color:rgb(161, 210, 83);" (click)="exportReorder()">
+				<div>Export</div>
+			</button>
+		</div>
+	</div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" role="dialog">
+	<div class="modal-dialog cstm_proper">
+
+		<!-- Modal content-->
+		<div class="modal-content modal-lg">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<!--  <h4 class="modal-title">Modal Header</h4> -->
+			</div>
+			<div class="modal-body">
+				<div class="row">
+
+					<div class="col-lg-12">
+						<div class="tbl-cntrol my_tab_6">	
+							<table class="table table-bordered tbl-data-modal" >
+								<thead class="cstm-head">
+									<tr>
+										<th width="10%" class="text-center">Product</th>
+										<th width="10%" class="text-center">Type</th>
+										<th width="10%" class="text-center">Packing</th>
+										<th width="10%" class="text-center">Current Stock</th>
+										<th width="10%" class="text-center">Order OTY</th>
+										<th width="10%" class="text-center">Rate</th>
+										<th width="10%" class="text-center">Tentative Cost</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr *ngFor="let list of reorderArray;let i = index">
+										<td width="10%" class="text-center vrt-mdl">{{list.product}}</td>
+										<td width="10%" class="text-center vrt-mdl">{{list.type}}</td>
+										<td width="10%" class="text-center vrt-mdl">{{list.pack_units}} x {{list.pack_quantity}}</td>
+										<td width="10%" class="text-center vrt-mdl">{{list.newPacking}} <b>:</b> {{list.newPackingReminder}}</td>
+										<td width="10%" class="text-center vrt-mdl"><input type="text" class="form-control" placeholder="Qty" (blur)="getTotalRecord(i)" [(ngModel)]="orderQty[i]"></td>
+										<td width="10%" class="text-center vrt-mdl" >{{getData(list.amount/list.qty)}}</td>
+										<td width="10%" class="text-center vrt-mdl" >{{getData(list.tent_amount)}} </td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+					<div class="col-lg-12">
+						<div class="btn-wrap row">
+							<div class="col-lg-8 col-lg-8 col-sm-12 col-xs-12 text-center">
+								<button class="btn btn-custom btn-grin nbtnn">
+									<div>Tentative purchase order cost: {{getData(newTentativeCost)}}</div>
+								</button>
+							</div>
+							<div class="col-lg-4 col-lg-4 col-sm-12 col-xs-12 text-center">
+								<button class="btn btn-custom" (click)="exportPdf()">
+									<div>Export</div>
+								</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+      <!--   <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div> -->
+  </div>
+
+</div>
+</div>

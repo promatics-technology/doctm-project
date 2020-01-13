@@ -1,0 +1,44 @@
+/*.modal-header{
+	border-bottom: 0;
+}*/
+.modal-title{
+	display: inline-block;
+}
+.clinic-id-box{
+	background-color: #00b0f0;
+	color: #002160;
+	border-radius: 4px;
+	padding: 5px 20px;
+	border: 1px solid #002160;
+}
+.patient-status{
+	padding: 0;
+	margin: 0;
+}
+.patient-status li{
+	list-style-type: none;
+    font-size: 15px;
+    padding: 7px;
+    background-color: #eee;
+    margin-bottom: 10px;
+}
+.patient-status-span{
+	color: #00b0f0;
+}
+.txt-theme{
+	color:#1565c0;
+}
+.mod-head{
+	background: #00b0f0;
+    color: #fff;
+}
+.mod-head button.close{
+	opacity: 1;
+	color:#fff;
+}
+.mdl-dlg{
+	display: table;
+}
+.mdl-dlg > .modal-content{
+	width:650px;
+}

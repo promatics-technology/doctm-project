@@ -1,0 +1,68 @@
+<section class="abt-us" style="background-image: url('./assets/imgs/slider-1.jpg');">
+    <h3>Contact Us</h3>
+</section>
+<section>
+	<div class="container">
+		<div class="row">
+			 <div class="col-lg-8">
+			 	<div class="wrap-contact">
+						<h2>Contact Us</h2>
+						<p>{{helpData[13]?.text}}</p>
+						<div class="row">
+							<div class="col-lg-6">
+								<div class="form-group">
+									<input type="text" name="name" id="name" [(ngModel)]="reqData.name" class="form-control input-lg cstm-input" placeholder="Name">
+								</div>
+							</div>
+							<div class="col-lg-6">
+								<div class="form-group">
+									<input type="text" name="email" id="email" [(ngModel)]="reqData.email" class="form-control input-lg" placeholder="Email">
+									
+								</div>
+							</div>
+							<div class="col-lg-12">
+								<div class="form-group">
+									<input type="text" name="subject" id="subject" [(ngModel)]="reqData.subject" class="form-control input-lg" placeholder="Subject">
+									
+								</div>
+							</div>
+							<div class="col-lg-12">
+								<div class="form-group">
+									<textarea class="form-control input-lg" name="message" [(ngModel)]="reqData.message" rows="5" id="message" placeholder=" Message"></textarea>
+									
+								</div>
+							</div>
+						</div>						
+						<div class="g-recaptcha" data-sitekey="6LccjXIUAAAAALs19cTD8lD6ODBrpfynpkXDl-ll"></div>
+						
+						<button class="btn btn-custom" id="Submit" type="button" style="margin-bottom: 15px;" (click)="submitContact()">Send</button><br>
+				</div>
+			 </div>
+			 <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 contact-us-page-order-1">
+					<div class="wrap-contact-detail">
+						<div class="email-details">
+							<h4 class="email-head">Lorem ipsum</h4>
+							<a href="javascript:void(0)" class="email-name high-color" style="color:#0000ff;">demo@gmail.com</a>
+						</div>
+						<div class="email-details">
+							<h4 class="email-head">Lorem ipsum</h4>
+							<a href="javascript:void(0)" class="email-nam high-colore" style="color:#0000ff;">demo@gmail.com</a>
+						</div>
+						<div class="email-details">
+							<h4 class="email-head">Lorem ipsum</h4>
+							<a href="javascript:void(0)" class="email-name high-color" style="color:#0000ff;">demo@gmail.com</a>
+							
+						</div>
+						<div class="email-details">
+							<h4 class="email-head">Lorem ipsum</h4>
+							<a href="javascript:void(0)" class="email-name high-color" style="color:#0000ff;">demo@gmail.com</a>
+						</div>
+						<div class="email-details">
+							<h4 class="email-head">Lorem ipsum</h4>
+							<a href="javascript:void(0)" class="email-name high-color" style="color:#0000ff;">demo@gmail.com</a>
+						</div>
+					</div>
+				</div>
+		</div>
+	</div>
+</section>

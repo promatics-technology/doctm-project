@@ -1,0 +1,162 @@
+<div class="loader-box" *ngIf="loading">
+	<img src="./assets/imgs/load.gif" />
+</div>
+<div class="analytics-sec">
+	
+	<div class="ipd-deatil-sec">
+		<!-- <div class="md-tab">
+	    
+	      	<ul class="nav nav-tabs" role="tablist">
+	          	<li role="presentation" class="active"><a href="javascript:void(0);" routerLink="/header-two-layout/dashboard-consultation-prescription"> Consultation </a></li>
+	          	<li role="presentation"><a href="javascript:void(0);" routerLink="/header-two-layout/dashboard-pharmacy-detail"> Clinic Services </a></li>
+	      	</ul>
+	      </div> -->
+
+	      <div class="inner-tab">
+	      	<!-- Nav tabs -->
+	      	<ul class="nav nav-tabs" role="tablist">
+	          	<li role="presentation"><a href="javascript:void(0);" routerLink="/header-two-layout/dashboard-progress"> Patient </a></li>
+	          	<li role="presentation"><a href="javascript:void(0);" routerLink="/header-two-layout/dashboard-progress-time"> Time</a></li>
+	          	<li role="presentation"><a href="javascript:void(0);" routerLink="/header-two-layout/dashboard-progress-prescription">Prescription</a></li>
+				<li role="presentation"><a href="javascript:void(0);" routerLink="/header-two-layout/dashboard-progress-pharmacy"> Pharmacy</a></li>
+	          	<li role="presentation"><a href="javascript:void(0);" routerLink="/header-two-layout/dashboard-progress-diagnosis"> Diagnostics </a></li>
+	          	<li role="presentation" class="active"><a href="javascript:void(0);" routerLink="/header-two-layout/dashboard-progress-ipd"> IPD </a></li>
+	      	</ul>
+	      </div>
+
+	      	<div class="ipd-body">
+		      	<!-- <div class="cus-sidebar-wrapper side-bar-cstm">
+		      		<div class="cus-sidebar">
+		      			<ul> 
+		      				<li>
+		      					<div class="">
+		      						<div class="col-lg-3">
+		      							<h4 class="pd-left"><b>From</b></h4>
+		      						</div>
+		      						<div class="col-lg-9">
+		      							<div class="cstm-mg">
+		      								<angular2-date-picker [(ngModel)]="fromDate1" [settings]="settings"></angular2-date-picker>
+		      							</div>
+		      						</div>
+		      					</div>
+		      				</li>
+		      				<li>
+		      					<div class="">
+		      						<div class="col-lg-3">
+		      							<h4 class="pd-left"><b>To</b></h4>
+		      						</div>
+		      						<div class="col-lg-9">
+		      							<div class="cstm-mg">
+		      								<angular2-date-picker [(ngModel)]="toDate1" [settings]="settings"></angular2-date-picker>
+		      							</div>
+		      						</div>
+		      					</div>
+		      				</li>
+		      				<li class="text-right brder-cstm">
+	    						<div class="col-lg-12 text-center">
+		      						<button class="btn btn-go" (click)="go()">Go</button>
+		      					</div>
+		      				</li>
+		      				<li class="li-cstm"> <a href="javascript:void(0);"> For Past</a> </li>
+		      				<li class="{{getClass(1)}}" (click)="activatetab(1)"> <a href="javascript:void(0);"> 1 Week &nbsp;<small *ngIf="activatedtab==1">({{fromDate | date: 'dd/LL/yy'}} - {{toDate | date: 'dd/LL/yy'}})</small> </a> </li>
+		      				<li class="{{getClass(2)}}" (click)="activatetab(2)"> <a href="javascript:void(0);"> 2 Weeks &nbsp;<small *ngIf="activatedtab==2">({{fromDate | date: 'dd/LL/yy'}} - {{toDate | date: 'dd/LL/yy'}})</small>  </a> </li>
+		      				<li class="{{getClass(3)}}" (click)="activatetab(3)"> <a href="javascript:void(0);"> 1 Month &nbsp;<small *ngIf="activatedtab==3">({{fromDate | date: 'dd/LL/yy'}} - {{toDate | date: 'dd/LL/yy'}})</small> </a> </li>
+		      				<li class="{{getClass(4)}}" (click)="activatetab(4)"> <a href="javascript:void(0);"> 3 Month &nbsp;<small *ngIf="activatedtab==4">({{fromDate | date: 'dd/LL/yy'}} - {{toDate | date: 'dd/LL/yy'}})</small></a> </li>
+		      				<li class="{{getClass(5)}}" (click)="activatetab(5)"> <a href="javascript:void(0);"> 6 Month &nbsp;<small *ngIf="activatedtab==5">({{fromDate | date: 'dd/LL/yy'}} - {{toDate | date: 'dd/LL/yy'}})</small></a> </li>
+		      				<li class="{{getClass(6)}}" (click)="activatetab(6)"> <a href="javascript:void(0);"> 1 Year &nbsp;<small *ngIf="activatedtab==6">({{fromDate | date: 'dd/LL/yy'}} - {{toDate | date: 'dd/LL/yy'}})</small></a> </li>
+		      				<li class="{{getClass(7)}}" (click)="activatetab(7)"> <a href="javascript:void(0);"> All </a> </li>
+		      			</ul>
+		      		</div>
+		      	</div> -->
+		      	<div class="cus-content-wrapper">
+		      		<div class="cus-content">
+		      			<div class="row brdr-lft">
+		      				<div class="col-lg-12 text-center">
+		      					<h1 class="mg-bt txt-thm"><u>Collection</u></h1>
+		      					<h2 class="mg-0 hdr-2"><span class="txt-thm">Rs.</span> <span class="txt-thm-1">{{finalTotal}}</span></h2>
+		      					<ul class="nav nav-tabs cstm-ul-new">
+		      						<li class="active"><a data-toggle="tab" href="#home-cstm" (click)="getDoctorId(0)">IPD Aggregate</a></li>
+		      						<li *ngFor="let doctor of doctorArray"><a data-toggle="tab" href="#menu1-cstm" (click)="getDoctorId(getDoctorFirstName(doctor._id))">Dr. {{getDoctorFirstName(doctor.first_name)}}</a></li>
+		      					</ul>
+		      					<div class="tab-content">
+		      						<div id="home-cstm" class="tab-pane fade in active">
+		      							<div class="cstm-pad">
+		      								<div class="table-responsive">
+		      									<div class="">
+		      										<table class="table tb-1">
+		      											<tbody>
+		      												<tr>
+		      													<td style="text-align: left;" width="550px">Patients Admitted</td>
+		      													<td width="5px"><h4><b>:</b></h4></td>
+		      													<td><b>{{patientAdmitted}}&nbsp;<span class="grin"><small>({{getData(patientAdmittedPercentage)}}%)</small></span></b></td>
+		      												</tr>
+		      												<tr class="evn">
+		      													<td style="text-align: left;" width="550px">Admission Rate</td>
+		      													<td width="5px"><h4><b>:</b></h4></td>
+		      													<td><b>{{getData(admisssionRate)}}%&nbsp;</b></td>
+		      												</tr>
+		      												<tr>
+		      													<td style="text-align: left;" width="550px">Revenue contribution</td>
+		      													<td width="5px"><h4><b>:</b></h4></td>
+		      													<td><b>{{DocWiseTotal}}&nbsp;</b></td>
+		      												</tr>
+		      												<tr class="evn">
+		      													<td style="text-align: left;" width="550px">Avg revenue per admission</td>
+		      													<td width="5px"><h4><b>:</b></h4></td>
+		      													<td><b>{{getData(totalAvgBill)}}&nbsp;</b></td>
+		      												</tr>
+		      												<tr>
+		      													<td style="text-align: left;" width="550px">Admission Hrs.</td>
+		      													<td width="5px"><h4><b>:</b></h4></td>
+		      													<td><b>{{getData(totalAdmissionHours)}}&nbsp;</b></td>
+		      												</tr>
+		      												<tr class="evn">
+		      													<td style="text-align: left;" width="550px">Patients Discharged</td>
+		      													<td width="5px"><h4><b>:</b></h4></td>
+		      													<td><b>{{patientDischarge}}&nbsp;<!-- <span class="grin"><small>({{getData(patientDischargedPercentage)}}%)</small></span> --></b></td>
+		      												</tr>
+		      											</tbody>
+		      										</table>
+		      									</div>
+		      								</div>
+		      							</div>
+		      						</div>
+		      					</div>
+		      				</div>
+		      				<div class="container-fluid">
+		      					<div class="col-lg-12 text-center foot-2">
+		      						<h5 style="font-weight: normal;">
+		      							<b style="background-color: rgb(199,220,244);padding:5px; ">
+		      								CURRENT OCCUPANCY STATUS:
+		      							</b>
+		      							<span style="background-color: rgb(199,220,244);padding:6px; ">
+		      								TOTAL BEDS <b>- {{getData(totalGeneralBeds + totalSemiPrivateBeds + totalPrivateBeds)}} |</b>
+		      								OCCUPIED <b>- {{patientAdmittedlength}} | </b>
+		      								VACANT- <b>{{getData((totalGeneralBeds + totalSemiPrivateBeds + totalPrivateBeds)-(patientAdmittedlength))}}</b>
+		      							</span>
+		      						</h5>
+		      					</div>
+		      				</div>
+		      			</div>
+		      		</div>
+		      	</div>
+	     	</div>
+	  </div>
+	</div>
+	<div class="container footer-cstm-an">
+		<div class="row">
+			<div class="col-lg-5 text-right">
+				<div>
+					<p>CURRENT OCCUPANCY: <b>{{getData(patientAdmittedOccupency)}}% </b></p>
+				</div>
+			</div>
+			<div class="text-center col-lg-2">
+				<span>|</span>
+			</div>
+			<div class="col-lg-5 text-left">
+				<div>
+					<p>ADMISSION TREND : <b>Rising:</b> Falling : Steady</p>
+				</div>
+			</div>
+		</div>
+	</div>

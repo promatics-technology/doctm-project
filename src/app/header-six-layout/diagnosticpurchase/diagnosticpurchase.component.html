@@ -1,0 +1,815 @@
+<div class="cstm-hdr">
+	<div class="">
+		<div  class="col-lg-2">
+			<div  class="dashboard-header-logo" tabindex="0" ng-reflect-router-link="/header-six-layout/dashboard-">
+				<img _ngcontent-c3="" class="img-responsive" src="./assets/imgs/logoDoctm.png" routerLink="/header-six-layout/dashboard-diagnostic">
+			</div>
+			<div >
+				<div _ngcontent-c3="" class="dshbrd-btn">
+					<button  class="btn btn-custom" routerLink="/header-six-layout/dashboard-diagnostic" tabindex="0" ng-reflect-router-link="/header-six-layout/dashboard-"> Dashboard </button>
+				</div>
+			</div>
+		</div>
+		<form [formGroup]="stockPurchase">
+			<div class="col-lg-3">
+				<div class="form-group">
+				    <input type="text" class="form-control input-lg" [(ngModel)]="reqData.partyName" placeholder="Consulting Doctor" required="" pattern="[a-zA-z ]+" [formControl]="stockPurchase.controls['partyName']">
+				</div>
+				 <p style="color: #FF0000" *ngIf="!stockPurchase.controls['partyName'].valid  && ( stockPurchase.controls['partyName'].touched)">Invalid Party Name !!!</p>
+			</div>
+			<div class="col-lg-7">
+				<div class="row">
+					<div class="col-lg-4">
+						<div class="form-group">
+					    	<input type="number" class="form-control input-lg" [(ngModel)]="reqData.invoiceNumber" placeholder="Prescription ID" required="" pattern="[0-9]+" [formControl]="stockPurchase.controls['invoiceNumber']">
+						</div>
+						
+					</div>
+					<div class="col-lg-4">
+						<div class="form-group">
+					    	<input type="number" class="form-control input-lg" [(ngModel)]="reqData.billNumber" placeholder="Invoice No." required="" pattern="[0-9]+" [formControl]="stockPurchase.controls['billNumber']">
+						</div>
+						
+					</div>
+					<div class="col-lg-4">
+						<div class="form-group">
+					    	<input type="number" class="form-control input-lg" [(ngModel)]="reqData.billNumber" placeholder="Date" required="" pattern="[0-9]+" [formControl]="stockPurchase.controls['billNumber']">
+						</div>
+						
+					</div>
+					<div class="col-lg-6">
+						<div class="form-group">
+					    	<input type="number" class="form-control input-lg" [(ngModel)]="reqData.billNumber" placeholder="Patient Name" required="" pattern="[0-9]+" [formControl]="stockPurchase.controls['billNumber']">
+						</div>
+						
+					</div>
+					<div class="col-lg-6">
+                        <span  class="caret cstm-caret"></span>
+                        <select class="form-control select-doctor cstm-opt">
+                            <option selected="" disabled="" value="">CONSULTING DOCTOR </option>
+                            <option value=""> Dr. Gagandeep Sethi</option>
+                        </select>
+					</div>
+				</div>
+			</div>
+		</form>
+		
+	</div>
+</div>
+<!-- cstm table -->
+<div class="stock-tab">
+	<div class="col-lg-12">
+		<table cellpadding="20px" class="table cstm-table" style="position: relative;">
+    	<thead class="table-head" style="position: absolute;">
+		  	<tr>
+			    <th class="text-center"><h5>Category</h5></th>
+                <th class="text-center"><h5>Test Name/Details</h5></th>
+                <th class="text-center"><h5>Rate</h5></th>
+                <th class="text-center"><h5>Disc(%)</h5></th>
+                <th class="text-center"><h5>Amount</h5></th>
+                <th class="text-center"><h5>Action</h5></th>
+			</tr>
+		</thead>
+		</table>
+		<div class="table-scroll-outside table-two" style="margin-top: 50px;">
+			<table>
+				<tbody class="tbod-max-w my-tbdy">
+					<tr class="table-row" *ngFor="let tr of totalTr;let i = index;">
+						<td>
+							<select  class="form-control" class="form-control txtfield" [(ngModel)]="reqData.opt[i]">
+								<option selected="" value="" disabled="">Pathology</option>	
+								<option value="Tab">Pathology</option>
+								<option value="Cap">X-Ray</option>
+								<option value="Syr">Ultrasound</option>
+								<option value="Sus">ECG</option>
+								<option value="Emu">TMT</option>
+								<option value="Sol">Echo</option>
+								<option value="Inj">Doppler Studies</option>
+								<option value="Mou">EEg</option>
+								<option value="Pow">Nerve Test</option>
+								<option value="Cre">Uroflowmetry</option>
+								<option value="Gel">Audiometry</option>
+								<option value="Dro">Bone Densitometry</option>
+								<option value="Aer">Eye Tests </option>
+								<option value="Lot">Lung Tests</option>
+								<option value="Oin">Others</option>
+							</select>
+						</td>
+						<td class="text-center">
+							<div class="cstm-input-2">
+								<input type="text" name="" class="form-control" placeholder="Urine Routine" [(ngModel)]="reqData.product[i]">
+							</div>
+						</td>
+						<!-- <td  class="text-center">
+							<span class="cstm-input cstm-2">
+								<input type="number" name="" class="form-control" [(ngModel)]="reqData.pack1[i]">
+							</span>
+							<span>&nbsp;&nbsp;X&nbsp;&nbsp;</span>
+							<span class="cstm-input cstm-2">
+								<input type="number" name="" class="form-control" [(ngModel)]="reqData.pack2[i]">
+							</span>
+						</td> -->
+						<td  class="text-center">
+							<div class="cstm-input-2">          
+								<input type="number" name="" class="form-control" placeholder="99.50" [(ngModel)]="reqData.mrp[i]">
+							</div>
+						</td>
+						<td  class="text-center">
+							<div class="cstm-input-2">          
+								<input type="number" name="" class="form-control" placeholder="5" [(ngModel)]="reqData.mrp[i]">
+							</div>
+						</td>
+						<td  class="text-center">
+							<div class="cstm-input-2">          
+								<input type="number" name="" class="form-control" placeholder="113.34" [(ngModel)]="reqData.mrp[i]">
+							</div>
+						</td>
+						<td  class="text-center">
+							<span class="min icon-2">
+								<i class="fa fa-minus" (click)="removeRow(i)"> &nbsp;&nbsp;&nbsp;&nbsp;</i>
+							</span>
+							<span class="add icon-2">
+								<i class="fa fa-plus" (click)="addRow()" *ngIf="i==totalTr.length-1"></i>
+							</span>
+						</td>
+					</tr>
+		  	</tbody>
+			</table>
+		</div>
+	</div>
+	
+</div>
+
+<!-- ends -->
+
+<!-- <div class="stock-tab">
+	<div class="col-lg-10 col-lg-offset-1 cstm-div">
+		<table cellpadding="20px" class="table cstm-table">
+            <thead class="table-head">
+              <tr>
+                <th class="th-back brdr-right"><h5>Type</h5></th>
+                <th class="th-back brdr-right prdct"><h5>Product</h5></th>
+                <th class="th-back brdr-right"><h5>Pack <small class="sn-txt">(1x10)</small></h5></th>
+                <th class="th-back brdr-right"><h5>M.R.P</h5></th>
+                <th class="th-back brdr-right"><h5>QTY</h5></th>
+                <th class="th-back brdr-right"><h5>P.Rate</h5></th>
+                <th class="th-back brdr-right"><h5>CGST</h5></th>
+                <th class="th-back brdr-right"><h5>SGST</h5></th>
+                <th class="th-back brdr-right"><h5>Disc</h5></th>
+                <th class="th-back brdr-right"><h5>Amount</h5></th>
+                <th class="th-back brdr-right"><h5>Batch</h5></th>
+                <th class="th-back brdr-right"><h5>Exp <small class="sn-txt">(MM/YY)</small></h5></th>
+                <th class="th-back brdr-right"><h5>Action</h5></th>
+              </tr>
+           </thead>
+            <tbody class="tbod-max-w cstm-tbd">
+				<tr class="" *ngFor="let tr of totalTr;let i = index;">
+					<td>
+						<select  class="form-control txtfield" [(ngModel)]="reqData.opt[i]">
+							<option selected="" value="" disabled="">Type</option>
+	                  		<option>TAB</option>
+	                  		<option>CAP</option>
+	                  		<option>SYR</option>
+	                  		<option>SUS</option>
+	                  		<option>EMUL</option>
+	                  		<option>SOL</option>
+	                  		<option>INJ</option>
+	                  		<option>CRE</option>
+	                  		<option>OINT</option>
+	                  		<option>GEL</option>
+	                  		<option>LOT</option>
+	                  		<option>DROP</option>
+	                  		<option>UNIT</option>
+	                  		<option>ITEM</option>
+	                  		<option>STRP</option>
+	                  		<option>PCS</option>
+	                  		<option>BOX</option>
+	                  		<option>MISC</option>
+	                    </select>
+					</td>
+					<td class="prdct">
+						<div class="txt-div">
+							<input type="text" placeholder="Product1" [(ngModel)]="reqData.product[i]" class="">
+						</div>
+					</td>
+					<td>
+						<div class="txt-div two-inputs">
+							<input type="number" placeholder="1" [(ngModel)]="reqData.pack1[i]" class="">
+							<input type="number" placeholder="2" [(ngModel)]="reqData.pack2[i]" class="">
+						</div>
+					</td>
+					<td>
+						<div class="txt-div">
+							<input type="number" placeholder="99.50" (blur)="getTotalRecord(i)" [(ngModel)]="reqData.mrp[i]" class="">
+						</div>
+					</td>
+					<td>
+						<div class="txt-div">
+							<input type="number" placeholder="10" [(ngModel)]="reqData.quantity[i]" (blur)="getTotalRecord(i)" class="">
+						</div>
+					</td>
+					<td>
+						<div class="txt-div">
+							<input type="number" placeholder="70.50" disabled="" [(ngModel)]="reqData.rate[i]" (blur)="getTotalRecord(i)"  value="reqData.rate[i]" class="">
+						</div>
+					</td>
+					<td>
+						<div class="txt-div">
+							<input type="number" placeholder="6" [(ngModel)]="reqData.cgst[i]" (blur)="getTotalRecord(i)" class="">
+						</div>
+					</td>
+					<td>
+						<div class="txt-div">
+							<input type="number" placeholder="6" [(ngModel)]="reqData.sgst[i]" (blur)="getTotalRecord(i)" class="">
+						</div>
+					</td>
+					<td>
+						<div class="txt-div">
+							<input type="number" placeholder="5" [(ngModel)]="reqData.discount[i]" (blur)="getTotalRecord(i)" class="">
+						</div>
+					</td>
+					<td>
+						<div class="txt-div">
+							<input type="number" placeholder="705.0" disabled="" [(ngModel)]="reqData.amount[i]" (blur)="getTotalRecord(i)" class="" value="reqData.amount[i]">
+						</div>
+					</td>
+					<td>
+						<div class="txt-div">
+							<input type="text" placeholder="B2334" [(ngModel)]="reqData.batch[i]" class="">
+						</div>
+					</td>
+					<td>
+						<div class="txt-div two-inputs">
+							<input type="number" placeholder="mm" [(ngModel)]="reqData.month[i]" class="">
+							<input type="number" placeholder="yy" [(ngModel)]="reqData.year[i]" class="">
+						</div>
+					</td>
+					<td class="ad-remove">
+						<i class="fa fa-minus" (click)="removeRow(i)"></i>
+						<i class="fa fa-plus" (click)="addRow()" *ngIf="i==totalTr.length-1"></i>
+					</td>
+				</tr>
+          </tbody>
+        </table>
+	</div>
+</div> -->
+<div class="footer-cstm-1">
+	<div class="col-lg-10 col-lg-offset-1">
+	  <table class="table table-bordered">
+	    <thead>
+	      <tr class="foot-data">
+	        <th class="text-center">Total Items</th>
+	        <th class="text-center">Sub Total</th>
+	        <th class="text-center">GST</th>
+	        <th class="text-center">Grand Total</th>
+	      
+	      </tr>
+	    </thead>
+	    <tbody>
+	      <tr>
+	        <td class="text-center">5</td>
+	        <td class="text-center">2933.43</td>
+	        <td class="text-center">0</td>
+	        <td class="text-center">2933</td>
+	    
+	      </tr>
+	      <tr>
+	        <td class="text-center" colspan="4">
+	        	<div  class="dashboard-btns new-reg">
+				<button  class="btn btn-custom btn-1" (click)='savePurchaseDetails()'>PRINT</button>
+				</div>
+	        </td>
+	       
+	        <td class="text-center">
+	        	<h5>{{reqData.amount[i]}}</h5>
+			</td>
+	      </tr>
+	    </tbody>
+	  </table>
+	</div>
+</div>
+  <!-- Modal -->
+  <div class="modal fade" id="stck-prchse" role="dialog">
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content modal-lg modal-cstm">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h3 class="modal-title text-center">Return Purchase</h3>
+        </div>
+        <div class="modal-body">
+	        <div class="col-lg-3 col-lg-offset-1 text-right">
+	         	<b class="bill-no">Bill Number</b>
+	        </div>
+	        <div class="col-lg-4">
+	         	<div class="form-group">
+	         		<input type="text" name="" class="form-control">
+	         	</div>
+	        </div>
+	        <div class="col-lg-4">
+	         	<button class="btn btn-custom">
+						<div> Search </div>
+					</button>
+	        </div>
+	        <div class="stock-tab">
+				<div class="col-lg-12">
+					<div class="hd-two text-center">
+						<div>Return</div>
+						<div>Item</div>
+					</div>
+					<div class="hd-two">
+						<span>Type</span>
+					</div>
+					<div class="hd-two">
+						<span>Product Name</span>
+					</div>
+					<div class="hd-two">
+						<span>Pack</span>
+					</div>
+					<div class="hd-two">
+						<span>M.R.P</span>
+					</div>
+					<div class="hd-two">
+						<div>Return</div>
+						<div>QTY</div>
+					</div>
+					<div class="hd-two">
+						<span>P.Rate</span>
+					</div>
+					<div class="hd-two">
+						<span>CGST</span>
+					</div>
+					<div class="hd-two">
+						<span>SGST</span>
+					</div>
+					<div class="hd-two">
+						<span>Disc</span>
+					</div>
+					<div class="hd-two">
+						<span>Account</span>
+					</div>
+					<div class="hd-two">
+						<span>Batch</span>
+					</div>
+					<div class="hd-two">
+						<span>Exp</span>
+					</div>
+				</div>
+				<div class="col-lg-12">
+					<div class="table tab-stock tab-stock-2">
+						<table>
+							<tr class="mg-top" *ngFor="let tr of totalTr;let i = index;">
+						<td width="88px">
+							<label class="cstm-chk">
+							  <input type="checkbox">
+							  <span class="checkmark"></span>
+							</label>
+						</td>
+						<td>
+							<select  class="form-control txtfield" [(ngModel)]="reqData.opt[i]">
+		                  		<option selected="" value="">TAB</option>
+		                  		<option>CAP</option>
+		                  		<option>SYR</option>
+		                  		<option>SUS</option>
+		                  		<option>EMUL</option>
+		                  		<option>SOL</option>
+		                  		<option>INJ</option>
+		                  		<option>CRE</option>
+		                  		<option>OINT</option>
+		                  		<option>GEL</option>
+		                  		<option>LOT</option>
+		                  		<option>DROP</option>
+		                  		<option>UNIT</option>
+		                  		<option>ITEM</option>
+		                  		<option>STRP</option>
+		                  		<option>PCS</option>
+		                  		<option>BOX</option>
+		                  		<option>MISC</option>
+		                    </select>
+						</td>
+						<td width="136px">
+							<div class="pro-trans-input">
+								<input type="text" placeholder="Product1" class="cstm-put">
+							</div>
+						</td>
+						<td>
+							<div class="trans-input">
+								<input type="text" placeholder="1x10" class="cstm-put">
+							</div>
+						</td>
+						<td>
+							<div class="trans-input">
+								<input type="text" placeholder="99.50" class="cstm-put">
+							</div>
+						</td>
+						<td>
+							<div class="trans-input">
+								<input type="text" placeholder="10" class="cstm-put">
+							</div>
+						</td>
+						<td>
+							<div class="trans-input">
+								<input type="text" placeholder="70.50" class="cstm-put">
+							</div>
+						</td>
+						<td>
+							<div class="trans-input">
+								<input type="text" placeholder="6" class="cstm-put">
+							</div>
+						</td>
+						<td>
+							<div class="trans-input">
+								<input type="text" placeholder="6" class="cstm-put">
+							</div>
+						</td>
+						<td>
+							<div class="trans-input">
+								<input type="text" placeholder="5" class="cstm-put">
+							</div>
+						</td>
+						<td>
+							<div class="trans-input">
+								<input type="text" placeholder="705.0" class="cstm-put">
+							</div>
+						</td>
+						<td>
+							<div class="trans-input">
+								<input type="text" placeholder="B2334" class="cstm-put">
+							</div>
+						</td>
+						<td>
+							<div class="trans-input">
+								<input type="text" placeholder="6/23" class="cstm-put">
+							</div>
+						</td>
+							</tr>
+							<tr class="mg-top" *ngFor="let tr of totalTr;let i = index;">
+						<td width="88px">
+							<label class="cstm-chk">
+							  <input type="checkbox">
+							  <span class="checkmark"></span>
+							</label>
+						</td>
+						<td>
+							<select  class="form-control txtfield" [(ngModel)]="reqData.opt[i]">
+		                  		<option selected="" value="">TAB</option>
+		                  		<option>CAP</option>
+		                  		<option>SYR</option>
+		                  		<option>SUS</option>
+		                  		<option>EMUL</option>
+		                  		<option>SOL</option>
+		                  		<option>INJ</option>
+		                  		<option>CRE</option>
+		                  		<option>OINT</option>
+		                  		<option>GEL</option>
+		                  		<option>LOT</option>
+		                  		<option>DROP</option>
+		                  		<option>UNIT</option>
+		                  		<option>ITEM</option>
+		                  		<option>STRP</option>
+		                  		<option>PCS</option>
+		                  		<option>BOX</option>
+		                  		<option>MISC</option>
+		                    </select>
+						</td>
+						<td width="136px">
+							<div class="pro-trans-input">
+								<input type="text" placeholder="Product1" class="cstm-put">
+							</div>
+						</td>
+						<td>
+							<div class="trans-input">
+								<input type="text" placeholder="1x10" class="cstm-put">
+							</div>
+						</td>
+						<td>
+							<div class="trans-input">
+								<input type="text" placeholder="99.50" class="cstm-put">
+							</div>
+						</td>
+						<td>
+							<div class="trans-input">
+								<input type="text" placeholder="10" class="cstm-put">
+							</div>
+						</td>
+						<td>
+							<div class="trans-input">
+								<input type="text" placeholder="70.50" class="cstm-put">
+							</div>
+						</td>
+						<td>
+							<div class="trans-input">
+								<input type="text" placeholder="6" class="cstm-put">
+							</div>
+						</td>
+						<td>
+							<div class="trans-input">
+								<input type="text" placeholder="6" class="cstm-put">
+							</div>
+						</td>
+						<td>
+							<div class="trans-input">
+								<input type="text" placeholder="5" class="cstm-put">
+							</div>
+						</td>
+						<td>
+							<div class="trans-input">
+								<input type="text" placeholder="705.0" class="cstm-put">
+							</div>
+						</td>
+						<td>
+							<div class="trans-input">
+								<input type="text" placeholder="B2334" class="cstm-put">
+							</div>
+						</td>
+						<td>
+							<div class="trans-input">
+								<input type="text" placeholder="6/23" class="cstm-put">
+							</div>
+						</td>
+							</tr>
+							<tr class="mg-top" *ngFor="let tr of totalTr;let i = index;">
+						<td width="88px">
+							<label class="cstm-chk">
+							  <input type="checkbox">
+							  <span class="checkmark"></span>
+							</label>
+						</td>
+						<td>
+							<select  class="form-control txtfield" [(ngModel)]="reqData.opt[i]">
+		                  		<option selected="" value="">TAB</option>
+		                  		<option>CAP</option>
+		                  		<option>SYR</option>
+		                  		<option>SUS</option>
+		                  		<option>EMUL</option>
+		                  		<option>SOL</option>
+		                  		<option>INJ</option>
+		                  		<option>CRE</option>
+		                  		<option>OINT</option>
+		                  		<option>GEL</option>
+		                  		<option>LOT</option>
+		                  		<option>DROP</option>
+		                  		<option>UNIT</option>
+		                  		<option>ITEM</option>
+		                  		<option>STRP</option>
+		                  		<option>PCS</option>
+		                  		<option>BOX</option>
+		                  		<option>MISC</option>
+		                    </select>
+						</td>
+						<td width="136px">
+							<div class="pro-trans-input">
+								<input type="text" placeholder="Product1" class="cstm-put">
+							</div>
+						</td>
+						<td>
+							<div class="trans-input">
+								<input type="text" placeholder="1x10" class="cstm-put">
+							</div>
+						</td>
+						<td>
+							<div class="trans-input">
+								<input type="text" placeholder="99.50" class="cstm-put">
+							</div>
+						</td>
+						<td>
+							<div class="trans-input">
+								<input type="text" placeholder="10" class="cstm-put">
+							</div>
+						</td>
+						<td>
+							<div class="trans-input">
+								<input type="text" placeholder="70.50" class="cstm-put">
+							</div>
+						</td>
+						<td>
+							<div class="trans-input">
+								<input type="text" placeholder="6" class="cstm-put">
+							</div>
+						</td>
+						<td>
+							<div class="trans-input">
+								<input type="text" placeholder="6" class="cstm-put">
+							</div>
+						</td>
+						<td>
+							<div class="trans-input">
+								<input type="text" placeholder="5" class="cstm-put">
+							</div>
+						</td>
+						<td>
+							<div class="trans-input">
+								<input type="text" placeholder="705.0" class="cstm-put">
+							</div>
+						</td>
+						<td>
+							<div class="trans-input">
+								<input type="text" placeholder="B2334" class="cstm-put">
+							</div>
+						</td>
+						<td>
+							<div class="trans-input">
+								<input type="text" placeholder="6/23" class="cstm-put">
+							</div>
+						</td>
+							</tr>
+
+							<tr class="mg-top" *ngFor="let tr of totalTr;let i = index;">
+						<td width="88px">
+							<label class="cstm-chk">
+							  <input type="checkbox">
+							  <span class="checkmark"></span>
+							</label>
+						</td>
+						<td>
+							<select  class="form-control txtfield" [(ngModel)]="reqData.opt[i]">
+		                  		<option selected="" value="">TAB</option>
+		                  		<option>CAP</option>
+		                  		<option>SYR</option>
+		                  		<option>SUS</option>
+		                  		<option>EMUL</option>
+		                  		<option>SOL</option>
+		                  		<option>INJ</option>
+		                  		<option>CRE</option>
+		                  		<option>OINT</option>
+		                  		<option>GEL</option>
+		                  		<option>LOT</option>
+		                  		<option>DROP</option>
+		                  		<option>UNIT</option>
+		                  		<option>ITEM</option>
+		                  		<option>STRP</option>
+		                  		<option>PCS</option>
+		                  		<option>BOX</option>
+		                  		<option>MISC</option>
+		                    </select>
+						</td>
+						<td width="136px">
+							<div class="pro-trans-input">
+								<input type="text" placeholder="Product1" class="cstm-put">
+							</div>
+						</td>
+						<td>
+							<div class="trans-input">
+								<input type="text" placeholder="1x10" class="cstm-put">
+							</div>
+						</td>
+						<td>
+							<div class="trans-input">
+								<input type="text" placeholder="99.50" class="cstm-put">
+							</div>
+						</td>
+						<td>
+							<div class="trans-input">
+								<input type="text" placeholder="10" class="cstm-put">
+							</div>
+						</td>
+						<td>
+							<div class="trans-input">
+								<input type="text" placeholder="70.50" class="cstm-put">
+							</div>
+						</td>
+						<td>
+							<div class="trans-input">
+								<input type="text" placeholder="6" class="cstm-put">
+							</div>
+						</td>
+						<td>
+							<div class="trans-input">
+								<input type="text" placeholder="6" class="cstm-put">
+							</div>
+						</td>
+						<td>
+							<div class="trans-input">
+								<input type="text" placeholder="5" class="cstm-put">
+							</div>
+						</td>
+						<td>
+							<div class="trans-input">
+								<input type="text" placeholder="705.0" class="cstm-put">
+							</div>
+						</td>
+						<td>
+							<div class="trans-input">
+								<input type="text" placeholder="B2334" class="cstm-put">
+							</div>
+						</td>
+						<td>
+							<div class="trans-input">
+								<input type="text" placeholder="6/23" class="cstm-put">
+							</div>
+						</td>
+							</tr>
+							<tr class="mg-top" *ngFor="let tr of totalTr;let i = index;">
+						<td width="88px">
+							<label class="cstm-chk">
+							  <input type="checkbox">
+							  <span class="checkmark"></span>
+							</label>
+						</td>
+						<td>
+							<select  class="form-control txtfield" [(ngModel)]="reqData.opt[i]">
+		                  		<option selected="" value="">TAB</option>
+		                  		<option>CAP</option>
+		                  		<option>SYR</option>
+		                  		<option>SUS</option>
+		                  		<option>EMUL</option>
+		                  		<option>SOL</option>
+		                  		<option>INJ</option>
+		                  		<option>CRE</option>
+		                  		<option>OINT</option>
+		                  		<option>GEL</option>
+		                  		<option>LOT</option>
+		                  		<option>DROP</option>
+		                  		<option>UNIT</option>
+		                  		<option>ITEM</option>
+		                  		<option>STRP</option>
+		                  		<option>PCS</option>
+		                  		<option>BOX</option>
+		                  		<option>MISC</option>
+		                    </select>
+						</td>
+						<td width="136px">
+							<div class="pro-trans-input">
+								<input type="text" placeholder="Product1" class="cstm-put">
+							</div>
+						</td>
+						<td>
+							<div class="trans-input">
+								<input type="text" placeholder="1x10" class="cstm-put">
+							</div>
+						</td>
+						<td>
+							<div class="trans-input">
+								<input type="text" placeholder="99.50" class="cstm-put">
+							</div>
+						</td>
+						<td>
+							<div class="trans-input">
+								<input type="text" placeholder="10" class="cstm-put">
+							</div>
+						</td>
+						<td>
+							<div class="trans-input">
+								<input type="text" placeholder="70.50" class="cstm-put">
+							</div>
+						</td>
+						<td>
+							<div class="trans-input">
+								<input type="text" placeholder="6" class="cstm-put">
+							</div>
+						</td>
+						<td>
+							<div class="trans-input">
+								<input type="text" placeholder="6" class="cstm-put">
+							</div>
+						</td>
+						<td>
+							<div class="trans-input">
+								<input type="text" placeholder="5" class="cstm-put">
+							</div>
+						</td>
+						<td>
+							<div class="trans-input">
+								<input type="text" placeholder="705.0" class="cstm-put">
+							</div>
+						</td>
+						<td>
+							<div class="trans-input">
+								<input type="text" placeholder="B2334" class="cstm-put">
+							</div>
+						</td>
+						<td>
+							<div class="trans-input">
+								<input type="text" placeholder="6/23" class="cstm-put">
+							</div>
+						</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</div>
+        </div>
+        <div class="modal-footer">
+         <div class="col-lg-6">
+         	<div class="row">
+         		<div class="col-lg-6">
+         			<h3 class="mg-top">Total Refund Amount</h3>
+         		</div>
+         		<div class="col-lg-6 text-left">
+         			<button class="btn data-div" readonly="" disabled="">
+						<div> 1126.0</div>
+					</button>
+         		</div>
+         	</div>
+         </div>
+         <div class="col-lg-6">
+         	<button class="btn btn-custom">
+				<div> Update </div>
+			</button>
+         </div>
+        </div>
+        <div class="clearfix"></div>
+      </div>
+      
+    </div>
+</div>

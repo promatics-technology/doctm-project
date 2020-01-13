@@ -1,0 +1,283 @@
+<div class="loader-box" *ngIf="loading">
+	<img src="./assets/imgs/load.gif" />
+</div>
+<div class="analytics-sec">
+	<div class="ipd-deatil-sec">
+		<div class="inner-tab">
+			<ul class="nav nav-tabs new-ul-1" role="tablist">
+				<li role="presentation"  class="clz"><a href="javascript:void(0);" routerLink="/header-two-layout/clinic-summary-opd"> <div>OPD</div><small> (All Doctors)</small> </a></li>
+				<li role="presentation" *ngIf="doctorData.clinic_services.Clinic_Pharmacy==true"><a href="javascript:void(0);" routerLink="/header-two-layout/clinic-summary-pharmacy">Pharmacy</a></li>
+				<li role="presentation" class="active" *ngIf="doctorData.clinic_services.Clinic_Diagnostics==true"><a href="javascript:void(0);" routerLink="/header-two-layout/clinic-summary-diagnostic"> Diagnostics </a></li>
+				<li role="presentation" *ngIf="doctorData.clinic_services.Clinic_IPD==true"><a href="javascript:void(0);" routerLink="/header-two-layout/clinic-summary-ipd"> IPD </a></li>
+				<li role="presentation"><a href="javascript:void(0);" routerLink="/header-two-layout/clinic-summary-all">Summary</a></li>
+			</ul>
+		</div>
+		<div class="ipd-body">
+			<div class="cus-sidebar-wrapper side-bar-cstm">
+				<div class="cus-sidebar">
+					<ul> 
+						<li>
+							<div class="">
+								<div class="col-lg-3">
+									<h4 class="pd-left"><b>From</b></h4>
+								</div>
+								<div class="col-lg-9">
+									<div class="cstm-mg">
+										<angular2-date-picker [(ngModel)]="fromDate1" [settings]="settings"></angular2-date-picker>
+									</div>
+								</div>
+							</div>
+						</li>
+						<li>
+							<div class="">
+								<div class="col-lg-3">
+									<h4 class="pd-left"><b>To</b></h4>
+								</div>
+								<div class="col-lg-9">
+									<div class="cstm-mg">
+										<angular2-date-picker [(ngModel)]="toDate1" [settings]="settings"></angular2-date-picker>
+									</div>
+								</div>
+							</div>
+						</li>
+						<li class="text-right brder-cstm">
+							<div class="col-lg-12 text-center">
+								<button class="btn btn-go" (click)="go()">Go</button>
+							</div>
+						</li>
+						<li class="li-cstm"> <a href="javascript:void(0);"> For Past</a> </li>
+						<!-- <li class="{{getClass(0)}}" (click)="activatetab(0)" class="active"> <a href="javascript:void(0);"> Current </a> </li> -->
+						<li class="{{getClass(1)}}" (click)="activatetab(1)"> <a href="javascript:void(0);"> 1 Week &nbsp;<small *ngIf="activatedtab==1">({{fromDate | date: 'dd/LL/yy'}} - {{toDate | date: 'dd/LL/yy'}})</small> </a> </li>
+						<li class="{{getClass(2)}}" (click)="activatetab(2)"> <a href="javascript:void(0);"> 2 Weeks &nbsp;<small *ngIf="activatedtab==2">({{fromDate | date: 'dd/LL/yy'}} - {{toDate | date: 'dd/LL/yy'}})</small>  </a> </li>
+						<li class="{{getClass(3)}}" (click)="activatetab(3)"> <a href="javascript:void(0);"> 1 Month &nbsp;<small *ngIf="activatedtab==3">({{fromDate | date: 'dd/LL/yy'}} - {{toDate | date: 'dd/LL/yy'}})</small> </a> </li>
+						<li class="{{getClass(4)}}" (click)="activatetab(4)"> <a href="javascript:void(0);"> 3 Month &nbsp;<small *ngIf="activatedtab==4">({{fromDate | date: 'dd/LL/yy'}} - {{toDate | date: 'dd/LL/yy'}})</small></a> </li>
+						<li class="{{getClass(5)}}" (click)="activatetab(5)"> <a href="javascript:void(0);"> 6 Month &nbsp;<small *ngIf="activatedtab==5">({{fromDate | date: 'dd/LL/yy'}} - {{toDate | date: 'dd/LL/yy'}})</small></a> </li>
+						<li class="{{getClass(6)}}" (click)="activatetab(6)"> <a href="javascript:void(0);"> 1 Year &nbsp;<small *ngIf="activatedtab==6">({{fromDate | date: 'dd/LL/yy'}} - {{toDate | date: 'dd/LL/yy'}})</small></a> </li>
+						<li class="{{getClass(7)}}" (click)="activatetab(7)"> <a href="javascript:void(0);"> All </a> </li>
+					</ul>
+				</div>
+			</div>
+			<div class="stock-tab">
+				<div class="col-lg-10 col-lg-offset-2">
+					<ul class="nav nav-tabs cstm-ul-new cstm-ul-new-width">
+						<li class="active"><a data-toggle="tab" href="#home-cstm">SALE BOOK</a></li>
+						<li><a data-toggle="tab" href="#menu1-cstm">BREAK UP </a></li>
+						<li><a data-toggle="tab" href="#menu2-cstm">TEST CATALOGUE </a></li>
+					</ul>
+					<div class="tab-content">
+						<div id="home-cstm" class="tab-pane fade in active">
+							<br>
+							<div class="">
+								<div style="min-height: 10px; max-height:405px; overflow-y: scroll;">
+									<table class="table table-bordered" matSort (matSortChange)="sortData($event)" >
+										<thead class="new-thd tab-copy">
+											<tr>
+												<th mat-sort-header="date" width="10%" class="{{getTableHeaderClass(1)}} text-center" (click)="setTableHeaderClass(1)"><h4 style="width: 100%; text-align: center;">Date</h4>
+												</th>
+												<th mat-sort-header="invoice" width="12%" class="{{getTableHeaderClass(2)}} text-center" (click)="setTableHeaderClass(2)"><h4 style="width: 100%; text-align: center;">Receipt Number</h4>
+												</th>
+												<th mat-sort-header="patient" width="10%" class="{{getTableHeaderClass(7)}} text-center" (click)="setTableHeaderClass(7)"><h4 style="width: 100%; text-align: center;">Patient Name</h4>
+												</th>
+												<th mat-sort-header="amount" width="10%" class="{{getTableHeaderClass(3)}} text-center" (click)="setTableHeaderClass(3)"><h4 style="width: 100%; text-align: center;">Sales Amount</h4>
+												</th>
+
+											</tr>
+										</thead>
+										<tbody class="tab-copy-tr">
+											<tr *ngFor="let item of salesBookArray;let i = index">
+												<td width="10%" class="text-center">{{item?.createdAt | date:'d MMM yy ,h:mm a'}}</td>
+												<td width="12%" class="text-center">{{item?.id}}</td>
+												<td width="10%" class="text-center">
+													<span *ngIf="item.walkin_patient">{{item?.patient_name}}</span>
+													<span *ngIf="!item.walkin_patient">{{item?.dispensed_patient_id?.registration?.pateintName}}</span>
+												</td>
+												<td width="10%" class="text-center">{{getData(item?.total_amount)}}</td>
+											</tr>
+										</tbody>
+									</table>
+									<div class="col-lg-12" *ngIf="sortedData.length<1">
+										<h3 class="text-center">No data found ...</h3>
+									</div> 
+								</div>
+							</div>
+							<div class="col-lg-12 cstm-footer text-center " style="padding-left: 297px;">
+								<div class="btn-wrap text-center">
+									<button class="btn btn-custom btn-ornge btn-lg">
+										<div> Total Orders</div>
+										<div>{{salesBookArray?.length}}</div>
+									</button>&nbsp;
+									<button class="btn btn-custom btn-lg">
+										<div> Total Sale</div>
+										<div>{{getData(totalAmountSalesBook)}}</div>
+									</button>
+								</div>
+							</div>
+						</div>
+						<div id="menu1-cstm" class="tab-pane fade">
+							<table class="table table-bordered ">
+								<thead class="new-thd">
+									<colgroup span="2"></colgroup>
+									<colgroup span="2"></colgroup>
+									<tr class="text-center">
+										<th width="14%" rowspan="2" class="new-thd" style="text-align: center;">Doctor Name</th>
+										<th colspan="5" scope="colgroup" class="text-center">Progress Parameters</th>
+									</tr>
+									<tr >
+										<th  class="text-center"  width="10%" scope="col">Prescriptions</th>
+										<th  class="text-center"  width="10%" scope="col">Sale Orders</th>
+										<th   class="text-center" width="10%" scope="col">Sales Amount</th>
+										<th  class="text-center" width="10%" scope="col">Conversion (%)</th>
+										<th  class="text-center"  width="10%" scope="col">Sales/prescription (Rs)</th>
+									</tr>
+								</thead>	
+								<tbody class="new-tbdy">
+									<tr *ngFor="let op of dataArray">
+										<td width="14%" class="text-left cstm-name">Dr. {{getDoctorName(op?._id)}}</td>
+										<td width="10%" class="text-center cstm-name">{{op?.total_sales.length}}
+											<small class='fontsmall'>({{getData(checkIsNan(getPercentage(op?.total_sales.length,totalPrescriptions)))}}%)</small></td>
+											<td width="10%" class="text-center cstm-name">{{op.true_sales.length}}
+												<small class='fontsmall'>({{getData(checkIsNan(getPercentage(op?.true_sales?.length,totalSales)))}}%)</small></td>
+												<td width="10%" class="text-center cstm-name">{{op.total_sales_amount}}
+													<small class='fontsmall'>({{getData(checkIsNan(getPercentage(op?.total_sales_amount,totalSalesDoctorPlusWalkin)))}}%)</small></td>
+													<td width="10%" class="text-center cstm-name">{{op?.conversion}}%</td>
+													<td width="10%" class="text-center cstm-name">{{op?.sales_per_pres}}</td>
+												</tr>
+												<tr>
+													<td width="14%" class="text-left cstm-name">Other Sales</td>
+													<td width="10%" class="text-center cstm-name">N.A</td>
+													<td width="10%" class="text-center cstm-name">{{otherSales.length}} 
+														<small class='fontsmall'>({{getData(checkIsNan(getPercentage(otherSales.length,totalSales)))}}%)</small></td>
+														<td width="10%" class="text-center cstm-name">{{checkIsNan(totalSalesWalkin)}} <small class='fontsmall'>({{getData(checkIsNan(getPercentage(totalSalesWalkin,totalSalesDoctorPlusWalkin)))}}%)</small></td>
+														<td width="10%" class="text-center cstm-name">N.A</td>
+														<td width="10%" class="text-center cstm-name">{{getData(checkIsNan(totalSalesWalkin/otherSales.length))}}</td>
+													</tr>
+												</tbody>				
+												<tfoot class="tfoot">
+													<th width="14%" class="text-left new-thd">Diagnostics Aggregates</th>
+													<td width="10%" class="text-center new-thd">{{totalPrescriptions}}</td>
+													<td width="10%" class="text-center new-thd">{{totalSales}}</td>
+													<td width="10%" class="text-center new-thd">
+														{{checkIsNan(totalSalesDoctorPlusWalkin)}}
+													</td>
+													<td width="10%" class="text-center new-thd">{{checkIsNan(totalConversion)}}%</td>
+													<td width="10%" class="text-center new-thd">{{checkIsNan(totalSalesPerPres)}}</td>
+												</tfoot>
+											</table>
+											<div class="col-lg-8 col-lg-offset-2 fix-footer" style="padding-left: 65px;">
+												<div class="row btn-wrap">
+													<div class="col-lg-4 text-right">
+														<button class="btn btn-custom">
+															<div>Sales: {{getData(totalSalesDoctorPlusWalkin)}}</div>
+														</button>
+													</div>
+													<div class="col-lg-4 text-left" >
+														<button class="btn btn-custom btn-grin" (click)="exportPdf()">
+															<div> PRINT </div>
+														</button>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div id="menu2-cstm" class="tab-pane fade">
+											<br>
+											<div class="">
+												<div style="min-height: 10px; max-height:400px; overflow-y: scroll;">
+													<table class="table table-bordered" matSort (matSortChange)="sortData1($event)" >
+														<thead class="new-thd tab-copy">
+															<tr>
+																<th mat-sort-header="category" width="10%" class="{{getTableHeaderClass(8)}} text-center" (click)="setTableHeaderClass(8)"><h4 style="width: 100%; text-align: center;">Category</h4>
+																</th>
+																<th mat-sort-header="testname" width="12%" class="{{getTableHeaderClass(9)}} text-center" (click)="setTableHeaderClass(9)"><h4 style="width: 100%; text-align: center;">Test Name/Details</h4>
+																</th>
+																<th mat-sort-header="rate" width="10%" class="{{getTableHeaderClass(10)}} text-center" (click)="setTableHeaderClass(10)"><h4 style="width: 100%; text-align: center;">Rate</h4>
+																</th>
+																<th mat-sort-header="discount" width="10%" class="{{getTableHeaderClass(11)}} text-center" (click)="setTableHeaderClass(11)"><h4 style="width: 100%; text-align: center;">Discount</h4>
+																</th>
+																<th width="10%">
+													                <h4 style="width: 100%; text-align: center;">Action</h4>
+													            </th>
+
+															</tr>
+														</thead>
+														<tbody class="tab-copy-tr">
+															<tr *ngFor="let ar of sortedData1">
+																<td width="10%" class="text-center">{{ar?.category}}</td>
+																<td width="10%" class="text-left">{{ar?.name}}</td>
+																<td width="10%" class="text-center">{{ar?.rate}}</td>
+																<td width="10%" class="text-center">{{ar?.discount}}</td>
+																<td width="10%" class="text-center">
+												                  <button class="btn btn-success" (click)="editTest(ar)">Edit</button>&nbsp;&nbsp;&nbsp;
+												                  <button class="btn btn-danger" (click)="DeleteTest(ar)">Delete</button>
+												              	</td>
+															</tr>
+														</tbody>
+													</table>
+												</div>
+											</div>
+											<div class="col-lg-8 col-lg-offset-2 footer-cstm cstm-footer">
+												<div class="btn-wrap text-center">
+													<button class="btn btn-custom">
+														<div>Total Tests</div>
+														<div *ngIf="sortedData1">{{sortedData1?.length}}</div>
+													</button>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+<!-- Modal -->
+<div class="modal fade" id="edit-entry" role="dialog" *ngIf = "diagnosticsData">
+   <div class="modal-dialog">
+      <div class="modal-content">
+         <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" (click)="reset()">&times;</button>
+            <h4 class="modal-title text-center">Update Test Entry</h4>
+         </div>
+         <form [formGroup] = "detailsForm">
+            <div class="modal-body">
+               <div class="row">
+                  <div class="col-lg-12">
+                     <div class="form-group">
+                        <select  class="form-control" class="form-control txtfield" [(ngModel)]="editcategory" required=""  [formControl]="detailsForm.controls['category']">
+                           <option selected="" value="" disabled="">Category</option>
+                           <option value="{{option}}" *ngFor="let option of diagnosticsData?.dataSmartDiagnostics?.diagnostics_services">{{option}}</option>
+                        </select>
+                     </div>
+                     <p style="color: #FF0000" *ngIf="!detailsForm?.controls['category'].valid  && ( detailsForm.controls['category'].touched)">Invalid Category !!!</p>
+                  </div>
+                  <div class="col-lg-12">
+                     <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Test Name" [(ngModel)]="edittestname" required="" [formControl]="detailsForm.controls['testName']" (keyup)="onTextChange(editcategory,$event.target.value)" [matAutocomplete]="auto">
+                        <mat-autocomplete #auto="matAutocomplete" >
+                           <mat-option *ngFor="let option of testNameSuggestion" [value]="option" >
+                           {{option}}
+                           </mat-option>
+                        </mat-autocomplete>
+                     </div>
+                     <p style="color: #FF0000" *ngIf="!detailsForm?.controls['testName'].valid  && ( detailsForm.controls['testName'].touched)">Invalid Test Name !!!</p>
+                  </div>
+                  <div class="col-lg-12">
+                     <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Rate" pattern="[0-9]+" [(ngModel)]="editrate" required=""  [formControl]="detailsForm.controls['rate']">
+                     </div><p style="color: #FF0000" *ngIf="!detailsForm.controls['rate'].valid  && ( detailsForm.controls['rate'].touched)">Invalid Rate !!!</p>
+                  </div>
+                  <div class="col-lg-12">
+                     <div class="form-group">
+                        <input type="text" class="form-control" maxlength="3" pattern="[0-9]+" placeholder="Discount(%)" [(ngModel)]="editdiscount" required=""  [formControl]="detailsForm.controls['discount']">
+                     </div>
+                     <p style="color: #FF0000" *ngIf="!detailsForm.controls['discount'].valid  && ( detailsForm.controls['discount'].touched)">Invalid Discount !!!</p>
+                  </div>
+                  <div class="col-lg-12 text-center">
+                     <button class="btn btn-custom btn-grin" type="submit" [disabled]="!detailsForm.valid" (click)="UpdateTest()">SUBMIT
+                     </button>
+                  </div>
+               </div>
+            </div>
+         </form>
+      </div>
+   </div>
+</div>

@@ -1,0 +1,221 @@
+.stock-tab{
+	float: left;
+	width:100%;
+}
+.cstm-row button{
+    padding: 14px 30px;
+    margin-top: 41px;
+}
+.cstm-hdr{
+	margin-top: 15px;
+}
+.tbl-head{
+	margin-bottom:2px;
+	margin-top:20px;
+}
+.tbl-head tr {
+	border-top:2px solid #00B0F0;
+	border-left:2px solid #00B0F0;
+	border-right:2px solid #00B0F0;
+}
+.tbl-head tr th{
+	background-color:#DCDCDC;
+	border-color:#00B0F0;
+}
+ .table-bordered > tbody > tr > td{
+    border: 1px solid #00B0F0;
+}
+.tbl-cntrol{
+	min-height:100px;
+	max-height: 420px;
+	overflow-x: hidden;
+	overflow-y: scroll;
+}
+.tbl-cntrol .tbl-data{
+	min-width: 880px;
+}
+.btn-wrap{
+	margin-top: 20px;
+    margin-bottom: 15px;
+}
+.btn-grin{
+	background-color:rgb(161, 210, 83);
+}
+.btn-grin-2{
+	padding:20px 30px; 
+}
+.btn-wrap button{
+	margin-right: 10px;
+}
+.btn-red-1{
+	background-color: #FF0000;
+}
+.btn-ornge{
+	background-color: #E36C09;
+}
+.vrt-mdl{
+	vertical-align: middle;
+}
+.modal-dialog{
+	display: table;
+}
+.tbl-data-modal{
+	width: 866px!important;
+}
+
+.cstm-drpdown-cnsulted-doc {
+    margin: 20px 0;
+    position: relative;
+}
+.smrt-ass-dropdown {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+.cstm-drpdown-cnsulted-doc select {
+    font-size: 25px;
+    color: #fff;
+    width: 100%;
+    position: relative;
+    cursor: pointer;
+    padding: 15px;
+    background-color: #76923C;
+    border-radius: 10px;
+    border: none;
+    margin-top: 20px;
+}
+.cstm-drpdown-cnsulted-doc option {
+    border-bottom: 1px #ccc dashed;
+    padding: 8px 7px;
+    transition: .3s all;
+    display: block;
+    color: #00b0f0;
+    border-radius: 0;
+    background-color: #fff;
+    font-size: 20px;
+}
+.cstm-caret-big {
+    display: inline-block;
+    width: 0;
+    cursor: pointer;
+    position: absolute;
+    height: 0;
+    margin-left: 4px;
+    color: #000;
+    top: 42px;
+    background-color:#76923C;
+    z-index: 1;
+    right: 5px;
+    margin-bottom: 9px;
+    vertical-align: middle;
+    border-top: 17px dashed;
+    border-right: 14px solid transparent;
+    border-left: 14px solid transparent;
+}
+.btn-b{
+	text-transform: unset;
+}
+.new-thd th{
+    color:#fff;
+    background-color: #000;
+    border:1px solid #fff;
+}
+.new-thd th h4{
+    margin: 0px;
+}
+.new-tbdy td{
+    background-color: #dae5f1!important;
+    border:1px solid #fff!important;
+}
+.new-tbdy tr:hover{
+    background-color:#b8d9fd!important;    
+}
+.new-tbdy tr:hover td{
+    background-color:#b8d9fd!important;
+}
+th.selected{
+    background-color: #00b0f0!important;
+}
+@media only screen and (min-width:992px) {
+    .cstm-footer{
+        position: fixed;
+        bottom: 0;
+    }
+}
+.cstm-put input{
+    height: 56px;
+    margin-top:40px;
+}
+.cstm-chk {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 22px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+/* Hide the browser's default checkbox */
+
+.cstm-chk input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+/* Create a custom checkbox */
+
+.checkmark {
+    position: absolute;
+    top: 4.5px;
+    left: 40%;
+    height: 25px;
+    width: 25px;
+    background-color: #d6d6d6;
+}
+/* On mouse-over, add a grey background color */
+
+.cstm-chk:hover input~.checkmark {
+    background-color: #ccc;
+}
+/* When the checkbox is checked, add a blue background */
+
+.cstm-chk input:checked~.checkmark {
+    background-color: #fff;
+}
+/* Create the checkmark/indicator (hidden when not checked) */
+
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+/* Show the checkmark when checked */
+
+.cstm-chk input:checked~.checkmark:after {
+    display: block;
+}
+/* Style the checkmark/indicator */
+
+.cstm-chk .checkmark:after {
+    left: 9px;
+    top: 3px;
+    width: 6px;
+    height: 16px;
+    border: solid #000;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+.cstm-sort > h4{
+transform: translateY(-5px);
+}
+.cstm-put-put input{
+    display: inline-block;
+    width:20%;
+}

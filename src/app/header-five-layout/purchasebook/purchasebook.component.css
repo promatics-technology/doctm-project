@@ -1,0 +1,228 @@
+.cstm-row{
+	margin-top: 20px;
+}
+.cstm-row button{
+	margin-top:38px;
+}
+.cstm-hdr{
+	margin-top: 15px;
+}
+.tbl-head{
+	margin-bottom:2px;
+	margin-top:20px;
+}
+.tbl-head tr {
+	border-top:2px solid #00B0F0;
+	border-left:2px solid #00B0F0;
+	border-right:2px solid #00B0F0;
+}
+.tbl-head tr th{
+	background-color:#DCDCDC;
+	border-color:#00B0F0;
+}
+ .table-bordered > tbody > tr > td{
+    border: 1px solid #00B0F0;
+}
+.tbl-cntrol{
+	min-height:100px;
+	max-height: 400px;
+	overflow-x: hidden;
+	overflow-y: scroll;
+}
+.tbl-cntrol .tbl-data{
+	min-width: 882px;
+}
+.btn-wrap{
+	margin-top: 20px;
+}
+.btn-grin{
+	background-color:rgb(161, 210, 83);
+}
+.mr-top input{
+    margin-top:18px;
+}
+.srch-cstm button{
+	margin-top: 20px;
+	padding: 4px 20px;
+    min-width: 140px;
+}
+.btn-go button{
+    transition: 300ms;
+    min-width:140px;
+}
+.btn-go button:hover{
+    transition: 300ms;
+    background: #98C74F;
+    border-color: #98C74F;
+    color:#fff;
+}
+.fix-footer{
+	position: fixed;
+	bottom: 15px;
+}
+
+.tbl-cntrol .tbl-data{
+    min-width: 1107px;
+}
+.new-thd th{
+	color:#fff;
+	background-color: #000;
+	border:1px solid #fff;
+}
+.new-tbdy td{
+	background-color: #dae5f1!important;
+	border:1px solid #fff!important;
+}
+.new-tbdy tr:hover{
+    background-color:#b8d9fd!important;    
+}
+.new-tbdy tr:hover td{
+    background-color:#b8d9fd!important;
+}
+th.selected{
+    background-color: #00b0f0!important;
+}
+
+@media (min-width: 992px){
+.modal-lg.modal-cstm {
+    width: 1185px;
+	}
+}
+.tab-stock-2 table tr td select{
+	width:67px;
+}
+.btn-custom {
+    color: #002160;
+    position: relative;
+    padding: 6.5px 17px;
+    border-radius: 4px;
+    font-size: 14px;
+}
+.cstm-table{
+    margin-bottom: 0px;
+}
+
+.tab-stock table tr td div.trans-input input{
+	width:97%;
+	padding:6px 0px; 
+}
+.tab-stock table tr td div.pro-trans-input input{
+	width:98%;
+	padding:6px 0px; 
+}
+.tab-stock table tr td select{
+	width: 82px;
+    height: 36px;
+    border-radius: 0px;
+    margin-right: 3px;
+}
+.tab-stock{
+	min-height:190px;
+	max-height: 190px;
+	overflow-x: hidden;
+	overflow-y: scroll;
+}
+.modal-tble{
+	display: table;
+}
+/*.cstm-width{
+	width: 1155px;
+}*/
+.cstm-width{
+   width: 1240px;
+}
+
+
+/*cstm*/
+.table-head tr th {
+    border-right: 1px solid #fff;
+    background-color: #000;
+    color: #fff;
+}
+.cstm-2 input{
+	display: inline;
+	width:36%!important;
+}
+.txtfield {
+    height: 31px;
+}
+.my-tbdy tr td{
+    border-right: 1px solid #fff;
+    background-color: #DAE5F1!important;
+    color: #000;
+    border-bottom: 1px solid #fff;
+}
+
+/* The container */
+.cstm-chk {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 22px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+/* Hide the browser's default checkbox */
+.cstm-chk input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+    position: absolute;
+    top: -6.5px;
+    left: 15px;
+    height: 25px;
+    width: 25px;
+    background-color: #d6d6d6;
+}
+
+/* On mouse-over, add a grey background color */
+.cstm-chk:hover input ~ .checkmark {
+    background-color: #ccc;
+}
+
+/* When the checkbox is checked, add a blue background */
+.cstm-chk input:checked ~ .checkmark {
+    background-color: #fff;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+/* Show the checkmark when checked */
+.cstm-chk input:checked ~ .checkmark:after {
+    display: block;
+}
+
+/* Style the checkmark/indicator */
+.cstm-chk .checkmark:after {
+    left: 9px;
+    top: 3px;
+    width: 6px;
+    height: 16px;
+    border: solid #000;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+.mg-top{
+	margin-top: 8px;
+}
+button.close{
+    font-size:40px;
+}

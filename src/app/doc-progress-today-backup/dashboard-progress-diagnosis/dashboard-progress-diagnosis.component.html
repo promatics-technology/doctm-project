@@ -1,0 +1,355 @@
+<div class="loader-box" *ngIf="loading">
+    <img src="./assets/imgs/load.gif" />
+</div>
+<div class="analytics-sec">
+	
+	<div class="ipd-deatil-sec">
+	<!-- 	<div class="md-tab">
+	      	
+	      	<ul class="nav nav-tabs" role="tablist">
+	          	<li role="presentation" class="active"><a href="javascript:void(0);" routerLink="/header-two-layout/dashboard-consultation-prescription"> Consultation </a></li>
+	          	<li role="presentation"><a href="javascript:void(0);" routerLink="/header-two-layout/dashboard-pharmacy-detail"> Clinic Services </a></li>
+	      	</ul>
+	    </div>
+ -->
+	    <div class="inner-tab">
+	    	<!-- Nav tabs -->
+      		<ul class="nav nav-tabs" role="tablist">
+	          	<li role="presentation" ><a href="javascript:void(0);" routerLink="/header-two-layout/dashboard-progress"> Patient </a></li>
+	          	<li role="presentation"><a href="javascript:void(0);" routerLink="/header-two-layout/dashboard-progress-time"> Time</a></li>
+	          	<li role="presentation"><a href="javascript:void(0);" routerLink="/header-two-layout/dashboard-progress-prescription">Prescription</a></li>
+				<li role="presentation"><a href="javascript:void(0);" routerLink="/header-two-layout/dashboard-progress-pharmacy"> Pharmacy</a></li>
+	          	<li role="presentation" class="active"><a href="javascript:void(0);" routerLink="/header-two-layout/dashboard-progress-diagnosis"> Diagnostics </a></li>
+	          	<li role="presentation"><a href="javascript:void(0);" routerLink="/header-two-layout/dashboard-progress-ipd"> IPD </a></li>
+	      	</ul>
+	    </div>
+
+	    <div class="ipd-body">
+	    	<!-- <div class="cus-sidebar-wrapper side-bar-cstm">
+	    		<div class="cus-sidebar">
+	    			<ul> 
+	    				<li>
+	    					<div class="">
+	    						<div class="col-lg-3">
+	    							<h4 class="pd-left"><b>From</b></h4>
+	    						</div>
+	    						<div class="col-lg-9">
+	    							<div class="cstm-mg">
+	    								<angular2-date-picker [(ngModel)]="fromDate1" [settings]="settings"></angular2-date-picker>
+	    							</div>
+	    						</div>
+	    					</div>
+	    				</li>
+	    				<li>
+	    					<div class="">
+	    						<div class="col-lg-3">
+	    							<h4 class="pd-left"><b>To</b></h4>
+	    						</div>
+	    						<div class="col-lg-9">
+	    							<div class="cstm-mg">
+	    								<angular2-date-picker [(ngModel)]="toDate1" [settings]="settings"></angular2-date-picker>
+	    							</div>
+	    						</div>
+	    					</div>
+	    				</li>
+	    				<li class="text-right brder-cstm">
+	    					<div class="col-lg-12 text-center">
+	    						<button class="btn btn-go" (click)="go()">Go</button>
+	    					</div>
+	    				</li>
+	    				<li class="li-cstm"> <a href="javascript:void(0);"> For Past</a> </li>
+	    				<li class="{{getClass(1)}}" (click)="activatetab(1)"> <a href="javascript:void(0);"> 1 Week &nbsp;<small *ngIf="activatedtab==1">({{fromDate | date: 'dd/LL/yy'}} - {{toDate | date: 'dd/LL/yy'}})</small> </a> </li>
+	    				<li class="{{getClass(2)}}" (click)="activatetab(2)"> <a href="javascript:void(0);"> 2 Weeks &nbsp;<small *ngIf="activatedtab==2">({{fromDate | date: 'dd/LL/yy'}} - {{toDate | date: 'dd/LL/yy'}})</small>  </a> </li>
+	    				<li class="{{getClass(3)}}" (click)="activatetab(3)"> <a href="javascript:void(0);"> 1 Month &nbsp;<small *ngIf="activatedtab==3">({{fromDate | date: 'dd/LL/yy'}} - {{toDate | date: 'dd/LL/yy'}})</small> </a> </li>
+	    				<li class="{{getClass(4)}}" (click)="activatetab(4)"> <a href="javascript:void(0);"> 3 Month &nbsp;<small *ngIf="activatedtab==4">({{fromDate | date: 'dd/LL/yy'}} - {{toDate | date: 'dd/LL/yy'}})</small></a> </li>
+	    				<li class="{{getClass(5)}}" (click)="activatetab(5)"> <a href="javascript:void(0);"> 6 Month &nbsp;<small *ngIf="activatedtab==5">({{fromDate | date: 'dd/LL/yy'}} - {{toDate | date: 'dd/LL/yy'}})</small></a> </li>
+	    				<li class="{{getClass(6)}}" (click)="activatetab(6)"> <a href="javascript:void(0);"> 1 Year &nbsp;<small *ngIf="activatedtab==6">({{fromDate | date: 'dd/LL/yy'}} - {{toDate | date: 'dd/LL/yy'}})</small></a> </li>
+	    				<li class="{{getClass(7)}}" (click)="activatetab(7)"> <a href="javascript:void(0);"> All </a> </li>
+	    			</ul>
+	    		</div>
+	    	</div> -->
+
+    		<div class="cus-content-wrapper">
+    			<div class="cus-content">
+	    				<div class="row">
+	    					<div class="col-lg-6 brdr-rght">
+	    						 <ul class="nav nav-tabs cstm-ul-new">
+								    <li class="active"><a data-toggle="tab" href="#home-cstm">Collection</a></li>
+								    <li><a data-toggle="tab" href="#menu2-cstm">Order</a></li>
+								  </ul>
+								  <div class="tab-content">
+								    <div id="home-cstm" class="tab-pane fade in active">
+								    	<div class="cstm-pad">
+						        			<div class="table-responsive">
+			    								<div class="">
+													<table class="table tb-1 new-table">
+														<tbody>
+															<tr>
+																<td width="350px">Total Diagnostic collection</td>
+																<td width="5px"><h4><b>:</b></h4></td>
+																<td><b>{{totalPharmacySales + totalWalkinSales}} &nbsp;</b></td>
+															</tr>
+															<tr class="evn">
+																<td width="350px">Cash collection</td>
+																<td width="5px"><h4><b>:</b></h4></td>
+																<td><b>{{totalCashAmount+totalWalkinCashAmount}} </b> <small class="xs-small">({{getData(checkIsNan(totalWalkinCashPatient))}}%)</small>&nbsp;</td>
+															</tr>
+															<tr>
+																<td width="350px">Online collection</td>
+																<td width="5px"><h4><b>:</b></h4></td>
+																<td><b>{{totalOnlineAmount+totalWalkinOnlineAmount}}</b> <small class="xs-small">({{getData(checkIsNan(totalWalkinOnlinePatient))}}%)</small>&nbsp;</td>
+															</tr>
+															<tr class="evn">
+																<td width="350px">Max collection in a day</td>
+																<td width="5px"><h4><b>:</b></h4></td>
+																<td><b>{{maxSaleOfDay}} &nbsp;</b><span>({{maxCollectionDate | date: 'dd/MM/yyyy'}})</span></td>
+															</tr>
+															<tr >
+																<td width="350px">Min collection in a day</td>
+																<td width="5px"><h4><b>:</b></h4></td>
+																<td><b>{{minSaleOfDay}} &nbsp;</b><span>({{minCollectionDate | date: 'dd/MM/yyyy'}})</span></td>
+															</tr>
+																<tr class="evn">
+																<td width="350px">Avg. daily collection</td>
+																<td width="5px"><h4><b>:</b></h4></td>
+															<td><b>{{getData(checkIsNan((totalPharmacySales + totalWalkinSales)/(dateDiff)))}} &nbsp;</b></td>
+															</tr>
+															<tr>
+																<td width="350px">Avg sale per order</td>
+																<td width="5px"><h4><b>:</b></h4></td>
+																<td><b>{{getData(checkIsNan((totalPharmacySales + totalWalkinSales)/(totalPharmacySalesLength + totalWalkinPatient)))}} &nbsp;</b></td>
+															</tr>
+															<tr class="evn" >
+																<td width="350px">Prescriptions sales</td>
+																<td width="5px"><h4><b>:</b></h4></td>
+																<td><b>{{totalPharmacySales}} &nbsp;</b></td>
+															</tr>
+															<tr>
+																<td width="350px">Other Sales</td>
+																<td width="5px"><h4><b>:</b></h4></td>
+																<td><b>{{totalWalkinSales}}</b> </td>
+															</tr>
+															<tr class="evn">
+																<td width="350px">Top 10 Test (Sale Num.)</td>
+																<td width="5px"><h4><b>:</b></h4></td>
+																<td><b><span class="clr-blue" data-toggle="modal" data-target="#myModal" (click) ="getSorted(1)">View</span></b></td>
+															</tr>
+															<tr>
+																<td width="350px">Top 10 Test (Sale Value)</td>
+																<td width="5px"><h4><b>:</b></h4></td>
+																<td><b><span class="clr-blue" data-toggle="modal" data-target="#myModal" (click) ="getSorted(2)">View</span></b></td>
+															</tr>
+														</tbody>
+													</table>
+												</div>
+				    						</div>
+								    	</div>
+								    </div>
+								    <div id="menu2-cstm" class="tab-pane fade">
+								      	<div class="cstm-pad">
+								   			<div class="table-responsive">
+			    								<div class="">
+													<table class="table tb-1 new-table-two">
+														<tbody>
+															<tr class="evn">
+															<td width="350px">Total Diagnostic orders</td>
+															<td width="5px"><h4><b>:</b></h4></td>
+															<td><b>{{totalPharmacySalesLength + totalWalkinPatient}} &nbsp;</b></td>
+															</tr>
+															<tr>
+															<td width="350px">Max order in a day </td>
+															<td width="5px"><h4><b>:</b></h4></td>
+															<td><b>{{checkIsNan(maxOrderOfDay)}} &nbsp;</b><span>({{maxOrderDate | date: 'dd/MM/yyyy'}})</span></td>
+															</tr>
+															<tr class="evn">
+															<td width="350px">Min order in a day</td>
+															<td width="5px"><h4><b>:</b></h4></td>
+															<td><b>{{checkIsNan(minOrderOfDay)}} &nbsp;</b><span>({{minOrderDate | date: 'dd/MM/yyyy'}})</span></td>
+															</tr>
+															<tr class="">
+															<td width="350px">Avg daily order</td>
+															<td width="5px"><h4><b>:</b></h4></td>
+															<td><b>{{getDataCeil((totalPharmacySalesLength+totalWalkinPatient)/(dateDiff))}}</b></td>
+															</tr>
+															<tr class="evn">
+															<td width="350px">Prescription orders</td>
+															<td width="5px"><h4><b>:</b></h4></td>
+															<td><b>{{totalPharmacySalesLength}} &nbsp;</b><small class="xs-small">({{getData(checkIsNan(totalPrecOrdersPercentage))}}%)</small></td>
+															</tr>
+															<tr>
+															<td width="350px">Other orders</td>
+															<td width="5px"><h4><b>:</b></h4></td>
+															<td><b>{{totalWalkinPatient}} &nbsp;</b><small class="xs-small">({{getData(checkIsNan(totalOthersOrdersPercentage))}}%)</small></td>
+															</tr>
+															
+														</tbody>
+													</table>
+													<h5 class="cstm-heading">DIAGNOSTICS ORDERS</h5>     
+													<div class="chart-diagnos chart-box wrap-canavas" *ngIf="!loading">
+								    				<canvas baseChart class="can-vas-1"
+									                [datasets]="lineChartData2"
+									                [labels]="lineChartLabels2"
+									                [options]="lineChartOptions2"
+									                [colors]="lineChartColors"
+									                [legend]="lineChartLegend2"
+									                [chartType]="lineChartType2"
+									                (chartHover)="chartHovered($event)"
+									                (chartClick)="chartClicked($event)"></canvas>
+									            </div>
+												</div>
+				    						</div>
+								   		</div>
+								    </div>
+								  </div>
+	    					</div>
+	    					<h5 class="cstm-heading">DIAGNOSTICS SALES</h5>     
+	    					<div class="col-lg-6">
+	    						<div class="chart-diagnos chart-box wrap-canavas" *ngIf="!loading">
+				    				<canvas baseChart class="can-vas" 
+					                [datasets]="lineChartData"
+					                [labels]="lineChartLabels"
+					                [options]="lineChartOptions"
+					                [colors]="lineChartColors"
+					                [legend]="lineChartLegend"
+					                [chartType]="lineChartType"
+					                (chartHover)="chartHovered($event)"
+					                (chartClick)="chartClicked($event)"></canvas>
+					            </div>
+					            <div class="table-responsive">
+							        <table class="table tb-1 table-bordered tab-new-cstm">
+							            <tbody>
+							                <tr class="cstm-tr">
+							                    <td colspan="5">
+							                        <h4>
+							                            <b>
+							                                Doctor-wise Break-up
+							                            </b>
+							                        </h4>
+							                    </td>
+							                </tr>
+							                <tr class="cstm-tr-2">
+							                    <!-- <td class="text-center" width="80px"><b>Sr no</b></td> -->
+							                    <td class="text-left">
+							                        <b>
+							                            Doctor Name
+							                        </b>
+							                    </td>
+							                    <td class="text-center">
+							                        <b>
+							                            Sales(Rs.) Contribution
+							                        </b>
+							                    </td>
+							                    <td class="text-center">
+							                        <b>
+							                            Order contribution
+							                        </b>
+							                    </td>
+							                    <td class="text-center">
+							                        <b>
+							                            Avg. Sale prescription
+							                        </b>
+							                    </td>
+							                </tr>
+							                <tr *ngFor="let op of dataArray; let i = index" class="cstm-tr-3">
+							                    <!-- <td class="text-center" width="80px">{{i+1}}</td> -->
+							                    <td class="text-left">
+							                        Dr. {{getDoctorName(op._id)}}
+							                    </td>
+							                    <td class="text-center">
+							                        {{op.total_sales_amount}}
+							                        <small class="fontsmall">
+							                            ({{getData(checkIsNan(getPercentage(op.total_sales_amount,totalSalesDoctorPlusWalkin)))}}%)
+							                        </small>
+							                    </td>
+							                    <td class="text-center">
+							                        {{op.conversion}} <small> ({{getData(op.orderPercentage)}}%)</small>
+							                    </td>
+							                    <td class="text-center">
+							                        {{op.sales_per_pres}}
+							                    </td>
+							                </tr>
+							                <tr>
+							                    <!-- <td class="text-center" width="80px">1</td> -->
+							                    <td class="text-left">
+							                        Other Sales
+							                    </td>
+							                    <td class="text-center">
+							                        {{checkIsNan(totalSalesWalkin)}}
+							                        <small class="fontsmall">
+							                            ({{getData(checkIsNan(getPercentage(totalSalesWalkin,totalSalesDoctorPlusWalkin)))}}%)
+							                        </small>
+							                    </td>
+							                    <!-- <td class="text-center">{{checkIsNan(totalSalesWalkin)}} <small class='fontsmall'>({{getData(checkIsNan(getPercentage(totalSalesWalkin,totalSalesDoctorPlusWalkin)))}}%)</small></td> -->
+							                    <td class="text-center">
+							                        N.A
+							                    </td>
+							                    <td class="text-center">
+							                        {{getData(checkIsNan(totalSalesWalkin/otherSales.length))}}
+							                    </td>
+							                </tr>
+							            </tbody>
+							        </table>
+							    </div>
+	    					</div>
+	    				</div>
+	    		</div>
+
+	    	</div>
+
+	    </div>
+
+	</div>
+
+</div>
+
+<div class="container footer-cstm-an">
+	<div class="row">
+		<div class="col-lg-4 text-center">
+			<div>
+				<p class="brdr-rght">PATIENT CONVERSION RATIO : <b>{{checkIsNan(totalConversion)}}%</b></p>
+			</div>
+		</div>
+		<div class="col-lg-4 text-center">
+			<div>
+				<p class="brdr-rght">CURRENT STOCK VALUATION  : <b>360000</b></p>
+			</div>
+		</div>
+		<div class="col-lg-4 text-center">
+			<div>
+				<p>SALES TREND  : <b>RISING</b>:Falling : Steady</p>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- Top 10 Products (Sale Num.) -->
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-body cstm-md-bdy">          	
+      	 	<button type="button" class="close" data-dismiss="modal">&times;</button>
+      		<div class="cstm-tab">
+				<table class="table tb-1 table-bordered">
+				    <tbody>
+						<tr class="cstm-tr-2">
+							<td class="text-center" width="80px"><b>Sr no</b></td>
+							<td class="text-center"><b>Type</b></td>
+							<td class="text-center"><b>Name</b></td>
+							<td class="text-center"><b>Total Sales</b></td>
+							<td class="text-center"><b>Occurence</b></td>
+							<td class="text-center"><b>Perncetage</b></td>
+						</tr>
+						<tr class="{{getClassMap(data,i)}}" *ngFor="let data of topProfitArray | slice: 0:10;let i = index; ">
+							<td class="text-center" width="80px">{{i+1}}</td>
+							<td class="text-left">{{data.type}}</td>
+							<td class="text-center">{{data.name}}</td>
+							<td class="text-center">{{data.sales}}</td>
+							<td class="text-center">{{data.occurence}}</td>
+							<td class="text-center">{{getData(data.percentage)}}</td>
+						</tr>
+					</tbody>
+				</table>
+      		</div>      
+        </div>
+      </div>
+    </div>
+</div>

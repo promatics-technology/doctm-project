@@ -1,0 +1,440 @@
+.btn.btn-custom.date-btn {
+    padding: 6px 15px !important;
+    min-width: auto;
+}
+.action-option {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 10px;
+    font-size: 16px;
+    display: flex;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -o-flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.grey-placeholder{
+	color:#BBBBBB !important;
+}
+
+
+.black-class{
+	color:black;
+}
+.action-option a {
+    color: #002160;
+}
+.md-tab.inner-tab .nav-tabs .active a {
+    padding: 10px 15px;
+    background-color: rgba(255, 255, 255, 0.5);
+    font-size: 20px;
+    text-transform: capitalize;
+}
+.md-tab.inner-tab .nav-tabs .active a {
+    padding: 10px 15px;
+    background-color: rgba(255, 255, 255, 0.5);
+}
+.md-tab.inner-tab .nav-tabs>li>a {
+    text-align: center;
+    text-transform: capitalize;
+    margin-right: 2px;
+    font-size: 20px;
+    font-weight: 500;
+    padding: 10px 15px;
+    min-width: 160px;
+    color: rgba(0, 0, 0, 0.47);
+    border: 0;
+    border-bottom: 2px solid transparent;
+    transition: all 0.3s ease 0s;
+    margin-bottom: 0
+}
+.cstm-drpdown-cnsulted-doc {
+    margin: 20px 0;
+    position: relative;
+}
+.smrt-ass-dropdown {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+.cstm-drpdown-cnsulted-doc select {
+    font-size: 25px;
+    color: #fff;
+    width: 100%;
+    position: relative;
+    cursor: pointer;
+    padding: 15px;
+    background-color: #01b0f0;
+    border-radius: 10px;
+    border: none;
+}
+.cstm-drpdown-cnsulted-doc option {
+    border-bottom: 1px #ccc dashed;
+    padding: 8px 7px;
+    transition: .3s all;
+    display: block;
+    color: #00b0f0;
+    border-radius: 0;
+    background-color: #fff;
+    font-size: 20px;
+}
+.consulation-progress-div {
+    float: left;
+    width: 100%;
+    font-size: 22px;
+    color: #0376a0;
+    text-align: left;
+    background-color: #d6e9c6;
+    margin: 20px 0;
+}
+.in-progress {
+    text-align: center;
+    width: 30%;
+    display: inline-block;
+    margin: 5px 0;
+    border-right: 1px solid #0376a0;
+    font-size: 21px;
+    line-height: 1.2;
+}
+.in-progress-detail {
+    width: 67%;
+    float: right;
+    display: inline-block;
+}
+.in-progress-detail .pending_ul>li>a {
+    box-shadow: none;
+    border-radius: 0;
+}
+.in-progress-detail .pending_ul>li {
+    margin-bottom: 0;
+}
+.in-progress-detail .pending_ul>li>a img {
+    width: 50px;
+    height: 50px;
+    float: left;
+    display: inline-block;
+    border-radius: 100px;
+}
+.in-progress-detail .patient-text {
+    text-align: left;
+    padding-left: 70px;
+    padding-top: 4px;
+}
+.smartassistant-panel .panel-success .panel-heading span, .smartassistant-panel .pending-patient-box .pending-heading span {
+    color: #fff;
+}
+.smartassistant-panel .patient-text .patient-duration {
+    color: #bbb;
+}
+.smartassistant-panel .patient-consult-status {
+    font-size: 13px;
+    color: #bbb;
+}
+.smartassistant-panel .patient-text .patient-date {
+    color: #bbb;
+}
+.pending_ul>li>span {
+    right: 20px;
+    top: 7px;
+    font-size: 13px;
+}
+.pending_ul>li>span p {
+    margin-bottom: 5px;
+}
+.pending-exp-time {
+    font-size: 18px;
+}
+.pat-reg-modal-form {
+    width: 600px;
+    right: 60px;
+}
+.cstm-fee-label {
+    background-color: #01b0f0;
+    font-size: 27px;
+    height: 38px!important;
+    padding: 0!important;
+    border: 1px solid #000;
+    text-align: center;
+}
+.cstm-fee-input {
+    border: 1px solid #000;
+    border-radius: 0;
+    height: 38px;
+    border-left: 0;
+    font-size: 25px;
+}
+.select-doctor {
+    font-size: 16px;
+    color: #fff;
+    width: 100%;
+    cursor: pointer;
+    background-color: #01b0f0;
+    border-radius: 0px;
+    border: none;
+    position: relative;
+}
+.cstm-caret {
+    display: inline-block;
+    width: 0;
+    cursor: pointer;
+    position: absolute;
+    height: 0;
+    margin-left: 4px;
+    color: #000;
+    top: 12px;
+    background-color: #01b0f0;
+    z-index: 9;
+    right: 20px;
+    margin-bottom: 9px;
+    vertical-align: middle;
+    border-top: 12px dashed;
+    border-right: 10px solid transparent;
+    border-left: 10px solid transparent;
+}
+.cstm-caret-big {
+    display: inline-block;
+    width: 0;
+    cursor: pointer;
+    position: absolute;
+    height: 0;
+    margin-left: 4px;
+    color: #000;
+    top: 22px;
+    background-color: #01b0f0;
+    z-index: 1;
+    right: 5px;
+    margin-bottom: 9px;
+    vertical-align: middle;
+    border-top: 17px dashed;
+    border-right: 14px solid transparent;
+    border-left: 14px solid transparent;
+}
+.cstm-crt-wrap {
+    position: relative;
+}
+.regis-modal-body .select-opt .disabled {
+    color: #ddd;
+}
+.select-opt {
+    border-bottom: 1px #ccc dashed!important;
+    padding: 10px!important;
+    color: #00b0f0;
+    border-radius: 0;
+    background-color: #fff;
+    font-size: 20px;
+}
+.regis-modal-body .input-btn {
+    width: 100%;
+    padding: 8px;
+}
+.ok-btn {
+    background-color: transparent;
+    border: 1px solid #002160;
+    width: 50px;
+    margin-left: -15px;
+}
+.reg-btn {
+    background-color: rgb(161, 210, 83);
+    color: #fff;
+    width: 100%;
+    border: rgb(150, 195, 78);
+}
+.regis-modal-body label {
+    height: 35px;
+    padding: 9px;
+}
+.reg-btn .cancel {
+    background-color: #ffc000!important;
+    border: #ffc000!important;
+}
+.name-cstm-input {
+    border-radius: 0;
+    border: none;
+    background-color: #00b0f0;
+    color: #fff;
+    font-size: 20px;
+    text-align: center;
+    padding: 4px!important;
+}
+.time-select {
+    width: 800px!important;
+    right: 35%!important;
+}
+.time-slots {
+    float: left;
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    /*border: 1px solid #eee;*/
+}
+.time-ul {
+    width: 100%;
+    float: left;
+    margin: 0px;
+    padding: 0;
+    text-align: center;
+    min-height: 90px;
+}
+.time-ul>li {
+    float: left;
+    width: 16%;
+}
+.time-ul>li>a {
+    padding: 6px;
+    border: 1px solid #333;
+    display: block;
+    margin: 5px 5px;
+    background-color:#a8e8ff;
+    /*background-color: #00b0f0;*/
+    color: #000;
+}
+.time-ul>li>a:hover {
+    text-decoration: none;
+    background-color: #000!important;
+    color: #fff!important;
+}
+.already-selected {
+    background-color: #000!important;
+    color: #fff!important;
+}
+.blue-slot {
+    background-color: #a8e8ff!important;
+}
+.grey-slot {
+    background-color: rgba(0,0,0,.2)!important;
+}
+/********  SIDEBAR OPTION CSS ************/
+
+/*************  END **********/
+
+.pickup-time {
+    margin-bottom: 10px;
+    padding: 0;
+    /*width: 16%;*/
+    /*border: 2px solid #01b0f0;*/
+}
+.btn-success {
+    color: #fff;
+    background-color: #01b0f0;
+    border: 1px solid #bdbdbd;
+    border-radius: 10px;
+    padding: 2px 12px;
+    margin-bottom: 8px;
+}
+.btn-success:active:hover {
+    color: #fff;
+    background-color: #01b0f0;
+    border: 1px solid #bdbdbd;
+    border-radius: 10px;
+    padding: 2px 12px;
+    margin-bottom: 8px;
+}
+fieldset.fieldset-preset {
+    min-width: unset;
+    padding: 0 10px;
+    border: 1px solid rgba(56, 94, 138, 1);
+}
+legend.legend-preset {
+    width: 55%;
+    border-bottom: none;
+    text-align: center;
+    margin-bottom: 10px;
+    font-size: 15px;
+}
+.tags-listing-div {
+    width: 30%;
+    margin: auto;
+    padding: 0 15px;
+    float: none;
+}
+.camera-div {
+    /*height:470px;*/
+    height: 600px;
+    padding: 10px;
+}
+.camera-btn {
+    text-align: center;
+    padding: 15px;
+    margin-top: 55px;
+}
+.upload-image {
+    padding: 3px;
+    text-align: center;
+}
+.upload-image a {
+    text-decoration: none;
+    color: #333;
+    position: absolute;
+    top: -8px;
+    right: 10px;
+}
+.upload-image i {
+    font-size: 16px;
+    padding: 10px;
+    background-color: #01b0f0;
+    border-radius: 5px;
+}
+.upload-image .img-thumbnail {
+    /*padding: 5px;
+    height:70px;
+    width:100%;*/
+    padding: 5px;
+    height: 35px;
+    width: 35px;
+}
+.p-upload {
+    margin-bottom: 11px;
+}
+.close-thik:after {
+    content: '✖';
+}
+/*09 nov 2018*/
+
+.fieldDesign
+{
+    width: 100%;
+    float: left;
+    position: relative;
+}
+.fieldDesign.input-group-addon
+{
+    background-color: #fff!important;
+    border: 1px solid rgba(56, 94, 138, 1)!important;
+    border-radius: 6px 0 0 6px!important;
+}
+.fieldDesign span
+{
+    border: 1px solid rgba(56, 94, 138, 1);
+    border-radius:6px 0px 0px 6px;
+}
+/*14-november*/
+.cstm-calender-opt, .cstm-calender-opt:hover{
+    color: #000;
+    text-decoration: none;
+}
+.regis-modal-body label{
+    margin:0px;
+}
+.mg-bottom{
+    margin-bottom:20px;
+}
+
+.reg-bnt{
+    margin: 5px 0px;
+}
+.cstm-modal-lg{
+    display: table;
+}
+.new-table .table > tbody > tr > td{
+    border:none!important;    
+    line-height: 2.428571!important;
+}
+.cstm_modal{
+    display: table;
+}
+.my_tab_new .table > tbody > tr > td{
+    border:transparent!important;
+}

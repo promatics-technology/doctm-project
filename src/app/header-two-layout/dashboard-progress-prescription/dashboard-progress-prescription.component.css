@@ -1,0 +1,238 @@
+.cus-content-wrapper{
+	padding-top: 0px;
+}
+.tr-cstm{
+	background-color: #000;color:#fff;
+}
+.clr-blue{
+	color:#00b0f0;
+	font-weight: bold;
+	cursor: pointer;
+}
+.sign-war{
+	color: rgb(255,0,0);
+	position: relative;
+	transform: translateY(-5px);
+}
+.tbl-diag{
+	min-height:373px;
+	max-height:373px;
+	margin-bottom:15px;
+	overflow-x:hidden;
+	overflow-y: scroll;   
+}
+.tbl-diag-1{
+	min-height:10px;
+	max-height:190px;
+	margin-bottom:15px;
+	overflow-x:hidden;
+	overflow-y: scroll;   
+}
+.cus-sidebar-wrapper .cus-sidebar{
+	height: initial;
+}
+.cus-sidebar-wrapper{
+	z-index: 99;
+}
+.dashboard-header-two{
+	padding-top: 0px;
+}
+.table{
+	margin-bottom:0px;
+}
+.table tr td{
+	padding:7px 0px; 
+}
+.inner-tab{
+	margin-bottom: 12px;
+}
+
+/*karam @29-1-2018*/
+
+.side-bar-cstm{
+	z-index: 99;
+}
+.res-tab-2{
+	max-height: 200px;
+}
+.cstm-ul-new li a{
+	background-color:transparent;
+	color:#000;
+	padding:10px 104px;
+	cursor: pointer;
+	border-radius: 0px;
+	border-bottom: 2px solid transparent; 
+}
+.cstm-ul-new li.active a{
+	background-color: #e0e0e0;
+    color: #000;
+	border-bottom: 2px solid #00b0f0;
+}
+.tab-new{
+	min-height: 450px;
+    max-height: 450px;
+    padding: 0px 8px;
+    border-left: 1px solid #dcdcdc;
+    border-right: 1px solid #dcdcdc;
+    overflow-x: hidden;
+}
+.clr-blue{
+    color: #00b0f0;
+    font-weight: bold;
+}
+
+.cstm-mg{
+	margin-top: 5px;
+}
+.btn-go{
+	background-color: transparent;
+    border: 1px solid #002160;
+    margin-bottom: 5px;
+    min-width: 62%;
+}
+.btn-go:hover{
+    -webkit-transition: 300ms;
+    transition: 300ms;
+    background: #98C74F;
+    border-color: #98C74F;
+    color: #fff;
+}
+.cstm-ul li a{
+	border-radius:0px!important;
+	margin-right: 0px!important; 
+}
+/*.cus-content{
+	z-index:1;
+}*/
+.li-cstm a{
+	text-align: center!important;
+    background: #000!important;
+    color: #fff!important;
+    font-size: 16px!important;
+    font-weight: inherit!important;
+    padding: 6px!important;
+}
+/*.tab-new-cstm tr td{
+	font-size: 10px;
+}*/
+.brder-cstm{
+	padding-bottom: 1px;
+    margin-bottom: 6px;
+    border-bottom: 1px solid #a7a7a7;
+    position: relative;
+}
+.brder-cstm::after{
+	content: "";
+    position: absolute;
+    height: 6px;
+    width: 12px;
+    background-color: #ffffff;
+    top: 41px;
+    right: -3px;
+	 
+}
+.cus-sidebar ul{
+	border:1px solid #a7a7a7;
+}
+.txt-thm{
+	font-weight: bold;
+	color: rgb(0,32,96);
+}
+.cstm-tr td{
+	border-bottom: 1px solid #a5a4a4!important;
+	border-top: 1px solid #a5a4a4!important;
+}
+.my-table-fv tr td{
+	padding:4px; 
+}
+.evn{
+	background-color:#eff3ef;
+}
+.cstm-ul li.active a,
+.cstm-ul li.active a:active,
+.cstm-ul li.active a:focus,
+.cstm-ul li.active a:hover{
+	background: #002160!important;
+	color:#fff!important;
+}
+.my-tab-5{
+	min-height:543px;
+    max-height:543px;
+    overflow-y: scroll;
+}
+.my-tab-5 tr td{
+	padding:8px; 
+}
+.tab-9 tr td{
+	padding:8px;
+}
+.cstm-brdr{
+	    border-right: 1px solid #bfbfbf;
+	    border-left:1px solid #bfbfbf;
+}
+.btn-brdr{
+	border-bottom: 1px solid #bfbfbf;
+}
+
+.one-tab tr td{
+	padding:4.5px 8px!important; 
+}
+.blank-ftr{
+	height:35px;
+	width:100%;
+	background-color:transparent;
+	float:left;
+	position:fixed;
+	bottom: 0;
+	border:1px solid #cacaca;
+	height: 8px;
+}
+.cus-content-wrapper{
+	padding-bottom: 0px!important;
+}
+.inner-tab{
+	margin-bottom: 4px!important;
+}
+.modal.fade .modal-dialog {
+  transform: translate3d(0, 100vh, 0);
+  transition: 700ms;
+}
+
+.modal.in .modal-dialog {
+  transform: translate3d(0, 0, 0);
+  transition: 700ms;
+}
+.cstm-tr-2{
+	background-color:#d7e4e3;
+}
+.cstm-tr-2 td{
+	border-right:1px solid #bbb; 
+}
+.cstm-tr-2 td:last-child {
+ border-right: none;
+}
+.cstm-tr-3{
+	border-bottom:1px solid #bbb; 
+}
+.cstm-tr-3 td{
+	border-right:1px solid #bbb; 
+}
+.cstm-tr-3 td:last-child {
+ border-right: none;
+}
+/*.cstm-md-bdy {
+	position: absolute;
+	top: -30px;
+    right: 8px;
+}*/
+.modal-body{
+	padding-top: 1px;
+	padding-bottom: -1px;
+}
+.left-algn{
+	text-align: left;
+	padding-left: 6px!important;
+}
+.cus-content-wrapper .cus-content{
+	margin-left: 0px!important
+}

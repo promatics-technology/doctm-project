@@ -1,0 +1,433 @@
+/*new sec-1*/
+.txt-theme{
+    color:#00b0f0;
+}
+.crnt-paln{
+    border:1px solid #000;
+    border-radius:50px;
+    padding:30px; 
+}
+.crnt-paln ul {
+    list-style: none;
+    padding: 0px;
+    margin:0px;
+}
+.crnt-paln ul li{
+    font-size: 20px;
+    padding-left:30px;
+    margin-bottom: 20px; 
+}
+.btn-grin{
+    background-color:rgb(146,208,80);
+    border: transparent;
+    font-size: 22px;
+}
+i.chk{
+    color:rgb(146,208,80);
+}
+i.op{
+    opacity: 0;
+}
+.rd-clr{
+    color:red;
+}
+.sve_rchrge{
+    padding:20px;
+    color: #000;
+    background-color: #00b0f0;
+    display: block;
+    width: 35%;
+    font-size: 30px;
+    border-radius: 22px;
+    margin: 0 auto;
+    margin-bottom:10px; 
+    text-decoration: none;
+}
+
+/*ends*/
+/*section 2*/
+.table_paymnt{
+    margin-top: 30px;
+}
+.table_paymnt table{
+    font-size: 22px;
+}
+.bck_pay a{
+    display:inline-block;
+    padding:20px;
+    text-decoration: none;
+    border-radius:15px;
+    font-size:24px;
+    color:#000; 
+    width:100%;
+    text-align: center;
+}
+.bck_pay a.btn-1{
+    background: rgba(255,195,0);
+}
+.bck_pay a.btn-2{
+    background:#00b0f0;
+}
+/*ends*/
+
+/*section 3*/
+.sec-3{
+    margin-top:50px;
+}
+.card-1{
+    width: 100%;
+    background: #00b0f0;
+    border-radius: 22px;
+    text-align: center;
+    margin:30px 0px; 
+    -webkit-box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.75);
+-moz-box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.75);
+box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.75);
+}
+.card-1 h3{
+    margin:0px;
+    line-height: 6;
+}
+.card-2{
+    background-color:#00f099; 
+}
+.card-3{
+    background-color:#f44336; 
+}
+.card-4{
+    background: #673ab7;
+}
+.anc_card,
+.anc_card:hover,
+.anc_card:active,
+.anc_card:focus{
+    display: block;
+    color:#ffff;
+    text-decoration: none;
+}
+
+/*ends*/
+
+/*sec-4*/
+.pay_tabs ul li{
+    width:100%;
+    margin-bottom:15px;
+}
+.pay_tabs ul.nav-tabs{
+    border-bottom:transparent;
+}
+.pay_tabs ul li a{
+    border: 1px solid #929292;
+    border-radius: 5px;
+    color:#929292;
+    font-size:20px; 
+}
+.pay_tabs ul li.active a{
+    background: #00b0f0;
+    font-size: 20px;
+    color: #fff;
+    border-color: #00b0f0;
+}
+.card_data{
+    background: #fff; 
+    -webkit-box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.75);
+    box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.75);
+    padding:15px 8em; 
+    position: relative;
+    overflow:hidden; 
+}
+.main_hd{
+    padding-bottom:15px;
+    margin-top: 0px;
+    border-bottom: 4px solid #00b0f0; 
+}
+.pay_inner ul li{
+    width:50%;
+    margin-bottom:15px;
+}
+.pay_inner ul.nav-tabs{
+    border-bottom:transparent;
+}
+.pay_inner ul li a{
+    border:transparent;
+    border-bottom:4px solid #929292;
+    color:#929292;
+    font-size:18px; 
+    border-radius:0px; 
+}
+.pay_inner ul li.active a{
+    background: #fff;
+    font-size: 18px;
+    color:  #000;
+    border-radius:0px; 
+    border-bottom-color: #00b0f0;
+}
+/* The container */
+.cstm_chk {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  cursor: pointer;
+  font-size:16px;
+  font-weight:normal; 
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Hide the browser's default checkbox */
+.cstm_chk input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height:20px;
+  width:20px;
+  background-color: #eee;
+}
+
+/* On mouse-over, add a grey background color */
+.cstm_chk:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+
+/* When the checkbox is checked, add a blue background */
+.cstm_chk input:checked ~ .checkmark {
+  background-color: #2196F3;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the checkmark when checked */
+.cstm_chk input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the checkmark/indicator */
+.cstm_chk .checkmark:after {
+ left: 7px;
+    top: 3px;
+    width: 6px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+.mke-paymnt button.btn-primary{
+    background: #00b0f0;
+    font-size: 20px;
+    color: #fff;
+    border-color: #00b0f0; 
+}
+.cvv_icon{
+    position: relative;
+}
+.cvv_icon i{
+    position: absolute;
+    top: 6.5px;
+    right: 9px;
+    font-size: 20px;
+
+}
+.card_data::after{
+    content: "";
+    border-left: 15px solid transparent;
+    border-right: 50px solid transparent;
+    border-top: 20em solid rgb(251, 221, 1);
+    position: absolute;
+    top: 0;
+    left: -16px;
+}
+.card_data::before{
+    content: "";
+    border-left: 50px solid transparent;
+    border-right: 15px solid transparent;
+    border-bottom: 20em solid rgb(251,185,28);
+    position: absolute;
+    height: 35em;
+    bottom: 0px;
+    right: -16px;
+}
+.card_img{
+  position: relative;
+}
+.card_img img{
+  position: absolute;
+  top:5px;
+  right:5px;
+}
+.wrap_img{
+    border-radius: 5px;
+    border: 1px solid #3a3a3a;
+    overflow: hidden;
+    padding: 12px;
+    margin-bottom: 25px;
+}
+/*pop up css*/
+.hdr{
+  margin-top: 0px;
+}
+.brdr-radius{
+  border-radius:50px; 
+  position: relative;
+}
+.brdr-radius button.close
+{    -webkit-appearance: none;
+    padding: 0;
+    cursor: pointer;
+    background: transparent;
+    border: 0;
+    right: 30px;
+    top: 5px;
+    font-size: 40px;
+    position: absolute;
+    z-index:99; 
+}
+.rdio {
+     display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 25px;
+    cursor: pointer;
+    font-size: 20px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    font-weight: normal;
+}
+.rdio input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  background-color: #eee;
+  border-radius: 50%;
+}
+.rdio:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+
+.rdio input:checked ~ .checkmark {
+  border:2px solid #2196F3;
+  background-color: #fff;
+}
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+.rdio input:checked ~ .checkmark:after {
+  display: block;
+}
+
+.rdio .checkmark:after {
+     top: 3px;
+    left: 3px;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background: #2196f3;
+}
+.crnt-plan-2{
+  padding-bottom: 0px;
+}
+/*checkbox*/
+
+.chk_cstm_5 {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 25px;
+  cursor: pointer;
+  font-size: 20px;
+  font-weight:normal; 
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.chk_cstm_5 input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.checkmark-2 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  background-color: #eee;
+}
+
+.chk_cstm_5:hover input ~ .checkmark-2 {
+  background-color: #ccc;
+}
+
+.chk_cstm_5 input:checked ~ .checkmark-2 {
+      border: 2px solid #2196f3;
+    background-color: #fff;
+}
+
+.checkmark-2:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+.chk_cstm_5 input:checked ~ .checkmark-2:after {
+  display: block;
+}
+.chk_cstm_5 .checkmark-2:after {
+  left: 8px;
+    top: 2px;
+    width: 6px;
+    height: 13px;
+    border: solid #2196f3;
+    border-width: 0px 2px 2px 0;
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+.pop_up button{
+  padding: 10px 65px;
+    font-size: 20px;
+    margin: 0px 32px;
+    border-radius: 55px;
+
+}
+.disabled {
+    color: gray;
+    cursor: not-allowed;
+    text-decoration: none;
+}
+
+/*ends*/
+
+/*ends*/

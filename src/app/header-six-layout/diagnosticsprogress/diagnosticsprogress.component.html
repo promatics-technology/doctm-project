@@ -1,0 +1,100 @@
+<div class="loader-box" *ngIf="loading">
+    <img src="./assets/imgs/load.gif" />
+</div>
+<div class="cstm-hdr container-fluid">
+	<div class="row">
+		<div  class="col-lg-2">
+			<div  class="dashboard-header-logo">
+				<img _ngcontent-c3="" class="img-responsive" src="./assets/imgs/logoDoctm.png" routerLink="/header-six-layout/dashboard-diagnostic">
+			</div>
+			<div >
+				<div _ngcontent-c3="" class="dshbrd-btn">
+					<button  class="btn btn-custom" routerLink="/header-six-layout/dashboard-diagnostic" tabindex="0"> Dashboard </button>
+				</div>
+			</div>
+		</div>
+		<div class="col-lg-9">
+			 <h3 class="dt">
+                {{day}} {{month}} , {{year}}
+                <small>
+                    {{hoursIST}}:{{getMin()}}
+                </small>
+            </h3>
+		</div>
+		<div class="stock-tab">
+			<div class="col-lg-10 col-lg-offset-1">
+				<div class="">
+					<table class="table table-bordered ">
+						<thead class="new-thd">
+							  <colgroup span="2"></colgroup>
+							  <colgroup span="2"></colgroup>
+							    <tr class="text-center">
+								    <th width="14%" rowspan="2" class="new-thd" style="text-align: center;">Doctor Name</th>
+								    <th colspan="5" scope="colgroup" class="text-center">Progress Parameters</th>
+								</tr>
+							<tr >
+								<th  class="text-center"  width="10%" scope="col">Prescriptions</th>
+								<th  class="text-center"  width="10%" scope="col">Sale Orders</th>
+								<th   class="text-center" width="10%" scope="col">Sales Amount</th>
+								<th  class="text-center" width="10%" scope="col">Conversion (%)</th>
+								<th  class="text-center"  width="10%" scope="col">Sales/prescription (Rs)</th>
+							</tr>
+						</thead>	
+						<tbody class="new-tbdy">
+							<tr *ngFor="let op of dataArray">
+								<td width="14%" class="text-center cstm-name">{{getDoctorName(op._id)}}</td>
+								<td width="10%" class="text-center cstm-name">{{op.total_sales.length}}
+								 <small class='fontsmall'>({{getData(checkIsNan(getPercentage(op.total_sales.length,totalPrescriptions)))}}%)</small></td>
+								<td width="10%" class="text-center cstm-name">{{op.true_sales.length}}
+								 <small class='fontsmall'>({{getData(checkIsNan(getPercentage(op.true_sales.length,totalSales)))}}%)</small></td>
+								<td width="10%" class="text-center cstm-name">{{op.total_sales_amount}}
+								 <small class='fontsmall'>({{getData(checkIsNan(getPercentage(op.total_sales_amount,totalSalesDoctorPlusWalkin)))}}%)</small></td>
+								<td width="10%" class="text-center cstm-name">{{op.conversion}}%</td>
+								<td width="10%" class="text-center cstm-name">{{op.sales_per_pres}}</td>
+							</tr>
+							<tr>
+								<td width="14%" class="text-center cstm-name">Other Sales</td>
+								<td width="10%" class="text-center cstm-name">N.A</td>
+								<td width="10%" class="text-center cstm-name">{{otherSales.length}} 
+								<small class='fontsmall'>({{getData(checkIsNan(getPercentage(otherSales.length,totalSales)))}}%)</small></td>
+								<td width="10%" class="text-center cstm-name">{{checkIsNan(totalSalesWalkin)}} <small class='fontsmall'>({{getData(checkIsNan(getPercentage(totalSalesWalkin,totalSalesDoctorPlusWalkin)))}}%)</small></td>
+								<td width="10%" class="text-center cstm-name">N.A</td>
+								<td width="10%" class="text-center cstm-name">{{getData(checkIsNan(totalSalesWalkin/otherSales.length))}}</td>
+							</tr>
+						</tbody>				
+						<tfoot class="tfoot">
+							<th width="14%" class="text-center new-thd">Diagnostics Aggregates</th>
+								<td width="10%" class="text-center new-thd">{{totalPrescriptions}}</td>
+								<td width="10%" class="text-center new-thd">{{totalSales}}</td>
+								<td width="10%" class="text-center new-thd">
+									{{checkIsNan(totalSalesDoctorPlusWalkin)}}
+								</td>
+								<td width="10%" class="text-center new-thd">{{checkIsNan(totalConversion)}}%</td>
+								<td width="10%" class="text-center new-thd">{{checkIsNan(totalSalesPerPres)}}</td>
+						</tfoot>
+					</table>
+				</div>
+			</div>
+			
+		</div>
+		<div class="col-lg-8 col-lg-offset-2 fix-footer">
+				<div class="row btn-wrap">
+					<div class="col-lg-4 text-center">
+						<button class="btn btn-custom">
+							<div>Sales: {{getData(totalSalesDoctorPlusWalkin)}}</div>
+						</button>
+					</div>
+					<div class="col-lg-4 text-center" >
+						<button class="btn btn-custom btn-grin" (click)="exportPdf()">
+							<div> Export </div>
+						</button>
+					</div>
+					<div class="col-lg-4 text-center">
+						<button class="btn btn-custom" (click)="SendEmailToAdminDoctorForDiagnosticsProgressToday()">
+							<div>Share</div>
+						</button>
+					</div>
+				</div>
+			</div>
+	</div>
+</div>

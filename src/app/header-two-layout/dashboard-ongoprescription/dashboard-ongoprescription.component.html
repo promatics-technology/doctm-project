@@ -1,0 +1,70 @@
+<div class="loader-box" *ngIf="loading">
+	<img src="./assets/imgs/load.gif" />
+</div>		
+<div class="ongo-sec">
+
+	<div class="ongo-panel">
+		<!-- <div class="form-group col-md-12 col-sm-12 col-xs-12">
+			<h2 class="text-center"> On-The-go Prescription </h2>
+		</div> -->
+
+		<form [formGroup]="stepOneForm">
+			<div class="ongo-form">
+				<div class="form-group col-md-12 col-sm-12 col-xs-12">
+					<label for="field1" class=""> Patient Mobile Number<sup>*</sup> </label>
+					<span class="input-group-addon">+91</span>
+					<input id="field1" type="text" class="form-control txtfield" name="" maxLength="10" required="" [(ngModel)]="registrationData.phone" [formControl]="stepOneForm.controls['phone']" (blur)="findPatientAppointmentByPhone($event.target.value)"/>
+					<p style="color: #FF0000" *ngIf="!stepOneForm.controls['phone'].valid  && ( stepOneForm.controls['phone'].touched)">Invalid phone number !!!</p>
+				</div>
+				<div class="form-group col-md-12 col-sm-12 col-xs-12">
+					<label for="field1" class=""> Patient Name<sup>*</sup> </label>
+					<input  type="text" class="form-control txtfield" name="" required="" [(ngModel)]="registrationData.name" [formControl]="stepOneForm.controls['name']" [matAutocomplete]="autoPatNameReg"/>
+					<mat-autocomplete #autoPatNameReg="matAutocomplete" class="mat-autocomplete-registration">
+						<mat-option *ngFor="let patient of patientListReg" [value]="patient.name">
+							{{patient.name}}
+						</mat-option>
+					</mat-autocomplete>
+					<p style="color: #FF0000" *ngIf="!stepOneForm.controls['name'].valid  && ( stepOneForm.controls['name'].touched)">Invalid name !!!</p>
+				</div>
+				<div class="form-group col-md-12 col-sm-12 col-xs-12">
+					<label for="field1" class=""> Patient Email </label>
+					<input  type="text" class="form-control txtfield" name=""  required="" [(ngModel)]="registrationData.email" [formControl]="stepOneForm.controls['email1']"/>
+					<p style="color: #FF0000" *ngIf="!stepOneForm.controls['email1'].valid  && ( stepOneForm.controls['email1'].touched)">Invalid email !!!</p>
+				</div>
+				<div class="form-group col-md-12 col-sm-12 col-xs-12">
+					<label for="field1" class=""> Date of birth </label>
+					<div class="cus-datetimepicker">
+						<angular2-date-picker [(ngModel)]="registrationData.dob" [formControl]="stepOneForm.controls['date']" [settings]="settings"></angular2-date-picker>
+						<!-- <input [(ngModel)]="myDate" ng2-datetime-picker date-only="true" /> -->
+						<!-- <input placeholder="Date of birth" class="form-control txtfield" [date-only]="true" [close-on-select]="false" [(ngModel)]="date" ng2-datetime-picker date-format="MM/DD/YYYY HH:mm" parse-format="YYYY-MM-DD HH:mm:ss" /> -->
+					</div>
+					<p style="color: #FF0000" *ngIf="!stepOneForm.controls['date'].valid  && ( stepOneForm.controls['date'].touched)">Invalid date !!!</p>
+				</div>
+
+				<div class="form-group col-md-12 col-sm-12 col-xs-12">
+					<label for="field1" class=""> Gender<sup>*</sup> </label>
+					<select class="form-control txtfield" [(ngModel)]="registrationData.gender" [formControl]="stepOneForm.controls['gender']">
+						<option value="" disabled> Gender </option>
+						<option value="Male"> Male </option>
+						<option value="Female"> Female </option>
+						<option value="Other"> Other </option>
+					</select>
+					<p style="color: #FF0000" *ngIf="!stepOneForm.controls['gender'].valid  && ( stepOneForm.controls['gender'].touched)">Invalid gender !!!</p>
+				</div>
+
+				<div class="form-group col-md-12 col-sm-12 col-xs-12">
+					<button class="btn btn-custom full-width" type="button" [disabled]="!registrationData.gender || !registrationData.phone || !registrationData.name" (click)="NewRegistration()"> Prescribe </button>
+					<button class="btn btn-custom btn-orange btn-block" type="button" routerLink="/header-two-layout/dashboard-prescription" style="margin-top:15px;"> Cancel </button>
+				</div>
+
+			</div>
+		</form>
+
+		<!-- <div class="form-group col-md-12 col-sm-12 col-xs-12 text-right">
+			
+		</div> -->
+
+	</div>
+
+
+</div>

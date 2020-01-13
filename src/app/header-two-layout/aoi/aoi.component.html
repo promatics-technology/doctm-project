@@ -1,0 +1,145 @@
+<div class="loader-box" *ngIf="loading">
+    <img src="./assets/imgs/load.gif" />
+</div>
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-lg-2 col-left">
+			<div class="cus-sidebar-wrapper">
+				<div class="cus-sidebar cstm-sd-bar">
+					<ul>
+						<li class="{{getClass(0)}}" (click)="activatetab(0)" class="active"> <a href="javascript:void(0);"> Today </a> </li>
+	    				<li class="{{getClass(1)}}" (click)="activatetab(1)"> <a href="javascript:void(0);"> 1 Week &nbsp;<small *ngIf="activatedtab==1">({{fromDate | date: 'dd/LL/yy'}} - {{toDate | date: 'dd/LL/yy'}})</small> </a> </li>
+						<li class="{{getClass(2)}}" (click)="activatetab(2)"> <a href="javascript:void(0);"> 2 Weeks &nbsp;<small *ngIf="activatedtab==2">({{fromDate | date: 'dd/LL/yy'}} - {{toDate | date: 'dd/LL/yy'}})</small>  </a> </li>
+						<li class="{{getClass(3)}}" (click)="activatetab(3)"> <a href="javascript:void(0);"> 1 Month &nbsp;<small *ngIf="activatedtab==3">({{fromDate | date: 'dd/LL/yy'}} - {{toDate | date: 'dd/LL/yy'}})</small> </a> </li>
+						<li class="{{getClass(4)}}" (click)="activatetab(4)"> <a href="javascript:void(0);"> 3 Month &nbsp;<small *ngIf="activatedtab==4">({{fromDate | date: 'dd/LL/yy'}} - {{toDate | date: 'dd/LL/yy'}})</small></a> </li>
+						<li class="{{getClass(5)}}" (click)="activatetab(5)"> <a href="javascript:void(0);"> 6 Month &nbsp;<small *ngIf="activatedtab==5">({{fromDate | date: 'dd/LL/yy'}} - {{toDate | date: 'dd/LL/yy'}})</small></a> </li>
+						<li class="{{getClass(6)}}" (click)="activatetab(6)"> <a href="javascript:void(0);"> 1 Year &nbsp;<small *ngIf="activatedtab==6">({{fromDate | date: 'dd/LL/yy'}} - {{toDate | date: 'dd/LL/yy'}})</small></a> </li>
+						<li class="{{getClass(7)}}" (click)="activatetab(7)"> <a href="javascript:void(0);"> All </a> </li>
+	    				<li style="padding-left: 15px;height: 44px;">
+	    					<h4>
+	    					<!-- <img src="http://maps.google.com/mapfiles/ms/icons/blue-dot.png" /> -->
+	    					<img src="./assets/imgs/map-blue32.png">
+	    					<!-- <span class="fa fa-circle bl"></span>  -->
+							<b>< 5 %</b>
+							</h4>
+	    				</li>
+	    				<li style="padding-left: 15px;height: 44px;">
+	    					<h4>
+	    					<!-- <img src="http://maps.google.com/mapfiles/ms/icons/green-dot.png" /> -->
+	    					<img src="./assets/imgs/map-green32.png">
+	    					<!-- <span class="fa fa-circle grin"></span>  -->
+							<b> 5-15 %</b>
+							</h4>
+	    				</li>
+	    				<li style="padding-left: 15px;height: 44px;">
+	    					<h4>
+	    					<!-- <img src="http://maps.google.com/mapfiles/ms/icons/red-dot.png" /> -->
+	    					<img src="./assets/imgs/map-red32.png">
+	    					<!-- <span class="fa fa-circle red"></span>  -->
+							<b> > 15 %</b>
+							</h4>
+	    				</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="col-lg-10 col-ryt" *ngIf="!loading">
+			<div class="cstm-table">
+				<table class="table table-bordered h3-mrgn">
+					<thead>
+						<!-- {{allData | json}} -->
+						<th class="text-center" *ngIf = "allData"><div>Total Area</div><div ><h3> <b> {{allData?.length}}</b></h3></div></th>
+						<th class="text-center" *ngIf = "!allData"><div>Total Area</div><div ><h3> <b>0</b></h3></div></th>
+						<th class="text-center"><div>Total Patients</div> <div><h3><b>{{totalLocations}}</b></h3></div></th>
+						<th class="text-center"><div>Area With Max Patients </div><div *ngIf = "areaMaxPatients"><h3><b>{{areaMaxPatients}}</b></h3></div></th>
+						<!-- <th class="text-center"><div>Area With Max Patients </div><div *ngIf = "!areaMaxPatients"><h3><b>Other</b></h3></div></th> -->
+						<th class="text-center"><div>Out Station Patients</div><div><h3><b>{{outOfStation}} ({{outOfStationPercenatge}}%)</b></h3></div></th>
+					</thead>
+				</table>
+			</div>
+			<div class="map">
+				<agm-map [latitude]="lat" [longitude]="lng" style="height: 450px;" [zoom]="zoom">
+                    <agm-marker *ngFor="let data of allData; let i = index" [latitude]="data.dataAoi[0].registration.lat" [longitude]="data.dataAoi[0].registration.lng" [title]="data.title" [iconUrl]="data.icon">
+                    	<agm-info-window [disableAutoPan]="true">
+                    		<h5>{{data.title}}</h5><span class="text-center">{{data.quality}}</span>                    		
+				        </agm-info-window>
+                    </agm-marker>
+                    <agm-marker [latitude]="lat" [longitude]="lng" [title]="clinicName" [iconUrl]="clinic_icon">
+                    	<agm-circle [latitude]="lat" [longitude]="lng" 
+					      [radius]="radius" [fillOpacity]="fillOpacity">
+					  	</agm-circle>
+					  	<agm-info-window [disableAutoPan]="true">
+                    		<h5>{{clinicName}}</h5>
+				        </agm-info-window>
+                    </agm-marker>
+                </agm-map>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="container footer-cstm-an">
+	<!-- <div class="row"> -->
+		<!-- <div class="col-lg-7 text-center">
+			<div>
+				<h4>
+					<span class="fa fa-circle bl"></span> 
+					<b>< 5 %</b>
+					<span class="bl">Blue Dot</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+					<span class="fa fa-circle grin"></span> 
+					<b>< 5-15 %</b>
+					<span class="grin">Green Dot</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+					<span class="fa fa-circle red"></span> 
+					<b> > 5 %</b>
+					<span class="red">Red Dot</span>
+				</h4>
+			</div>
+		</div> -->
+		<div class="col-lg-12 text-center">
+			<button class="btn btn-cstm" data-toggle="modal" data-target="#myModal">Tabular View</button>
+		</div>
+	<!-- </div> -->
+</div>
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-body cstm-md-bdy">          	
+      	 	<button type="button" class="close" data-dismiss="modal">&times;</button>
+      		<div class="cstm-tab">
+				<table class="table tb-1 table-bordered">
+				    <tbody>
+						<tr class="cstm-tr-2">
+							<td class="text-center" width="80px"><b>Sr no</b></td>
+							<td class="text-center"><b>Area Name</b></td>
+							<td class="text-center"><b>Number of Patients</b></td>
+							<td class="text-center"><b>Percentages</b></td>
+						</tr>
+						<tr class="{{getClassMap(data,i)}}" *ngFor="let data of allData;let i = index;">
+							<td class="text-center" *ngIf="data.dataAoi[0].registration.lat!=0" width="80px">{{i+1}}</td>
+							<td class="text-left" *ngIf="data.dataAoi[0].registration.lat!=0">{{data.dataAoi[0].registration.location}}</td>
+							<td class="text-center" *ngIf="data.dataAoi[0].registration.lat!=0">{{data.dataAoi.length}}</td>
+							<td class="text-center" *ngIf="data.dataAoi[0].registration.lat!=0">{{data.percentage}}%</td>
+						</tr>
+						<tr class="cstm-tr-2">
+							<td class="text-center" colspan="2">
+								<b>
+									Total Patients
+								</b>
+							</td>
+							<td class="text-center">{{totalLocations}}</td>
+							<td class="text-center">100%</td>
+						</tr>
+					</tbody>
+				</table>
+      		</div>    
+      		<div class="text-center">	
+	      		<button class="btn btn-custom btn-stts"  (click)="exportPdf()"> EXPORT 
+	            </button>   	
+      		</div>   
+        </div>
+      </div>
+    </div>
+</div>
+

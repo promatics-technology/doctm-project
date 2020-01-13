@@ -1,0 +1,411 @@
+<div class="loader-box" *ngIf="loading">
+    <img src="./assets/imgs/load.gif" />
+</div>
+<section class="ipdbook">
+	<div class="container-fluid">
+		<div class="dashboard-header-pthree">
+			<div class="col-lg-2 col-md-2 col-sm-12 col-xs-12 ">
+				<div class="dashboard-header-logo" routerLink="/header-four-layout/dashboard-ipd">
+					<img src="./assets/imgs/logoDoctm.png" class="img-responsive" />
+					<div class="dshbrd-btn">
+						<button class="btn btn-custom" routerLink="/header-four-layout/dashboard-ipd"> Dashboard </button>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-10 col-md-10 col-sm-12 col-xs-12 ">
+				<div class="row">
+                  	<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                  		<div class="select-duration">
+                  			<h3>Select Duration:</h3>
+                  		</div>
+                  	</div>
+      				<div class="col-lg-4 col-md-4 col-sm-5 col-xs-12">
+      					<div class="row">	
+      					
+      						<label class=" col-md-3 col-sm-3 col-xs-12">From:</label>
+      						<div class="col-md-9  col-sm-9 col-xs-12">
+      							<angular2-date-picker [(ngModel)]="fromDate" [settings]="settings"></angular2-date-picker>
+      						</div>
+      						
+      					</div>
+      				</div>
+      				<div class="col-lg-4 col-md-4 col-sm-5 col-xs-12">
+      					<div class="row">
+      						<label class=" col-md-3 col-sm-3 col-xs-12">To:</label>
+      						<div class="col-md-9  col-sm-9 col-xs-12">
+      							<angular2-date-picker [(ngModel)]="toDate" [settings]="settings"></angular2-date-picker>
+      						</div>
+      					</div>
+      				</div>
+                  	<div class="col-lg-1 col-md-1 col-sm-2 col-xs-12">
+                  		<div class="select-duration btn-go">
+							<button class="btn ok-btn" type="submit" data-dismiss="modal" (click)='viaDate()'> Go </button>
+                  		</div>
+                  	</div>
+                </div>
+            	<div class="row">
+                	<div class="col-lg-11 col-md-11 col-sm-11 col-xs-12">
+	                	<div class="form-group">
+	                		<input type="number" name="" class="form-control" placeholder="Search by invoice" [(ngModel)]="invoiceId" >
+	                	</div>
+                	</div>
+                	<div class="col-lg-1 col-md-1 col-sm-1 col-xs-11 btn-go">
+                		<button class="btn ok-btn" (click)="FindByInvoiceID()">Go</button>
+                	</div>
+                </div>
+	             
+			</div>
+		</div>
+		<div class="col-md-12 col-sm-12 col-xs-12">
+	        <div class="signup-content-wrapper history">
+	            <div class="signup-clinicServc">
+	                <div class="table-doc">
+		                <div class="row">
+		                     <div class="table-responsive" *ngIf="patinetlist.length>0">
+			                        <table matSort (matSortChange)="sortData($event)" cellpadding="20px" class="table cstm-table nn-5">
+			                        	<thead class="table-head">
+										  <tr>
+										    <th width="60px"><h4>SNo.</h4></th>
+										    <th mat-sort-header="patientName" class="{{getTableHeaderClass(1)}}" (click)="setTableHeaderClass(1)"><h4>Name</h4></th>
+										    <th mat-sort-header="procedure" class="{{getTableHeaderClass(2)}}" (click)="setTableHeaderClass(2)"><h4>Procedure</h4></th>
+										    <th mat-sort-header="first_name" class="{{getTableHeaderClass(3)}}" (click)="setTableHeaderClass(3)"><h4>Doctor</h4></th>
+										    <th mat-sort-header="createdAt" class="{{getTableHeaderClass(4)}}" (click)="setTableHeaderClass(4)"><h4>Admission</h4></th>
+										    <th mat-sort-header="discharge_date" class="{{getTableHeaderClass(5)}}" (click)="setTableHeaderClass(5)"><h4>Discharge</h4></th>
+										    <th mat-sort-header="duration_days" class="{{getTableHeaderClass(6)}}" (click)="setTableHeaderClass(6)"><h4>Dur(days:hrs)</h4></th>
+										    <th mat-sort-header="invoice" class="{{getTableHeaderClass(7)}}" (click)="setTableHeaderClass(7)"><h4>Invoice No.</h4></th>
+										    <th mat-sort-header="total_bill" class="{{getTableHeaderClass(8)}}" (click)="setTableHeaderClass(8)"><h4>Bill (Rs)</h4></th>
+										    <th><h4>Status</h4></th>
+										  </tr>
+									   </thead>
+									    <tbody class="tbd">
+
+									  <tr class="table-row"  *ngFor="let item of sortedData; let i= index;">
+									    <td width="60px">{{i+1}}</td>
+									    <td>{{item.patientName}}</td> 
+									    <td>{{item.procedure}}</td>
+									    <td>{{item.consultDoc.first_name}}</td>
+									    <td>{{getTimeFiveAndHalfHoursBefore(item.createdAt) | date:'d MMM yy ,h:mm a'}}</td>
+									    <td>
+									    	<span *ngIf="item.discharge_date">{{getTimeFiveAndHalfHoursBefore(item.discharge_date) | date:'d MMM yy ,h:mm a'}}</span>
+									    </td>
+									    <td><span *ngIf="item.discharge_date">{{item.duration_days}} days {{item.duration_hours}} hrs</span></td>
+									    <td>
+									    	<span *ngIf="item.discharge_date">{{item.id}}</span>
+									    </td>
+									    <td>{{item.total_bill}}</td>
+									    <td>
+									    	<span *ngIf="!item.discharge_date">Admitted</span>
+									    	<span *ngIf="item.discharge_status=='requested_by_ipd'">Requested</span>
+									    	<span *ngIf="item.discharge_status=='approved_by_doctor'">
+									    		<button class="btn btn-primary" (click)="printPdfAndDischarge(item)"> View </button> 
+									    		<!-- <i class="fa fa-download" (click)="printPdfAndDischarge(item)"></i> -->
+									    	</span>
+									    	<span *ngIf="item.discharge_status=='printed'">View <i class="fa fa-download"></i></span>
+									    </td>
+									  </tr>
+									  </tbody>
+									</table>
+		                     </div>
+		                     <div class="col-lg-12" *ngIf="patinetlist.length<1">
+		                     	<h3 class="text-center">No data found ...</h3>
+		                     </div> 
+		                </div>
+		                <div class="row" *ngIf="patinetlist.length>0">
+		                  	<div class="col-md-3 col-lg-offset-1 col-sm-4 col-xs-12 text-center">
+		                  		<div class="sub-total-div">
+		                  			<h4><p>Total patients admitted: <b>{{patientAdmitted}}</b></p></h4>
+		                  		</div>
+		                  	</div>
+		                  	<div class="col-md-3 col-sm-4 col-xs-12 text-center">
+		                  		<div class="sub-total-div">
+		                  			<h4><p>Total Occupancy Hours: <b>{{totalOccupancy}}</b></p></h4>
+		                  		</div>
+		                  	</div>
+		                  	<div class="col-md-3 col-sm-4 col-xs-12 text-center">
+		                  		<div class="sub-total-div">
+		                  			<h4><p>Total Bill Value: <b>Rs. {{totalBill}} </b></p></h4>
+		                  		</div>
+		                  	</div>
+		                  	<div class="col-lg-2 col-md-12 col-sm-12 col-xs-12 text-center" *ngIf="patinetlist.length>0">
+		                		<div class="dshbrd-btn ts-btn">
+									<!-- <button class="btn btn-custom" (click)="onGenerateCsv()"> Export </button> -->
+									<button class="btn btn-custom" (click)="exportPdf()"> Export </button>
+								</div>
+		                	</div>
+		                </div>
+	                </div>
+	            </div>
+	        </div>
+		</div>
+	</div>
+</section>
+<div class="modal fade cus-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" *ngIf="openedPatientDetail">
+  	<div class="modal-dialog wrap-tab" role="document">
+    	<div id="generatePdfModal">
+    		<div class=" text-center">
+    			<h4 class="modal-title mg--top" *ngIf="smartIpdData.dataSmartIpd.address && smartIpdData.dataSmartIpd.address.clinic_name">{{smartIpdData.dataSmartIpd.address.clinic_name}}</h4>
+    			<table>
+    				<tr>
+    					<td>
+    						<div class="col-lg-6 text-left">
+		    					<div class="">
+		    						<b>Date: </b><span>{{getTimeFiveAndHalfHoursBefore(openedPatientDetail.updatedAt) | date:'d MMM yy ,h:mm a' }}</span>
+		    					</div>
+		    				</div>
+    					</td>
+    					<td>	
+		    				<div class="col-lg-6 text-right">
+		    					<div *ngIf="smartIpdData.dataSmartIpd.address && smartIpdData.dataSmartIpd.address.address">{{smartIpdData.dataSmartIpd.address.address}}</div>
+								<div *ngIf="smartIpdData.dataSmartIpd.address && smartIpdData.dataSmartIpd.address.mobile">
+								IPD contact: {{smartIpdData.dataSmartIpd.address.mobile}}</div>
+		    				</div>	
+    					</td>
+    				</tr>
+    			</table>
+    		</div>
+    		<div class="modal-body">
+    			<div class="col-md-12 col-sm-12 col-xs-12">
+	    			<div class="patient-popup">
+	    				<div class="pat-center">
+		    				<div class="pat-img">
+								<img class="img-responsive" src="./assets/imgs/no-person.jpg">
+		    				</div>
+		    				<p>{{openedPatientDetail.patientName}} ({{openedPatientDetail.gender}}), {{openedPatientDetail.age}}Y</p>
+		    			</div>
+		    			<table class="table-cstm">
+		    				<tbody>
+			    				<tr>
+			    					<th>Bed Number</th>
+			    					<td> 
+			    						<span *ngIf="openedPatientDetail.type=='general'">G</span>
+		                                <span *ngIf="openedPatientDetail.type=='private'">P</span>
+		                                <span *ngIf="openedPatientDetail.type=='semi_private'">SP</span>-{{openedPatientDetail.bed_number}}
+			    					</td>
+			    				</tr>
+			    			
+			    				<tr>
+			    					<th>Ailment/Procedure</th>
+			    					<td>{{openedPatientDetail.procedure}}</td>
+			    				</tr>
+			    				
+			    				<tr *ngIf="openedPatientDetail.prescription_id">
+			    					<th>Prescription ID</th>
+			    					<td> {{openedPatientDetail.prescription_id}}</td>
+			    				</tr>
+			    			
+			    				<tr>
+			    					<th>Mobile Number</th>
+			    					<td> +91-{{openedPatientDetail.phone}}</td>
+			    				</tr>
+			    			
+			    				<tr>
+			    					<th>Consulting Doctor Name</th>
+			    					<td>Dr. {{getDoctorName(openedPatientDetail.consultDoc._id)}}</td>
+			    				</tr>
+			    			
+			    				<tr>
+			    					<th>Admit date and Time</th>
+			    					<td>{{getTimeFiveAndHalfHoursBefore(openedPatientDetail.createdAt) | date:'d MMM yy ,h:mm a' }} </td>
+			    				</tr>
+			    				<tr>
+			    					<th>Discharge Date and Time</th>
+			    					<td>{{getTimeFiveAndHalfHoursBefore(openedPatientDetail.discharge_date) | date:'d MMM yy ,h:mm a' }}</td>
+			    				</tr>
+			    				<tr *ngIf="openedPatientDetail.medication.length>0">
+			    					<td colspan="2"> 
+			    						<div class="">
+                                    	<div><h4><b> Medicines</b></h4></div>
+	                                    <ol style="padding-left:10px">
+	                                        <li *ngFor="let data of openedPatientDetail.medication">
+	                                            <span *ngIf="data.name=='Tablet' || data.name=='Capsule' || data.name=='Cream' || data.name=='Ointment' || data.name=='Aerosols' || data.name=='Powder' || data.name=='MouthWash'">
+	                                            {{data.short_name}}<b class="notranslate"> {{data.med_name[0].value}} </b>-{{data.frequency}} <span class="notranslate"> X </span> {{data.duration}} days <span *ngIf="data.specialInstruction!=null"> ({{data.specialInstruction}})</span>
+	                                            <span *ngIf="data.med_info"><p class="help-note" *ngIf="data.med_info.length>0">({{data.med_info[0].value}}<span *ngIf="data.med_info.length>1"> / {{data.med_info[1].value}}</span>)</p>
+	                                            </span>
+	                                            </span>
+	                                            <span *ngIf="data.name=='Syrup' || data.name=='Suspension' || data.name=='Emulsion' || data.name=='Solution'">
+	                                            {{data.short_name}}<b class="notranslate"> {{data.med_name[0].value}} </b>- {{data.dosage}}ml <span class="notranslate"> X </span> {{data.frequency}} <span class="notranslate"> X </span> {{data.duration}} days <span *ngIf="data.specialInstruction!=null"> ({{data.specialInstruction}})</span>
+	                                            <span *ngIf="data.med_info"><p class="help-note" *ngIf="data.med_info.length>0">({{data.med_info[0].value}}<span *ngIf="data.med_info.length>1"> / {{data.med_info[1].value}}</span>)</p>
+	                                            </span>
+	                                            </span>
+	                                            <span *ngIf="data.name=='Injection' || data.name=='Gel' || data.name=='Lotion'">
+	                                            {{data.short_name}}<b class="notranslate"> {{data.med_name[0].value}} </b><span *ngIf="data.mode"> ({{data.mode}}) </span> -{{data.frequency}} <span class="notranslate"> X </span> {{data.duration}} days <span *ngIf="data.specialInstruction!=null"> ({{data.specialInstruction}})</span><span *ngIf="data.mode"> ({{data.mode}}) </span>
+	                                            <span *ngIf="data.med_info"><p class="help-note" *ngIf="data.med_info.length>0">({{data.med_info[0].value}}<span *ngIf="data.med_info.length>1"> / {{data.med_info[1].value}}</span>)</p>
+	                                            </span>
+	                                            </span>
+	                                            <span *ngIf="data.name=='Drops'">
+	                                            {{data.short_name}}<b class="notranslate"> {{data.med_name[0].value}} </b>-{{data.quantity}} drops <span class="notranslate"> X </span> {{data.frequency}} <span class="notranslate"> X </span> {{data.duration}} days <span *ngIf="data.specialInstruction!=null"> ({{data.specialInstruction}})</span>
+	                                            <span *ngIf="data.med_info"><p class="help-note" *ngIf="data.med_info.length>0">({{data.med_info[0].value}}<span *ngIf="data.med_info.length>1"> / {{data.med_info[1].value}}</span>)</p>
+	                                            </span>
+	                                            </span>
+	                                        </li>
+	                                    </ol>  
+	                                </div>
+			    					</td>
+			    				</tr>
+			    				<tr *ngIf="openedPatientDetail.woundCare || openedPatientDetail.diet || openedPatientDetail.lifestyle || openedPatientDetail.others">
+			    					<td colspan="2">
+			    						<div class="row">
+			    							<div class="col-lg-12">
+			    								<h4 *ngIf="getDischargeInstructionsStatus()">
+			    									<b>Discharge Instructions</b>
+			    								</h4>
+			    								<h5 *ngIf="openedPatientDetail.woundCare && (openedPatientDetail.woundCare.one || openedPatientDetail.woundCare.two)"><b>Wound Care</b></h5>
+			    								<ol class="cstm-ol" *ngIf="openedPatientDetail.woundCare && (openedPatientDetail.woundCare.one || openedPatientDetail.woundCare.two)">
+			    									<li *ngIf="openedPatientDetail.woundCare.one">{{openedPatientDetail.woundCare.one}}</li>
+			    									<li *ngIf="openedPatientDetail.woundCare.two">{{openedPatientDetail.woundCare.two}}</li>
+			    								</ol>
+			    								<h5 *ngIf="openedPatientDetail.diet &&  (openedPatientDetail.diet.one || openedPatientDetail.diet.two)"><b>Diet</b></h5>
+			    								<ol class="cstm-ol" *ngIf="openedPatientDetail.diet && (openedPatientDetail.diet.one || openedPatientDetail.diet.two)">
+			    									<li *ngIf="openedPatientDetail.diet.one">{{openedPatientDetail.diet.one}}</li>
+			    									<li *ngIf="openedPatientDetail.diet.two">{{openedPatientDetail.diet.two}}</li>
+			    								</ol>
+			    								<h5 *ngIf="openedPatientDetail.lifestyle && (openedPatientDetail.lifestyle.one || openedPatientDetail.lifestyle.two)"><b>Lifestyle changes</b></h5>
+			    								<ol class="cstm-ol" *ngIf="openedPatientDetail.lifestyle && (openedPatientDetail.lifestyle.one || openedPatientDetail.lifestyle.two)">
+			    									<li *ngIf="openedPatientDetail.lifestyle.one">{{openedPatientDetail.lifestyle.one}}</li>
+			    									<li *ngIf="openedPatientDetail.lifestyle.two">{{openedPatientDetail.lifestyle.two}}</li>
+			    								</ol>
+			    								<h5 *ngIf="openedPatientDetail.others && (openedPatientDetail.others.one || openedPatientDetail.others.two)"><b>Other Instructions</b></h5>
+			    								<ol class="cstm-ol" *ngIf="openedPatientDetail.others && (openedPatientDetail.others.one || openedPatientDetail.others.two)">
+			    									<li *ngIf="openedPatientDetail.others.one">{{openedPatientDetail.others.one}}</li>
+			    									<li *ngIf="openedPatientDetail.others.two">{{openedPatientDetail.others.two}}</li>
+			    								</ol>
+			    								<h4><b>Doctor Discharge Note</b></h4>
+			    								<div class="form-group doc-note">
+												  <textarea class="form-control" rows="10" id="comment" value="{{openedPatientDetail.doctor_note}}" readonly=""></textarea>
+												</div><br><br>
+												<div class="text-right">
+													<h5>(Doctor Signature)</h5>
+												</div>
+			    							</div>
+			    						</div>
+			    					</td>
+			    				</tr>
+			    			</tbody>
+		    			</table>
+		    			<div class="row">
+				    		<div class="col-md-12 col-sm-12 col-xs-12">
+				    			<div class="patient-popup">		
+                                     <div><h4><b> Billing</b></h4></div>
+				    				<table style="width: 80%" class="table-bordered my-tab">
+				    					<tr>
+				    						<th>Name</th>
+				    						<td>{{openedPatientDetail.patientName}}</td>
+				    					</tr>
+				    					<tr>
+					    					<th>Bed Number</th>
+					    					<td> 
+					    						<span *ngIf="openedPatientDetail.type=='general'">G</span>
+				                                <span *ngIf="openedPatientDetail.type=='private'">P</span>
+				                                <span *ngIf="openedPatientDetail.type=='semi_private'">SP</span>-{{openedPatientDetail.bed_number}}
+					    					</td>
+					    				</tr>
+					    			
+					    				<tr>
+					    					<th>Ailment/Procedure</th>
+					    					<td>{{openedPatientDetail.procedure}}</td>
+					    				</tr>
+					    				
+					    				<tr *ngIf="openedPatientDetail.prescription_id">
+					    					<th>Prescription ID</th>
+					    					<td> {{openedPatientDetail.prescription_id}}</td>
+					    				</tr>
+					    			
+					    				<tr>
+					    					<th>Mobile Number</th>
+					    					<td> +91-{{openedPatientDetail.phone}}</td>
+					    				</tr>
+					    			
+					    				<tr>
+					    					<th>Consulting Doctor Name</th>
+					    					<td>Dr. {{getDoctorName(openedPatientDetail.consultDoc._id)}}</td>
+					    				</tr>
+					    			
+					    				<tr>
+					    					<th>Admit date and Time</th>
+					    					<td>{{getTimeFiveAndHalfHoursBefore(openedPatientDetail.createdAt) | date:'d MMM yy ,h:mm a' }} </td>
+					    				</tr>
+					    				<tr>
+					    					<th>Discharge Date and Time</th>
+					    					<td>{{getTimeFiveAndHalfHoursBefore(openedPatientDetail.discharge_date) | date:'d MMM yy ,h:mm a' }}</td>
+					    				</tr>
+					    			</table>					    		
+				    			</div>
+				    		</div>
+		        		</div>
+		        		<div class="row">
+				    		<div class="col-md-12  col-sm-12 col-xs-12 text-left">
+				    			<div class="patient-popup chrges">
+					    			<h4>Occupancy Charges(a): 
+					    				<span> 
+					    					{{openedPatientDetail.occupancy_charges}}
+					    				</span>
+					    			</h4>
+				    			</div>
+				    		</div>
+		        		</div>
+		        		<div class="row">
+		        			<div class="col-md-12 col-sm-12 col-xs-12">
+		        				<div class="patient-popup discharge-popup">
+		        					<h4>Other Charges (b):</h4>
+		        					<table class="table table-striped table-bordered table-responsive">
+									    <thead>
+									      <tr>
+									        <th width="75px">Date : Time</th>
+									        <th width="90px">Activity</th>
+									        <th width="100px">Description</th>
+									        <th width="80px">Unit</th>
+									        <th width="80px">Rate</th>
+									        <th width="80px">Amount</th>
+									      </tr>
+									    </thead>
+									    <tbody>
+									      <tr *ngFor="let activity of openedPatientDetail.patient_activities; let i = index;">
+									        <td width="75px"> 
+									        	{{getTimeFiveAndHalfHoursBefore(activity.createdAt) | date:'d MMM yy ,h:mm a' }}
+									    	</td>
+									        <td width="90px"> 
+									        	{{activity.type}}
+									    	</td>
+									    	<td width="100px">
+									    		{{activity.instruction}}
+									    	</td>
+									    	<td class="80px">
+									    		{{activity.unit}}
+									    	</td>
+									        <td class="80px"> 
+									        	{{activity.rate}}
+									    	</td>
+									        <td> 
+									        	{{activity.amount}}
+									    	</td>
+									     	<tr class="cstm-tr">
+												<td colspan="5" class="text-right">Total</td>
+										        <td>{{totalActivitiesAmountPdf}}</td>
+										   	</tr>
+										    <tr class="cstm-tr">  
+										    	<td colspan="5" class="text-right">Occupancy Charges</td>
+										        <td>{{openedPatientDetail.occupancy_charges}}</td>
+										    </tr>
+										    <tr class="cstm-tr">							       
+										        <td colspan="5" class="text-right">Advance Received</td>
+										        <td>{{openedPatientDetail.advanceReceived}}</td>
+										    </tr>
+										    <tr class="cstm-tr" *ngIf="refundAmountPdf>0">
+										        <td colspan="5" class="text-right">Total Refunded</td>
+										        <td>{{refundAmountPdf}}</td>
+										    </tr>
+										    <tr class="cstm-tr">
+										        <td colspan="5" class="text-right">Total Bill</td>
+										        <td>{{openedPatientDetail.total_bill}}</td>
+										    </tr>
+									    </tbody>
+									</table>
+		        				</div>
+		        			</div>
+		        		</div>
+	    			</div>
+	    		</div>
+      		</div>
+		</div>
+  	</div>
+</div>

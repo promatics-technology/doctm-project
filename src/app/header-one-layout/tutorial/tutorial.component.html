@@ -1,0 +1,73 @@
+<div class="loader-box" *ngIf="loading">
+   <img src="./assets/imgs/load.gif" />
+</div>
+<div class="analytics-sec">
+   <div class="ipd-deatil-sec">
+      <div class="ipd-body">
+         <div class="cus-sidebar-wrapper side-bar-cstm">
+            <div class="cus-sidebar">
+               <h4 class="cstm-tr">Category</h4>
+               <ul *ngFor = "let list of getCategoryArray; let i = index">
+                  <li class="{{getClass(i)}}" (click) = "showByCategory(list.category, i)"> <a>{{list.category}}</a> </li>
+               </ul>
+            </div>
+         </div>
+         <div class="cus-content-wrapper">
+            <div class="cus-content">
+               <div class="">
+                  <div class="row">
+                     <h3 class="text-center mg-top-btn">TUTORIALS</h3>
+                  </div>
+                  <div class="col-lg-12">
+                     <ul class="nav nav-tabs cstm-ul-new">
+                        <li class="active text-center"><a data-toggle="tab" href="#home-cstm">Videos</a></li>
+                        <li class="text-center"><a data-toggle="tab" href="#menu1-cstm">Pdf</a></li>
+                     </ul>
+                     <div class="tab-content">
+                       
+                           <div id="home-cstm" class="tab-pane fade in active">
+                              <div class="row" >
+                                 <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12" *ngFor = "let list of filteredData">
+                                    <div class="video-wrap">
+                                       <video  controls controlsList="nodownload" >
+                                          <source src="{{tutorialData}}{{list.fileName}}"  type="video/mp4">
+                                             Your browser does not support the video tag.
+                                          </video>
+                                          <div class="txt-video">
+                                             <h4>{{list.caption}}</h4>
+                                             <p>{{list.description}}</p>
+                                          </div>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </div>
+
+                           <div id="menu1-cstm" class="tab-pane fade">
+                              <div *ngFor = "let list of pdfData">
+                                 <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                                    <div (click)="openDialogDocument(list)">
+                                       <div class="video-wrap">
+                                          <div class="text-center img-pdf">
+                                             <img src="./assets/imgs/capture.jpg"/>
+                                          </div>
+                                          <div class="txt-video">
+                                             <h4><b>{{list.caption}}</b>
+                                             </h4>
+                                             <p>
+                                                {{list.description}}
+                                             </p>
+                                          </div>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+<!-- </div> -->

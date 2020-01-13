@@ -1,0 +1,7 @@
+.tb-pd-hi tr td{
+    padding: 10px 8px;
+    vertical-align: middle;
+}
+.evn {
+    background-color: #eff3ef;
+}

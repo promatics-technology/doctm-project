@@ -1,0 +1,976 @@
+<app-headerthree></app-headerthree>
+<router-outlet></router-outlet>
+<!-- Modal -->
+<div class="loader-box" *ngIf="loading">
+   <img src="./assets/imgs/load.gif" />
+</div>
+<div class="modal fade cus-modal" id="registrationForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+   <div class="modal-dialog cstm-modal-lg" role="document">
+      <div class="modal-content modal-lg">
+         <div class="modal-header" *ngIf="!webCam">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="ngOnInit()">
+            <span aria-hidden="true">×</span>
+            </button>
+            <div class="row cstm-mr">
+               <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
+                  <div class="input-group fieldDesign">
+                     <span class="input-group-addon">+91</span>
+					  <input class="form-control txtfield" name="" placeholder="Patient Mobile Number" type="text" pattern="[0-9.]+" maxLength="10" [(ngModel)]="registrationData.phone" [ngModelOptions]="{standalone: true}" (blur)="fetchPatientAppointments(registrationData.phone)" (keydown)="hide()"/>
+				</div>
+               </div>
+			   <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
+					<input type="text" class="form-control txtfield" name="" pattern="[a-zA-Z ]+" placeholder="Patient Name" [(ngModel)]="registrationData.name" [ngModelOptions]="{standalone: true}" (keyup)="SearchPatientNameReg($event.target.value)"  [matAutocomplete]="autoPatNameReg" (blur)="GetPatientLastPrescriptionByName()" (focus)="getPatientList()"  (keyup.enter)="findPatientAppointmentByPhoneAndName(registrationData)"/>
+                              <mat-autocomplete #autoPatNameReg="matAutocomplete" class="mat-autocomplete-registration" (optionSelected)="fillInfo($event)" >
+                                 <mat-option *ngFor="let patient of patientListReg" [value]="patient.name">
+                                 {{patient.name}}
+                                 </mat-option>
+                              </mat-autocomplete>
+			   </div>
+               <div class="col-lg-1 col-md-1 col-sm-12 col-xs-12 text-center hvr_green">
+                  <button class="btn ok-btn" style="padding: 5px;" type="button" (click)="findPatientAppointmentByPhoneAndName(registrationData)"> Go </button>
+               </div>
+            </div>
+            <!-- <h4 class="modal-title"> Registration Form </h4> -->
+         </div>
+         <div class="modal-body" *ngIf="numberWritten">
+            <div class="row" *ngIf="!webCam">
+               <div class="col-lg-6">
+                  <div class=" mg-bottom">
+                     <span  class="caret cstm-caret"></span>
+                     <select [(ngModel)]="consultationDoctor" (change)="checkWhichFieldsToShow()" class="form-control txtfield select-doctor">
+                     <option selected = "Select Doctor" disabled="" value="Select Doctor">SELECT DOCTOR* </option>
+                     <option value="{{doctor._id}}" *ngFor="let doctor of dataDoctors"> Dr. {{doctor.first_name}}</option>
+                     </select>
+                  </div>
+               </div>
+               <div class="col-lg-6">
+                  <div class=" mg-bottom col-md-12 col-sm-12 col-xs-12 cstm-crt-wrap">
+                     <span  class="caret cstm-caret"></span>
+                     <select class="form-control txtfield select-doctor" [(ngModel)]="registrationData.type" [ngModelOptions]="{standalone: true}">
+                     <option selected="" value="Select_doc" disabled="" class="select-opt"> Consultation Type* </option>
+                     <option *ngFor="let ct of consultationType" value="{{ct}}">{{ct}}</option>
+                     </select>
+                  </div>
+               </div>
+               <div class="col-lg-12 new-table">
+                  <div class="">
+                     <table class="table">
+                        <!--tr>
+                           <td width="150px">
+                              <label>Patient Name*</label>
+                           </td>
+                           <td>
+                              <input type="text" class="form-control txtfield" name="" pattern="[a-zA-Z ]+" placeholder="" [(ngModel)]="registrationData.name" [ngModelOptions]="{standalone: true}" (keyup)="SearchPatientNameReg($event.target.value)"  [matAutocomplete]="autoPatNameReg" (blur)="GetPatientLastPrescriptionByName()"/>
+                              <mat-autocomplete #autoPatNameReg="matAutocomplete" class="mat-autocomplete-registration" (optionSelected)="fillInfo($event)" >
+                                 <mat-option *ngFor="let patient of patientListReg" [value]="patient.name">
+                                 {{patient.name}}
+                                 </mat-option>
+                              </mat-autocomplete>
+                           </td>
+                        </tr-->
+                        <tr *ngIf="field_dob">
+                           <td width="185px" ><label>Patient DOB*</label></td>
+                           <td>
+                              <div  *ngIf="field_dob">
+                                 <angular2-date-picker class="{{dob_class}}" [(ngModel)]="registrationData.dob" [ngModelOptions]="{standalone: true}" [settings]="settings" (ngModelChange)="changeClass('dobClass')"></angular2-date-picker>
+                              </div>
+                           </td>
+                        </tr>
+                        <tr *ngIf="field_age">
+                           <td width="185px" ><label>Patient Age*</label></td>
+                           <td>
+						   <div class="row">
+								<div class="col-lg-4">
+                                 <input type="text" min="1" max="100" class="form-control txtfield" name="" placeholder="Age" [(ngModel)]="registrationData.age"  [ngModelOptions]="{standalone: true}" />
+                              </div>
+							  <div class="col-lg-6">
+							 <mat-radio-group [(ngModel)]="registrationData.age_param">
+							  <mat-radio-button value="years">Year(s)</mat-radio-button>
+							  <mat-radio-button value="months" >Month(s)</mat-radio-button>
+							</mat-radio-group> 
+							  </div>
+						   
+						   </div>
+                              
+                           </td>
+                        </tr>
+                        <tr>
+                           <td width="185px"><label>Gender*</label></td>
+                           <td>
+                              <select class="form-control txtfield {{genderClass}}" [(ngModel)]="registrationData.gender" [ngModelOptions]="{standalone: true}" (change)="changeClass('genderClass')">
+                              <option selected="" disabled="" value="Select"> Gender </option>
+                              <option value="Male"> Male </option>
+                              <option value="Female"> Female </option>
+                              <option value="Other"> Other </option>
+                              </select>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td width="185px"><label>Address*</label></td>
+                           <td>
+                              <div>
+							  
+                                <!-- <input class="form-control txtfield" placeholder="City" [matAutocomplete]="auto1" (keyup)="SearchCity($event.target.value)" [(ngModel)]="registrationData.city" [ngModelOptions]="{standalone: true}" /> -->         
+								<input class="form-control txtfield" placeholder="City" [(ngModel)]="registrationData.city" [ngModelOptions]="{standalone: true}" ngx-google-places-autocomplete [options]="{ types: [(cities)],componentRestrictions: { country: 'IN' } }" #placesRef="ngx-places" (onAddressChange)="changeCity($event)"  style="margin-top:20px;" (blur)="clearSuggestions()"/><!--mat-autocomplete #auto1="matAutocomplete" class="mat-autocomplete-registration">
+                                    <mat-option *ngFor="let city of allCities" [value]="city" (onSelectionChange)="GetLatLng(city)">
+                                    {{city}}
+                                    </mat-option>
+                                 </mat-autocomplete-->
+                                 <input class="form-control txtfield" placeholder="Area/Location" [(ngModel)]="registrationData.location" [ngModelOptions]="{standalone: true}" ngx-google-places-autocomplete [options]="{ types: [(geocode)],componentRestrictions: { country: 'IN' } }" #placesRef="ngx-places" (onAddressChange)="handleAddressChange($event)" style="margin-top:20px;" *ngIf="area_suggestions.length <=0"  (keyup)="checkSuggestions($event)"/>
+								 
+								  <input class="form-control txtfield" placeholder="Area/Location" [(ngModel)]="registrationData.location" [ngModelOptions]="{standalone: true}"  style="margin-top:20px;" [matAutocomplete]="autoAreaFill" (keyup)="SearchArea($event.target.value)" *ngIf="area_suggestions.length>0"/>
+								 <mat-autocomplete  #autoAreaFill="matAutocomplete" class="mat-autocomplete-registration" (optionSelected)="handleAddressClick($event)" >
+                                 <mat-option *ngFor="let area of area_suggestions" [value]="area">
+                                 {{area.location}}
+                                 </mat-option>
+                                 </mat-autocomplete>
+                              </div>
+                           </td>
+                        </tr>
+                        <tr *ngIf="field_weight">
+                           <td width="185px"><label>Weigth (Kg)</label></td>
+                           <td><input class="form-control txtfield" name="" placeholder="weight" type="text" min="1" max="150" [(ngModel)]="registrationData.weight" [ngModelOptions]="{standalone: true}"></td>
+                        </tr>
+                        <tr *ngIf="field_height">
+                           <td width="185px"><label>Height (cm)</label></td>
+                           <td> <input class="form-control txtfield" name="" placeholder="height" type="text" min="1" max="240" [(ngModel)]="registrationData.height" [ngModelOptions]="{standalone: true}">
+                           </td>
+                        </tr>
+                        <tr *ngIf="field_temp">
+                           <td width="185px"><label>Temperature (0F)</label></td>
+                           <td>
+                              <select class="form-control txtfield {{temp_class}}" [(ngModel)]="registrationData.temp" [ngModelOptions]="{standalone: true}" (change)="changeClass('tempClass')">
+                              <option value=""> Select </option>
+                              <option value="{{value}}" *ngFor="let value of temperature_range"> {{value}} </option>
+                              </select>
+                           </td>
+                        </tr>
+                        <tr *ngIf="field_pulse">
+                           <td width="185px"><label>Pulse (per min)</label></td>
+                           <td>
+                              <select class="form-control txtfield {{pulse_class}}" [(ngModel)]="registrationData.pulse" [ngModelOptions]="{standalone: true}" (change)="changeClass('pulseClass')">
+                              <option value=""> Select </option>
+                              <option value="{{value}}" *ngFor="let value of pulse_range"> {{value}} </option>
+                              </select>
+                           </td>
+                        </tr>
+                        <tr *ngIf="field_bp">
+                           <td width="185px"><label>Blood Pressure (mmHg)</label></td>
+                           <td>
+                              <div class="">
+                                 <div class=" col-md-6 col-sm-6 col-xs-12"  *ngIf="field_bp" style="padding-left: 0px;">
+                                    <select class="form-control txtfield {{sys_class}}" [(ngModel)]="registrationData.bp" [ngModelOptions]="{standalone: true}" id="sys" (change)="changeClass('sys_class')">
+                                    <option value=""> SYS </option>
+                                    <option value="{{value}}" *ngFor="let value of sys_range"> {{value}} </option>
+                                    </select>
+                                 </div>
+                                 <div class=" col-md-6 col-sm-6 col-xs-12" *ngIf="field_bp" style="padding-right: 0px;">
+                                    <select class="form-control txtfield {{dia_class}}" [(ngModel)]="registrationData.dia" [ngModelOptions]="{standalone: true}" (change)="changeClass('diaClass')">
+                                    <option value=""> DIA </option>
+                                    <option value="{{value}}" *ngFor="let value of dia_range"> {{value}} </option>
+                                    </select>
+                                 </div>
+                              </div>
+                           </td>
+                        </tr>
+                        <tr *ngIf="field_rbs">
+                            <td>
+                                <div *ngIf="field_rbs">
+                                    <label>RBS (mg/dL)</label>
+                                </div>
+                            </td>
+                            <td>
+                                <div  *ngIf="field_rbs">
+                                    <select class="form-control txtfield {{rbs_class}}" [(ngModel)]="registrationData.rbs" [ngModelOptions]="{standalone: true}" (change)="changeClass('rbsClass')">
+                                        <option value=""> Select </option>
+                                        <option value="{{value}}" *ngFor="let value of rbs_range"> {{value}} </option>
+                                      </select>
+                                </div>
+                            </td>
+                        </tr>
+						    <tr *ngIf="field_spo">
+                            <td>
+                                <div *ngIf="field_spo">
+                                    <label>SpO2 (%)</label>
+                                </div>
+                            </td>
+                            <td>
+                                <div  *ngIf="field_spo">
+                                   <select class="form-control txtfield {{spo_class}}" [(ngModel)]="registrationData.spo" [ngModelOptions]="{standalone: true}" (change)="changeClass('spoClass')">
+                                    <option value="Select"> Select </option>
+                                    <option value="{{value}}" *ngFor="let value of spo_range"> {{value}} </option>
+                                </select>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr *ngIf="field_patientPic">
+                           <td width="185px"><label>Patient Photo</label></td>
+                           <td>
+                              <div class=" mg-bottom col-md-12 col-sm-12 col-xs-12" *ngIf="field_patientPic && !pateintPic && !uploadedPatientPic" style="padding: 0px;">
+                                 <span class="input-btn btn btn-default" (click)="openWebCam('patient')">
+                                 Take Picture
+                                 </span>
+                              </div>
+                              <div class=" mg-bottom col-md-12 col-sm-12 col-xs-12 upload-image-main" *ngIf="field_patientPic && (pateintPic || uploadedPatientPic)">
+                                 <div class="col-md-4 col-lg-4 col-sm-4 col-xs-4 upload-image" (click)="openWebCam('patient')">
+                                    <img href="javascript:void(0)" src="{{pateintPic}}" alt="pic" class="img-thumbnail" *ngIf="pateintPic">
+                                    <img href="javascript:void(0)" src="{{pateintPicPath}}{{uploadedPatientPic}}" alt="pic" class="img-thumbnail" *ngIf="uploadedPatientPic">
+                                 </div>
+                              </div>
+                           </td>
+                        </tr>
+                        <tr *ngIf="field_testReport">
+                           <td width="185px"><label>Upload test reports</label></td>
+                           <td>
+                              <div class=" mg-bottom col-md-12 col-sm-12 col-xs-12" *ngIf="field_testReport && reportPics.length<1" style="padding: 0px;">
+                                 <span class="input-btn btn btn-default" (click)="openWebCam('report')">
+                                 Take Picture 
+                                 </span>
+                              </div>
+                              <div class="upload-image-main" *ngIf="field_testReport && reportPics.length>0">
+                                 <div class="col-md-1 col-lg-1 col-sm-1 col-xs-1 upload-image" *ngFor="let image of reportPics;let i = index">
+                                    <img href="javascript:void(0)" src="{{image}}" alt="pic" class="img-thumbnail">
+                                    <a (click)="removeImageFromReportPics(i)" class="close-thik"></a>
+                                 </div>
+                                 <div class="col-md-1 col-lg-1 col-sm-1 col-xs-1 upload-image" *ngIf="reportPics.length<3">
+                                    <i class="fa fa-plus" (click)="openWebCam('report')"></i>      
+                                 </div>
+                              </div>
+                           </td>
+                        </tr>
+                        <tr *ngIf="field_fee">
+                            <td><div> <label> Fee </label></div></td>
+                            <td><div>  
+                              <input class="form-control txtfield " name="" type="number" [(ngModel)]="registrationData.fee" [ngModelOptions]="{standalone: true}">
+                          </div></td>
+                        </tr>
+                     </table>
+                  </div>
+               </div>
+               <!--  <div class="col-md-6 col-sm-6 col-xs-12">
+                  <div class="regis-modal-body">
+                      <div class=" mg-bottom col-md-12 col-sm-12 col-xs-12">
+                          <span  class="caret cstm-caret"></span>
+                          <select [(ngModel)]="consultationDoctor" (change)="checkWhichFieldsToShow()" class="form-control txtfield select-doctor">
+                              <option selected = "Select Doctor" disabled="" value="Select Doctor">SELECT DOCTOR* </option>
+                              <option value="{{doctor._id}}" *ngFor="let doctor of dataDoctors"> Dr. {{doctor.first_name}}</option>
+                          </select>
+                      </div>
+                      <div class="mg-bottom col-md-12 col-sm-12 col-xs-12">
+                          <label>Patient Name*</label>
+                      </div>
+                      <div class=" mg-bottom col-md-12 col-sm-12 col-xs-12" *ngIf="field_dob">
+                          <label>Patient DOB*</label>
+                      </div>
+                      <div class=" mg-bottom col-md-12 col-sm-12 col-xs-12" *ngIf="field_age">
+                          <label>Patient Age*</label>
+                      </div>
+                      <div class=" mg-bottom col-md-12 col-sm-12 col-xs-12">
+                          <label>Gender*</label>
+                      </div>
+                      <div class=" mg-bottom col-md-12 col-sm-12 col-xs-12" style="height:70px;float:left;width:100%;">
+                          <label>Address*</label>
+                      </div>
+                      <div class=" mg-bottom col-md-12 col-sm-12 col-xs-12" *ngIf="field_weight">
+                          <label>Weight (Kg)</label>
+                      </div>
+                      <div class=" mg-bottom col-md-12 col-sm-12 col-xs-12" *ngIf="field_height">
+                          <label>Height (cm)</label>
+                      </div>
+                      <div class=" mg-bottom col-md-12 col-sm-12 col-xs-12" *ngIf="field_temp">
+                          <label>Temperature(0F)</label>
+                      </div>
+                      <div class=" mg-bottom col-md-12 col-sm-12 col-xs-12" *ngIf="field_pulse">
+                          <label>Pulse (per min)</label>
+                      </div>
+                      <div class=" mg-bottom col-md-12 col-sm-12 col-xs-12" *ngIf="field_bp">
+                          <label>Blood Pressure (mmHg)</label>
+                      </div>
+                      <div class=" mg-bottom col-md-12 col-sm-12 col-xs-12" *ngIf="field_rbs">
+                          <label>RBS (mg/dL)</label>
+                      </div>
+                      <div class=" mg-bottom col-md-12 col-sm-12 col-xs-12" *ngIf="field_spo">
+                          <label>SpO2 (%)</label>
+                      </div>
+                      <div class=" mg-bottom col-md-12 col-sm-12 col-xs-12" *ngIf="field_patientPic">
+                          <label>Patient Photo</label>
+                      </div>
+                      <div class=" mg-bottom col-md-12 col-sm-12 col-xs-12" *ngIf="field_testReport">
+                          <label>Upload test reports</label>
+                      </div>
+                      <div class=" mg-bottom col-md-12 col-sm-12 col-xs-12" *ngIf="field_fee">
+                          <label class="col-md-6 cstm-fee-label"> FEE </label>
+                          <div class="col-md-6 col-sm-6" style="padding-left:0">  
+                              <input class="form-control txtfield cstm-fee-input" name="" type="number" [(ngModel)]="registrationData.fee" [ngModelOptions]="{standalone: true}">
+                          </div>
+                      </div>
+                  </div>
+                  </div>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                  <div class="regis-modal-body">
+                      <div class=" mg-bottom col-md-12 col-sm-12 col-xs-12 cstm-crt-wrap">
+                          <span  class="caret cstm-caret"></span>
+                          <select class="form-control txtfield select-doctor" [(ngModel)]="registrationData.type" [ngModelOptions]="{standalone: true}">
+                              <option selected="" value="Select_doc" disabled="" class="select-opt"> Consultation Type* </option>
+                              <option *ngFor="let ct of consultationType" value="{{ct}}">{{ct}}</option>
+                          </select>
+                      </div>
+                      <div class=" mg-bottom col-md-12 col-sm-12 col-xs-12">
+                          <input type="text" class="form-control txtfield" name="" pattern="[a-zA-Z ]+" placeholder="" [(ngModel)]="registrationData.name" [ngModelOptions]="{standalone: true}" (keyup)="SearchPatientNameReg($event.target.value)"  [matAutocomplete]="autoPatNameReg" (blur)="GetPatientLastPrescriptionByName()"/>
+                          <mat-autocomplete #autoPatNameReg="matAutocomplete" class="mat-autocomplete-registration">
+                            <mat-option *ngFor="let patient of patientListReg" [value]="patient.name">
+                              {{patient.name}}
+                            </mat-option>
+                          </mat-autocomplete>
+                        
+                      </div>
+                      <div class=" mg-bottom col-md-12 col-sm-12 col-xs-12" *ngIf="field_dob">
+                          <angular2-date-picker [(ngModel)]="registrationData.dob" [ngModelOptions]="{standalone: true}" [settings]="settings"></angular2-date-picker>
+                      </div>
+                      <div class=" mg-bottom col-md-12 col-sm-12 col-xs-12" *ngIf="field_age">
+                          <input type="text" min="1" max="100" class="form-control txtfield" name="" placeholder="Age" [(ngModel)]="registrationData.age" [ngModelOptions]="{standalone: true}" />
+                      </div>
+                      <div class=" mg-bottom col-md-12 col-sm-12 col-xs-12">
+                          <select class="form-control txtfield" [(ngModel)]="registrationData.gender" [ngModelOptions]="{standalone: true}">
+                              <option selected="" disabled="" value="Select"> Gender </option>
+                              <option value="Male"> Male </option>
+                              <option value="Female"> Female </option>
+                              <option value="Other"> Other </option>
+                          </select>
+                      </div>
+                      <div class=" mg-bottom col-md-12 col-sm-12 col-xs-12" style="height:70px;float:left;width:100%;"> 
+                      <div>
+                                     <input class="form-control txtfield" placeholder="City" [matAutocomplete]="auto1" (keyup)="SearchCity($event.target.value)" [(ngModel)]="registrationData.city" [ngModelOptions]="{standalone: true}">
+                          <mat-autocomplete #auto1="matAutocomplete" class="mat-autocomplete-registration">
+                            <mat-option *ngFor="let city of citiesList" [value]="city.name" (onSelectionChange)="GetLatLng(city.name)">
+                              {{city.name}}
+                            </mat-option>
+                          </mat-autocomplete>
+                      
+                     <br>
+                          <input class="form-control txtfield" placeholder="Area/Location" [(ngModel)]="registrationData.location" [ngModelOptions]="{standalone: true}" ngx-google-places-autocomplete [options]="{ types: [(geocode)],componentRestrictions: { country: 'IN' } }" #placesRef="ngx-places" (onAddressChange)="handleAddressChange($event)" />
+                      
+                      </div>
+                  
+                      </div>
+                      <div class=" mg-bottom col-md-12 col-sm-12 col-xs-12" *ngIf="field_weight">
+                          <input class="form-control txtfield" name="" placeholder="weight" type="text" min="1" max="150" [(ngModel)]="registrationData.weight" [ngModelOptions]="{standalone: true}">
+                      </div>
+                      <div class=" mg-bottom col-md-12 col-sm-12 col-xs-12" *ngIf="field_height">
+                          <input class="form-control txtfield" name="" placeholder="height" type="text" min="1" max="240" [(ngModel)]="registrationData.height" [ngModelOptions]="{standalone: true}">
+                      </div>
+                      <div class=" mg-bottom col-md-12 col-sm-12 col-xs-12" *ngIf="field_temp">
+                          <select class="form-control txtfield" [(ngModel)]="registrationData.temp" [ngModelOptions]="{standalone: true}">
+                              <option value=""> Select </option>
+                              <option value="{{value}}" *ngFor="let value of temperature_range"> {{value}} </option>
+                          </select>
+                      </div>
+                      <div class=" mg-bottom col-md-12 col-sm-12 col-xs-12" *ngIf="field_pulse">
+                          <select class="form-control txtfield" [(ngModel)]="registrationData.pulse" [ngModelOptions]="{standalone: true}">
+                              <option value=""> Select </option>
+                              <option value="{{value}}" *ngFor="let value of pulse_range"> {{value}} </option>
+                          </select>
+                      </div>
+                      <div class=" col-md-6 col-sm-6 col-xs-12" style="height: 62px;" *ngIf="field_bp">
+                          <select class="form-control txtfield" [(ngModel)]="registrationData.bp" [ngModelOptions]="{standalone: true}">
+                              <option value=""> SYS </option>
+                              <option value="{{value}}" *ngFor="let value of sys_range"> {{value}} </option>
+                          </select>
+                      </div>
+                      <div class=" col-md-6 col-sm-6 col-xs-12" *ngIf="field_bp">
+                          <select class="form-control txtfield" [(ngModel)]="registrationData.dia" [ngModelOptions]="{standalone: true}">
+                              <option value=""> DIA </option>
+                              <option value="{{value}}" *ngFor="let value of dia_range"> {{value}} </option>
+                          </select>
+                      </div>
+                      <div class=" mg-bottom col-md-12 col-sm-12 col-xs-12" *ngIf="field_rbs">
+                          <select class="form-control txtfield" [(ngModel)]="registrationData.rbs" [ngModelOptions]="{standalone: true}">
+                              <option value=""> Select </option>
+                              <option value="{{value}}" *ngFor="let value of rbs_range"> {{value}} </option>
+                          </select>
+                      </div>
+                      <div class=" mg-bottom col-md-12 col-sm-12 col-xs-12" *ngIf="field_spo">
+                          <select class="form-control txtfield" [(ngModel)]="registrationData.spo" [ngModelOptions]="{standalone: true}">
+                              <option value=""> Select </option>
+                              <option value="{{value}}" *ngFor="let value of spo_range"> {{value}} </option>
+                          </select>
+                      </div>
+                      <div class=" mg-bottom col-md-12 col-sm-12 col-xs-12" *ngIf="field_patientPic && !pateintPic && !uploadedPatientPic">
+                          <span class="input-btn btn btn-default" (click)="openWebCam('patient')">
+                              Take Picture
+                          </span>
+                      </div>
+                      <div class=" mg-bottom col-md-12 col-sm-12 col-xs-12 upload-image-main" *ngIf="field_patientPic && (pateintPic || uploadedPatientPic)">
+                          <div class="col-md-4 col-lg-4 col-sm-4 col-xs-4 upload-image" (click)="openWebCam('patient')">
+                              <img href="javascript:void(0)" src="{{pateintPic}}" alt="pic" class="img-thumbnail" *ngIf="pateintPic">
+                              <img href="javascript:void(0)" src="{{pateintPicPath}}{{uploadedPatientPic}}" alt="pic" class="img-thumbnail" *ngIf="uploadedPatientPic">
+                          </div>
+                      </div>
+                      <div class=" mg-bottom col-md-12 col-sm-12 col-xs-12" *ngIf="field_testReport && reportPics.length<1">
+                          <span class="input-btn btn btn-default" (click)="openWebCam('report')">
+                              Take Picture 
+                          </span>
+                      </div>
+                      <div class=" mg-bottom col-md-12 col-sm-12 col-xs-12 upload-image-main" *ngIf="field_testReport && reportPics.length>0">
+                          <div class="col-md-4 col-lg-4 col-sm-4 col-xs-4 upload-image" *ngFor="let image of reportPics;let i = index">
+                              <img href="javascript:void(0)" src="{{image}}" alt="pic" class="img-thumbnail">
+                              <a (click)="removeImageFromReportPics(i)" class="close-thik"></a>
+                          </div>
+                          <div class="col-md-4 col-lg-4 col-sm-4 col-xs-4 upload-image" *ngIf="reportPics.length<3">
+                              <i class="fa fa-plus" (click)="openWebCam('report')"></i>      
+                          </div>  
+                      </div>
+                  </div>
+                  </div> -->
+               <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+                  <div class="col-md-6 col-lg-6 col-sm-12 col-xs-12 reg-bnt">
+                     <div class="reg-cancel-btn">
+                        <button class="btn btn-custom reg-btn cancel" style="background-color:#FFC000" data-dismiss="modal" data-toggle="modal" type="button" (click)="ngOnInit()"> Cancel  </button> 
+                     </div>
+                  </div>
+                  <div class="col-md-6 col-lg-6 col-sm-12 col-xs-12 reg-bnt">
+                     <div class="reg-cancel-btn">
+                        <button class="btn btn-custom reg-btn" type="button" (click)="NewRegistration()"> Register </button>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div *ngIf="webCam" class="camera-div">
+               <webcam [height]="550" [width]="550" [trigger]="triggerObservable" (imageCapture)="handleImage($event)" ></webcam>
+               <div class=" col-md-10 col-md-offset-1 col-sm-12 col-xs-12 camera-btn">
+                  <button class="btn btn-custom" type="button" (click)="triggerSnapshot()">OK</button>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+<!-- Modal -->
+<div class="modal fade cus-modal" id="appointmentForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+   <div class="modal-dialog cstm_modal" role="document">
+      <div class="modal-content pat-app-modal-form modal-md">
+         <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="resetAppointmentModal()">
+            <span aria-hidden="true">×</span>
+            </button>
+            <!-- <h4 class="modal-title"> Registration Form </h4> -->
+            <div class=" col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 col-xs-12">
+               <span  class="caret cstm-caret"></span>
+               <select class="form-control txtfield select-doctor" (change)="changeDoctor()" [(ngModel)]="appointmentDoctor" [ngModelOptions]="{standalone: true}">
+               <option selected="Select App" disabled="" value="Select App" class="select-opt"> Select Doctor* </option>
+               <option *ngFor="let doctor of dataDoctors" value="{{doctor._id}}" > Dr. {{doctor.first_name}}</option>
+               </select>
+            </div>
+         </div>
+         <div class="modal-body">
+            <div class="table-responsive my_tab_new">
+               <table class="table">
+                  <tr>
+                     <td width="200px;"> <label>Appointment Date &amp; Time </label></td>
+                     <td>
+                        <div *ngIf="dateSelected">
+                           <input type="text" class="form-control txtfield" value="{{appointmentDate.getDate()}}-{{appointmentDate.getMonth()+1}}-{{appointmentDate.getFullYear()}}  {{appointmentTime.startHour}}:{{getAppointmentMinToShow(appointmentTime.startMin)}}" readonly="" name="" placeholder="" (click)="AppointmentsBySmartAssistant()"/>
+                        </div>
+                        <div  *ngIf="!dateSelected">
+                           <input type="text" class="form-control txtfield" value="" name="" placeholder="Appointment Date & Time" (click)="AppointmentsBySmartAssistant()"/>
+                        </div>
+                     </td>
+                  </tr>
+                  <tr>
+                     <td>
+                        <label> Patient Mobile* </label>
+                     </td>
+                     <td>
+                        <div class="input-group fieldDesign">
+                           <span class="input-group-addon">+91</span>
+                           <input type="text" class="form-control txtfield" name="" placeholder="Mobile Number" pattern="[0-9.]+" maxLength="10" (blur)="findPatientNameFromPhone($event.target.value)" [(ngModel)]="appointment.phone" [ngModelOptions]="{standalone: true}"/>
+                        </div>
+                     </td>
+                  </tr>
+                  <tr>
+                     <td>
+                        <label> Patient Name* </label>
+                     </td>
+                     <td>
+                        <input type="text" class="form-control txtfield" name="" pattern="[a-zA-Z ]+" placeholder="Patient Name" [(ngModel)]="appointment.name" [ngModelOptions]="{standalone: true}" (onfocus)="SearchPatientName($event.target.value)" [matAutocomplete]="autoPatNameApnt"/>
+                        <mat-autocomplete #autoPatNameApnt="matAutocomplete" class="mat-autocomplete-registration">
+                           <mat-option *ngFor="let patient of patientList" [value]="patient.name">
+                           {{patient.name}}
+                           </mat-option>
+                        </mat-autocomplete>
+                     </td>
+                  </tr>
+                  <tr>
+                     <td colspan="3" class="text-center">
+                        <button class="btn btn-custom" type="submit" [disabled]="!dateSelected || !appointment.phone || appointment.phone.length<10 || !appointment.name" (click)="bookAppointment()"> BOOK APPOINTMENT </button>
+                     </td>
+                  </tr>
+               </table>
+            </div>
+            <!-- <div class="row">
+               <div class="regis-modal-body">
+                   <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                       <div class="cus-datetimepicker">
+                           <label class="col-md-4 col-sm-4 col-xs-12">Appointment Date &amp; Time </label>
+                           <div class="col-md-8 col-sm-8 col-xs-12" *ngIf="dateSelected">
+                               <input type="text" class="form-control txtfield" value="{{appointmentDate.getDate()}}-{{appointmentDate.getMonth()+1}}-{{appointmentDate.getFullYear()}}  {{appointmentTime.startHour}}:{{getAppointmentMinToShow(appointmentTime.startMin)}}" readonly="" name="" placeholder="" (click)="AppointmentsBySmartAssistant()"/>
+                           </div>
+                           <div class="col-md-8 col-sm-8 col-xs-12" *ngIf="!dateSelected">
+                               <input type="text" class="form-control txtfield" value="" name="" placeholder="Appointment Date & Time" (click)="AppointmentsBySmartAssistant()"/>
+                           </div>
+                          
+                       </div>
+                   </div>
+                   <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                       <label class="col-md-4 col-sm-4 col-xs-12"> Patient Mobile* </label>
+                       <div class="col-md-8 col-sm-8 col-xs-12">
+                           <div class="input-group fieldDesign">
+                               <span class="input-group-addon">+91</span>
+                               <input type="text" class="form-control txtfield" name="" placeholder="Mobile Number" pattern="[0-9.]+" maxLength="10" (blur)="findPatientNameFromPhone($event.target.value)" [(ngModel)]="appointment.phone" [ngModelOptions]="{standalone: true}"/>
+                           </div>
+                       </div>
+                   </div>
+                   <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                       <label class="col-md-4 col-sm-4 col-xs-12"> Patient Name* </label>
+                       <div class="col-md-8 col-sm-8 col-xs-12">
+                           <input type="text" class="form-control txtfield" name="" pattern="[a-zA-Z ]+" placeholder="" [(ngModel)]="appointment.name" [ngModelOptions]="{standalone: true}" (keyup)="SearchPatientName($event.target.value)" [matAutocomplete]="autoPatNameApnt"/>
+                           <mat-autocomplete #autoPatNameApnt="matAutocomplete" class="mat-autocomplete-registration">
+                             <mat-option *ngFor="let patient of patientList" [value]="patient.name">
+                               {{patient.name}}
+                             </mat-option>
+                           </mat-autocomplete>
+                         
+                       </div>
+                   </div>
+                   <div class="form-group col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 col-xs-12 text-center">
+                       <button class="btn btn-custom" type="submit" [disabled]="!dateSelected || !appointment.phone || appointment.phone.length<10 || !appointment.name" (click)="bookAppointment()"> BOOK APPOINTMENT </button>
+                   </div>
+               </div>
+               </div> -->
+         </div>
+      </div>
+   </div>
+</div>
+<!-- appointmeny calender model -->
+<div class="modal fade cus-modal" id="appointmentCalender" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+   <div class="modal-dialog" role="document">
+      <div class="modal-content">
+         <div class="modal-header" *ngIf="calendarOptions">
+            <button type="button" class="close" data-dismiss="modal" (click) = "closeAppointment()" aria-label="Close">
+            <span aria-hidden="true">×</span>
+            </button>
+            <h3 *ngIf = "getDoctorName(appointmentDoctor)">Dr. {{getDoctorName(appointmentDoctor)}}</h3>
+            <!-- <h4 class="modal-title"> Registration Form </h4> -->
+         </div>
+         <div class="modal-body">
+            <div *ngIf="calendarOptions">
+               <a href="javascript:void(0)" class="cstm-calender-opt">
+               <ng-fullcalendar #ucCalendar [options]="calendarOptions" (eventClick)="eventClick($event.detail)" (eventDrop)="updateEvent($event.detail)" (eventResize)="updateEvent($event.detail)" (dayClick)="dayClick($event.detail)" (clickButton)="clickButton($event.detail)" [(eventsModel)]="events"></ng-fullcalendar>
+               </a>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+<div class="modal fade cus-modal" id="selectAppointmentTime" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+   <div class="modal-dialog" role="document">
+      <div class="modal-content time-select">
+         <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+            </button>
+            <!-- <h4 class="modal-title"> Registration Form </h4> -->
+            <div class=" col-md-8 col-md-offset-2 col-sm-12 col-xs-1 text-center">
+               <h3 style="margin:0px"> {{appointmentDate | date:'fullDate' }} </h3>
+            </div>
+         </div>
+         <div class="modal-body">
+            <div class="row">
+               <div class=" col-md-12 col-sm-12 col-xs-1 text-center">
+                  <div class="time-slots" *ngFor="let schedule of shiftsOfParticularDay;let i = index">
+                     <h3>Shift {{i+1}} [{{schedule.startHour}}:<span *ngIf="schedule.startMin.length>1">{{schedule.startMin}}</span><span *ngIf="schedule.startMin.length==1">0{{schedule.startMin}}</span> - {{schedule.endHour}}:<span *ngIf="schedule.endMin.length>1">{{schedule.endMin}}</span><span *ngIf="schedule.endMin.length==1">0{{schedule.endMin}}</span>]</h3>
+                     <ul class="time-ul" type="none">
+                        <li *ngFor="let shift of schedule.shift" (click)="onTimeSelection(shift)"><a href="javascript:void(0)" class="{{getClassSlot(shift)}}">{{shift.startHour}}:<span *ngIf="shift.startMin.length>1">{{shift.startMin}}</span><span *ngIf="shift.startMin.length==1">0{{shift.startMin}}</span></a></li>
+                     </ul>
+                  </div>
+                  <div class="time-slots" *ngIf="customShifts.length>0">
+                     <h3>More Shifts</h3>
+                     <ul class="time-ul" type="none">
+                        <li *ngFor="let shift of customShifts"><a href="javascript:void(0)" class="already-selected">{{shift.startHour}}:<span *ngIf="shift.startMin.length>1">{{shift.startMin}}</span><span *ngIf="shift.startMin.length<=1">0{{shift.startMin}}</span></a></li>
+                     </ul>
+                  </div>
+                  <div class="tags-listing-div">
+                     <fieldset class="fieldset-preset">
+                        <legend class="legend-preset">Add New Slot</legend>
+                        <div class="col-md-offset-2 col-md-10 pickup-time">
+                           <ngb-timepicker [spinners]="false" [(ngModel)]="customTime"></ngb-timepicker>
+                        </div>
+                        <div class="col-md-12">
+                           <button class="btn-success" (click)="SaveAppointmentForCustomTime(customTime)">Save</button>
+                        </div>
+                     </fieldset>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+<!-- end -->
+<div class="modal fade cus-preview" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" *ngIf="doctorArrayObject">
+   <div class="modal-dialog" role="document">
+      <div class="modal-content">
+         <div class="modal-header">
+            <div>
+               <h4 class="modal-title"> Preview </h4>
+            </div>
+            <div class="text-center">
+               <button type="button" class="btn-sm btn btn-custom" (click)="createPdf()"> Print </button>
+            </div>
+            <div>
+               <button type="button" class="pull-right btn-sm btn btn-custom btn-outline" data-dismiss="modal" aria-label="Close"> Close </button>
+            </div>
+         </div>
+         <div class="modal-body" id="previewModalPdfNew">
+            <div class="row">
+               <div class="presc-modal-body">
+                  <div class="pad-view">
+                     <div class="padview-header">
+                        <div class="pad-view-flx col-lg-6" style="float:left;width:49%;">
+                           <div class="form-group doctor-name" *ngIf="checkOptionOfPad('Doctor_name')">
+                              <h1 id="translated_doctorName"> Dr<span class="notranslate">.</span> {{doctorArrayObject.first_name}} </h1>
+                           </div>
+                           <div class="form-group qual">
+                              <p class="color-purple">
+                                 <span *ngIf="checkOptionOfPad('Specialization')">({{doctorArrayObject.specialization}})</span><br>
+                                 <span *ngIf="checkOptionOfPad('Qualifications')">
+                                 <span *ngFor="let data of doctorArrayObject.qualification;let i = index">
+                                 {{data.value}} <span *ngIf="i!=doctorArrayObject.qualification.length-1">,</span>
+                                 </span>
+                                 </span>
+                              </p>
+                              <p > Registration: <span class="color-purple"> {{doctorArrayObject.registration_no}} </span> </p>
+                              <p style="width:200px;word-break: break-all;">
+                                 <span class="color-purple" *ngFor="let pa of doctorArrayObject.professional_affiliation;let i=index">
+                                 {{pa.value}}<span *ngIf="i!=doctorArrayObject.professional_affiliation.length-1">,</span>
+                                 </span>
+                              </p>
+                           </div>
+                        </div>
+                        <div class="pad-view-flx col-lg-6" style="float:left;width:49%;">
+                           <ul class="clinic-detail">
+                              <li class="clinic-name" *ngIf="doctorArrayObject.clinic_details">
+                                 <h1 id="translated_clinicName"> {{doctorArrayObject.clinic_details.clinic_name}} </h1>
+                              </li>
+                              <li *ngIf="doctorArrayObject.clinic_details">{{doctorArrayObject.clinic_details.address}}, {{doctorArrayObject.clinic_details.area}}, {{doctorArrayObject.clinic_details.city}}, {{doctorArrayObject.clinic_details.state}}</li>
+                              <li class="li-cstm">
+                                 <div class="row" *ngIf="doctorArrayObject.clinic_details">
+                                    <div class="col-lg-12">
+                                       <h4 class="for-apt"> For appointments </h4>
+                                       <p *ngIf="doctorArrayObject.clinic_details.landline"> Tel: {{doctorArrayObject.clinic_details.std_code}}-{{doctorArrayObject.clinic_details.landline}}</p>
+                                       <p> Mb: +91-{{doctorArrayObject.clinic_details.mobile}} </p>
+                                    </div>
+                                 </div>
+                              </li>
+                           </ul>
+                        </div>
+                     </div>
+                     <p class="text-center" *ngIf="checkOptionOfPad('Header_note')">
+                        <label id="translated_appointmentText"> {{getHeaderText()}} </label>
+                     </p>
+                     <div class="padview-body">
+                        <div class="col-md-2 col-sm-2 col-xs- p-0">
+                           <div class="emergency-wrap">
+                              <!-- <div class="form-group emrgency-consult" *>
+                                 <p class="small" id="translated_emergencyText"><i> Emergency Consultation </i> </p>
+                                 </div> -->
+                              <div class="form-group schdl" >
+                                 <h5 class="color-blue"> Schedule: </h5>
+                                 <div class="form-group span-txt" *ngFor="let shift of allShifts"> 
+                                    <span><strong style="display:block; width:110px;"> {{shift.day}}: </strong>
+                                    <span class="mrgin-r" *ngFor="let time of shift.shifts"> 
+                                    [
+                                    <span *ngIf="time.fromTime.hour=='0'">{{time.fromTime.hour}}0:</span>
+                                    <span *ngIf="time.fromTime.hour!='0'">{{time.fromTime.hour}}:</span>
+                                    <span *ngIf="time.fromTime.minute=='0'">{{time.fromTime.minute}}0 –</span>
+                                    <span *ngIf="time.fromTime.minute!='0'">{{time.fromTime.minute}} –</span>
+                                    <span *ngIf="time.toTime.hour=='0'">{{time.toTime.hour}}0:</span>
+                                    <span *ngIf="time.toTime.hour!='0'">{{time.toTime.hour}}:</span>
+                                    <span *ngIf="time.toTime.minute=='0'">{{time.toTime.minute}}0</span>
+                                    <span *ngIf="time.toTime.minute!='0'">{{time.toTime.minute}}</span>
+                                    ]
+                                    </span>
+                                    <br>
+                                    </span>
+                                 </div>
+                                 <div class="form-group" *ngFor="let shift of allShiftsClosed"> 
+                                    <span><strong> {{shift.day}}: </strong> Closed 
+                                    </span>
+                                 </div>
+                              </div>
+                              <div id="translated_treatmentText" *ngIf="checkOptionOfPad('Available_treatments')">
+                                 <h5 class="color-blue"> Available Treatments: </h5>
+                                 <ul style="padding-left:15px!important;">
+                                    <li *ngFor="let treat of doctorArrayObject.expertise">{{treat.value}}</li>
+                                 </ul>
+                              </div>
+                              <div *ngIf="doctorArrayObject.clinic_services_status=='Yes' && checkOptionOfPad('Available_services')" id="translated_servicesText">
+                                 <h5 class="color-blue"> Available Services: </h5>
+                                 <ul style="padding-left:15px!important;">
+                                    <li *ngIf="doctorArrayObject.clinic_services.Clinic_Pharmacy">Pharmacy</li>
+                                    <li *ngIf="doctorArrayObject.clinic_services.Clinic_IPD">IPD</li>
+                                    <li *ngFor="let cs of doctorArrayObject.clinic_services.ClinicServicesDetail"> {{cs}} </li>
+                                    <li *ngFor="let cs of doctorArrayObject.clinic_services.OtherClinicService"> {{cs.value}} </li>
+                                 </ul>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="col-md-10 col-sm-10 col-xs-10 p-0" style="font-size: 10px;">
+                           <div class="padview-bodyright">
+                              <ul class="padview-body-header">
+                                 <li>
+                                    <div class="text-underline " > Name </div>
+                                    <input type=""  disabled="" name="" [(ngModel)]="registrationData.name" style="border:transparent;text-align: center"> 
+                                 </li>
+                                 <li>
+                                    <div  class="text-underline"> Age/Sex </div>
+                                    <input type=""  disabled="" name="" [(ngModel)]="registrationData.gender" style="width: 38px;border:transparent"> 
+                                 </li>
+                                 <li>
+                                    <div class="text-underline"> Weight (kg)</div>
+                                    <input type=""  disabled="" name="" [(ngModel)]="registrationData.weight" style="width: 38px;border:transparent">
+                                 </li>
+                                 <li>
+                                    <div class="text-underline"> Height (cm)</div>
+                                    <input type=""  disabled="" name="" [(ngModel)]="registrationData.height" style="width: 38px;border:transparent">
+                                 </li>
+                                 <li>
+                                    <div class="strong"> {{todayDate | date: 'dd MMM,yyyy'}}</div>
+                                 </li>
+                              </ul>
+                              <ul class="padview-patient">
+                                 <!-- <li class="img-patient">
+                                    <img src="{{pateintPicPath}}{{dispensedPatient.pateintPic}}" class="img-responsive" *ngIf="dispensedPatient.pateintPic"/>
+                                    <img src="./assets/imgs/no-person.jpg" class="img-responsive" *ngIf="!dispensedPatient.pateintPic"/>
+                                    </li> -->
+                                 <li *ngIf="preConditionComplete==true && finalPreConditions.length>0">
+                                    <div class="pat-heading"><span id="translated_PreCondHeading"> Existing health status </span> </div>
+                                    <ul class="pat-type">
+                                       <li *ngFor="let data of finalPreConditions"> {{data}} </li>
+                                    </ul>
+                                 </li>
+                                 <li *ngIf="bodyIndicatorComplete==true && bodyIndicatorSelected.length>0">
+                                    <div class="pat-heading"><span id="translated_BIHeading"> Body Indicators</span> </div>
+                                    <ul class="pat-type">
+                                       <li *ngFor="let data of bodyIndicatorSelected"> {{data}}
+                                       </li>
+                                    </ul>
+                                 </li>
+                                 <li *ngIf="allergyComplete==true && finalAllergy.length>0">
+                                    <div class="pat-heading"><span id="translated_allergyHeading"> Allergy</span> </div>
+                                    <ul class=" pat-type">
+                                       <li *ngFor="let data of finalAllergy"> {{data}} </li>
+                                    </ul>
+                                 </li>
+                              </ul>
+                              <div class="middle-body">
+                                 <div class="">
+                                    <div class="number-div" *ngIf="findingsComplete==true && findingsSelected.length>0">
+                                       <div class="pat-heading"><span id="translated_PTHeading"> Patient's Complaints</span> </div>
+                                       <ul class="numberol">
+                                          <li *ngFor="let data of findingsSelected"> {{data.value}} </li>
+                                       </ul>
+                                    </div>
+                                    <div class="number-div" *ngIf="symptomsComplete==true && symptomsSelected.length>0">
+                                       <div class="pat-heading"><span id="translated_sympHeading"> Symptoms</span> </div>
+                                       <ul class="numberol">
+                                          <li *ngFor="let data of symptomsSelected"> {{data.value}} </li>
+                                       </ul>
+                                    </div>
+                                    <div class="number-div" *ngIf="diagnosisComplete==true && diagnosisSelected.length>0">
+                                       <div class="pat-heading"><span id="translated_diagnosisHeading"> Diagnosis</span> </div>
+                                       <ul class="numberol">
+                                          <li *ngFor="let data of diagnosisSelected">{{data.value}}</li>
+                                       </ul>
+                                    </div>
+                                 </div>
+                                 <div class="" *ngIf="medicationComplete==true">
+                                    <div class="padview-medic" id="translated_medication">
+                                       <div class="pat-heading"><span> Medicines</span> </div>
+                                       <ol style="padding-left:10px">
+                                          <li *ngFor="let data of tempMedicationArray">
+                                             <span *ngIf="data.name=='Tablet' || data.name=='Capsule' || data.name=='Cream' || data.name=='Ointment' || data.name=='Aerosols' || data.name=='Powder' || data.name=='MouthWash'">
+                                                {{data.short_name}}<b class="notranslate"> {{data.med_name[0].value}} </b>-{{data.frequency}} <span class="notranslate"> X </span> {{data.duration}} days <span *ngIf="data.specialInstruction!=null"> ({{data.specialInstruction}})</span>
+                                                <span *ngIf="data.med_info">
+                                                   <p class="help-note" *ngIf="data.med_info.length>0">({{data.med_info[0].value}}<span *ngIf="data.med_info.length>1"> / {{data.med_info[1].value}}</span>)</p>
+                                                </span>
+                                             </span>
+                                             <span *ngIf="data.name=='Syrup' || data.name=='Suspension' || data.name=='Emulsion' || data.name=='Solution'">
+                                                {{data.short_name}}<b class="notranslate"> {{data.med_name[0].value}} </b>- {{data.dosage}}ml <span class="notranslate"> X </span> {{data.frequency}} <span class="notranslate"> X </span> {{data.duration}} days <span *ngIf="data.specialInstruction!=null"> ({{data.specialInstruction}})</span>
+                                                <span *ngIf="data.med_info">
+                                                   <p class="help-note" *ngIf="data.med_info.length>0">({{data.med_info[0].value}}<span *ngIf="data.med_info.length>1"> / {{data.med_info[1].value}}</span>)</p>
+                                                </span>
+                                             </span>
+                                             <span *ngIf="data.name=='Injection' || data.name=='Gel' || data.name=='Lotion'">
+                                                {{data.short_name}}<b class="notranslate"> {{data.med_name[0].value}} </b><span *ngIf="data.mode"> ({{data.mode}}) </span> -{{data.frequency}} <span class="notranslate"> X </span> {{data.duration}} days <span *ngIf="data.specialInstruction!=null"> ({{data.specialInstruction}})</span><span *ngIf="data.mode"> ({{data.mode}}) </span>
+                                                <span *ngIf="data.med_info">
+                                                   <p class="help-note" *ngIf="data.med_info.length>0">({{data.med_info[0].value}}<span *ngIf="data.med_info.length>1"> / {{data.med_info[1].value}}</span>)</p>
+                                                </span>
+                                             </span>
+                                             <span *ngIf="data.name=='Drops'">
+                                                {{data.short_name}}<b class="notranslate"> {{data.med_name[0].value}} </b>-{{data.quantity}} drops <span class="notranslate"> X </span> {{data.frequency}} <span class="notranslate"> X </span> {{data.duration}} days <span *ngIf="data.specialInstruction!=null"> ({{data.specialInstruction}})</span>
+                                                <span *ngIf="data.med_info">
+                                                   <p class="help-note" *ngIf="data.med_info.length>0">({{data.med_info[0].value}}<span *ngIf="data.med_info.length>1"> / {{data.med_info[1].value}}</span>)</p>
+                                                </span>
+                                             </span>
+                                          </li>
+                                       </ol>
+                                    </div>
+                                    <div class="number-div vac-div">
+                                       <div *ngIf="vaccinationComplete==true">
+                                          <div class="pat-heading" id="translated_VaccinationHeading"> <span> Vaccination</span> </div>
+                                          <ul *ngIf="currentVaccinationComplete == true" class="medicationol">
+                                             <div><b>Current</b></div>
+                                             <li *ngFor="let data of finalCurrentVaccinationArray">{{data}}</li>
+                                          </ul>
+                                          <ul *ngIf="dueVaccinationComplete == true" class="medicationol">
+                                             <span *ngIf="finalDueVaccinationArray.length>0"><strong>Due </strong>({{vaccinationDate.toString().substr(4,11)}})
+                                             </span>
+                                             <li *ngFor="let data of finalDueVaccinationArray">{{data}}</li>
+                                          </ul>
+                                       </div>
+                                       <div class="" *ngIf="instructionsComplete==true && instructionsSelected.length>0" id="translated_instHeading">
+                                          <div class="pat-heading"> <span> Instructions</span> </div>
+                                          <ul class="numberol" start="1">
+                                             <li *ngFor="let data of instructionsSelected">{{data}}</li>
+                                          </ul>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </div>
+                              <div class="third-body">
+                                 <div class="number-div" *ngIf="investigationIndicatorComplete==true && investigationArray.length">
+                                    <div class="pat-heading"> <span id="translated_invHeading"> Investigation</span> </div>
+                                    <ol class="numberol pl10">
+                                       <li *ngFor="let data of investigationArray">
+                                          <span *ngIf="data.name != 'Mammography' && data.name!= 'Uroflowmetry' && data.name != 'ECG' && data.name != 'EEG' && data.name != 'TMT' && data.name != 'Echo'">
+                                          <span *ngIf="data.name!='Others'">{{data.name}} - </span><span *ngFor="let value of data.values;let i = index">{{value.value}} 
+                                          <span *ngIf="i!=data.values.length-1">\</span>
+                                          </span>
+                                          </span>
+                                          <span *ngIf="data.name == 'Mammography' || data.name== 'Uroflowmetry' || data.name == 'ECG' || data.name == 'EEG' || data.name == 'TMT' || data.name == 'Echo'">
+                                          <span *ngIf="data.name!='Others'">{{data.name}} - </span> {{data.values}}
+                                          </span>
+                                       </li>
+                                    </ol>
+                                 </div>
+                                 <div class="number-div" *ngIf="treatmentComplete==true" id="translated_OTHeading">
+                                    <div class="pat-heading"> <span> Other Treatments</span> </div>
+                                    <ul class="numberol">
+                                       <li *ngFor="let data of treatmentArray;let i =index">
+                                          <span *ngIf="data.name=='Lifestyle Changes'">
+                                          {{data.name}} - <span *ngFor="let value of data.lifestyle;let j = index">{{value.value}} <span *ngIf="j!=data.lifestyle.length-1">\</span></span>
+                                          </span>
+                                          <span *ngIf="data.name=='Physiotherapy' || data.name=='Fomentation'">
+                                          {{data.name}} - {{data.Frequency}} for {{data.Duration}} days <span *ngIf="data.SpecialInstruction!=null"> ({{data.SpecialInstruction}})</span>
+                                          </span>
+                                          <span *ngIf="data.name=='Plaster'">
+                                          <span class="notranslate">{{data.name}}</span> - on <span class="notranslate">{{data.Injury_Area}}</span> of {{data.plaster_type}} for {{data.Duration}} days 
+                                          </span>
+                                          <span *ngIf="data.name=='Gargle' || data.name=='Dressing' || data.name=='Bandage' || data.name=='Other'">
+                                          <span *ngIf="data.name!='Other'">{{data.name}} - </span>{{data.med_name[0].value}} {{data.Frequency}} for {{data.Duration}} days <span *ngIf="data.SpecialInstruction!=null"> ({{data.SpecialInstruction}})</span>
+                                          </span>
+                                          <span>
+                                          {{data.value}}
+                                          </span>
+                                       </li>
+                                    </ul>
+                                 </div>
+                              </div>
+                              <div class="note-box">
+                                 <div class="note-innerbox">
+                                    <div class="note-innerdiv">
+                                       <div class="number-div" *ngIf="surgeryComplete==true && surgerySelectedArray.length>0">
+                                          <div class="pat-heading"> <span id="translated_surgHeading"> Recommended Surgery</span> </div>
+                                          <ul class="numberol">
+                                             <li *ngFor="let data of surgerySelectedArray">{{data.sub_speciality | titlecase}} - {{data.procedure_name[0].value}}</li>
+                                          </ul>
+                                       </div>
+                                       <div class="number-div" *ngIf="refer_status" style="padding:0 30px;">
+                                          <div class="pat-heading"> <span> Referred To</span> </div>
+                                          <p> {{referDetail.doctor_name}} </p>
+                                       </div>
+                                    </div>
+                                 </div>
+                                 <div class="" *ngIf="eyePresComplete==true">
+                                    <div class="pat-heading"> <span id="translated_eyeHeading"> Eye Prescription</span> </div>
+                                    <div class="table-responsive">
+                                       <table class="table table-bordered table-striped cstm-table">
+                                          <thead>
+                                             <tr>
+                                                <th> Eye </th>
+                                                <th> Sphere </th>
+                                                <th> Cylinder </th>
+                                                <th> Axis </th>
+                                                <th> Add </th>
+                                                <th> PD (mm) </th>
+                                             </tr>
+                                          </thead>
+                                          <tbody>
+                                             <tr>
+                                                <td> Right (OD): </td>
+                                                <td> {{finalRightOD.sphere}} </td>
+                                                <td> {{finalRightOD.cylinder}} </td>
+                                                <td> {{finalRightOD.axis}} </td>
+                                                <td> {{finalRightOD.add}} </td>
+                                                <td> {{finalRightOD.pd}} </td>
+                                             </tr>
+                                             <tr>
+                                                <td> Left (OS): </td>
+                                                <td> {{finalLeftOD.sphere}} </td>
+                                                <td> {{finalLeftOD.cylinder}} </td>
+                                                <td> {{finalLeftOD.axis}} </td>
+                                                <td> {{finalLeftOD.add}} </td>
+                                                <td> {{finalLeftOD.pd}} </td>
+                                             </tr>
+                                          </tbody>
+                                       </table>
+                                    </div>
+                                 </div>
+                              </div>
+                              <div class="third-body">
+                                 <div class="number-div" *ngIf="followDaysComplete == true">
+                                    <div class="pat-heading"> <span> Follow Up</span></div>
+                                    <p> Please come again after {{finalfollowUpDays}} days for consultation </p>
+                                    <p class="small"> On {{followUpDay}} {{followUpMonth}} , {{followUpYear}}</p>
+                                 </div>
+                              </div>
+                              <div class="forth-body">
+                                 <div class="padview-confee" *ngIf="checkOptionOfPad('Consultation_duration')">
+                                    <div class="cons-time">Consultation Duration: {{minutes}} min {{seconds}} sec </div>
+                                 </div>
+                                 <div class="signature" *ngIf="checkOptionOfPad('Signature')">(Signature)</div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="padview-footer" *ngIf="checkOptionOfPad('Footer_note')">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                           <div class="padview-powered">
+                              <div style="float:left; color:#ccc;">Powered by doctm</div>
+                              <div style="float:right; color:#ccc;">For prescription visit www.mydoctm.com </div>
+                           </div>
+                        </div>
+                        <div class="col-md-12 col-sm-4 col-xs-12" id="translated_footer">
+                           <div class="legal">
+                              <h3>{{getFooterText()}}</h3>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>

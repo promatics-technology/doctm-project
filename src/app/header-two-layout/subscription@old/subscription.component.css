@@ -1,0 +1,30 @@
+.tab_subscription table tr td{
+	vertical-align: middle;
+}
+.tab_subscription table tr th{
+	background-color: #000;
+	color:#fff;
+}
+.tab_subscription table tr.evn td{
+	background-color: #eff3ef;
+	border: 1px solid #fff;
+}
+.footer-cstm-an{
+    position: fixed;
+    float: left;
+    width: 100%;
+    bottom: 0;
+    background: #00b0f0;
+    color: #fff;
+    z-index: 99;
+    border-top: 1px solid #d6d6d6;
+    padding-top: 8px;
+}
+.btn-grin,
+.btn-grin:hover,
+.btn-grin:active,
+.btn-grin:focus{
+	background-color:#000;
+	color:#fff;
+	box-shadow: none;
+}

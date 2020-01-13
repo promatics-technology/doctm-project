@@ -1,0 +1,78 @@
+<div class="loader-box" *ngIf="loading">
+    <img src="./assets/imgs/load.gif" />
+</div>
+<div class="cstm-hdr">
+	<div class="">
+		<div  class="col-lg-2">
+			<div  class="dashboard-header-logo" tabindex="0" ng-reflect-router-link="/header-five-layout/dashboard-">
+				<img class="img-responsive" src="./assets/imgs/logoDoctm.png" routerlink="/header-five-layout/dashboard-pharmacy">
+			</div>
+			<div >
+				<div class="dshbrd-btn">
+					<button  class="btn btn-custom" routerLink="/header-five-layout/dashboard-pharmacy" tabindex="0" ng-reflect-router-link="/header-five-layout/dashboard-"> Dashboard </button>
+				</div>
+			</div>
+		</div>
+		<div class="col-lg-5 cstm-input cstm-row">
+			<button  class="btn btn-custom btn-block" tabindex="0">PRODUCTS AS ON {{today | date:'d MMM yyyy'}}</button>
+		</div>
+		<div class="col-lg-3 cstm-input cstm-row">
+	        <div class="">
+	           <div class="cstm-put">
+	           		<input type="text" name="" class="form-control" placeholder="Search by product" (input)="search()" [(ngModel)]="searchInput" >
+	           </div>
+	        </div>
+	    </div>
+	</div>
+</div>
+<div class="stock-tab">
+	<div class="col-lg-12">
+		<div class="tbl-cntrol">
+			<table class="table table-bordered" matSort (matSortChange)="sortData($event)" *ngIf="sortedData.length>0">
+			    <thead class="new-thd">
+			   		<tr>
+			   			<th width="5%" class="text-center cstm-sort"><h4 style="width: 100%; text-align: center;">Select</h4></th>
+				        <th mat-sort-header="product" width="10%" class="{{getTableHeaderClass(1)}} text-center" (click)="setTableHeaderClass(1)"><h4 style="width: 100%; text-align: center;">Product</h4></th>
+				        <th mat-sort-header="type" width="10%" class="{{getTableHeaderClass(2)}} text-center" (click)="setTableHeaderClass(2)"><h4 style="width: 100%; text-align: center;">Type</h4></th>
+				        <th mat-sort-header="packing" width="10%" class="{{getTableHeaderClass(3)}} text-center" (click)="setTableHeaderClass(3)"><h4 style="width: 100%; text-align: center;">Packing</h4></th>
+				        <th mat-sort-header="reorder_stock" width="10%" class="{{getTableHeaderClass(4)}} text-center" (click)="setTableHeaderClass(4)"><h4 style="width: 100%; text-align: center;">Set Min Stock Level</h4></th>
+			    	</tr>
+			    </thead>
+			    <tbody class="new-tbdy">
+					<tr *ngFor="let list of sortedData">
+						<td width="5%"> 
+							<label class="cstm-chk">
+							  <input type="checkbox" [(ngModel)]="list.select" [checked]="list.select">
+							  <span class="checkmark"></span>
+							</label>
+						</td>
+						<td width="10%" class="text-center">{{list.product}}</td>
+						<td width="10%" class="text-center">{{list.type}}</td>
+						<td width="10%" class="text-center">{{list.pack_units}} x {{list.pack_quantity}}</td>
+						<td width="10%" class="text-center">
+							<div class="cstm-put-put">
+	                            <input type="number" class="form-control" placeholder="Min pack" value="{{list.reorder_stock}}" [disabled]="!list.select" [(ngModel)]="list.reorder_stock">
+	                        	<span><b>:</b> 0</span>
+	                        </div>
+						</td>
+					</tr>
+				</tbody>		    
+			</table>
+			<div class="col-lg-12" *ngIf="sortedData.length<1">
+             	<h3 class="text-center">No product found ...</h3>
+            </div> 
+		</div>
+	</div>
+</div>
+<div class="col-lg-12  cstm-footer">
+	<div class="col-lg-7 btn-wrap text-center">
+		<button class="btn btn-custom" (click)="UpdateMinStockToReorder()">
+			<div> Save </div>
+		</button>
+	</div>
+	<div class="col-lg-3 btn-wrap text-center">
+		<button class="btn btn-custom">
+			<div> Total Products:  {{totalProduct.length}}</div>
+		</button>
+	</div>
+</div>

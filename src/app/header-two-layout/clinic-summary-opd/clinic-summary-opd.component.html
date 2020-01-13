@@ -1,0 +1,227 @@
+<div class="loader-box" *ngIf="loading">
+	<img src="./assets/imgs/load.gif" />
+</div>
+<div class="analytics-sec">
+	
+	<div class="ipd-deatil-sec">
+       <div class="inner-tab">
+            <ul class="nav nav-tabs new-ul-1" role="tablist">
+                  <li role="presentation"  class="active clz"><a href="javascript:void(0);" routerLink="/header-two-layout/clinic-summary-opd"> <div>OPD</div><small> (All Doctors)</small> </a></li>
+                  <li role="presentation"><a href="javascript:void(0);" routerLink="/header-two-layout/clinic-summary-pharmacy" *ngIf="doctorData.clinic_services.Clinic_Pharmacy==true">Pharmacy</a></li>
+                  <li role="presentation"><a href="javascript:void(0);" routerLink="/header-two-layout/clinic-summary-diagnostic" *ngIf="doctorData.clinic_services.Clinic_Diagnostics==true"> Diagnostics </a></li>
+                  <li role="presentation"><a href="javascript:void(0);" routerLink="/header-two-layout/clinic-summary-ipd" *ngIf="doctorData.clinic_services.Clinic_IPD==true"> IPD </a></li>
+                  <li role="presentation"><a href="javascript:void(0);" routerLink="/header-two-layout/clinic-summary-all">Summary</a></li>
+            </ul>
+      </div>
+
+      <div class="ipd-body">
+         <div class="cus-sidebar-wrapper side-bar-cstm">
+              <div class="cus-sidebar">
+                   <ul> 
+                        <li>
+                             <div class="">
+                                  <div class="col-lg-3">
+                                       <h4 class="pd-left"><b>From</b></h4>
+                                 </div>
+                                 <div class="col-lg-9">
+                                       <div class="cstm-mg">
+                                            <angular2-date-picker [(ngModel)]="fromDate1" [settings]="settings"></angular2-date-picker>
+                                      </div>
+                                </div>
+                          </div>
+                    </li>
+                    <li>
+                       <div class="">
+                            <div class="col-lg-3">
+                                 <h4 class="pd-left"><b>To</b></h4>
+                           </div>
+                           <div class="col-lg-9">
+                                 <div class="cstm-mg">
+                                      <angular2-date-picker [(ngModel)]="toDate1" [settings]="settings"></angular2-date-picker>
+                                </div>
+                          </div>
+                    </div>
+              </li>
+              <li class="text-right brder-cstm">
+                   <div class="col-lg-12 text-center">
+                      <button class="btn btn-go" (click)="go()">Go</button>
+                </div>
+          </li>
+          <li class="li-cstm"> <a href="javascript:void(0);"> For Past</a> </li>
+          <!-- <li class="{{getClass(0)}}" (click)="activatetab(0)" class="active"> <a href="javascript:void(0);"> Current </a> </li> -->
+          <li class="{{getClass(1)}}" (click)="activatetab(1)"> <a href="javascript:void(0);"> 1 Week &nbsp;<small *ngIf="activatedtab==1">({{fromDate | date: 'dd/LL/yy'}} - {{toDate | date: 'dd/LL/yy'}})</small> </a> </li>
+          <li class="{{getClass(2)}}" (click)="activatetab(2)"> <a href="javascript:void(0);"> 2 Weeks &nbsp;<small *ngIf="activatedtab==2">({{fromDate | date: 'dd/LL/yy'}} - {{toDate | date: 'dd/LL/yy'}})</small>  </a> </li>
+          <li class="{{getClass(3)}}" (click)="activatetab(3)"> <a href="javascript:void(0);"> 1 Month &nbsp;<small *ngIf="activatedtab==3">({{fromDate | date: 'dd/LL/yy'}} - {{toDate | date: 'dd/LL/yy'}})</small> </a> </li>
+          <li class="{{getClass(4)}}" (click)="activatetab(4)"> <a href="javascript:void(0);"> 3 Month &nbsp;<small *ngIf="activatedtab==4">({{fromDate | date: 'dd/LL/yy'}} - {{toDate | date: 'dd/LL/yy'}})</small></a> </li>
+          <li class="{{getClass(5)}}" (click)="activatetab(5)"> <a href="javascript:void(0);"> 6 Month &nbsp;<small *ngIf="activatedtab==5">({{fromDate | date: 'dd/LL/yy'}} - {{toDate | date: 'dd/LL/yy'}})</small></a> </li>
+          <li class="{{getClass(6)}}" (click)="activatetab(6)"> <a href="javascript:void(0);"> 1 Year &nbsp;<small *ngIf="activatedtab==6">({{fromDate | date: 'dd/LL/yy'}} - {{toDate | date: 'dd/LL/yy'}})</small></a> </li>
+          <li class="{{getClass(7)}}" (click)="activatetab(7)"> <a href="javascript:void(0);"> All </a> </li>
+    </ul>
+</div>
+</div>
+<div class="cus-content-wrapper">
+  <div class="cus-content">
+       <div class="row brdr-lft">
+            <div class="col-lg-12 text-center">
+                 <div class="cstm-pad">
+                      <div class="table-responsive">
+                           <div class="my-table-all">
+                                <table class="table new-table-24">
+                                     <tbody>
+                                          <tr class="tbl-blk-hd">
+                                               <td class="text-left"><h5>OPD PARAMETERS</h5></td>
+                                               <td *ngFor="let data of doctorCollectionArray" class="text-center"><h5>Dr. {{getDoctorName(data.id)}}</h5></td>
+                                               <td class="text-center"><h4><b>CLINIC</b></h4></td>
+                                         </tr>
+                                         <tr class="tbl-hd-2">
+                                               <td colspan="7" class="text-left">
+                                                    COLLECTION
+                                              </td>
+                                        </tr>
+                                        <tr class="odd">
+                                         <td class="text-left">Consultation collection</td>
+                                         <td *ngFor="let data of doctorCollectionArray" class="text-center">{{data?.sales}} ({{data.percentage}} %)</td>
+                                         <td class="text-center"><b>{{getData(totalCollection)}}</b></td>
+                                   </tr>
+                                   <tr class="evn">
+                                         <td class="text-left">Avg daily collection</td>
+                                         <td *ngFor="let data of doctorCollectionArray"  class="text-center">{{data?.avgDailyColl}}</td>
+                                         <td class="text-center"><b>{{getData(avgDailyCollection)}}</b></td>
+                                   </tr>
+                                   <tr class="odd">
+                                         <td class="text-left">Avg collection per prescription</td>
+                                         <td *ngFor="let data of doctorCollectionArray"  >{{data?.avgColl}}</td>
+                                         <td><b>{{getData(avgPatientCollection)}}</b></td>
+                                   </tr>
+                                   <tr class="tbl-hd-2">
+                                         <td colspan="7" class="text-left">
+                                              PRESCRIPTION
+                                        </td>
+                                  </tr>
+                                  <tr class="odd">
+                                   <td class="text-left">Prescriptions</td>
+                                   <td class="text-center" *ngFor="let data of doctorCollectionArray">{{data?.prescriptions}}</td>
+                                   <td class="text-center"><b>{{totalPrescriptions}}</b></td>
+                             </tr>
+                             <tr class="evn">
+                                   <td class="text-left">Avg daily prescriptions</td>
+                                   <td class="text-center" *ngFor="let data of doctorCollectionArray">{{getData(data?.avgDailyPrescription)}}</td>
+                                   <td class="text-center"><b>{{getData(avgTotalPrescriptions)}}</b></td>
+                             </tr>
+                             <tr class="tbl-hd-2">
+                                   <td colspan="7" class="text-left">
+                                        PATIENT
+                                  </td>
+                            </tr>
+                            <tr class="odd">
+                             <td class="text-left">Patients</td>
+                             <td class="text-center" *ngFor="let data of doctorCollectionArray">{{data?.totalPatients}}</td>
+                             <td class="text-center"><b>{{patientArray?.length}}</b></td>
+                       </tr>
+                       <tr class="evn">
+                             <td class="text-left">New Patients</td>
+                             <td class="text-center" *ngFor="let data of doctorCollectionArray">{{data?.newPatients}}</td>
+                             <td class="text-center"><b>{{newPatientArray?.length}}</b></td>
+                       </tr>
+                       <tr class="odd">
+                             <td class="text-left">Old Patients</td>
+                             <td class="text-center" *ngFor="let data of doctorCollectionArray">{{data?.oldPatients}}</td>
+                             <td class="text-center"><b>{{oldPatientArray?.length}}</b></td>
+                       </tr>
+                       <tr class="evn">
+                             <td class="text-left">Avg daily patients</td><td class="text-center" *ngFor="let data of doctorCollectionArray">{{data?.avgDailyPatients}}</td>
+                             <td class="text-center"><b>{{totalAvgDailyPatients}}</b></td>
+                       </tr>
+                       <tr class="odd">
+                             <td class="text-left">Frequent Patients  ( Twice or more )</td>
+                             <td class="text-center" *ngFor="let data of doctorCollectionArray">{{data?.frequentPatients}}</td>
+                             <td class="text-center"><b>{{totalFreqPatients}}</b></td>
+                       </tr>
+                       <tr class="evn">
+                             <td class="text-left">Male patients</td>
+                             <td class="text-center" *ngFor="let data of doctorCollectionArray">{{data?.male}}</td>
+                             <td class="text-center"><b>{{totalMalePatients}}</b></td>
+                       </tr>
+                       <tr class="odd">
+                             <td class="text-left">Female patients </td>
+                             <td class="text-center" *ngFor="let data of doctorCollectionArray">{{data?.female}}</td>
+                             <td class="text-center"><b>{{totalFemalePatients}}</b></td>
+                       </tr>
+                       <tr class="evn">
+                             <td class="text-left">Avg. Patient Age (Yrs)</td>
+                             <td class="text-center" *ngFor="let data of doctorCollectionArray">{{data?.avgAge}}</td>
+                             <td class="text-center"><b>{{totalAvgAgePatients}}</b></td>
+                       </tr>
+                       <tr class="odd">
+                             <td class="text-left">Walk-In patients</td>
+                             <td class="text-center" *ngFor="let data of doctorCollectionArray">{{data?.walkin}}</td>
+                             <td class="text-center"><b>{{totalWalkinPatients}}</b></td>
+                       </tr>
+                       <tr class="evn">
+                        <td class="text-left">Appointment patients</td>
+                        <td class="text-center" *ngFor="let data of doctorCollectionArray">{{data?.appointment}}</td>
+                        <td class="text-center"><b>{{totalAppointmentPatients}}</b></td>
+                  </tr>
+                  <tr class="odd">
+                        <td class="text-left">Emergency patients</td>
+                        <td class="text-center" *ngFor="let data of doctorCollectionArray">{{data?.emergency}}</td>
+                        <td class="text-center"><b>{{totalEmergencyPatients}}</b></td>
+                  </tr>
+                  <tr class="tbl-hd-2">
+                        <td colspan="7" class="text-left">
+                              TIME
+                        </td>
+                  </tr>
+                  <tr class="evn">
+                        <td class="text-left">Avg CTU</td>
+                        <td class="text-center" *ngFor="let data of doctorCollectionArray">{{data?.avgCtu}}%</td>
+                        <td class="text-center"><b>{{totalAvgCtu}}%</b></td>
+                  </tr>
+                  <tr class="odd">
+                        <td class="text-left">Avg time per patient</td>
+                        <td class="text-center" *ngFor="let data of doctorCollectionArray">{{data?.totalSec}}</td>
+                        <td class="text-center"><b>{{totalAvgTime}}</b></td>
+                  </tr>
+            </tbody>
+      </table>
+</div>
+</div>
+</div>
+</div>
+		      			<!-- 	<div class="container-fluid">
+		      					<div class="col-lg-12 text-center foot-2">
+		      						<h5 style="font-weight: normal;">
+		      							<b style="background-color: rgb(199,220,244);padding:5px; ">
+		      								CURRENT ACCUPANCY STATUS:
+		      							</b>
+		      							<span style="background-color: rgb(199,220,244);padding:6px; ">
+		      								TOTAL BEDS <b>- {{getData(totalGeneralBeds + totalSemiPrivateBeds + totalPrivateBeds)}} |</b>
+		      								OCCUPIUED <b>- {{patientAdmittedlength}} | </b>
+		      								VACANT- <b>{{getData((totalGeneralBeds + totalSemiPrivateBeds + totalPrivateBeds)-(patientAdmittedlength))}}</b>
+		      							</span>
+		      						</h5>
+		      					</div>
+		      				</div> -->
+		      			</div>
+		      		</div>
+		      	</div>
+                 </div>
+           </div>
+     </div>
+<!-- 	<div class="container footer-cstm-an">
+		<div class="row">
+			<div class="col-lg-5 text-right">
+				<div>
+					<p>CURRENT OCCUPANCY: <b>25% </b></p>
+				</div>
+			</div>
+			<div class="text-center col-lg-2">
+				<span>|</span>
+			</div>
+			<div class="col-lg-5 text-left">
+				<div>
+					<p>ADMISSION TREND : <b>Rising:</b> Falling : Steady</p>
+				</div>
+			</div>
+		</div>
+	</div> -->

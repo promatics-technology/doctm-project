@@ -1,0 +1,306 @@
+<div class="loader-box" *ngIf="loading">
+    <img src="./assets/imgs/load.gif" />
+</div>
+<div class="cstm-hdr" style="float:left;width:100%;">
+	<div class="">
+		<div  class="col-lg-2 col-md-2 col-sm-12 col-xs-12 cstm-col-mg">
+			<div  class="dashboard-header-logo" tabindex="0" ng-reflect-router-link="/header-five-layout/dashboard-">
+				<img _ngcontent-c3="" class="img-responsive" src="./assets/imgs/logoDoctm.png" routerLink="/header-five-layout/dashboard-pharmacy">
+			</div>
+			<div >
+				<div _ngcontent-c3="" class="dshbrd-btn">
+					<button  class="btn btn-custom" routerLink="/header-five-layout/dashboard-pharmacy" tabindex="0" ng-reflect-router-link="/header-five-layout/dashboard-"> Dashboard</button>
+				</div>
+			</div>
+		</div>
+		<div class="col-lg-8 col-md-8 col-sm-10 col-xs-12 ">
+      		<div class="select-duration">
+      			<div class="row">
+      				<div class="col-md-6 col-sm-6 col-xs-12">
+      					<div class="row">
+      						<div class="col-md-12 col-sm-12 col-xs-12">
+	      						<div class="row">
+	      							<label class=" col-md-3 col-sm-3 col-xs-12 text-right txt-lft" style="font-size: 20px">From:</label>
+	      						<div class="col-md-9  col-sm-9 col-xs-12">
+	      							<angular2-date-picker [(ngModel)]="fromDate" [settings]="settings"></angular2-date-picker>
+	      						</div>
+	      						</div>
+	      					</div>
+      					</div>
+      				</div>
+      				<div class="col-md-6 col-sm-6 col-xs-12">
+      					<div class="row">
+      						<div class="col-md-12 col-sm-12 col-xs-12">
+      							<div class="row">
+      								<label class=" col-md-3 col-sm-3 col-xs-12 text-right txt-lft" style="font-size: 20px">To:</label>
+		      						<div class="col-md-9  col-sm-9 col-xs-12">
+		      							<angular2-date-picker [(ngModel)]="toDate" [settings]="settings"></angular2-date-picker>
+		      						</div>
+      							</div>
+	      					</div>
+      					</div>
+      				</div>
+      			</div>
+      		</div>
+      	</div>
+      	<div class="col-lg-2 col-md-2 col-sm-2 col-xs-12 ">
+      		<div class="select-duration btn-go">
+				<button class="btn ok-btn" type="button" (click)='viaDate()'> Go </button>
+      		</div>
+      	</div>
+      	<div class="col-lg-8 col-md-8 col-sm-8 col-xs-12 ">
+      		<!-- <div class="col-lg-12"> -->
+				<div class="form-group mr-top">
+				    <input type="text" class="form-control" [(ngModel)]="searchInput" placeholder="Search by Party name, Bill number" (keyup)="onKey($event)">
+				</div>
+			<!-- </div> -->
+      	</div>
+		<div class="col-lg-2 col-md-2 col-sm-2 col-xs-12 cstm-input srch-cstm">
+			<button class="btn btn-custom" (click)="SearchByPartyNameOrBill()">Search </button>
+		</div>
+	</div>
+</div>
+<div class="stock-tab" style="float:left;width:100%;">
+	<div class="col-lg-12">
+		<div class="tbl-cntrol">	
+			<table class="table table-bordered" matSort (matSortChange)="sortData($event)" *ngIf="sortedData.length>0">
+				<thead class="new-thd">
+			      <tr>
+			        <th mat-sort-header="createdAt" width="20%" class="{{getTableHeaderClass(1)}} text-center" (click)="setTableHeaderClass(1)"><h4 style="width: 100%;text-align: center;">Date</h4></th>
+			        <th mat-sort-header="bill_no" width="20%" class="{{getTableHeaderClass(2)}} text-center" (click)="setTableHeaderClass(2)"><h4 style="width: 100%;text-align: center;">Bill Number</h4></th>
+			        <th mat-sort-header="party_name" width="20%" class="{{getTableHeaderClass(3)}} text-center" (click)="setTableHeaderClass(3)"><h4 style="width: 100%;text-align: center;">Party Name</h4></th>
+			        <th mat-sort-header="amount" width="20%" class="{{getTableHeaderClass(4)}} text-center" (click)="setTableHeaderClass(4)"><h4 style="width: 100%;text-align: center;">Bill Value</h4></th>
+			        <th width="20%" class="text-center"><h4>Action</h4></th>
+			      </tr>
+		    	</thead>
+		    	<tbody class="new-tbdy">
+			      <tr *ngFor="let item of sortedData">
+			        <td width="20%" class="text-center">{{getTimeFiveAndHalfHoursBefore(item.stock[0].createdAt) | date:'d MMM yy ,h:mm a'}}</td>
+			        <td width="20%" class="text-center">{{item.stock[0].bill_no}}</td>
+			        <td width="20%" class="text-center">{{item.party_name}}</td>
+			        <td  width="20%" class="text-center">{{item.amount}}</td>
+			        <td  width="20%" class="text-center">
+			        	<button class="btn btn-info" data-toggle="modal" data-target="#myModal" (click)="viewReturnData(item.stock,item)">View/Return</button>
+			        </td>
+			      </tr>
+		    	</tbody>
+			</table>
+			<div class="col-lg-12" *ngIf="sortedData.length<1">
+                <h3 class="text-center">No data found ...</h3>
+            </div> 
+		</div>
+	</div>
+
+
+	<div class="col-lg-8 col-lg-offset-2 fix-footer">
+		<div class="row btn-wrap">
+			<div class="col-lg-5 col-md-5 col-sm-4 col-xs-12 txt-cnt">
+				<button class="btn btn-custom btn-grin">
+					<div> Total Number of Purchases: {{stockPurchaseArray.length}} </div>
+				</button>
+			</div>
+			<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 txt-cnt text-center">
+				<button class="btn btn-custom">
+					<div>Total Bill Value: {{totalBill.toFixed(2)}} </div>
+				</button>
+			</div>
+			<div class="col-lg-3 col-md-3 col-sm-4 col-xs-12 txt-cnt text-right" *ngIf="stockPurchaseArray.length>0">
+				<button class="btn btn-custom btn-grin" (click)="exportPdf()">
+					<div> Export </div>
+				</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="myModal" role="dialog">
+	<div class="modal-dialog modal-tble">
+	  <div class="modal-content cstm-width pop_tab">
+	    <div class="modal-header">
+	      <button type="button" class="close" data-dismiss="modal">&times;</button>
+	      <h3 class="modal-title text-center">{{returnPartyName}}</h3>
+	      <h4 class="modal-title text-center">Bill No - {{returnBillNo}}</h4>
+	    </div>
+		<div class="modal-body">
+			<div class="table-responsive">
+				<table cellpadding="20px" class="table cstm-table" style="position: relative;">
+		    		<thead class="table-head" style="position: absolute;">
+				  	<tr>
+				  		<th class="text-center" width="60px">Return Item</th>
+					    <th class="text-center" width="60px"><h5>Type</h5></th>
+		                <th class="text-center" width="150px"><h5>Product</h5></th>
+		                <th class="text-center" width="85px"><h5>Batch</h5></th>
+		                <th class="text-center" width="110px"><h5>Exp</h5></th>
+		                <th class="text-center" width="120px"><h5>Pack</h5></th>
+		                <th class="text-center" width="80px"><h5>M.R.P</h5></th>
+		                <th class="text-center" width="80px"><h5>QTY</h5></th>
+		                <th class="text-center" width="80px"><h5>Return QTY</h5></th>
+		                <th class="text-center" width="80px"><h5>P.Rate</h5></th>
+		                <th class="text-center" width="65px"><h5>CGST(%)</h5></th>
+		                <th class="text-center" width="65px"><h5>SGST(%)</h5></th>
+		                <th class="text-center" width="70px"><h5>Disc(%)</h5></th>
+		                <th class="text-center" width="80px"><h5>Amount</h5></th>
+		                <th class="text-center" width="80px"><h5>New Amount</h5></th>
+					</tr>
+					</thead>
+				</table>
+				<div class="table-scroll-outside table-two" style="margin-top: 60px;">
+					<table>
+					<tbody class="tbod-max-w my-tbdy tbdy_book">
+						<tr class="table-row" *ngFor="let tr of totalTr;let i = index;">
+						<td width="60px">
+							<label class="cstm-chk">
+							  <input type="checkbox" [(ngModel)]="returnStatus[i]" [checked]="returnStatus[i]" (change)="getTotalReturn(i)">
+							  <span class="checkmark"></span>
+							</label>
+						</td>
+						<td width="60px">
+							<select  class="form-control" class="form-control txtfield" [(ngModel)]="reqData.opt[i]" disabled="">\
+								<option selected="" value="" disabled="">Type</option>	
+								<option value="Tablet">Tab</option>
+								<option value="Capsule">Cap</option>
+								<option value="Syrup">Syr</option>
+								<option value="Suspension">Sus</option>
+								<option value="Emulsion">Emu</option>
+								<option value="Solution">Sol</option>
+								<option value="Injection">Inj</option>
+								<option value="MouthWash">Mou</option>
+								<option value="Powder">Pow</option>
+								<option value="Cream">Cre</option>
+								<option value="Gel">Gel</option>
+								<option value="Drops">Dro</option>
+								<option value="Aerosols">Aer</option>
+								<option value="Lotion">Lot</option>
+								<option value="Ointment">Oin</option>
+								<option value="Unit">Unit</option>
+								<option value="Box">Box</option>
+								<option value="Misc">Misc</option>
+							</select>
+						</td>
+
+						<td width="150px" class="text-center">
+							<div class="cstm-input-2">
+								<input type="text" name="" class="form-control" placeholder="Product" disabled="{{getReturnStatus(i)}}" readonly="" [(ngModel)]="reqData.product[i]" (keyup)="onTextChangeOfMedName(reqData.opt[i],$event.target.value)" [matAutocomplete]="auto" disabled="">
+								<mat-autocomplete #auto="matAutocomplete" style="width:100%">
+								  <mat-option *ngFor="let option of productNameSuggestion" [value]="option">
+									{{option}}
+								  </mat-option>
+								</mat-autocomplete>		
+							</div>
+						</td>
+							<td width="85px" class="text-center">
+								<div class="cstm-input-2">
+									<input type="text" name="" class="form-control" placeholder="" readonly="" disabled="{{getReturnStatus(i)}}" readonly=""  [(ngModel)]="reqData.batch[i]" disabled="">
+								</div>
+							</td>
+
+							<td width="110px" class="text-center">
+								<span class="cstm-input cstm-2">
+									<input style="padding:6px;" type="number" name="" class="form-control" readonly="" disabled="{{getReturnStatus(i)}}" [(ngModel)]="reqData.month[i]" disabled="">
+								</span>
+								<span>&nbsp;&nbsp;/&nbsp;&nbsp;</span>
+								<span class="cstm-input cstm-2">
+									<input style="padding:6px;" type="number" name="" class="form-control" readonly="" disabled="{{getReturnStatus(i)}}" [(ngModel)]="reqData.year[i]" disabled="">
+								</span>
+							</td>
+							<td width="120px" class="text-center">
+								<span class="cstm-input cstm-2">
+									<input style="padding:6px;"type="number" name="" class="form-control" readonly="" disabled="{{getReturnStatus(i)}}" [(ngModel)]="reqData.pack1[i]" disabled="">
+								</span>
+								<span>&nbsp;&nbsp;X&nbsp;&nbsp;</span>
+								<span class="cstm-input cstm-2">
+									<input style="padding:6px;" type="number" name="" class="form-control" readonly="" disabled="{{getReturnStatus(i)}}" [(ngModel)]="reqData.pack2[i]" disabled="">
+								</span>
+							</td>
+
+							<td width="80px" class="text-center">
+								<div class="cstm-input-2">          
+									<input type="number" name="" class="form-control" readonly="" disabled="{{getReturnStatus(i)}}" placeholder="" [(ngModel)]="reqData.mrp[i]" disabled="">
+								</div>
+							</td>
+
+							<td width="80px" class="text-center">
+								<div class="cstm-input-2">
+									<input type="number" name="" class="form-control" readonly="" disabled="" placeholder="" value="{{returnPurchaseArray[i].qty}}">
+								</div>
+							</td>
+
+							<td width="80px" class="text-center">
+								<div class="cstm-input-2">
+									<input type="number" name="" class="form-control" disabled="{{getReturnStatus(i)}}" placeholder="" [(ngModel)]="reqData.quantity[i]" (blur)="getTotalRecord(i)">
+								</div>
+							</td>
+
+							<td width="80px" class="text-center">
+								<div class="cstm-input-2">
+									<input type="number" name="" class="form-control" readonly="" disabled="{{getReturnStatus(i)}}" placeholder="" [(ngModel)]="reqData.rate[i]" (blur)="getTotalRecord(i)" disabled="">
+								</div>
+							</td>
+
+							<td width="65px" class="text-center">
+								<div class="cstm-input-2">
+									<input type="number" name="" class="form-control" readonly="" disabled="{{getReturnStatus(i)}}" placeholder="" [(ngModel)]="reqData.cgst[i]" (blur)="getTotalRecord(i)" disabled="">
+								</div>
+							</td>
+
+							<td width="65px" class="text-center">
+								<div class="cstm-input-2">
+									<input type="number" name="" class="form-control" readonly="" disabled="{{getReturnStatus(i)}}" placeholder=""  [(ngModel)]="reqData.sgst[i]" (blur)="getTotalRecord(i)" disabled="">
+								</div>
+							</td>
+
+							<td width="70px" class="text-center">
+								<div class="cstm-input-2">
+									<input type="number" name="" class="form-control" readonly="" disabled="{{getReturnStatus(i)}}" placeholder="" [(ngModel)]="reqData.discount[i]" (blur)="getTotalRecord(i)" disabled="">
+								</div>
+							</td>
+
+							<td width="80px" class="text-center">
+								<div class="cstm-input-2">
+									<input type="number" name="" class="form-control" readonly="" disabled="" placeholder="" value="{{returnPurchaseArray[i].amount}}">
+								</div>
+							</td>
+
+							<td width="80px" class="text-center">
+								<div class="cstm-input-2">
+									<input type="number" name="" class="form-control" readonly="" disabled="{{getReturnStatus(i)}}" placeholder="" [(ngModel)]="reqData.amount[i]" (blur)="getTotalRecord(i)"  disabled="">
+								</div>
+							</td>
+						</tr>
+			  		</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+		<div class="modal-footer" >
+	        <div class="col-lg-12">
+	        	<div class="row">
+	         		<div class="col-lg-3">
+	         			<h3 class="mg-top">Total Amount</h3>
+	         		</div>
+	         		<div class="col-lg-3 text-left">
+	         			<button class="btn data-div" readonly="" disabled="">
+							<div>{{totalAmountOriginal}}</div>
+						</button>
+	         		</div>
+	         		<div class="col-lg-3">
+	         			<h3 class="mg-top">Total Refund Amount</h3>
+	         		</div>
+	         		<div class="col-lg-3 text-left">
+	         			<button class="btn data-div" readonly="" disabled="">
+							<div>{{totalRefundAmount}}</div>
+						</button>
+	         		</div>
+	         	</div>
+	        </div>
+	        <div class="text-center">
+	         	<button class="btn btn-custom" (click)="openConfirmation()">
+					<div> Return </div>
+				</button>
+	        </div>
+        </div>
+	  </div>
+	</div>
+</div>
+
+<!-- "getRetunDetails()"  -->

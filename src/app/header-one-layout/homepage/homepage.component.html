@@ -1,0 +1,271 @@
+<section class="slider-sec">
+	<div class="container">			
+		<div class="slider-div">
+			<div id="main-slider" class="">
+				<div class="item">
+					<div class="slider-item" style="background-image: url('./assets/imgs/slider-1.jpg');"></div>
+				</div>
+                <!-- <div class="item">
+			    	<div class="slider-item" style="background-image: url('imgs/slider-2.jpg');"></div>
+                </div>
+                <div class="item">
+			    	<div class="slider-item" style="background-image: url('imgs/slider-3.jpg');"></div>
+			    </div> -->
+			</div>
+		</div>
+		
+		<div class="slider-txt text-center">
+			<div class="container">
+				<div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
+					<div class="wrap-div">
+						<div class="smart_heading">
+							<h1>SmartClinic</h1>
+							<p> Clinic at your fingertips </p>
+						</div>
+						<h1>An easy, secure and efficient medical practice platform</h1>
+						<h3>Designed to integrate all clinic services, boost financial performance and deliver better patient experience</h3>
+					</div>
+				</div>
+			</div>				
+		</div>
+	</div>
+</section>
+
+<section class="about-sec"> 
+	<div class="container">
+		<h2 class="about-heading">About SmartClinic</h2>
+		<div class="row">
+			<div class="col-lg-5 col-md-5 col-sm-5 col-xs-12">
+				<div class="wrap-div">
+					<div [innerHtml]="homeData?.about.content"></div>
+					<div class="form-group col-md-12 col-sm-12 col-xs-12 text-center">
+						<a href="javascript:void(0)" routerLink="/header-one-layout/smart-clinic-service" class="btn btn-theme"> Read more </a>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-7 col-md-7 col-sm-7 col-xs-12">
+				<!--div class="video-box wrap-div">
+					<iframe [src]="homeData?.video | customPipes" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+				</div-->
+				<div class="video-wrap" *ngIf="video">
+					<video  controls controlsList="nodownload" oncontextmenu="return false" poster="assets/imgs/responsive.jpg">
+						<source [src]="video | customPipes" type="video/mp4" >
+						</video>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section class="whyus-sec">
+		<div class="container">
+			<div class="whyus-panel">
+				<h2 class="about-heading"> Why SmartClinic? </h2>
+				<div class="whyus-wrap">
+
+					<div class="whyus-box" *ngFor="let content of homeData?.whySmart; let i = index">
+						<div class="whyus-img">
+							<img src="./assets/imgs/why-{{i+1}}.png" class="img-responsive" />
+						</div>
+						<h4> <span> {{content.title}} </span> </h4>
+						<p [innerHtml]="content.description"></p>
+					</div>
+
+				<!--div class="whyus-box">
+					<div class="whyus-img">
+						<img src="./assets/imgs/why-2.png" class="img-responsive" />
+					</div>
+					<h4> <span> Use of latest technology </span> </h4>
+					<p> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+					tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+					quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+					consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+					cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+					proident, sunt in culpa qui officia deserunt mollit anim id est laborum. </p>
+				</div>
+
+				<div class="whyus-box">
+					<div class="whyus-img">
+						<img src="./assets/imgs/why-3.png" class="img-responsive" />
+					</div>
+					<h4> <span> Seamless integration of all clinic services </span> </h4>
+					<p> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+					tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+					quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+					consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+					cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+					proident, sunt in culpa qui officia deserunt mollit anim id est laborum. </p>
+				</div>
+				<div class="whyus-box">
+					<div class="whyus-img">
+						<img src="./assets/imgs/why-4.png" class="img-responsive" />
+					</div>
+					<h4> <span> Anywhere, anytime access </span> </h4>
+					<p> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+					tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+					quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+					consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+					cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+					proident, sunt in culpa qui officia deserunt mollit anim id est laborum. </p>
+				</div>
+				<div class="whyus-box">
+					<div class="whyus-img">
+						<img src="./assets/imgs/why-5.png" class="img-responsive" />
+					</div>
+					<h4> <span> Data security on top priority </span> </h4>
+					<p> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+					tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+					quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+					consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+					cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+					proident, sunt in culpa qui officia deserunt mollit anim id est laborum. </p>
+				</div-->
+
+			</div>
+
+		</div>
+	</div>
+</section>
+
+<section class="clinicform-sec">
+	<div class="container">	
+		<div class="col-md-offset-1 col-md-10 col-sm-offset-1 col-sm-10 col-xs-12 p-0">
+			<div class="clinicform-panel">
+				<div class="row">
+					
+					<div class="col-md-5 col-sm-6 col-xs-12">
+						<div class="clinicform-content">
+							<h1 class="about-heading"> Ready to make your clinic SMART?  </h1>
+							<p> Allow us to put all your clinic operations on your fingertips. so that you save your time and energy to focus more on your patients.</p>
+							<p>  Fill out the form to register with us and experience total peace of mind. </p>
+						</div>
+					</div>
+
+					<div class="col-md-offset-1 col-md-6 col-sm-6 col-xs-12">
+						<div class="clinicform-form">
+							<div class="form-group col-md-12 col-sm-12 col-xs-12">
+								<div class="fieldDesign">
+									<input id="field1" type="text" autocomplete="off" class="form-control txtfield" name="" required=""  />
+									<label for="field1" class="labelFloat"> Mobile Number </label>
+									<span style="color:red" *ngIf="mobile_field">Please enter a valid mobile number!</span>
+								</div>
+							</div>
+							<div class="form-group col-md-12 col-sm-12 col-xs-12">
+								<div class="fieldDesign">
+									<input id="field2" type="text" class="form-control txtfield" required="" name="" autocomplete="off"  />
+									<label for="field2" class="labelFloat"> Email (User ID) </label>
+									<span style="color:red"  *ngIf="email_field">Please enter a valid email address!</span>
+								</div>
+							</div>
+							<div class="form-group col-md-12 col-sm-12 col-xs-12">
+								<div class="fieldDesign">
+									
+									<input for="field3" type="password" class="form-control txtfield" name="" required="" autocomplete="off" [readonly]="email_readonly"  style="background-color:white" (focus)="changeReadOnly(false)" id="field3" />
+									<label for="field3" class="labelFloat"> Create Password </label>
+									<span style="color:red"  *ngIf="password_field">Please enter a valid mobile number!</span>
+								</div>
+							</div>
+							<div class="form-group col-md-12 col-sm-12 col-xs-12">
+								<div class="fieldDesign">
+									<input id="field4" type="password"  autocomplete="off" class="form-control txtfield" name="" required="" style="background-color:white"  [readonly]="email_readonly1" (focus)="changeReadOnly1(false)" />
+									<label for="field4" class="labelFloat"> Repeat Password </label>
+									<span style="color:red" *ngIf="confirm_field">Passwords and Confirm password is mismatching!</span>
+								</div>
+							</div>
+							<div class="col-md-12 col-sm-12 col-xs-12 text-center">
+								<input type="submit" (click)="registerNewClinic()" class="btn btn-custom" value="Register" />
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>	
+		</div>
+
+	</div>	
+</section>
+
+<section class="download-sec">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-7 col-md-7 col-sm-6 col-xs-12">
+				<div class="wrap-div">
+					<img src="./assets/imgs/responsive.jpg" class="img-responsive screen-img">
+				</div>
+			</div>
+			<div class="col-lg-5 col-md-5 col-sm-6 col-xs-12">
+				<div class="wrap-div download-app">
+					<img src="./assets/imgs/logoDoctm.png" class="logo">
+					<h2>Download Our App</h2>
+					<p class="text-muted">
+						{{helpData[11]?.text}}
+					</p>
+					<p class="download-btns">	
+						<a href="{{helpData[12]?.text}}" target="_balank"><img src="./assets/imgs/gp.png"></a>	
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<section class="testimonial-sec">
+	<div class="container mt80">
+		<h2 class="text-center">What our happy users have to say</h2>
+		<div class="stars stars-2">
+			<ngx-stars *ngIf="totalRate" [size]="1" [color]="'#FFD700'" [readonly]="true" [initialStars]="totalRate"></ngx-stars>&nbsp;
+			<span>{{totalRate}}/5</span> <span>|</span> <span>{{ratingArray.length}} Rating</span>
+		</div>
+		<div class="slick-wrap" *ngIf="ratingArray">
+			<ngx-slick class="carousel"  *ngIf="ratingArray.length"  id="abcde" #slickModal="slick-modal" [config]="slideConfig">
+				<div *ngFor = "let list of ratingArray">
+					<div ngxSlickItem class="item">
+						<div class="saying">
+							<div class="row cstm-row">
+								<div class="col-lg-6">
+									<h5 class="txt-white text-center user-name"><i><b>Dr. {{list.name}}</b></i></h5>
+
+
+									<div class="text-center" >
+										<span class="txt-white" style="margin-bottom:0px;     font-size: 12px; " *ngFor = "let data of list.qualification; let i=index">{{data.display}}<span *ngIf="i!=list.qualification.length-1">,&nbsp;</span></span>
+									</div>
+									<br>
+									<h6 class="txt-white text-center"><span style="color: #23de7e">{{list.specialization}}</span> </h6>
+									<h6 class="txt-white text-center" style="margin-top:0px;" *ngIf = "list.city"><i>{{list.city}}</i></h6>
+								</div>
+								<div class="col-lg-6">
+									<div class="profile" *ngIf = "list.doc_image || list.doc_image != '' " >
+										<img   src="{{doc_image}}{{list.doc_image}}" class="img-responsive">
+									</div>
+									<div class="profile" *ngIf = "list.doctor_profile && !list.doc_image">
+										<img  src="{{doctorPic}}{{list.doctor_profile}}" class="img-responsive"/>
+									</div>
+									<div class="profile" *ngIf = "list.doc_image == '' && list.doctor_profile == ''" >
+										<img  src="./assets/imgs/no-person.jpg" class="img-responsive">
+									</div>
+								</div>
+								<div class="col-lg-12">
+									<div class="stars">
+										<ngx-stars [size]="1" [color]="'#FFD700'" [readonly]="true" [initialStars]="list.rating"></ngx-stars>
+									</div>
+								</div>
+								<div class="col-lg-12">
+									<div class="content">
+										<i class="fa fa-quote-left theme-clr"></i>
+										<p style="max-height: 70px; min-height: 70px; overflow: hidden;">{{trimMessage(list.message)}}</p>
+									</div>
+								</div>
+							</div>
+							<div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</ngx-slick>
+			<i class="fa fa-chevron-left btn-next i-next" (click)="next()"></i>
+			<i class="fa fa-chevron-right btn-prev i-prev" (click)="prev()"></i>
+		</div>
+	</div>
+</section>
+

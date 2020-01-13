@@ -1,0 +1,1193 @@
+<div class="loader-box" *ngIf="loading">
+    <img src="./assets/imgs/load.gif" />
+</div>
+<section class="signup-sec">
+    <div class="signup-sidebar-wrapper">
+        <div id="bs-example-navbar-collapse-1" class="signup-sidbar navbar-collapse p-0">
+            <ul class="">
+                <li class="{{getClass(0)}}" (click)="activatetab('Your Contact details',0)"> <a> Your Contact details </a> </li>
+                <li class="{{getClass(1)}}" (click)="activatetab('Create your profile',1)"> <a> Create your profile </a> </li>
+                <li class="{{getClass(2)}}" (click)="activatetab('Clinic contact details',2)"> <a> Clinic contact details </a> </li>
+                <li class="{{getClass(3)}}" (click)="activatetab('Your consultation schedule',3)"> <a> Your consultation schedule </a> </li>
+                <li class="{{getClass(4)}}" (click)="activatetab('Add SmartAssistant',4)"> <a> Add SmartAssistant </a> </li>
+                <li class="{{getClass(5)}}" (click)="activatetab('Add clinic services',5)"> <a> Add clinic services </a> </li>
+                <li class="{{getClass(7)}}" (click)="activatetab('Language Selection',7)"> <a> Language Selection </a> </li>
+                <li class="{{getClass(6)}}" (click)="activatetab('Upload documents',6)"> <a> Upload documents </a> </li>
+            </ul>
+        </div>
+    </div>
+    <div class="" *ngIf="activatedtab==0">
+        <div class="signup-content-wrapper">
+            <div class="signup-content">
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="signup-card">
+                            <h3 class="signup-contentHead"> SmartClinic Sign-up / {{activatedtabHeading}}</h3>
+                        </div>
+                    </div>
+                    <form [formGroup]="stepOneForm" autocomplete="off">
+                        <div class="col-md-5 col-sm-5 col-xs-12">
+                            <div class="signup-card newform-margin">
+                                <div class="row">
+                                    <!-- <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                                        <div class="fieldDesign">
+                                            <input id="field1" type="text" class="form-control txtfield" name="" required=""  pattern="[0-9.]+" maxLength="10" [(ngModel)]="InitialDetail.phone" [formControl]="stepOneForm.controls['phone']" />
+                                            <label for="field1" class="labelFloat"> Mobile Number<sup>*</sup> </label>
+                                            <p style="color: #FF0000" *ngIf="!stepOneForm.controls['phone'].valid  && ( stepOneForm.controls['phone'].touched)">Invalid phone number !!!</p>
+                                        </div>
+                                    </div> -->
+                                    <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                                        <div class="input-group fieldDesign">
+                                            <span class="input-group-addon">+91</span>
+                                            <input id="field1" type="text" [attr.disabled]="otp_verified ? '' : null" class="form-control txtfield" name="" required="" pattern="[0-9.]+" maxLength="10" [(ngModel)]="InitialDetail.phone" [formControl]="stepOneForm.controls['phone']" />
+                                            <label for="field1" class="labelFloat" *ngIf="!otp_verified"> Mobile Number<sup>*</sup> </label>
+                                            <p style="color: #FF0000" *ngIf="!stepOneForm.controls['phone'].valid  && ( stepOneForm.controls['phone'].touched)">Invalid phone number !!!</p>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                                        <div class="fieldDesign">
+                                            <input id="field2" type="text" [attr.disabled]="otp_verified ? '' : null" class="form-control txtfield" name="" required="" [(ngModel)]="InitialDetail.email" [formControl]="stepOneForm.controls['email']" />
+                                            <label for="field2" class="labelFloat" *ngIf="!otp_verified"> Email<sup>*</sup>(User ID) </label>
+                                            <p style="color: #FF0000" *ngIf="!stepOneForm.controls['email'].valid  && ( stepOneForm.controls['email'].touched)">Invalid email ID !!!</p>
+                                        </div>
+                                    </div>
+                                    <!-- <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                                        <div class="fieldDesign">
+                                            <input id="field3" type="password" class="form-control txtfield" name="" required="" [(ngModel)]="InitialDetail.password" [formControl]="stepOneForm.controls['password']" />
+                                            <label for="field3" class="labelFloat">Create password<sup>*</sup> </label>
+                                            <p style="color: #FF0000" *ngIf="!stepOneForm.controls['password'].valid  && (stepOneForm.controls['password'].touched)">Password can be of 8 to 15 characters !!!</p>
+                                        </div>
+                                    </div> -->
+                                    <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                                        <div class="fieldDesign">
+                                            <input id="field3" type="password" class="form-control txtfield" name="" required="" [(ngModel)]="InitialDetail.password" [formControl]="stepOneForm.controls['password']" (input)="checkPassword(InitialDetail.password)" />
+                                            <label for="field3" class="labelFloat">Create password<sup>*</sup> </label>
+                                            <p style="color: #FF0000" *ngIf="!stepOneForm.controls['password'].valid  && (stepOneForm.controls['password'].touched)">Invalid password pattern!!!</p>
+                                            <div class="instruction-ul">
+                                                <ul>
+                                                    <li [ngClass]="(lowerCase==true) ? 'passed': ''">One lowercase character</li>
+                                                    <li [ngClass]="(specialCase==true) ? 'passed': ''">One special character</li>
+                                                    <li [ngClass]="(upperCase==true) ? 'passed': ''">One uppercase character</li>
+                                                    <li [ngClass]="(lengthCase==true) ? 'passed': ''">8 characters minimum</li>
+                                                    <li [ngClass]="(numberCase==true) ? 'passed': ''">One number</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                                        <div class="fieldDesign">
+                                            <input id="field4" type="password" class="form-control txtfield" name="" required="" (keyup)="onKey($event)" [(ngModel)]="InitialDetail.confirm_password" [formControl]="stepOneForm.controls['confirm_password']" />
+                                            <label for="field4" class="labelFloat"> Repeat password<sup>*</sup> </label>
+                                            <p style="color: #FF0000" *ngIf="p_false">Password and confirm password are not same !!!</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="row">
+                    <div class="col-md-5 col-sm-5 col-xs-12">
+                        <div class="signup-card text-center">
+                             <button class="btn btn-custom" type="submit" [disabled]="(!stepOneForm.valid) || (p_false)" (click)="openOTPModal()"> Verify </button>
+                            <!-- <button class="btn btn-custom" type="submit" data-target="#myModal" data-toggle="modal" data-dismiss="modal"> Verify </button> -->
+                            <p class="help-note m-t-5"><small>Separate OTP (One Time Password) will be sent to your registered mobile number and email for verification</small></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="" *ngIf="activatedtab==1">
+        <div class="signup-content-wrapper">
+            <div class="signup-content">
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="signup-card">
+                            <h3 class="signup-contentHead"> SmartClinic Sign-up / {{activatedtabHeading}}</h3>
+                        </div>
+                    </div>
+                    <form [formGroup]="stepTwoForm" autocomplete="off">
+                        <div class="col-md-7 col-sm-7 col-xs-12">
+                            <div class="signup-card">
+                                <div class="row">
+                                    <div class="form-group col-md-12 col-sm-12 col-xs-12 inform-margin">
+                                        <div class="fieldDesign">
+                                            <label for="field6"> Full Name<sup>*</sup> </label>
+                                            <input id="field6" type="text" class="form-control txtfield" name="" required="" pattern="[a-zA-z ]+" [(ngModel)]="ProfileDetail.first_name" [formControl]="stepTwoForm.controls['first_name']" />
+                                            <p style="color: #FF0000" *ngIf="!stepTwoForm.controls['first_name'].valid  && (stepTwoForm.controls['first_name'].touched)">Invalid name !!!</p>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                                        <label> Select Specialization<sup>*</sup> </label>
+                                        <select class="form-control txtfield" [(ngModel)]="ProfileDetail.specialization" [formControl]="stepTwoForm.controls['specialization']" (change)="checkOther(ProfileDetail.specialization)">
+                                            <option selected disabled="" selected=""> Select Specialization </option>
+                                            <option value="CARDIOLOGIST"> CARDIOLOGIST </option>
+                                            <option value="DENTIST"> DENTIST </option>
+                                            <option value="DERMATOLOGIST"> DERMATOLOGIST </option>
+                                            <option value="DIABETOLOGIST"> DIABETOLOGIST </option>
+                                            <option value="DIETICIAN"> DIETICIAN </option>
+                                            <option value="E.N.T.">E.N.T.</option>
+                                            <option value="GASTROENTEROLOGIST"> GASTROENTEROLOGIST </option>
+                                            <option value="GENERAL PHYSICIAN"> GENERAL PHYSICIAN </option>
+                                            <option value="GENERAL SURGEON"> GENERAL SURGEON </option>
+                                            <option value="GYNOCOLOGIST/OBSTETRICIAN"> GYNOCOLOGIST/OBSTETRICIAN </option>
+                                            <option value="NEPHROLOGIST"> NEPHROLOGIST </option>
+                                            <option value="NEUROLOGIST"> NEUROLOGIST </option>
+                                            <option value="ONCOLOGIST"> ONCOLOGIST </option>
+                                            <option value="OPTHALMOLOGIST"> OPTHALMOLOGIST </option>
+                                            <option value="ORTHOPEDIST"> ORTHOPEDIST </option>
+                                            <option value="PEDIATRICIAN"> PEDIATRICIAN </option>
+                                            <option value="PSYCHIATRIST"> PSYCHIATRIST </option>
+                                            <option value="PULMONOLOGIST"> PULMONOLOGIST </option>
+                                            <option value="RHEUMATOLOGIST"> RHEUMATOLOGIST </option>
+                                            <option value="SEXOLOGIST"> SEXOLOGIST </option>
+                                            <option value="UROLOGIST"> UROLOGIST </option>
+                                            <option value="OTHER"> OTHER </option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-md-12 col-sm-12 col-xs-12" *ngIf="other_specialization">
+                                        <label> Enter Other Specialisation<sup>*</sup> </label>
+                                        <input type="text" class="form-control txtfield" name="" placeholder="Other Specialization" [(ngModel)]="ProfileDetail.other_specialization" [formControl]="stepTwoForm.controls['other_specialization']" />
+                                        <p style="color: #FF0000" *ngIf="!stepTwoForm.controls['other_specialization'].valid">Invalid Entry !!!</p>
+                                    </div>
+                                    <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                                        <label> Medical/State council registration number<sup>*</sup> </label>
+                                        <input type="text" class="form-control txtfield" name="" placeholder="110067" [(ngModel)]="ProfileDetail.registration_no" [formControl]="stepTwoForm.controls['registration_no']" />
+                                        <p style="color: #FF0000" *ngIf="!stepTwoForm.controls['registration_no'].valid  && (stepTwoForm.controls['registration_no'].touched)">Invalid registration number !!!</p>
+                                    </div>
+                                    <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                                        <label> Qualification<sup>*</sup> <small class="text-muted">(Degrees separated by comma) </small></label>
+                                        <tag-input class="selectize-qual" placeholder="Add more" [separatorKeyCodes]="[188]" secondaryPlaceholder="MBBS, MD" theme='bootstrap' [(ngModel)]="ProfileDetail.qualification" [formControl]="stepTwoForm.controls['qualification']"></tag-input>
+                                        <p style="color: #FF0000" *ngIf="!stepTwoForm.controls['qualification'].valid  && (stepTwoForm.controls['qualification'].touched)">Invalid qualification !!!</p>
+                                    </div>
+                                    <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                                        <label> Professional Affiliation<sup>*</sup> <small class="text-muted">(Separated by comma) </small></label>
+                                        <tag-input class="selectize-qual" placeholder="Add more" [separatorKeyCodes]="[188]" secondaryPlaceholder="Retired Head of Dept., AIIMS" theme='bootstrap' [(ngModel)]="ProfileDetail.professional_affiliation" [formControl]="stepTwoForm.controls['professional_affiliation']"></tag-input>
+                                        <p style="color: #FF0000" *ngIf="!stepTwoForm.controls['professional_affiliation'].valid  && (stepTwoForm.controls['professional_affiliation'].touched)">Invalid professional affiliation !!!</p>
+                                    </div>
+                                    <!-- <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                                            <label> Date of Birth<sup>*</sup> </label>
+                                            <input type='text' class="form-control txtfield" id='datetimepicker' placeholder="(YYYY-MM-DD)" pattern="(?:19|20)[0-9]{2}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-9])|(?:(?!02)(?:0[1-9]|1[0-2])-(?:30))|(?:(?:0[13578]|1[02])-31))" [(ngModel)]="ProfileDetail.dob" [formControl]="stepTwoForm.controls['dob']" />
+                                            <p style="color: #FF0000" *ngIf="!stepTwoForm.controls['dob'].valid  && (stepTwoForm.controls['dob'].touched)">Invalid date of birth !!!</p>
+                                        </div> -->
+                                    <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                                        <label> Date of Birth<sup>*</sup> </label>
+                                        <!-- <input matInput class="form-control txtfield" id='datetimepicker' placeholder="DOB" [matDatepicker]="picker" (dateInput)="inputFromDate(ProfileDetail.dob)" [(ngModel)]="ProfileDetail.dob" [formControl]="stepTwoForm.controls['dob']" />
+                                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                            <mat-datepicker #picker></mat-datepicker> -->
+                                        <angular2-date-picker [(ngModel)]="ProfileDetail.dob" [formControl]="stepTwoForm.controls['dob']" [settings]="settings"></angular2-date-picker>
+                                        <p style="color: #FF0000" *ngIf="!stepTwoForm.controls['dob'].valid  && (stepTwoForm.controls['dob'].touched)">Invalid date of birth !!!</p>
+                                    </div>
+                                    <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                                        <label> Practicing Since<sup>*</sup> </label>
+                                        <input type="text" class="form-control txtfield" name="" placeholder="yyyy" pattern="[0-9.]+" maxLength="4" [(ngModel)]="ProfileDetail.practicing_since" [formControl]="stepTwoForm.controls['practicing_since']" />
+                                        <p style="color: #FF0000" *ngIf="!stepTwoForm.controls['practicing_since'].valid  && (stepTwoForm.controls['practicing_since'].touched)">Invalid year !!!</p>
+                                    </div>
+                                    <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                                        <label> Consultation fee
+                                            <!--sup>*</sup-->
+                                        </label>
+                                        <input type="text" class="form-control txtfield" name="" placeholder="500" pattern="[0-9.]+" maxLength="10" value="0" [(ngModel)]="ProfileDetail.consultation_fee" [formControl]="stepTwoForm.controls['consultation_fee']" />
+                                        <p style="color: #FF0000" *ngIf="!stepTwoForm.controls['consultation_fee'].valid  && (stepTwoForm.controls['consultation_fee'].touched)">Invalid fee !!!</p>
+                                    </div>
+                                    <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                                        <!-- <label> Your Expertise<sup>*</sup> (Disease &amp; Conditions) (Multiple Field seperated by coma)  </label> -->
+                                        <label>Specialized treatments available for<sup>*</sup> <small class="text-muted">(Diseases/Conditions seperated by comma)</small></label>
+                                        <tag-input class="selectize-qual" [separatorKeyCodes]="[188]" placeholder="Add more" secondaryPlaceholder="Diabetes, Asthma etc" theme='bootstrap' [(ngModel)]="ProfileDetail.expertise" [formControl]="stepTwoForm.controls['expertise']"></tag-input>
+                                        <p style="color: #FF0000" *ngIf="!stepTwoForm.controls['expertise'].valid  && (stepTwoForm.controls['expertise'].touched)">Invalid expertise(s) !!!</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="col-md-5 col-sm-5 col-xs-12">
+                        <div class="signup-card">
+                            <div class="signup-profile">
+                                <div class="signup-uploadimg">
+                                    <img src="./assets/imgs/profile-placeholder.png" class="img-responsive" *ngIf="!ProfileDetail.selectedImage" />
+                                    <img [src]="ProfileDetail.selectedImage" class="img-responsive" *ngIf="ProfileDetail.selectedImage" />
+                                    <input type="file" (change)="onupload($event)" name="" class="inpt-file" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="signup-card text-center">
+                            <!-- <button class="btn btn-custom" type="submit" [disabled]="!stepTwoForm.valid || !ProfileDetail.selectedImage" (click)="saveStepTwoDetails()"> Save </button> -->
+                            <button class="btn btn-custom" type="submit" [disabled]="!stepTwoForm.valid" (click)="saveStepTwoDetails()"> Save </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="" *ngIf="activatedtab==2">
+        <div class="signup-content-wrapper">
+            <div class="signup-content">
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="signup-card">
+                            <h3 class="signup-contentHead"> SmartClinic Sign-up / {{activatedtabHeading}}</h3>
+                        </div>
+                    </div>
+                    <div class="col-md-7 col-sm-12 col-xs-12" *ngIf="!loading">
+                        <div class="signup-card">
+                            <div class="row">
+                                <form [formGroup]="stepThreeForm" autocomplete="off">
+                                    <div class="option-div">
+                                        <div class="form-group col-md-8 col-sm-8 col-xs-12">
+                                            <h3 class="option-ques"> Do you own the clinic? </h3>
+                                        </div>
+                                        <div class="form-group col-md-4 col-sm-4 col-xs-12"> 
+                                            <ul class="option-form">
+                                                <li value="yes" [ngClass]="formClass1" (click)="yesform()"> Yes </li>
+                                                <li value="no" [ngClass]="formClass2" (click)="noform()"> No </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="yes-form" *ngIf="condition">
+                                        <div class="form-group col-md-12 col-sm-12 col-xs-12 inform-margin">
+                                            <label> Clinic Name <sup>*</sup></label>
+                                            <input class="form-control txtfield" placeholder="Clinic Name" [(ngModel)]="ClinicContactDetail.clinic_name" [formControl]="stepThreeForm.controls['clinic_name']" ngx-google-places-autocomplete [options]="{ types: [(geocode)],componentRestrictions: { country: 'IN' } }" #placesRef="ngx-places" (onAddressChange)="handleAddressChange($event)" />
+                                            <p style="color: #FF0000" *ngIf="!stepThreeForm.controls['clinic_name'].valid  && (stepThreeForm.controls['clinic_name'].touched)">Invalid name !!!</p>
+                                        </div>
+                                        <div class="form-group col-md-12 col-sm-12 col-md-12">
+                                            <h4 class="pull-left"> Clinic Contact Details </h4>
+                                        </div>
+                                        <div class="form-group col-md-6 col-sm-6 col-xs-12">
+                                            <label> State <sup>*</sup></label>
+                                            <select name="state" class="form-control txtfield" [(ngModel)]="state" [formControl]="stepThreeForm.controls['state']" (change)="stateSelected()">
+                                                <option *ngFor="let state of statesList" value="{{state.id}}">{{state.name}}</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group col-md-6 col-sm-6 col-xs-12">
+                                            <label> City<sup>*</sup></label>
+                                            <select name="city" class="form-control txtfield" [(ngModel)]="city" [formControl]="stepThreeForm.controls['city']" (change)="citySelected()">
+                                                <option *ngFor="let city of citiesList" value="{{city.id}}">{{city.name}}</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group col-md-6 col-sm-6 col-xs-12">
+                                            <label> Location/Area <sup>*</sup></label>
+                                            <input class="form-control txtfield" [(ngModel)]="ClinicContactDetail.area" [formControl]="stepThreeForm.controls['area']" [matAutocomplete]="auto" (keyup)="SearchLocation(ClinicContactDetail.area)">
+                                            <mat-autocomplete #auto="matAutocomplete" >
+                                              <mat-option (onSelectionChange)="onAddLocation($event)" *ngFor="let option of ClinicContactDetail.database" [value]="option" >
+                                                {{option}}
+                                              </mat-option>
+                                            </mat-autocomplete>
+                                        </div>
+                                        <div class="form-group col-md-6 col-sm-6 col-xs-12">
+                                            <label> Flat/House/building No<sup>*</sup></label>
+                                            <input type="text" class="form-control txtfield" name="" placeholder="E-286" [(ngModel)]="ClinicContactDetail.address" [formControl]="stepThreeForm.controls['address']" />
+                                            <p style="color: #FF0000" *ngIf="!stepThreeForm.controls['address'].valid  && (stepThreeForm.controls['address'].touched)">Invalid address !!!</p>
+                                        </div>
+                                        <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                                            <label> Clinic Land line number (for appointments) </label>
+                                            <div class="input-group">
+                                                <span class="input-group-field">
+                                                    <input type="text" class="form-control txtfield" name="" placeholder="0121" pattern="[0-9.]+" maxLength="10" [(ngModel)]="ClinicContactDetail.std_code" [formControl]="stepThreeForm.controls['std_code']"/>
+                                                </span>
+                                                <input type="text" class="form-control txtfield" name="" placeholder="22492032" pattern="[0-9.]+" maxLength="10" [(ngModel)]="ClinicContactDetail.landline" [formControl]="stepThreeForm.controls['landline']" />
+                                            </div>
+                                            <p style="color: #FF0000" *ngIf="!stepThreeForm.controls['std_code'].valid  && (stepThreeForm.controls['std_code'].touched)">Invalid Code !!!</p>
+                                            <p style="color: #FF0000" *ngIf="!stepThreeForm.controls['landline'].valid  && (stepThreeForm.controls['landline'].touched)">Invalid number !!!</p>
+                                        </div>
+                                        <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                                            <label> Clinic Mobile number (for appointments) <sup>*</sup></label>
+                                            <div class="input-group fieldDesign">
+                                                <span class="input-group-addon">+91</span>
+                                                <input type="text" class="form-control txtfield" name="" placeholder="8506006693" pattern="[0-9-+.]+" maxLength="10" [(ngModel)]="ClinicContactDetail.mobile" [formControl]="stepThreeForm.controls['mobile']" />
+                                                <p style="color: #FF0000" *ngIf="!stepThreeForm.controls['mobile'].valid  && (stepThreeForm.controls['mobile'].touched)">Invalid mobile number !!!</p>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-md-12 col-sm-12 col-xs-12 map-box">
+                                            <p><small>Drag the marker to exactly locate your clinic</small></p>
+                                            <!-- <input id="pac-input" class="form-control" type="text" placeholder="Search Box"> -->
+                                            <agm-map [zoom]="12" [latitude]="lat" [longitude]="lng">
+                                                <agm-marker [markerDraggable]="true" [markerClickable]="true" (dragEnd)="placeMarker($event)" [latitude]="lat" [longitude]="lng"></agm-marker>
+                                            </agm-map>
+                                            <!-- <agm-map [latitude]="latitude" [longitude]="longitude" [scrollwheel]="false" 
+                                            [zoom]="zoom" style="height: 250px;">
+                                            <agm-marker [latitude]="latitude" [longitude]="longitude"></agm-marker>
+                                            </agm-map> -->
+                                        </div>
+                                        <div class="form-group col-md-12 col-sm-12 col-xs-12">Clinic Id and Doctor Id are automatically generated and can be seen on the profile page after the sign up.</div>
+                                        <!-- <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                                            <label> Clinic id<sup>*</sup> </label>
+                                            <input type="text" class="form-control txtfield" name="" disabled="true" value="{{ClinicContactDetail.clinic_id}}" />
+                                        </div>
+                                        <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                                            <label> Doctor id<sup>*</sup> </label>
+                                            <input type="text" class="form-control txtfield" name="" disabled="true" value="{{ProfileDetail.registration_no}}" />
+                                        </div> -->
+                                    </div>
+                                    <div class="no-form" *ngIf="!condition">
+                                        <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                                            <label>Clinic Id you want to associate with<sup>*</sup> </label>
+                                            <input type="text" class="form-control txtfield" name="" placeholder="Clinic Id" [(ngModel)]="ClinicContactDetail.clinic_id" [ngModelOptions]="{standalone: true}"/>
+                                        </div>
+                                        <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                                            <p>doctmId will be automatically generated and can be seen on your profile page after the sign up.</p>
+                                            <!-- <label> Doctor id<sup>*</sup> </label>
+                                            <input type="text" class="form-control txtfield" name="" disabled="true" value="{{ProfileDetail.registration_no}}" /> -->
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="signup-card text-center">
+                            <button *ngIf="condition" class="btn btn-custom" type="submit" [disabled]="!stepThreeForm.valid" (click)="saveStepThreeDetails()"> Save </button>
+                            <button *ngIf="ClinicContactDetail.userOwnClinic=='No'" class="btn btn-custom" type="submit" [disabled]="!ClinicContactDetail.clinic_id" (click)="saveStepThreeDetails()"> Save </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="" *ngIf="activatedtab==3">
+        <div class="signup-content-wrapper">
+            <div class="signup-content signup-consultSchedul">
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="signup-card">
+                            <div class="row">
+                                <div class="col-lg-9 col-md-9 col-sm-8 col-xs-12">
+                                    <h3 class="signup-contentHead"> SmartClinic Sign-up / {{activatedtabHeading}}</h3>
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12">
+                                    <div class="btn btn-custom pull-right" (click)="preview()">Preview</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <ul class="consult-scheduleul">
+                        <li *ngFor="let schedule of scheduleArray;let i = index;">
+                            <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                                <div class="signup-card schedul-box">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading" role="tab" id="heading">
+                                            <h4 class="panel-title">
+                                                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse{{i+1}}" aria-expanded="true" aria-controls="collapse">
+                                                Schedule #{{i+1}} <span class="trash-schedule"> <i class="fa fa-trash" (click)="deleteSchedule(i)"></i> </span></a>
+                                            </h4>
+                                        </div>
+                                        <div id="collapse{{i+1}}" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading">
+                                            <div class="panel-body">
+                                                <div class="row">
+                                                    <div class="opened-schedule">
+                                                        <div class="day_schedule">
+                                                            <label class="checkbox-inline">
+                                                                <input type="checkbox" (change)="changeDay(schedule.Monday,1,i)" [(ngModel)]="schedule.Monday" [ngModelOptions]="{standalone: true}" value="Monday" name="" /> Monday
+                                                            </label>
+                                                            <label class="checkbox-inline">
+                                                                <input type="checkbox" (change)="changeDay(schedule.Tuesday,2,i)" [(ngModel)]="schedule.Tuesday" [ngModelOptions]="{standalone: true}" name="" value="Tuesday" /> Tuesday
+                                                            </label>
+                                                            <label class="checkbox-inline">
+                                                                <input type="checkbox" (change)="changeDay(schedule.Wednesday,3,i)" [(ngModel)]="schedule.Wednesday" [ngModelOptions]="{standalone: true}" name="" value="Wednesday" /> Wednesday
+                                                            </label>
+                                                            <label class="checkbox-inline">
+                                                                <input type="checkbox" (change)="changeDay(schedule.Thursday,4,i)" [(ngModel)]="schedule.Thursday" [ngModelOptions]="{standalone: true}" name="" value="Thursday" /> Thursday
+                                                            </label>
+                                                            <label class="checkbox-inline">
+                                                                <input type="checkbox" (change)="changeDay(schedule.Friday,5,i)" [(ngModel)]="schedule.Friday" [ngModelOptions]="{standalone: true}" name="" value="Friday" /> Friday
+                                                            </label>
+                                                            <label class="checkbox-inline">
+                                                                <input type="checkbox" (change)="changeDay(schedule.Saturday,6,i)" [(ngModel)]="schedule.Saturday" [ngModelOptions]="{standalone: true}" name="" value="Saturday" /> Saturday
+                                                            </label>
+                                                            <label class="checkbox-inline">
+                                                                <input type="checkbox" (change)="changeDay(schedule.Sunday,7,i)" [(ngModel)]="schedule.Sunday" [ngModelOptions]="{standalone: true}" name="" value="Sunday" /> Sunday
+                                                            </label>
+                                                        </div>
+                                                        <ul class="shift-schedule">
+                                                            <li *ngFor="let shift of schedule.shifts;let j = index">
+                                                                <h5 class="text-uppercase"> Shift-{{j+1}} </h5>
+                                                                <div class="table-schedule">
+                                                                    <div class="tablecell-schedule">
+                                                                        <label> From <small class="text-muted">(HH : MM)</small></label>
+                                                                        <ngb-timepicker [hourStep]="hourStep" [minuteStep]="minuteStep" [(ngModel)]="schedule.shifts[j].fromTime"></ngb-timepicker>
+                                                                    </div>
+                                                                    <div class="tablecell-schedule">
+                                                                        <label> Untill <small class="text-muted">(HH : MM)</small></label>
+                                                                        <ngb-timepicker [hourStep]="hourStep" [minuteStep]="minuteStep" [(ngModel)]="schedule.shifts[j].toTime"></ngb-timepicker>
+                                                                    </div>
+                                                                    <div class="tablecell-schedule">
+                                                                        <a href="javascript:void(0);" class="shift-trash ok-btn-prnt m-b-5"> <span class="trash-schedule"><i class="fa fa-trash" (click)="deleteShiftFromArray(i,j)"></i> </span></a>
+                                                                    </div>
+                                                                </div>
+                                                            </li>
+                                                            <li *ngIf="schedule.shifts.length<6 && schedule.show_new_shift==true">
+                                                                <h5 class="text-uppercase"> New Shift </h5>
+                                                                <div class="table-schedule">
+                                                                    <div class="tablecell-schedule">
+                                                                        <label> From <small class="text-muted">(HH : MM)</small></label>
+                                                                        <ngb-timepicker [hourStep]="hourStep" [minuteStep]="minuteStep" [(ngModel)]="schedule.fromTime"></ngb-timepicker>
+                                                                    </div>
+                                                                    <div class="tablecell-schedule">
+                                                                        <label> Untill <small class="text-muted">(HH : MM)</small></label>
+                                                                        <ngb-timepicker [hourStep]="hourStep" [minuteStep]="minuteStep" [(ngModel)]="schedule.toTime"></ngb-timepicker>
+                                                                    </div>
+                                                                    <div class="tablecell-schedule">
+                                                                        <a href="javascript:void(0);" class="shift-trash ok-btn-prnt m-b-5">
+                                                                            <!-- <i class="fa fa-cloud-upload" (click)="addShiftInArray(i)"></i>
+                                                                         -->
+                                                                            <!-- <span class="ok-btn" (click)="addShiftInArray(i)"></span> -->
+                                                                            <img src="./assets/imgs/submit.png" (click)="addShiftInArray(i)"  />
+                                                                        </a>
+                                                                        <a href="javascript:void(0);" class="shift-trash  ok-btn-prnt m-b-5" *ngIf="schedule.shifts.length>0"> <i class="fa fa-trash" (click)="hideNewShiftSchedule(i)"></i> </a>
+                                                                    </div>
+                                                                </div>
+                                                            </li>
+                                                        </ul>
+                                                        <div *ngIf="schedule.shifts.length<6" class="opened-heading" (click)="addShiftInArray(i)">
+                                                            <h5 class="text-center"> Add More Shift <a href="javascript:void(0);" class="shift-add"> <i class="fa fa-plus-circle"></i> </a> </h5>
+                                                        </div>
+                                                        <!-- <div class="opened-heading" *ngIf="schedule.shifts.length==6" (click)="addShiftInArray(i)">
+                                                            <h5 class="text-center"> Save </h5>
+                                                        </div> -->
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li *ngIf="show_new_schedule==true">
+                            <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                                <div class="signup-card schedul-box">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading" role="tab" id="heading2">
+                                            <h4 class="panel-title">
+                                                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseStatic" aria-expanded="true" aria-controls="collapseStatic">
+                                                New Schedule <span class="trash-schedule" *ngIf="scheduleArray.length>0"> <i class="fa fa-trash" (click)="hideNewSchedule()"></i> </span></a>
+                                            </h4>
+                                        </div>
+                                        <div id="collapseStatic" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading2">
+                                            <div class="panel-body">
+                                                <div class="row">
+                                                    <div class="opened-schedule">
+                                                        <div class="day_schedule">
+                                                            <label class="checkbox-inline">
+                                                                <input type="checkbox" disabled="{{mondayDisabled}}" [(ngModel)]="myObject.Monday" [ngModelOptions]="{standalone: true}" value="Monday" name="" /> Monday
+                                                            </label>
+                                                            <label class="checkbox-inline">
+                                                                <input type="checkbox" disabled="{{tuesdayDisabled}}" [(ngModel)]="myObject.Tuesday" [ngModelOptions]="{standalone: true}" name="" value="Tuesday" /> Tuesday
+                                                            </label>
+                                                            <label class="checkbox-inline">
+                                                                <input type="checkbox" disabled="{{wednesdayDisabled}}" [(ngModel)]="myObject.Wednesday" [ngModelOptions]="{standalone: true}" name="" value="Wednesday" /> Wednesday
+                                                            </label>
+                                                            <label class="checkbox-inline">
+                                                                <input type="checkbox" disabled="{{thursdayDisabled}}" [(ngModel)]="myObject.Thursday" [ngModelOptions]="{standalone: true}" name="" value="Thursday" /> Thursday
+                                                            </label>
+                                                            <label class="checkbox-inline">
+                                                                <input type="checkbox" disabled="{{fridayDisabled}}" [(ngModel)]="myObject.Friday" [ngModelOptions]="{standalone: true}" name="" value="Friday" /> Friday
+                                                            </label>
+                                                            <label class="checkbox-inline">
+                                                                <input type="checkbox" disabled="{{saturdayDisabled}}" [(ngModel)]="myObject.Saturday" [ngModelOptions]="{standalone: true}" name="" value="Saturday" /> Saturday
+                                                            </label>
+                                                            <label class="checkbox-inline">
+                                                                <input type="checkbox" disabled="{{sundayDisabled}}" [(ngModel)]="myObject.Sunday" [ngModelOptions]="{standalone: true}" name="" value="Sunday" /> Sunday
+                                                            </label>
+                                                        </div>
+                                                        <ul class="shift-schedule">
+                                                            <li *ngFor="let shift of myObject.shifts;let j = index">
+                                                                <h5 class="text-uppercase"> Shift-{{j+1}} </h5>
+                                                                <div class="table-schedule">
+                                                                    <div class="tablecell-schedule">
+                                                                        <label> From <small class="text-muted">(HH : MM)</small></label>
+                                                                        <ngb-timepicker [hourStep]="hourStep" [minuteStep]="minuteStep" [(ngModel)]="myObject.shifts[j].fromTime"></ngb-timepicker>
+                                                                    </div>
+                                                                    <div class="tablecell-schedule">
+                                                                        <label> Untill <small class="text-muted">(HH : MM)</small></label>
+                                                                        <ngb-timepicker [hourStep]="hourStep" [minuteStep]="minuteStep" [(ngModel)]="myObject.shifts[j].toTime"></ngb-timepicker>
+                                                                    </div>
+                                                                    <div class="tablecell-schedule">
+                                                                        <a href="javascript:void(0);" class="shift-trash"> <i class="fa fa-trash" (click)="deleteShift(j)"></i> </a>
+                                                                    </div>
+                                                                </div>
+                                                            </li>
+                                                            <li *ngIf="myObject.shifts.length<6 && show_new_shift==true">
+                                                                <h5 class="text-uppercase"> New Shift </h5>
+                                                                <div class="table-schedule">
+                                                                    <div class="tablecell-schedule">
+                                                                        <label> From <small class="text-muted">(HH : MM)</small></label>
+                                                                        <ngb-timepicker [hourStep]="hourStep" [minuteStep]="minuteStep" [(ngModel)]="myObject.fromTime"></ngb-timepicker>
+                                                                    </div>
+                                                                    <div class="tablecell-schedule">
+                                                                        <label> Untill <small class="text-muted">(HH : MM)</small></label>
+                                                                        <ngb-timepicker [hourStep]="hourStep" [minuteStep]="minuteStep" [(ngModel)]="myObject.toTime"></ngb-timepicker>
+                                                                    </div>
+                                                                    <div class="tablecell-schedule">
+                                                                        <a href="javascript:void(0);" class="shift-trash ok-btn-prnt m-b-5"><!--  <i class="fa fa-cloud-upload" (click)="addShift('not_show')"></i> 
+                                                                        --> <!-- <span class="ok-btn" (click)="addShift('not_show')"></span> -->
+                                                                        <img src="./assets/imgs/submit.png" (click)="addShift('not_show')"/>
+                                                                        </a>
+                                                                        <a href="javascript:void(0);" class="shift-trash" *ngIf="myObject.shifts.length>0"> <i class="fa fa-trash" (click)="hideNewShift()"></i> </a>
+                                                                    </div>
+                                                                </div>
+                                                            </li>
+                                                        </ul>
+                                                        <div *ngIf="myObject.shifts.length<6" class="opened-heading" (click)="addShift('show')">
+                                                            <h5 class="text-center"> Add More Shift <a href="javascript:void(0);" class="shift-add"> <i class="fa fa-plus-circle"></i> </a> </h5>
+                                                        </div>
+                                                        <!-- <div class="opened-heading" *ngIf="myObject.shifts.length==6" (click)="addShift('not_show')">
+                                                            <h5 class="text-center"> Save </h5>
+                                                        </div> -->
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <!-- <li>
+                            <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                                <div class="signup-card schedul-box">
+                                    
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading" role="tab" id="heading3">
+                                            <h4 class="panel-title">
+                                                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse3" aria-expanded="true" aria-controls="collapse3">
+                                                Schedule #3 <span class="trash-schedule"> <i class="fa fa-trash"></i> </span></a>
+                                            </h4>
+                                        </div>
+                                        <div id="collapse3" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading3">
+                                            <div class="panel-body">                                                
+                                                <div class="row">
+                                                    <div class="opened-schedule">
+                                                        
+                                                        <div class="day_schedule">
+                                                            <label class="checkbox-inline">
+                                                                <input type="checkbox" value="monday" name="" /> Monday
+                                                            </label>
+                                                            <label class="checkbox-inline">
+                                                                <input type="checkbox" name="" value="tuesday" /> Tuesday
+                                                            </label>
+                                                            <label class="checkbox-inline">
+                                                                <input type="checkbox" name="" value="wednesday" /> Wednesday
+                                                            </label>
+                                                            <label class="checkbox-inline">
+                                                                <input type="checkbox" name="" value="thursday" /> Thursday
+                                                            </label>
+                                                            <label class="checkbox-inline">
+                                                                <input type="checkbox" name="" value="friday" /> Friday
+                                                            </label>
+                                                            <label class="checkbox-inline">
+                                                                <input type="checkbox" name="" value="saturday" /> Saturday
+                                                            </label>
+                                                            <label class="checkbox-inline">
+                                                                <input type="checkbox" name="" value="sunday" /> Sunday
+                                                            </label>
+                                                        </div>
+
+                                                        <ul class="shift-schedule">
+                                                            <li>
+                                                                <h5 class="text-uppercase"> Shift-1 </h5>
+                                                                <div class="table-schedule">
+                                                                    <div class="tablecell-schedule">
+                                                                        <label> From </label>
+                                                                        <input type="text" class="timepicker1 form-control txtfield" name="" />
+                                                                    </div>
+                                                                    <div class="tablecell-schedule">
+                                                                        <label> Untill </label>
+                                                                        <input type="text" class="timepicker1 form-control txtfield" name="" />
+                                                                    </div>
+                                                                    <div class="tablecell-schedule">
+                                                                        <a href="javascript:void(0);" class="shift-trash"> <i class="fa fa-trash"></i> </a>
+                                                                    </div>
+                                                                    
+                                                                </div>
+                                                            </li>
+                                                            <li>
+                                                                <h5 class="text-uppercase"> Shift-2 </h5>
+                                                                <div class="table-schedule">
+                                                                    <div class="tablecell-schedule">
+                                                                        <label> From </label>
+                                                                        <input type="text" class="timepicker1 form-control txtfield" name="" />
+                                                                    </div>
+                                                                    <div class="tablecell-schedule">
+                                                                        <label> Untill </label>
+                                                                        <input type="text" class="timepicker1 form-control txtfield" name="" />
+                                                                    </div>
+                                                                    <div class="tablecell-schedule">
+                                                                        <a href="javascript:void(0);" class="shift-trash"> <i class="fa fa-trash"></i> </a>
+                                                                    </div>
+                                                                    
+                                                                </div>
+                                                            </li>
+                                                            <li>
+                                                                <h5 class="text-uppercase"> Shift-3 </h5>
+                                                                <div class="table-schedule">
+                                                                    <div class="tablecell-schedule">
+                                                                        <label> From </label>
+                                                                        <input type="text" class="timepicker1 form-control txtfield" name="" />
+                                                                    </div>
+                                                                    <div class="tablecell-schedule">
+                                                                        <label> Untill </label>
+                                                                        <input type="text" class="timepicker1 form-control txtfield" name="" />
+                                                                    </div>
+                                                                    <div class="tablecell-schedule">
+                                                                        <a href="javascript:void(0);" class="shift-trash"> <i class="fa fa-trash"></i> </a>
+                                                                    </div>
+                                                                    
+                                                                </div>
+                                                            </li>
+                                                        </ul>
+                                                        <div class="opened-heading">
+                                                            <h5 class="text-center"> Add More Shift <a href="javascript:void(0);" class="shift-add"> <i class="fa fa-plus-circle"></i> </a> </h5>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+
+                                </div>
+
+                            </div>
+                        </li> -->
+                        <li>
+                            <div class="addschedul-box">
+                                <div class="signup-card schedul-box">
+                                    <div class="addschedul-div" (click)="addAnotherSchedule()">
+                                        <i class="fa fa-plus-circle"></i> Add Another Schedule
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="signup-card text-center">
+                            <button class="btn btn-custom" type="submit" (click)="saveConsultationSchedule()"> Save </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="" *ngIf="activatedtab==4">
+        <div class="signup-content-wrapper">
+            <div class="signup-content">
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="signup-card">
+                            <h3 class="signup-contentHead"> SmartClinic Sign-up / {{activatedtabHeading}}</h3>
+                        </div>
+                    </div>
+                    <div class="smartasst-box">
+                        <form [formGroup]="stepFourForm" autocomplete="off">
+                            <div class="col-md-5 col-sm-12 col-xs-12">
+                                <div class="signup-card signup-smartasst">
+                                    <h3 class="text-center m-b-30">SmartAssistant</h3>
+                                    <p>You need to add a Smart assistant to your clinic for giving appointments to patients and doing registration of patients coming to the clinic.</p>
+                                    <p>You can add your SmartAssistant by creating his login user id and password here.</p>
+                                </div>
+                            </div>
+                            <div class="col-md-7 col-sm-12 col-xs-12">
+                                <div class="signup-card newform-margin">
+                                    <div class="wrapper-div-cstm">
+                                        <h4> 1. Define SmartAssistant Login Credentials </h4>
+                                        <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                                            <div class="fieldDesign">
+                                                <input id="field8" type="text" class="form-control txtfield" name="" pattern="[a-zA-z ]+" required="" [(ngModel)]="SmartAssistantDetail.name" [formControl]="stepFourForm.controls['name']" />
+                                                <label for="field8" class="labelFloat">Assistant Name</label>
+                                                <p style="color: #FF0000" *ngIf="!stepFourForm.controls['name'].valid  && (stepFourForm.controls['name'].touched)">Invalid name !!!</p>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                                            <div class="input-group fieldDesign">
+                                                <span class="input-group-addon">+ 91</span>
+                                                <input id="field9" type="text" class="form-control txtfield" name="" required="" pattern="[0-9.]+" maxLength="10" [(ngModel)]="SmartAssistantDetail.phone" [formControl]="stepFourForm.controls['phone']" (blur)="GetSmartAssistantByPhone(SmartAssistantDetail.phone)"/>
+                                                <label for="field9" class="labelFloat"> Assistant Mobile Number<sup>*</sup> </label>
+                                                <p style="color: #FF0000" *ngIf="!stepFourForm.controls['phone'].valid  && (stepFourForm.controls['phone'].touched)">Invalid mobile number !!!</p>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-md-12 col-sm-12 col-xs-12" [hidden]="!smartAssistantDiv"> 
+                                            <div class="fieldDesign">
+                                                <input id="field10" type="text" class="form-control txtfield" name="" required="" [(ngModel)]="SmartAssistantDetail.unique_id" [formControl]="stepFourForm.controls['unique_id']"/>
+                                                <label for="field10" class="labelFloat"> Assistant User ID (Email format)<sup>*</sup></label>
+                                                <p style="color: #FF0000" *ngIf="!stepFourForm.controls['unique_id'].valid  && (stepFourForm.controls['unique_id'].touched)">Invalid email id !!!</p>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-md-12 col-sm-12 col-xs-12" [hidden]="!smartAssistantDiv">
+                                            <div class="fieldDesign">
+                                                <input id="field11" type="password" class="form-control txtfield" name="" required="" [(ngModel)]="SmartAssistantDetail.password" [formControl]="stepFourForm.controls['password']" (input)="checkPassword1(SmartAssistantDetail.password)"/>
+                                                <label for="field11" class="labelFloat">Create password<sup>*</sup></label>
+                                                <p style="color: #FF0000" *ngIf="!stepFourForm.controls['password'].valid  && (stepFourForm.controls['password'].touched)">Password can be of 8 to 15 characters !!!</p>
+                                                <div class="instruction-ul">
+                                                    <ul>
+                                                        <li [ngClass]="(lowerCase1==true) ? 'passed': ''">One lowercase character</li>
+                                                        <li [ngClass]="(specialCase1==true) ? 'passed': ''">One special character</li>
+                                                        <li [ngClass]="(upperCase1==true) ? 'passed': ''">One uppercase character</li>
+                                                        <li [ngClass]="(lengthCase1==true) ? 'passed': ''">8 characters minimum</li>
+                                                        <li [ngClass]="(numberCase1==true) ? 'passed': ''">One number</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-md-12 col-sm-12 col-xs-12" [hidden]="!smartAssistantDiv">
+                                            <div class="fieldDesign">
+                                                <input id="field12" type="password" class="form-control txtfield" name="" required="" (keyup)="onKey1($event)" [(ngModel)]="SmartAssistantDetail.confirm_password" [formControl]="stepFourForm.controls['confirm_password']"/>
+                                                <label for="field12" class="labelFloat">Confirm password<sup>*</sup></label>
+                                                <p style="color: #FF0000" *ngIf="p_false1">Password and confirm password are not same !!!</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="wrapper-div-cstm">
+                                        <h4>2. Define SmartAssistant module Parameters</h4>
+                                        <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                                            <label> Select average consultation time per patient</label>
+                                            <select class="form-control txtfield" [(ngModel)]='SmartAssistantDetail.avgConsTime' [formControl]="stepFourForm.controls['avgConsTime']" >
+                                                <option selected disabled="" selected=""> Average consultation time per patient </option>
+                                                <option value="5 mins"> 5 mins </option>
+                                                <option value="6 mins"> 6 mins </option>
+                                                <option value="8 mins"> 8 mins </option>
+                                                <option value="10 mins"> 10 mins </option>
+                                                <option value="12 mins"> 12 mins </option>
+                                                <option value="15 mins"> 15 mins </option>
+                                                <option value="20 mins"> 20 mins </option>
+                                                <option value="Auto"> Auto </option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                                            <label> Select waiting time for a given Appointment</label>
+                                            <select class="form-control txtfield" [(ngModel)]='SmartAssistantDetail.waitingTime' [formControl]="stepFourForm.controls['waitingTime']" >
+                                                <option selected disabled="" selected=""> Waiting time for a given Appointment </option>
+                                                <option value="10 mins"> 10 mins </option>
+                                                <option value="15 mins"> 15 mins </option>
+                                                <option value="30 mins"> 30 mins </option>
+                                                <option value="45 mins"> 45 mins </option>
+                                                <option value="60 mins"> 60 mins </option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="wrapper-div-cstm">
+                                        <div class="col-md-12 col-sm-12 col-xs-12">
+                                            <h4>3. Define patient registration form fields</h4>
+                                            <div class="pat-reg-form">
+                                                <label class="checkbox-inline" *ngFor="let pt of smartAssistantRegFields">
+                                                    <input type="checkbox" [disabled]="pt.disable" [checked]="pt.status" (change)="changeSmartAssistantRegFields(pt)" name="" /> {{pt.name}}<span *ngIf="pt.star">*</span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="signup-card smartasstFooter">
+                            <a (click)="saveStepFourDetails(0)" class="btn btn-outline" type="button">
+                                Skip
+                                <div class="outlinebtn_text"> <small> You can add later </small> </div>
+                            </a>
+                            <button class="btn btn-custom" type="submit" [disabled]="(!stepFourForm.valid) || (p_false1)" (click)="saveStepFourDetails(1)"> Save </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="" *ngIf="activatedtab==5">
+        <div class="signup-content-wrapper">
+            <div class="signup-content signup-clinicServc">
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="signup-card">
+                            <h3 class="signup-contentHead"> SmartClinic Sign-up / {{activatedtabHeading}}</h3>
+                        </div>
+                    </div>
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="signup-card">
+                            <h4> Check the services available in your clinic </h4>
+                            <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                                <div class="checkbox m-0">
+                                    <label>
+                                        <input type="checkbox" name="" [(ngModel)]="Clinic_Pharmacy" [ngModelOptions]="{standalone: true}" /> Pharmacy </label>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                                <div class="checkbox m-0">
+                                    <label>
+                                        <input type="checkbox" class="clincdiag" name="" [(ngModel)]="Clinic_Diagnostics" [ngModelOptions]="{standalone: true}" /> Diagnostics </label>
+                                </div>
+                                <ul class="sub_checkboxul hideme" *ngIf="Clinic_Diagnostics">
+                                    <li *ngFor="let option of clinicDiagnosticsList; let i = index;">
+                                        <label class="checkbox-inline">
+                                            <input type="checkbox" (change)="push(option.name,i)" name="" [checked]="option.status" /> {{option.name}} </label>
+                                    </li>
+                                    <li>
+                                        <label class="checkbox-inline">
+                                            <input type="checkbox" value="other" name="" (change)="push(1,-1)" [(ngModel)]="otherSelected" [ngModelOptions]="{standalone: true}" /> Others
+                                            <!-- <input *ngIf="otherSelected" type="text" class="otherfield hideme" placeholder="Other" name="" [(ngModel)]="OtherClinicService" [ngModelOptions]="{standalone: true}" />  -->
+                                            <tag-input *ngIf="otherSelected" class="otherfield hideme" placeholder="Other (comma separated)" [separatorKeyCodes]="[188]" secondaryPlaceholder="Other (comma separated)" theme='bootstrap' [(ngModel)]="OtherClinicService" [ngModelOptions]="{standalone: true}"></tag-input>
+                                        </label>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                                <div class="checkbox m-0">
+                                    <label>
+                                        <input type="checkbox" name="" class="ipd" [(ngModel)]="Clinic_IPD" [ngModelOptions]="{standalone: true}" /> IPD </label>
+                                </div>
+                            </div>
+                            <div class="row" *ngIf="Clinic_IPD && ClinicContactDetail.userOwnClinic == 'Yes'">
+                                <div class="signup-clinicBeds hideme">
+                                    <div class="col-lg-12 m-b-10">
+                                        <small class="pull-left"> (Write numbers of bed available) </small>
+                                    </div>
+                                    <form [formGroup]="addBeds" >
+                                        <div class="col-md-2 col-sm-3 col-xs-4">
+                                            <label> General Beds </label>
+                                            <input type="number" name="" min="0" max="100" [(ngModel)]="general_beds" class="form-control txtfield" required="" pattern="[0-9.]+" maxLength="3"  [formControl]="addBeds.controls['generalBeds']" />
+                                            <p style="color: #FF0000" *ngIf="!addBeds.controls['generalBeds'].valid  && ( addBeds.controls['generalBeds'].touched)">Invalid Bed !!!</p>
+                                        </div>
+                                        <div class="col-md-2 col-sm-3 col-xs-4">
+                                            <label> Semi-Private Beds </label>
+                                            <input type="number" name="" min="0" max="100" [(ngModel)]="semi_private_beds"  class="form-control txtfield" pattern="[0-9.]+" maxLength="3" [formControl]="addBeds.controls['semiPrivateBeds']"/>
+                                            <p style="color: #FF0000" *ngIf="!addBeds.controls['semiPrivateBeds'].valid  && ( addBeds.controls['semiPrivateBeds'].touched)">Invalid Bed !!!</p>
+                                        </div>
+                                        <div class="col-md-2 col-sm-3 col-xs-4">
+                                            <label> Private Beds </label>
+                                            <input type="number" name="" min="0" max="100" [(ngModel)]="private_beds" class="form-control txtfield" pattern="[0-9.]+" maxLength="3" [formControl]="addBeds.controls['privateBeds']"/>
+                                            <p style="color: #FF0000" *ngIf="!addBeds.controls['privateBeds'].valid  && ( addBeds.controls['privateBeds'].touched)">Invalid Bed !!!</p>
+                                        </div>
+                                        <div class="col-md-2 col-sm-3 col-xs-4">
+                                            <label> Total Beds </label>
+                                            <input type="number" disabled="" name="" min="0" value="{{general_beds+semi_private_beds+private_beds}}" class="form-control txtfield" />
+                                        </div>
+                                </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="signup-card smartasstFooter">
+                            <a (click)="saveStepFiveDetails(0)" class="btn btn-outline" type="button">
+                                Skip
+                                <div class="outlinebtn_text"> <small> You can add later </small> </div>
+                            </a>
+                            <button class="btn btn-custom" type="submit" [disabled]="!Clinic_Diagnostics && !Clinic_Pharmacy && !Clinic_IPD || !addBeds.valid" (click)="saveStepFiveDetails(1)"> Save </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="" *ngIf="activatedtab==6">
+        <div class="signup-content-wrapper">
+            <div class="signup-content signup-clinicServc">
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="signup-card">
+                            <h3 class="signup-contentHead"> SmartClinic Sign-up / {{activatedtabHeading}}</h3>
+                        </div>
+                    </div>
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="signup-card">
+                            <p class="help-note small"> Please Upload documents in *.jpg, *.pdf format only. </p>
+                            <div class="wrapper-div-cstm">
+                                <h4><span class="color-blue">1.</span> Photo ID<sup>*</sup> <small>(Select any one)</small> </h4>
+                                <div class="row">
+                                    <ul class="upload-ul">
+                                        <li *ngFor="let photoId of photoIDDocumentsList;let i = index">
+                                            <label> {{photoId.name}} </label>
+                                            <div class="input-group">
+                                                <span class="input-group-addon">
+                                                    <input type="radio" name="photo" [checked]="photoId.status" (click)="enablePhotoId(i)"/>
+                                                </span>
+                                                <input type="text" class="form-control txtfield" [(ngModel)]="photoId.document_name" [ngModelOptions]="{standalone: true}" [disabled]="!photoId.status" placeholder="{{photoId.placeholder}}" />
+                                                <span class="input-group-btn" (change)="onuploadPhotoId($event,i)">
+                                                    <input type="file" accept=".jpg,.jpeg,.pdf" class="inpt-file" [disabled]="!photoId.status"/>
+                                                    <button *ngIf="!photoId.image" class="btn btn-default" type="button" [disabled]="!photoId.status"> Browse </button>
+                                                    <button *ngIf="photoId.image" class="btn btn-success" type="button"> Uploaded <i class="fa fa-check-circle"></i> </button>
+                                                </span>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="wrapper-div-cstm">
+                                <h4> <span class="color-blue">2.</span> Clinic Documents <sup>*</sup> <small>(Select any one)</small> </h4>
+                                <div class="row">
+                                    <ul class="upload-ul clinicDoc">
+                                        <li *ngFor="let clinicDocumentId of clinicDocumentsList;let i = index">
+                                            <label> {{clinicDocumentId.name}} </label>
+                                            <div class="input-group">
+                                                <span class="input-group-addon">
+                                                    <input type="radio" name="clinic" [checked]="clinicDocumentId.status" (click)="enableClinicDocumentId(i)" />
+                                                </span>
+                                                <span class="input-group-btn" (change)="onuploadClinicDocument($event,i)">
+                                                    <input type="file" accept=".jpg,.jpeg,.pdf" name="" class="inpt-file" [disabled]="!clinicDocumentId.status" />
+                                                    <button *ngIf="!clinicDocumentId.image" class="btn btn-default" type="button" [disabled]="!clinicDocumentId.status"> Browse </button>
+                                                    <button *ngIf="clinicDocumentId.image" class="btn btn-success" type="button"> Uploaded <i class="fa fa-check-circle"></i> </button>
+                                                </span>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="wrapper-div-cstm">
+                                <div class="medicalReg">
+                                    <h4 class="medicalReg-text"> <span class="color-blue">3.</span> Medical registration certificate<sup>*</sup> </h4>
+                                    <span *ngIf="!medical_certificate" class="input-btn btn btn-default" (change)="onuploadMedicalCert($event,i)">
+                                        Browse <input type="file" accept=".jpg,.jpeg,.pdf" class="inpt-file">
+                                    </span>
+                                    <span *ngIf="medical_certificate" class="input-btn btn btn-success" (change)="onuploadMedicalCert($event,i)">
+                                        Uploaded <i class="fa fa-check-circle"></i> <input type="file" accept=".jpg,.jpeg,.pdf" class="inpt-file">
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="signup-card text-center">
+                            <button class="btn btn-custom" type="submit" (click)="saveStepSixDetails()"> Save </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="" *ngIf="activatedtab==7">
+        <div class="signup-content-wrapper">
+            <div class="signup-content">
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="signup-card">
+                            <h3 class="signup-contentHead"> SmartClinic Sign-up / {{activatedtabHeading}}</h3>
+                        </div>
+                    </div>
+                    <div class="smartasst-box">
+                        <form [formGroup]="stepFourForm" autocomplete="off">
+                            <div class="col-md-5 col-sm-12 col-xs-12">
+                                <div class="signup-card signup-smartasst">
+                                    <h3 class="text-center m-b-30">Why Second language?</h3>
+                                    <p>Please select your second preferred lanaguage which best suit to you. This will also help pateints to read their prescription in the second language.</p>
+                                </div>
+                            </div>
+                            <div class="col-md-7 col-sm-12 col-xs-12">
+                                <div class="signup-card newform-margin">
+                                    <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                                        <div class="fieldDesign">
+                                            <select class="form-control txtfield" [(ngModel)]='languageOption' [ngModelOptions]="{standalone: true}">
+                                                <option value="" selected=""> None </option>
+                                                <option value="hi">Hindi</option>
+                                                <option value="pa">Punjabi</option>
+                                                <option value="bn">Bengali</option>
+                                                <option value="gu">Gujarati</option>
+                                                <option value="kn">Kannada</option>
+                                                <option value="ml">Malayalam</option>
+                                                <option value="mr">Marathi</option>
+                                                <option value="ta">Tamil</option>
+                                                <option value="te">Telugu</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="signup-card smartasstFooter">
+                            <button class="btn btn-custom" type="submit" (click)="saveStepSevenDetails()"> Save </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- <div class="" *ngIf="activatedtab==7">
+        <div class="signup-content-wrapper">
+            <div class="signup-content">
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="signup-card">
+                            <h3 class="signup-contentHead"> SmartClinic Sign-up / {{activatedtabHeading}}</h3>
+                        </div>
+                    </div>
+                    <form>
+                        <div class="col-md-7 col-sm-7 col-xs-12">
+                            <div class="signup-card">
+                                <div class="row">
+                                    <div class="form-group col-md-12 col-sm-12 col-xs-12 inform-margin">
+                                        <label> Select your second preferred language</label>
+                                        <select class="form-control txtfield">
+                                            <option selected=""> None </option>
+                                            <option value="Hindi">Hindi</option>
+                                            <option value="Punjabi">Punjabi</option>
+                                            <option value="Bengali">Bengali</option>
+                                            <option value="Gujarati">Gujarati</option>
+                                            <option value="Kannada">Kannada</option>
+                                            <option value="Malayalam">Malayalam</option>
+                                            <option value="Marathi">Marathi</option>
+                                            <option value="Tamil">Tamil</option>
+                                            <option value="Telugu">Telugu</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="signup-card text-center">
+                            <button class="btn btn-custom" type="submit" [disabled]="!stepTwoForm.valid" (click)="saveStepTwoDetails()"> Save </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> -->
+</section>
+<!-- Modal -->
+<div class="modal fade cus-modal" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <h4 class="modal-title"> Contact details verification </h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="contact-modal-body">
+                        <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                            <input type="number" class="form-control txtfield" name="" placeholder="Enter OTP received on Mobile" [(ngModel)]="otpPhone" [ngModelOptions]="{standalone: true}" />
+                        </div>
+                        <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                            <input type="number" class="form-control txtfield" name="" placeholder="Enter OTP received on Email" [(ngModel)]="otpEmail" [ngModelOptions]="{standalone: true}" />
+                        </div>
+                        <div class="form-group text-center col-md-12 col-sm-12 col-xs-12">
+                            <a href="javascript:void(0);" (click)="openOTPModal()" class="resend-link">Resend OTP</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-custom" type="submit" [disabled]="!otpPhone || !otpEmail" (click)="verifyOTP()"> Save </button>
+                <button class="btn btn-custom" type="button" data-dismiss="modal" data-toggle="modal"> Cancel </button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Preview Modal -->
+<div class="modal fade" id="previewModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div>
+                    <h4 class="modal-title"> Preview </h4>
+                </div>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="presc-modal-body">
+                        <div class="pad-view">
+                            <div class="padview-header">
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                    <div class="form-group schdl">
+                                        <h4 class="text-underline"> Schedule: </h4>
+                                        <div class="Week-name" *ngFor="let shift of allShifts">
+                                            <div class="week-name-wrp">
+                                                <span class="week-spn">{{shift.day}}</span>
+                                            </div>
+                                            <div class="week-time-wrap">
+                                                <span class="week-time" *ngFor="let time of shift.shifts">[{{time.fromTime.hour}}:{{time.fromTime.minute}} – {{time.toTime.hour}}:{{time.toTime.minute}}]</span>
+                                            </div>
+                                        </div>
+                                        <div class="Week-name" *ngFor="let shift of allShiftsClosed">
+                                            <div class="week-name-wrp">
+                                                <span class="week-spn">{{shift.day}}</span>
+                                            </div>
+                                            <div class="week-time-wrap">
+                                                Closed
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <p class="text-center">Total number of working hours per week: <strong>{{totalHours}} Hours & {{totalMin}} Minutes</strong></p>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- <div class="modal fade" id="previewModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div>
+                    <h4 class="modal-title"> Preview </h4>
+                </div>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="presc-modal-body">
+                        <div class="pad-view">
+                            <div class="padview-header">
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                    <div class="form-group schdl">
+                                        <h4 class="text-underline"> Schedule: </h4>
+                                        <div class="Week-name" *ngFor="let shift of scheduleArray">
+                                            <div class="week-name-wrp" *ngIf="shift.Monday==true">
+                                                <span class="week-spn">Mon</span>
+                                            </div>
+                                            <div class="week-time-wrap" *ngIf="shift.Monday==true">
+                                                <span class="week-time" *ngFor="let time of shift.shifts">[{{time.fromTime.hour}}:{{time.fromTime.minute}} – {{time.toTime.hour}}:{{time.toTime.minute}}]</span>
+                                            </div>
+                                            <div class="week-name-wrp" *ngIf="shift.Tuesday==true">
+                                                <span class="week-spn">Tue</span>
+                                            </div>
+                                            <div class="week-time-wrap" *ngIf="shift.Tuesday==true">
+                                                <span class="week-time" *ngFor="let time of shift.shifts">[{{time.fromTime.hour}}:{{time.fromTime.minute}} – {{time.toTime.hour}}:{{time.toTime.minute}}]</span>
+                                            </div>
+                                            <div class="week-name-wrp" *ngIf="shift.Wednesday==true">
+                                                <span class="week-spn">Wed</span>
+                                            </div>
+                                            <div class="week-time-wrap" *ngIf="shift.Wednesday==true">
+                                                <span class="week-time" *ngFor="let time of shift.shifts">[{{time.fromTime.hour}}:{{time.fromTime.minute}} – {{time.toTime.hour}}:{{time.toTime.minute}}]</span>
+                                            </div>
+                                            <div class="week-name-wrp" *ngIf="shift.Thrusday==true">
+                                                <span class="week-spn">Thrus</span>
+                                            </div>
+                                            <div class="week-time-wrap" *ngIf="shift.Thrusday==true">
+                                                <span class="week-time" *ngFor="let time of shift.shifts">[{{time.fromTime.hour}}:{{time.fromTime.minute}} – {{time.toTime.hour}}:{{time.toTime.minute}}]</span>
+                                            </div>
+                                            <div class="week-name-wrp" *ngIf="shift.Friday==true">
+                                                <span class="week-spn">Fri</span>
+                                            </div>
+                                            <div class="week-time-wrap" *ngIf="shift.Friday==true">
+                                                <span class="week-time" *ngFor="let time of shift.shifts">[{{time.fromTime.hour}}:{{time.fromTime.minute}} – {{time.toTime.hour}}:{{time.toTime.minute}}]</span>
+                                            </div>
+                                            <div class="week-name-wrp" *ngIf="shift.Saturday==true">
+                                                <span class="week-spn">Sat</span>
+                                            </div>
+                                            <div class="week-time-wrap" *ngIf="shift.Saturday==true">
+                                                <span class="week-time" *ngFor="let time of shift.shifts">[{{time.fromTime.hour}}:{{time.fromTime.minute}} – {{time.toTime.hour}}:{{time.toTime.minute}}]</span>
+                                            </div>
+                                            <div class="week-name-wrp" *ngIf="shift.Sunday==true">
+                                                <span class="week-spn">Sun</span>
+                                            </div>
+                                            <div class="week-time-wrap" *ngIf="shift.Sunday==true">
+                                                <span class="week-time" *ngFor="let time of shift.shifts">[{{time.fromTime.hour}}:{{time.fromTime.minute}} – {{time.toTime.hour}}:{{time.toTime.minute}}]</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <p class="text-center">Total number of working hours per week: <strong>{{totalHours}} Hours & {{totalMin}} Minutes</strong></p>
+            </div>
+        </div>
+    </div> -->

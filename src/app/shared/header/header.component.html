@@ -1,0 +1,1024 @@
+<div class="loader-box" *ngIf="loading">
+	<img src="./assets/imgs/load.gif" />
+</div>
+<header>
+	<div class="srch-prescription">
+		<div class="container">
+			<div class="">
+				<div class="">
+					<label class="">For prescription</label>
+				</div>
+				<!-- <form formGroup="stepOneForm"> -->
+					<div class="">
+						<div class="input-group">
+							<input id="phoneNo" type="text"  autocomplete="new-phoneNo" class="form-control" placeholder="Enter Mobile Number" maxlength="10" minlength="10" pattern="[0-9.]+">
+							<span class="input-group-btn btn-go-hm">
+								<button type="button" class="btn btn-default" (click) = "checkPhone()"> Go </button>
+							</span>
+						</div>
+					</div>
+					<!-- </form> -->
+				</div>
+			</div>
+		</div>
+		<nav class="navbar navbar-default">
+			<div class="container">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand" routerLink="/header-one-layout/homepage"><img src="./assets/imgs/logoDoctm.png"></a>
+				</div>
+				<div class="collapse navbar-collapse" id="myNavbar">
+					<ul class="nav navbar-nav navbar-right">
+						<li><a href="javascript:void(0)" routerLink="/header-one-layout/about-us">About us</a></li>
+						<li class="dropdown cus-dropdown">
+							<a class="dropdown-toggle" data-toggle="dropdown" href="javascript:void(0)">Services
+								<span class="caret"></span></a>
+
+								<ul class="dropdown-menu">
+						<!-- <li class="cus-dropdown">
+							<a class="dropdown-toggle" data-toggle="dropdown" href="javascript:void(0)">SmartClinic <i class="pull-right fa fa-angle-right"></i></a>
+							<ul class="dropdown-menu sub-dropdown">
+								<li><a href="javascript:void(0)">Digital Prescription</a></li>
+								<li><a href="javascript:void(0)">Clinic Analytics</a></li>
+								<li><a href="javascript:void(0)">SMS</a></li>
+								<li><a href="javascript:void(0)">Area of Influence(AoI)</a></li>
+								<li><a href="javascript:void(0)">Clinic Score</a></li>
+								<li><a href="javascript:void(0)">Clinic Reports</a></li>
+								<li><a href="javascript:void(0)">Referrals </a></li>
+								<li><a href="javascript:void(0)">Search records</a></li>
+								<li><a href="javascript:void(0)">Appointments</a></li>
+								<li><a href="javascript:void(0)">Clinic summary</a></li>
+							</ul>
+						</li> -->
+
+						<li><a routerLink="/header-one-layout/smart-clinic-service">SmartClinic</a></li>
+						<li><a routerLink="/header-one-layout/smart-assistant-service">SmartAssistant</a></li>
+						<li><a routerLink="/header-one-layout/smart-pharmacy-service">SmartPharmacy</a></li>
+						<li><a routerLink="/header-one-layout/smart-diagnostics-service">SmartDiagnostics</a></li>
+						<li><a routerLink="/header-one-layout/smart-ipd-service">SmartIPD</a></li>
+					</ul>
+				</li>
+				<li><a routerLink="/header-one-layout/pricing">Pricing</a></li>
+				<li><a routerLink="/header-one-layout/faq">FAQ</a></li>
+				<li><a target="_blank" href="http://promatics.gagzweblab.xyz/Doctm-blog-design/blog.html">Blog</a></li>
+				<li class="dropdown cus-dropdown signin_dropdown" (mouseover)="onHoverSignIn()">
+					<a class="dropdown-toggle btn btn-theme btn-info" data-toggle="dropdown" href="javascript:void(0)">Sign-in
+						<span class="caret"></span></a>
+						<div class="dropdown-menu" id="parent">
+							<ul class="parent-hide">
+								<li><a routerLink="/header-one-layout/smartClinicLogin" (click)="selectClass()">Doctor</a></li>
+								<li><a routerLink="/header-one-layout/smartAssistantLogin" (click)="selectClass()">SmartAssistant</a></li>
+								<li><a routerLink="/header-one-layout/smartPharmacyLogin" (click)="selectClass()">SmartPharmacy</a></li>
+								<li><a routerLink="/header-one-layout/smartDiagnosticsLogin" (click)="selectClass()">SmartDiagnostics</a></li>
+								<li><a routerLink="/header-one-layout/smartIPDLogin" (click)="selectClass()">SmartIPD</a></li>
+							</ul>
+							<div class="for_newuser">
+								<p class="pull-left"> New user?  </p>
+								<div class="inner_newuser">
+									<p> <a href="#myModalConf" data-toggle="modal" data-dismiss="modal" class="btn btn-custom" (click)="selectClass()"> Sign-up </a> </p>
+									<p> (for doctors only) </p>
+								</div>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</nav> 
+</header>
+<!-- Modal -->
+<div class="modal fade cus-modal" id="myModalConf" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">×</span>
+				</button>
+				<h4 class="modal-title mdl-title">Documents Required </h4>
+			</div>
+			<div class="modal-body">
+				<div class="row">
+					<div class="contact-modal-body">
+						<div class="form-group col-md-12 col-sm-12 col-xs-12">
+							<p><b>Please Note: </b>Following documents ( jpg / pdf format ) are required to be uploaded for successful sign-up.</p>
+						</div>
+						<div class="col-lg-5">
+							<p><span class="color-blue">1.</span> <b>Photo ID*</b> <small class="txt-muted">(Any one)</small></p>
+							<ul>
+								<li>PAN Card</li>
+								<li>Driving License</li>
+								<li>Aadhaar Card</li>
+								<li>Passport</li>
+							</ul>
+						</div>
+						<div class="col-lg-7">
+							<p><span class="color-blue">2.</span> <b>Clinic Documents* <small>(Any one)</small></b><small class="txt-muted" style="display:block">(For clinic owners only)</small></p>
+							<ul>
+								<li>Latest clinic electricity bill</li>
+								<li>Undertaking <i class="fa fa-info-circle"></i></li>
+								<li>Latest post paid  mobile or  clinic landline phone bill</li>
+							</ul>
+						</div>
+						<div class="col-lg-12">
+							<p><span class="color-blue">3.</span> <b>Medical registration certificate*</b></p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<div class="col-lg-5 col-lg-offset-1">
+					<button class="btn btn-custom" type="submit" data-dismiss="modal" data-toggle="modal" routerLink="/header-one-layout/signup"> Continue</button>
+				</div>
+				<div class="col-lg-5">
+					<button class="btn btn-custom" type="button" data-dismiss="modal" data-toggle="modal"> Cancel </button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- <script type="text/javascript">
+document.getElementsByClassName("li-child");
+
+</script> -->
+
+<div class="modal fade cus-preview" id="show-list" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal-dialog cstm-width" role="document">
+		<div class="modal-content modal-lg">
+			<div class="modal-header cancel-wrap" style="position: relative;">
+				<div>
+					<h3 class="text-center">Search results</h3>
+					<button type="button" class="close" data-dismiss="modal" style="position: absolute;top:5px; right:10px;">&times;</button>
+				</div>
+			</div>
+			<div class="modal-body">
+				<div class="">
+					<div class="">
+						<div class="cstm-tab">
+							<table class="table tb-1 table-bordered">
+								<thead>
+									<tr class="cstm-tr-2" >
+										<th class="text-center"><b>Sr no</b></th>
+										<th class="text-center"><b>Date</b></th>
+										<!--th class="text-center"><b>Phone Number</b></th-->
+										<th class="text-center"><b>Patient Name</b></th>
+										<th class="text-center"><b></b>Doctor Name</th>
+										<th class="text-center"><b></b>Prescription</th>
+										<th class="text-center"><b></b>Report</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr *ngFor = "let list of patientList; let i = index">
+										<td class="text-center">{{i+1}}</td>
+										<td class="text-center">{{list.createdAt | date: 'dd/MM/yyyy'}}</td>
+										<!--td class="text-center">{{list.registration.pateintPhone}}</td-->
+										<td class="text-center">{{list.registration.pateintName  | uppercase}}</td>
+										<td class="text-center">{{getDocNameList(list.registration.doctor_id) | uppercase}}</td>
+
+										<td class="text-center cusr" (click)="openPrescriptionPreview(list)" *ngIf="checkPrescription(list)">view</td>
+										<td class="text-center cusr" *ngIf="!checkPrescription(list)">NA</td>
+										<td class="text-center cusr" (click)="openReportPreview(list)" *ngIf="checkReports(list)">view</td>
+										<td class="text-center cusr" *ngIf="!checkReports(list)">NA</td>
+									</tr>
+								</tbody>
+							</table>
+						</div> 
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade cus-preview" id="show-otp" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header cancel-wrap">
+				<div>
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+				</div>
+			</div>
+			<div class="modal-body">
+				<div class="row" style="padding: 10px;">
+					<div class="col-lg-3 text-right">
+						<h4><b>Enter OTP</b></h4>
+					</div>
+					<div class="col-lg-6">
+						<!-- <input type="" name="" class="form-control" > -->
+
+						<input id="otpAbcd" type="text" class="form-control txtfield" name="" pattern="[0-9.]+" maxLength="10"  placeholder ="Enter OTP"/>
+					</div>
+					<div>
+						<div class="col-lg-3">
+							<button class="btn-sm btn btn-custom" (click) = "getData()" >Submit</button>
+						</div>
+						<div class="text-center col-lg-12">
+
+							<a href="#" style="margin-top: 10px;display: inline-block;font-weight: bold;">Resend OTP</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade cus-preview" tabindex="-1"  id="uploadedPrescriptionModal" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<div class="col-lg-4">
+					<h4 class="modal-title"> Prescription </h4>
+				</div>
+				<div class="text-center col-lg-4">
+					<button type="button" class="btn-sm btn btn-custom" (click)="createPdf1(uploadedPrescription)"> Print </button>
+				</div>
+				<div class="col-lg-4">
+					<button type="button" class="pull-right btn-sm btn btn-custom btn-outline" data-dismiss="modal" aria-label="Close"> Close </button>
+				</div>
+			</div>
+			<div class="modal-body" *ngIf="uploadedPrescription" id="uploadedPrescriptionModalPDF">
+				<div class="row">
+					<div class="wrap">
+						<div class="presc-modal-body">
+							<div class="reportImg">
+								<img src="http://18.188.229.2/public/prescriptions_uploaded/{{uploadedPrescription}}" class="img-responsive"/>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+<div class="modal fade cus-preview" id="previewModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content show-default">
+			<div class="modal-header">
+				<div>
+					<h4 class="modal-title"> Preview </h4>
+				</div>
+				<div class="text-center">
+					<button type="button" class="btn-sm btn btn-custom" (click)="createPdf()"> Print </button>
+				</div>
+				<div>
+					<button type="button" class="pull-right btn-sm btn btn-custom btn-outline" data-dismiss="modal" aria-label="Close"> Close </button>
+				</div>
+			</div>
+			<div class="modal-body">
+				<div class="row">
+					<div class="presc-modal-body">
+						<div class="pad-view">
+							<div class="padview-header">
+								<div class="pad-view-flx col-lg-4" *ngFor = "let data of doctorData | slice:0:1" >
+									<div class="form-group doctor-name" *ngIf="checkOptionOfPad('Doctor_name')">
+										<h1 id="translated_doctorName"> Dr<span class="notranslate">.</span> {{docName | uppercase}} </h1>
+									</div>
+									<div class="form-group qual">
+										<p class="color-purple">
+											<span *ngIf="checkOptionOfPad('Specialization')">({{docSpecialization}})</span><br>
+											<span *ngIf="checkOptionOfPad('Qualifications')">
+												<span *ngFor="let data of newGlobalArray.qualification;let i = index">
+													{{data.value}} <span *ngIf="i!=newGlobalArray?.qualification?.length-1">,</span>
+												</span>
+											</span>
+										</p>
+										<p *ngIf="checkOptionOfPad('registration_no')"> Registration: <span class="color-purple"> {{newGlobalArray.registration_no}} </span> </p>
+										<p *ngIf="checkOptionOfPad('Professional_affiliation')">
+											<span class="color-purple" *ngFor="let pa of newGlobalArray?.professional_affiliation;let i=index">
+												{{pa.value}}<span *ngIf="i!=newGlobalArray?.professional_affiliation?.length-1">,</span>
+											</span>
+										</p>
+									</div>
+								</div>
+
+								<div class="pad-view-flx col-lg-8">
+									<ul class="clinic-detail">
+										<li class="clinic-name" *ngIf="newDocAllData?.clinic_details">
+											<h1 id="translated_clinicName" > {{newDocAllData.clinic_details.clinic_name}} </h1>
+										</li>
+										<li class="clinic-name" *ngIf="!newDocAllData?.clinic_details">
+											<h1 id="translated_clinicName" >---</h1>
+										</li>
+										<li *ngIf="newDocAllData?.clinic_details">{{newDocAllData.clinic_details.address}}, {{newDocAllData.clinic_details.area}}, {{newDocAllData.clinic_details.city}}, {{newDocAllData.clinic_details.state}}</li>
+										<li *ngIf="!newDocAllData?.clinic_details">-----</li>
+										<li class="li-cstm">
+											<div class="row">
+												<div class="col-lg-12">
+													<h4 class="for-apt" > For appointments </h4>
+													<p *ngIf="newDocAllData?.clinic_details"> Tel: {{newDocAllData?.clinic_details?.std_code}}-{{newDocAllData?.clinic_details?.landline}}</p>
+													<p *ngIf="!newDocAllData?.clinic_details"> Tel: ---</p>
+													<p *ngIf="newDocAllData?.clinic_details"> Mb: +91-{{newDocAllData?.clinic_details?.mobile}} </p>
+													<p *ngIf="!newDocAllData?.clinic_details"> Mb: +91---</p>
+												</div>
+											</div>
+
+										</li>
+									</ul>
+								</div>
+
+							</div>
+							<p class="text-center">
+								<label id="translated_appointmentText"> {{getHeaderText()}} </label>
+							</p>
+							<div class="padview-body">
+								<div class="col-md-2 col-sm-2 col-xs- p-0">
+									<div class="emergency-wrap">
+										<div class="form-group emrgency-consult" *ngIf="dispensedPatient?.type=='Emergency'">
+											<p class="small" id="translated_emergencyText"><i> Emergency Consultation </i> </p>
+										</div>
+										<div class="form-group schdl">
+											<h5 class="color-blue"> Schedule: </h5>
+											<div class="form-group span-txt" *ngFor="let shift of allShifts"> 
+												<span><strong style="display:block; width:110px;"> {{shift.day}}: </strong>
+													<span class="mrgin-r" *ngFor="let time of shift.shifts"> 
+														[
+														<span *ngIf="time?.fromTime?.hour=='0'">{{time?.fromTime?.hour}}0:</span>
+														<span *ngIf="time?.fromTime?.hour!='0'">{{time?.fromTime?.hour}}:</span>
+														<span *ngIf="time?.fromTime?.minute=='0'">{{time?.fromTime?.minute}}0 –</span>
+														<span *ngIf="time.fromTime.minute!='0'">{{time?.fromTime?.minute}} –</span>
+														<span *ngIf="time?.toTime?.hour=='0'">{{time?.toTime?.hour}}0:</span>
+														<span *ngIf="time?.toTime?.hour!='0'">{{time?.toTime?.hour}}:</span>
+														<span *ngIf="time?.toTime?.minute=='0'">{{time?.toTime?.minute}}0</span>
+														<span *ngIf="time?.toTime?.minute!='0'">{{time?.toTime?.minute}}</span>
+														]
+													</span>
+													<br>
+												</span>
+											</div>
+											<div class="form-group" *ngFor="let shift of allShiftsClosed"> 
+												<span><strong> {{shift.day}}: </strong> Closed 
+												</span>
+											</div>
+										</div>
+										<div id="translated_treatmentText" *ngIf="checkOptionOfPad('Available_treatments')">
+											<h5 class="color-blue"> Available Treatments: </h5>
+											<ul style="padding-left:15px!important;">
+												<li *ngFor="let treat of newGlobalArray.expertise">{{treat.value}}</li>
+											</ul>
+										</div>
+										<div *ngIf="newGlobalArray.clinic_services_status=='Yes' && checkOptionOfPad('Available_services')" id="translated_servicesText">
+											<h5 class="color-blue"> Available Services: </h5>
+											<ul style="padding-left:15px!important;">
+												<li *ngIf="newGlobalArray.clinic_services.Clinic_Pharmacy">Pharmacy</li>
+												<li *ngIf="newGlobalArray.clinic_services.Clinic_IPD">IPD</li>
+												<li *ngFor="let cs of newGlobalArray.clinic_services.ClinicServicesDetail"> {{cs}} </li>
+												<li *ngFor="let cs of newGlobalArray.clinic_services.OtherClinicService"> {{cs.value}} </li>
+											</ul>
+										</div>
+									</div>                                   
+								</div>
+								<div class="col-md-10 col-sm-10 col-xs-10 p-0" style="font-size: 10px;">
+									<div class="padview-bodyright">
+										<ul class="padview-body-header">
+											<li>
+												<div class="text-underline"> Prescription ID </div>
+												<div class="strong">{{prescription_id}}</div>
+											</li>
+											<li>
+												<div class="text-underline"> Name </div>
+												<div class="strong"> {{dispensedPatient.pateintName | uppercase}} </div>
+											</li>
+											<li>
+												<div class="text-underline"> Age/Sex </div>
+												<div class="strong"> {{dispensedPatient.age_in_years}} {{dispensedPatient.gender}} </div>
+											</li>
+											<li>
+												<div class="text-underline"> Weight </div>
+												<div class="strong" *ngIf="dispensedPatient.weight"> {{dispensedPatient.weight}} Kg </div>
+											</li>
+											<li>
+												<div class="text-underline"> Height </div>
+												<div class="strong" *ngIf="dispensedPatient.height"> {{dispensedPatient.height}} cm </div>
+											</li>
+											<li>
+												<div class="strong">{{lastDate | date: 'dd/MMM/yyyy'}}</div>
+											</li>
+										</ul>
+										<ul class="padview-patient">
+											<li class="img-patient">
+												<img src="{{pateintPicPath}}{{dispensedPatient.pateintPic}}" class="img-responsive" *ngIf="dispensedPatient.pateintPic"/>
+												<img src="./assets/imgs/no-person.jpg" class="img-responsive" *ngIf="!dispensedPatient.pateintPic"/>
+											</li>
+											<li *ngIf="preConditionComplete==true && finalPreConditions?.length>0">
+												<div class="pat-heading"><span id="translated_PreCondHeading"> Existing health status </span> </div>
+												<ul class="pat-type">
+													<li *ngFor="let data of finalPreConditions"> {{data}} </li>
+												</ul>
+											</li>
+											<li *ngIf="bodyIndicatorComplete==true && bodyIndicatorSelected?.length>0">
+												<div class="pat-heading"><span id="translated_BIHeading"> Body Indicators</span> </div>
+												<ul class="pat-type">
+													<li *ngFor="let data of bodyIndicatorSelected"> {{data}}
+													</li>
+												</ul>
+											</li>
+											<li *ngIf="finalAllergy?.length>0">
+												<div class="pat-heading"><span id="translated_allergyHeading"> Allergy</span> </div>
+												<ul class=" pat-type">
+													<li *ngFor="let data of finalAllergy"> {{data}} </li>
+												</ul>
+											</li>
+										</ul>
+										<div class="middle-body">
+											<div class="">
+												<div class="number-div" *ngIf="findingsSelected?.length>0">
+													<div class="pat-heading"><span id="translated_PTHeading"> Patient's Complaints</span> </div>
+													<ul class="numberol">
+														<li *ngFor="let data of findingsSelected"> {{data.value}} </li>
+													</ul>
+												</div>
+												<div class="number-div" *ngIf="symptomsComplete==true && symptomsSelected?.length>0">
+													<div class="pat-heading"><span id="translated_sympHeading"> Symptoms</span> </div>
+													<ul class="numberol">
+														<li *ngFor="let data of symptomsSelected"> {{data.value}} </li>
+													</ul>
+												</div>
+												<div class="number-div" *ngIf=" diagnosisSelected?.length>0">
+													<div class="pat-heading"><span id="translated_diagnosisHeading"> Diagnosis</span> </div>
+													<ul class="numberol">
+														<li *ngFor="let data of diagnosisSelected">{{data.value}}</li>
+													</ul>
+												</div>
+											</div>
+											<div class="" *ngIf="medicationComplete==true">
+												<div class="padview-medic" id="translated_medication">
+													<div class="pat-heading"><span> Medicines</span> </div>
+													<ol style="padding-left:10px">
+														<li *ngFor="let data of tempMedicationArray">
+															<span *ngIf="data.name=='Tablet' || data.name=='Capsule' || data.name=='Cream' || data.name=='Ointment' || data.name=='Aerosols' || data.name=='Powder' || data.name=='MouthWash'">
+																{{data.short_name}}<b class="notranslate"> {{data.med_name[0].value}} </b>-{{data.frequency}} <span class="notranslate"> X </span> {{data.duration}} days <span *ngIf="data.specialInstruction!=null"> ({{data.specialInstruction}})</span>
+																<span *ngIf="data.med_info"><p class="help-note" *ngIf="data.med_info?.length>0">({{data.med_info[0].value}}<span *ngIf="data.med_info.length>1"> / {{data.med_info[1].value}}</span>)</p>
+															</span>
+														</span>
+														<span *ngIf="data.name=='Syrup' || data.name=='Suspension' || data.name=='Emulsion' || data.name=='Solution'">
+															{{data.short_name}}<b class="notranslate"> {{data.med_name[0].value}} </b>- {{data.dosage}}ml <span class="notranslate"> X </span> {{data.frequency}} <span class="notranslate"> X </span> {{data.duration}} days <span *ngIf="data.specialInstruction!=null"> ({{data.specialInstruction}})</span>
+															<span *ngIf="data.med_info"><p class="help-note" *ngIf="data.med_info?.length>0">({{data.med_info[0].value}}<span *ngIf="data.med_info?.length>1"> / {{data.med_info[1].value}}</span>)</p>
+														</span>
+													</span>
+													<span *ngIf="data.name=='Injection' || data.name=='Gel' || data.name=='Lotion'">
+														{{data.short_name}}<b class="notranslate"> {{data.med_name[0].value}} </b><span *ngIf="data.mode"> ({{data.mode}}) </span> -{{data.frequency}} <span class="notranslate"> X </span> {{data.duration}} days <span *ngIf="data.specialInstruction!=null"> ({{data.specialInstruction}})</span><span *ngIf="data.mode"> ({{data.mode}}) </span>
+														<span *ngIf="data.med_info"><p class="help-note" *ngIf="data.med_info?.length>0">({{data.med_info[0].value}}<span *ngIf="data.med_info?.length>1"> / {{data.med_info[1].value}}</span>)</p>
+													</span>
+												</span>
+												<span *ngIf="data.name=='Drops'">
+													{{data.short_name}}<b class="notranslate"> {{data.med_name[0].value}} </b>-{{data.quantity}} drops <span class="notranslate"> X </span> {{data.frequency}} <span class="notranslate"> X </span> {{data.duration}} days <span *ngIf="data.specialInstruction!=null"> ({{data.specialInstruction}})</span>
+													<span *ngIf="data.med_info"><p class="help-note" *ngIf="data.med_info?.length>0">({{data.med_info[0].value}}<span *ngIf="data.med_info?.length>1"> / {{data.med_info[1].value}}</span>)</p>
+												</span>
+											</span>
+										</li>
+									</ol>
+								</div>
+								<div class="flex-inner five-height vaccination" *ngIf="vaccinationComplete==true" data-target="#vaccinationModal" data-toggle="modal" data-dismiss="modal">
+                                                <div class="heading-wrap">
+                                                    <a class="heading-pad" href="javascript:void(0)" data-toggle="modal" data-dismiss="modal">
+                                                 Vaccination 
+                                                 </a>
+                                                    <span class="heading-delete" (click)="$event.stopPropagation(); deleteAndResetSelectedDiv('Vaccination')"> <i class="fa fa-times"></i> </span>
+                                                </div>
+                                                <ol *ngIf="currentVaccinationComplete == true">
+                                                    <div>Current</div>
+                                                    <li *ngFor="let data of finalCurrentVaccinationArray">{{data}}</li>
+                                                </ol>
+                                                <ol *ngIf="dueVaccinationComplete == true">
+                                                    <!-- <div class="li-blocked">
+                                                        <li *ngIf="finalDueVaccinationArray.length>0">
+                                                            <span><strong>Due </strong>                                    ({{vaccinationDate.toString().substr(4,11)}})
+                                                            </span>
+                                                        </li>
+                                                    </div> -->
+                                                    <!-- <div>Due <span *ngIf="vaccinationDate!=null" style="float:left;font-weight: bold; padding-left:30px; text-align:right; font-size: 12px;"></span>
+                                                    </div> -->
+                                                    <span *ngIf="finalDueVaccinationArray?.length>0"><strong>Due </strong>({{vaccinationDate.toString().substr(4,11)}})
+                                                    </span>
+                                                    <li *ngFor="let data of finalDueVaccinationArray">{{data}}</li>
+                                                </ol>
+                                            </div>
+							</div>
+						</div>
+						<div class="third-body">
+							<div class="number-div" *ngIf="investigationIndicatorComplete==true && investigationArray?.length">
+								<div class="pat-heading"> <span id="translated_invHeading"> Investigation</span> </div>
+								<ol class="numberol pl10">
+									<li *ngFor="let data of investigationArray">
+										<span *ngIf="data.name != 'Mammography' && data.name!= 'Uroflowmetry' && data.name != 'ECG' && data.name != 'EEG' && data.name != 'TMT' && data.name != 'Echo'">
+											<span *ngIf="data.name!='Others'">{{data.name}} - </span><span *ngFor="let value of data.values;let i = index">{{value.value}} 
+												<span *ngIf="i!=data.values?.length-1">\</span>
+											</span>
+										</span>
+										<span *ngIf="data.name == 'Mammography' || data.name== 'Uroflowmetry' || data.name == 'ECG' || data.name == 'EEG' || data.name == 'TMT' || data.name == 'Echo'">
+											<span *ngIf="data.name!='Others'">{{data.name}} - </span> {{data.values}}
+										</span>
+									</li>
+								</ol>
+							</div>
+							<div class="number-div" *ngIf="treatmentComplete==true" id="translated_OTHeading">
+								<div class="pat-heading"> <span> Other Treatments</span> </div>
+								<ul class="numberol">
+									<li *ngFor="let data of treatmentArray;let i =index">
+										<span *ngIf="data.name=='Lifestyle Changes'">
+											{{data.name}} - <span *ngFor="let value of data.lifestyle;let j = index">{{value.value}} <span *ngIf="j!=data.lifestyle?.length-1">\</span></span>
+										</span>
+										<span *ngIf="data.name=='Physiotherapy' || data.name=='Fomentation'">
+											{{data.name}} - {{data.Frequency}} for {{data.Duration}} days <span *ngIf="data.SpecialInstruction!=null"> ({{data.SpecialInstruction}})</span>
+										</span>
+										<span *ngIf="data.name=='Plaster'">
+											<span class="notranslate">{{data.name}}</span> - on <span class="notranslate">{{data.Injury_Area}}</span> of {{data.plaster_type}} for {{data.Duration}} days 
+										</span>
+										<span *ngIf="data.name=='Gargle' || data.name=='Dressing' || data.name=='Bandage' || data.name=='Other'">
+											<span *ngIf="data.name!='Other'">{{data.name}} - </span>{{data.med_name[0].value}} {{data.Frequency}} for {{data.Duration}} days <span *ngIf="data.SpecialInstruction!=null"> ({{data.SpecialInstruction}})</span>
+										</span>
+										<span>
+											{{data.value}}
+										</span>
+									</li>
+								</ul>
+							</div>
+						</div>
+						<div class="note-box">
+							<div class="note-innerbox">
+								<div class="note-innerdiv">
+									<div class="number-div" *ngIf="surgeryComplete==true && surgerySelectedArray?.length>0">
+										<div class="pat-heading"> <span id="translated_surgHeading"> Recommended Surgery</span> </div>
+										<ul class="numberol">
+											<li *ngFor="let data of surgerySelectedArray">{{data.sub_speciality | titlecase}} - {{data.procedure_name[0].value}}</li>
+										</ul>
+									</div>
+									<div class="number-div" *ngIf="refer_status" style="padding:0 30px;">
+										<div class="pat-heading"> <span> Referred To</span> </div>
+										<p> {{referDetail.doctor_name | uppercase}} </p>
+									</div>
+								</div>
+							</div>
+							<div class="" *ngIf="eyePresComplete==true">
+								<div class="pat-heading"> <span id="translated_eyeHeading"> Eye Prescription</span> </div>
+								<div class="table-responsive">
+									<table class="table table-bordered table-striped cstm-table">
+										<thead>
+											<tr>
+												<th> Eye </th>
+												<th> Sphere </th>
+												<th> Cylinder </th>
+												<th> Axis </th>
+												<th> Add </th>
+												<th> PD (mm) </th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td> Right (OD): </td>
+												<td> {{finalRightOD.sphere}} </td>
+												<td> {{finalRightOD.cylinder}} </td>
+												<td> {{finalRightOD.axis}} </td>
+												<td> {{finalRightOD.add}} </td>
+												<td> {{finalRightOD.pd}} </td>
+											</tr>
+											<tr>
+												<td> Left (OS): </td>
+												<td> {{finalLeftOD.sphere}} </td>
+												<td> {{finalLeftOD.cylinder}} </td>
+												<td> {{finalLeftOD.axis}} </td>
+												<td> {{finalLeftOD.add}} </td>
+												<td> {{finalLeftOD.pd}} </td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+						<div class="third-body">
+							<div class="number-div" *ngIf="followDaysComplete == true">
+								<div class="pat-heading"> <span> Follow Up</span></div>
+								<p> Please come again after {{finalfollowUpDays}} days for consultation </p>
+								<p class="small"> On {{followUpDay}} {{followUpMonth}} , {{followUpYear}}</p>
+							</div>
+						</div>
+						<div class="forth-body">
+							<div class="padview-confee" *ngIf="checkOptionOfPad('Consultation_duration')">
+								<div class="cons-time">Consultation Duration: {{minutes}} min {{seconds}} sec </div>
+							</div>
+							<div class="signature" *ngIf="checkOptionOfPad('Signature')">(Signature)</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="padview-footer" *ngIf="checkOptionOfPad('Footer_note')">
+				<div class="col-md-12 col-sm-12 col-xs-12">
+					<div class="padview-powered">
+						<div style="float:left; color:#ccc;">Powered by doctm</div>
+						<div style="float:right; color:#ccc;">For prescription visit www.mydoctm.com </div>
+					</div>
+				</div>
+				<div class="col-md-12 col-sm-4 col-xs-12" id="translated_footer">
+					<div class="legal">
+						<h3>{{getFooterText()}}</h3>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+<div class="modal fade cus-preview" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<div>
+					<h4 class="modal-title"> Preview </h4>
+				</div>
+				<div class="text-center">
+					<button type="button" class="btn-sm btn btn-custom" (click)="createPdf()"> Print </button>
+				</div>
+				<div>
+					<button type="button" class="pull-right btn-sm btn btn-custom btn-outline" data-dismiss="modal" aria-label="Close"> Close </button>
+				</div>
+			</div>
+			<div class="modal-body" id="previewModalPdf">
+				<div class="row">
+					<div class="presc-modal-body">
+						<div class="pad-view">
+							<div class="padview-header">
+								<div class="pad-view-flx col-lg-6" *ngFor = "let data of doctorData | slice:0:1"  style="float:left;width:49%;">
+									<div class="form-group doctor-name" *ngIf="checkOptionOfPad('Doctor_name')">
+										<h1 id="translated_doctorName"> Dr<span class="notranslate">.</span> {{docName}} </h1>
+									</div>
+									<div class="form-group qual">
+										<p class="color-purple">
+											<span *ngIf="checkOptionOfPad('Specialization')">({{docSpecialization}})</span><br>
+											<span *ngIf="checkOptionOfPad('Qualifications')">
+												<span *ngFor="let data of newGlobalArray.qualification;let i = index">
+													{{data.value}} <span *ngIf="i!=newGlobalArray.qualification?.length-1">,</span>
+												</span>
+											</span>
+										</p>
+										<p *ngIf="checkOptionOfPad('registration_no')"> Registration: <span class="color-purple"> {{newGlobalArray.registration_no}} </span> </p>
+										<p *ngIf="checkOptionOfPad('Professional_affiliation')" style="width:200px;word-break: break-all;">
+											<span class="color-purple" *ngFor="let pa of newGlobalArray.professional_affiliation;let i=index">
+												{{pa.value}}<span *ngIf="i!=newGlobalArray.professional_affiliation?.length-1">,</span>
+											</span>
+										</p>
+									</div>
+								</div>
+								<div class="pad-view-flx col-lg-6" style="float:left;width:49%;">
+									<ul class="clinic-detail">
+										<li class="clinic-name" *ngIf="newDocAllData.clinic_details">
+											<h1 id="translated_clinicName" > {{newDocAllData.clinic_details.clinic_name}} </h1>
+										</li>
+										<li class="clinic-name" *ngIf="!newDocAllData.clinic_details">
+											<h1 id="translated_clinicName" >---</h1>
+										</li>
+										<li *ngIf="newDocAllData.clinic_details">{{newDocAllData.clinic_details.address}}, {{newDocAllData.clinic_details.area}}, {{newDocAllData.clinic_details.city}}, {{newDocAllData.clinic_details.state}}</li>
+										<li *ngIf="!newDocAllData.clinic_details">-----</li>
+										<li class="li-cstm">
+											<div class="row">
+												<div class="col-lg-12">
+													<h4 class="for-apt" > For appointments </h4>
+													<p *ngIf="newDocAllData.clinic_details"> Tel: {{newDocAllData.clinic_details.std_code}}-{{newDocAllData.clinic_details.landline}}</p>
+													<p *ngIf="!newDocAllData.clinic_details"> Tel: ---</p>
+													<p *ngIf="newDocAllData.clinic_details"> Mb: +91-{{newDocAllData.clinic_details.mobile}} </p>
+													<p *ngIf="!newDocAllData.clinic_details"> Mb: +91---</p>
+												</div>
+											</div>
+
+										</li>
+									</ul>
+								</div>
+							</div>
+							<p class="text-center">
+								<label id="translated_appointmentText"> {{getHeaderText()}} </label>
+							</p>
+							<div class="padview-body">
+								<div class="col-md-2 col-sm-2 col-xs- p-0">
+									<div class="emergency-wrap">
+										<div class="form-group emrgency-consult" *ngIf="dispensedPatient.type=='Emergency'">
+											<p class="small" id="translated_emergencyText"><i> Emergency Consultation </i> </p>
+										</div>
+										<div class="form-group schdl">
+											<h5 class="color-blue"> Schedule: </h5>
+											<div class="form-group span-txt" *ngFor="let shift of allShifts"> 
+												<span><strong style="display:block; width:110px;"> {{shift.day}}: </strong>
+													<span class="mrgin-r" *ngFor="let time of shift.shifts"> 
+														[
+														<span *ngIf="time.fromTime.hour=='0'">{{time.fromTime.hour}}0:</span>
+														<span *ngIf="time.fromTime.hour!='0'">{{time.fromTime.hour}}:</span>
+														<span *ngIf="time.fromTime.minute=='0'">{{time.fromTime.minute}}0 –</span>
+														<span *ngIf="time.fromTime.minute!='0'">{{time.fromTime.minute}} –</span>
+														<span *ngIf="time.toTime.hour=='0'">{{time.toTime.hour}}0:</span>
+														<span *ngIf="time.toTime.hour!='0'">{{time.toTime.hour}}:</span>
+														<span *ngIf="time.toTime.minute=='0'">{{time.toTime.minute}}0</span>
+														<span *ngIf="time.toTime.minute!='0'">{{time.toTime.minute}}</span>
+														]
+													</span>
+													<br>
+												</span>
+											</div>
+											<div class="form-group" *ngFor="let shift of allShiftsClosed"> 
+												<span><strong> {{shift.day}}: </strong> Closed 
+												</span>
+											</div>
+										</div>
+										<div id="translated_treatmentText" *ngIf="checkOptionOfPad('Available_treatments')">
+											<h5 class="color-blue"> Available Treatments: </h5>
+											<ul style="padding-left:15px!important;">
+												<li *ngFor="let treat of newGlobalArray.expertise">{{treat.value}}</li>
+											</ul>
+										</div>
+										<div *ngIf="newGlobalArray.clinic_services_status=='Yes' && checkOptionOfPad('Available_services')" id="translated_servicesText">
+											<h5 class="color-blue"> Available Services: </h5>
+											<ul style="padding-left:15px!important;">
+												<li *ngIf="newGlobalArray.clinic_services.Clinic_Pharmacy">Pharmacy</li>
+												<li *ngIf="newGlobalArray.clinic_services.Clinic_IPD">IPD</li>
+												<li *ngFor="let cs of newGlobalArray.clinic_services.ClinicServicesDetail"> {{cs}} </li>
+												<li *ngFor="let cs of newGlobalArray.clinic_services.OtherClinicService"> {{cs.value}} </li>
+											</ul>
+										</div>
+									</div>                                   
+								</div>
+								<div class="col-md-10 col-sm-10 col-xs-10 p-0" style="font-size: 10px;">
+									<div class="padview-bodyright">
+										<ul class="padview-body-header">
+											<li>
+												<div class="text-underline"> Prescription ID </div>
+												<div class="strong">{{prescription_id}}</div>
+											</li>
+											<li>
+												<div class="text-underline"> Name </div>
+												<div class="strong"> {{dispensedPatient.pateintName}} </div>
+											</li>
+											<li>
+												<div class="text-underline"> Age/Sex </div>
+												<div class="strong"> {{dispensedPatient.age}} {{dispensedPatient.gender}} </div>
+											</li>
+											<li>
+												<div class="text-underline"> Weight </div>
+												<div class="strong" *ngIf="dispensedPatient.weight"> {{dispensedPatient.weight}} Kg </div>
+											</li>
+											<li>
+												<div class="text-underline"> Height </div>
+												<div class="strong" *ngIf="dispensedPatient.height"> {{dispensedPatient.height}} cm </div>
+											</li>
+											<li>
+												<div class="strong">{{lastDate | date: 'dd/MMM/yyyy'}}</div>
+											</li>
+										</ul>
+										<ul class="padview-patient">
+											<li class="img-patient">
+												<img src="{{pateintPicPath}}{{dispensedPatient.pateintPic}}" class="img-responsive" *ngIf="dispensedPatient.pateintPic"/>
+												<img src="./assets/imgs/no-person.jpg" class="img-responsive" *ngIf="!dispensedPatient.pateintPic"/>
+											</li>
+											<li *ngIf="preConditionComplete==true && finalPreConditions?.length>0">
+												<div class="pat-heading"><span id="translated_PreCondHeading"> Existing health status </span> </div>
+												<ul class="pat-type">
+													<li *ngFor="let data of finalPreConditions"> {{data}} </li>
+												</ul>
+											</li>
+											<li *ngIf="bodyIndicatorComplete==true && bodyIndicatorSelected?.length>0">
+												<div class="pat-heading"><span id="translated_BIHeading"> Body Indicators</span> </div>
+												<ul class="pat-type">
+													<li *ngFor="let data of bodyIndicatorSelected"> {{data}}
+													</li>
+												</ul>
+											</li>
+											<li *ngIf="finalAllergy?.length>0">
+												<div class="pat-heading"><span id="translated_allergyHeading"> Allergy</span> </div>
+												<ul class=" pat-type">
+													<li *ngFor="let data of finalAllergy"> {{data}} </li>
+												</ul>
+											</li>
+										</ul>
+										<div class="middle-body">
+											<div class="">
+												<div class="number-div" *ngIf="findingsSelected?.length>0">
+													<div class="pat-heading"><span id="translated_PTHeading"> Patient's Complaints</span> </div>
+													<ul class="numberol">
+														<li *ngFor="let data of findingsSelected"> {{data.value}} </li>
+													</ul>
+												</div>
+												<div class="number-div" *ngIf="symptomsComplete==true && symptomsSelected?.length>0">
+													<div class="pat-heading"><span id="translated_sympHeading"> Symptoms</span> </div>
+													<ul class="numberol">
+														<li *ngFor="let data of symptomsSelected"> {{data.value}} </li>
+													</ul>
+												</div>
+												<div class="number-div" *ngIf=" diagnosisSelected?.length>0">
+													<div class="pat-heading"><span id="translated_diagnosisHeading"> Diagnosis</span> </div>
+													<ul class="numberol">
+														<li *ngFor="let data of diagnosisSelected">{{data.value}}</li>
+													</ul>
+												</div>
+											</div>
+											<div class="" *ngIf="medicationComplete==true">
+												<div class="padview-medic" id="translated_medication">
+													<div class="pat-heading"><span> Medicines</span> </div>
+													<ol style="padding-left:10px">
+														<li *ngFor="let data of tempMedicationArray">
+															<span *ngIf="data.name=='Tablet' || data.name=='Capsule' || data.name=='Cream' || data.name=='Ointment' || data.name=='Aerosols' || data.name=='Powder' || data.name=='MouthWash'">
+																{{data.short_name}}<b class="notranslate"> {{data.med_name[0].value}} </b>-{{data.frequency}} <span class="notranslate"> X </span> {{data.duration}} days <span *ngIf="data.specialInstruction!=null"> ({{data.specialInstruction}})</span>
+																<span *ngIf="data.med_info"><p class="help-note" *ngIf="data.med_info?.length>0">({{data.med_info[0].value}}<span *ngIf="data.med_info?.length>1"> / {{data.med_info[1].value}}</span>)</p>
+															</span>
+														</span>
+														<span *ngIf="data.name=='Syrup' || data.name=='Suspension' || data.name=='Emulsion' || data.name=='Solution'">
+															{{data.short_name}}<b class="notranslate"> {{data.med_name[0].value}} </b>- {{data.dosage}}ml <span class="notranslate"> X </span> {{data.frequency}} <span class="notranslate"> X </span> {{data.duration}} days <span *ngIf="data.specialInstruction!=null"> ({{data.specialInstruction}})</span>
+															<span *ngIf="data.med_info"><p class="help-note" *ngIf="data.med_info?.length>0">({{data.med_info[0].value}}<span *ngIf="data.med_info?.length>1"> / {{data.med_info[1].value}}</span>)</p>
+														</span>
+													</span>
+													<span *ngIf="data.name=='Injection' || data.name=='Gel' || data.name=='Lotion'">
+														{{data.short_name}}<b class="notranslate"> {{data.med_name[0].value}} </b><span *ngIf="data.mode"> ({{data.mode}}) </span> -{{data.frequency}} <span class="notranslate"> X </span> {{data.duration}} days <span *ngIf="data.specialInstruction!=null"> ({{data.specialInstruction}})</span><span *ngIf="data.mode"> ({{data.mode}}) </span>
+														<span *ngIf="data.med_info"><p class="help-note" *ngIf="data.med_info?.length>0">({{data.med_info[0].value}}<span *ngIf="data.med_info?.length>1"> / {{data.med_info[1].value}}</span>)</p>
+													</span>
+												</span>
+												<span *ngIf="data.name=='Drops'">
+													{{data.short_name}}<b class="notranslate"> {{data.med_name[0].value}} </b>-{{data.quantity}} drops <span class="notranslate"> X </span> {{data.frequency}} <span class="notranslate"> X </span> {{data.duration}} days <span *ngIf="data.specialInstruction!=null"> ({{data.specialInstruction}})</span>
+													<span *ngIf="data.med_info"><p class="help-note" *ngIf="data.med_info?.length>0">({{data.med_info[0].value}}<span *ngIf="data.med_info?.length>1"> / {{data.med_info[1].value}}</span>)</p>
+												</span>
+											</span>
+										</li>
+									</ol>
+								</div>
+								<div class="flex-inner five-height vaccination" *ngIf="vaccinationComplete==true" data-target="#vaccinationModal" data-toggle="modal" data-dismiss="modal">
+									<div class="heading-wrap">
+										<a class="heading-pad" href="javascript:void(0)" data-toggle="modal" data-dismiss="modal">
+											Vaccination 
+										</a>
+										<span class="heading-delete" (click)="$event.stopPropagation(); deleteAndResetSelectedDiv('Vaccination')"> <i class="fa fa-times"></i> </span>
+									</div>
+									<ol *ngIf="currentVaccinationComplete == true">
+										<div>Current</div>
+										<li *ngFor="let data of finalCurrentVaccinationArray">{{data}}</li>
+									</ol>
+									<ol *ngIf="dueVaccinationComplete == true">
+                                                    <!-- <div class="li-blocked">
+                                                        <li *ngIf="finalDueVaccinationArray.length>0">
+                                                            <span><strong>Due </strong>                                    ({{vaccinationDate.toString().substr(4,11)}})
+                                                            </span>
+                                                        </li>
+                                                    </div> -->
+                                                    <!-- <div>Due <span *ngIf="vaccinationDate!=null" style="float:left;font-weight: bold; padding-left:30px; text-align:right; font-size: 12px;"></span>
+                                                    </div> -->
+                                                    <span *ngIf="finalDueVaccinationArray?.length>0"><strong>Due </strong>({{vaccinationDate.toString().substr(4,11)}})
+                                                    </span>
+                                                    <li *ngFor="let data of finalDueVaccinationArray">{{data}}</li>
+                                                </ol>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="third-body">
+                                    	<div class="number-div" *ngIf="investigationIndicatorComplete==true && investigationArray?.length">
+                                    		<div class="pat-heading"> <span id="translated_invHeading"> Investigation</span> </div>
+                                    		<ol class="numberol pl10">
+                                    			<li *ngFor="let data of investigationArray">
+                                    				<span *ngIf="data.name != 'Mammography' && data.name!= 'Uroflowmetry' && data.name != 'ECG' && data.name != 'EEG' && data.name != 'TMT' && data.name != 'Echo'">
+                                    					<span *ngIf="data.name!='Others'">{{data.name}} - </span><span *ngFor="let value of data.values;let i = index">{{value.value}} 
+                                    						<span *ngIf="i!=data.values?.length-1">\</span>
+                                    					</span>
+                                    				</span>
+                                    				<span *ngIf="data.name == 'Mammography' || data.name== 'Uroflowmetry' || data.name == 'ECG' || data.name == 'EEG' || data.name == 'TMT' || data.name == 'Echo'">
+                                    					<span *ngIf="data.name!='Others'">{{data.name}} - </span> {{data.values}}
+                                    				</span>
+                                    			</li>
+                                    		</ol>
+                                    	</div>
+                                    	<div class="number-div" *ngIf="treatmentComplete==true" id="translated_OTHeading">
+                                    		<div class="pat-heading"> <span> Other Treatments</span> </div>
+                                    		<ul class="numberol">
+                                    			<li *ngFor="let data of treatmentArray;let i =index">
+                                    				<span *ngIf="data.name=='Lifestyle Changes'">
+                                    					{{data.name}} - <span *ngFor="let value of data.lifestyle;let j = index">{{value.value}} <span *ngIf="j!=data.lifestyle?.length-1">\</span></span>
+                                    				</span>
+                                    				<span *ngIf="data.name=='Physiotherapy' || data.name=='Fomentation'">
+                                    					{{data.name}} - {{data.Frequency}} for {{data.Duration}} days <span *ngIf="data.SpecialInstruction!=null"> ({{data.SpecialInstruction}})</span>
+                                    				</span>
+                                    				<span *ngIf="data.name=='Plaster'">
+                                    					<span class="notranslate">{{data.name}}</span> - on <span class="notranslate">{{data.Injury_Area}}</span> of {{data.plaster_type}} for {{data.Duration}} days 
+                                    				</span>
+                                    				<span *ngIf="data.name=='Gargle' || data.name=='Dressing' || data.name=='Bandage' || data.name=='Other'">
+                                    					<span *ngIf="data.name!='Other'">{{data.name}} - </span>{{data.med_name[0].value}} {{data.Frequency}} for {{data.Duration}} days <span *ngIf="data.SpecialInstruction!=null"> ({{data.SpecialInstruction}})</span>
+                                    				</span>
+                                    				<span>
+                                    					{{data.value}}
+                                    				</span>
+                                    			</li>
+                                    		</ul>
+                                    	</div>
+                                    </div>
+                                    <div class="note-box">
+                                    	<div class="note-innerbox">
+                                    		<div class="note-innerdiv">
+                                    			<div class="number-div" *ngIf="surgeryComplete==true && surgerySelectedArray?.length>0">
+                                    				<div class="pat-heading"> <span id="translated_surgHeading"> Recommended Surgery</span> </div>
+                                    				<ul class="numberol">
+                                    					<li *ngFor="let data of surgerySelectedArray">{{data.sub_speciality | titlecase}} - {{data.procedure_name[0].value}}</li>
+                                    				</ul>
+                                    			</div>
+                                    			<div class="number-div" *ngIf="refer_status" style="padding:0 30px;">
+                                    				<div class="pat-heading"> <span> Referred To</span> </div>
+                                    				<p> {{referDetail.doctor_name | uppercase}} </p>
+                                    			</div>
+                                    		</div>
+                                    	</div>
+                                    	<div class="" *ngIf="eyePresComplete==true">
+                                    		<div class="pat-heading"> <span id="translated_eyeHeading"> Eye Prescription</span> </div>
+                                    		<div class="table-responsive">
+                                    			<table class="table table-bordered table-striped cstm-table">
+                                    				<thead>
+                                    					<tr>
+                                    						<th> Eye </th>
+                                    						<th> Sphere </th>
+                                    						<th> Cylinder </th>
+                                    						<th> Axis </th>
+                                    						<th> Add </th>
+                                    						<th> PD (mm) </th>
+                                    					</tr>
+                                    				</thead>
+                                    				<tbody>
+                                    					<tr>
+                                    						<td> Right (OD): </td>
+                                    						<td> {{finalRightOD.sphere}} </td>
+                                    						<td> {{finalRightOD.cylinder}} </td>
+                                    						<td> {{finalRightOD.axis}} </td>
+                                    						<td> {{finalRightOD.add}} </td>
+                                    						<td> {{finalRightOD.pd}} </td>
+                                    					</tr>
+                                    					<tr>
+                                    						<td> Left (OS): </td>
+                                    						<td> {{finalLeftOD.sphere}} </td>
+                                    						<td> {{finalLeftOD.cylinder}} </td>
+                                    						<td> {{finalLeftOD.axis}} </td>
+                                    						<td> {{finalLeftOD.add}} </td>
+                                    						<td> {{finalLeftOD.pd}} </td>
+                                    					</tr>
+                                    				</tbody>
+                                    			</table>
+                                    		</div>
+                                    	</div>
+                                    </div>
+                                    <div class="third-body">
+                                    	<div class="number-div" *ngIf="followDaysComplete == true">
+                                    		<div class="pat-heading"> <span> Follow Up</span></div>
+                                    		<p> Please come again after {{finalfollowUpDays}} days for consultation </p>
+                                    		<p class="small"> On {{followUpDay}} {{followUpMonth}} , {{followUpYear}}</p>
+                                    	</div>
+                                    </div>
+                                    <div class="forth-body">
+                                    	<div class="padview-confee" *ngIf="checkOptionOfPad('Consultation_duration')">
+                                    		<div class="cons-time">Consultation Duration: {{minutes}} min {{seconds}} sec </div>
+                                    	</div>
+                                    	<div class="signature" *ngIf="checkOptionOfPad('Signature')">(Signature)</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="padview-footer" *ngIf="checkOptionOfPad('Footer_note')">
+                        	<div class="col-md-12 col-sm-12 col-xs-12">
+                        		<div class="padview-powered">
+                        			<div style="float:left; color:#ccc;">Powered by doctm</div>
+                        			<div style="float:right; color:#ccc;">For prescription visit www.mydoctm.com </div>
+                        		</div>
+                        	</div>
+                        	<div class="col-md-12 col-sm-4 col-xs-12" id="translated_footer">
+                        		<div class="legal">
+                        			<h3>{{getFooterText()}}</h3>
+                        		</div>
+                        	</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+
+<div class="modal fade cus-preview" id="Test-report-Modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<!-- <button type="button" class="pull-right btn-sm btn btn-custom" > Print </button> -->
+				<button type="button" class="pull-right btn-sm btn btn-custom btn-outline" data-dismiss="modal" aria-label="Close"> Close </button>
+				<h4 class="modal-title"> Test Report </h4>
+			</div>
+			<div class="modal-body" *ngIf="getTestReports.reportPics && getTestReports.reportPics?.length>0">
+				<div class="row">
+					<div class="wrap">
+						<div class="presc-modal-body">
+							<div *ngFor="let report of getTestReports.reportPics" class="reportImg">
+								<img src="{{reportPic}}{{report}}" class="img-responsive"/>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

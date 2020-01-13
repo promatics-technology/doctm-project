@@ -1,0 +1,884 @@
+<div class="loader-box" *ngIf="loading">
+	<img src="./assets/imgs/load.gif" />
+</div>
+<div class="analytics-sec">
+	
+	<div class="ipd-deatil-sec">
+	<!-- 	<div class="md-tab">
+	      
+	      	<ul class="nav nav-tabs" role="tablist">
+	          	<li role="presentation" class="active"><a href="javascript:void(0);" routerLink="/header-two-layout/dashboard-consultation-prescription"> Consultation </a></li>
+	          	<li role="presentation"><a href="javascript:void(0);" routerLink="/header-two-layout/dashboard-pharmacy-detail"> Clinic Services </a></li>
+	      	</ul>
+	      </div> -->
+
+	      <div class="inner-tab">
+	      	<!-- Nav tabs -->
+	      	<ul class="nav nav-tabs" role="tablist">
+	      		<li *ngIf="(doctorData.digital_precipitation === false && doctorData.type_of_doctor === 'admin_doctor')|| doctorData.type_of_doctor != 'admin_doctor'" role="presentation"  class="active"><a href="javascript:void(0);" routerLink="/header-two-layout/dashboard-consultation-patient"> OPD </a></li>
+	      		<li *ngIf="doctorData.digital_precipitation === true && doctorData.type_of_doctor === 'admin_doctor'" role="presentation"  class="active"><a href="javascript:void(0);" routerLink="/header-two-layout/dashboard-consultation-patient"> Your OPD </a></li>
+	      		<li role="presentation"><a href="javascript:void(0);" routerLink="/header-two-layout/dashboard-consultation-time"> Time</a></li>
+	      		<li role="presentation" *ngIf = "doctorData.digital_precipitation"><a href="javascript:void(0);" routerLink="/header-two-layout/dashboard-consultation-prescription" >Prescription</a></li>
+	      		<li role="presentation" *ngIf = "doctorData.type_of_doctor == 'admin_doctor' && doctorData.clinic_services.Clinic_Pharmacy==true"><a href="javascript:void(0);" routerLink="/header-two-layout/dashboard-consultation-treatment"> Pharmacy</a></li>
+	      		<li role="presentation" *ngIf = "doctorData.type_of_doctor == 'admin_doctor' && doctorData.clinic_services.Clinic_Diagnostics==true"><a href="javascript:void(0);" routerLink="/header-two-layout/dashboard-consultation-diagnosis"> Diagnostics </a></li>
+	      		<li role="presentation" *ngIf = "doctorData.type_of_doctor == 'admin_doctor' && doctorData.clinic_services.Clinic_IPD==true"><a href="javascript:void(0);" routerLink="/header-two-layout/dashboard-consultation-investigation"> IPD </a></li>
+	      	</ul>
+	      </div>
+
+	      <div class="ipd-body">
+	      	<div class="cus-sidebar-wrapper side-bar-cstm">
+	      		<div class="cus-sidebar">
+	      			<ul> 
+	      				<li>
+	      					<div class="">
+	      						<div class="col-lg-3">
+	      							<h4 class="pd-left"><b>From</b></h4>
+	      						</div>
+	      						<div class="col-lg-9">
+	      							<div class="cstm-mg">
+	      								<angular2-date-picker [(ngModel)]="fromDate1" [settings]="settings"></angular2-date-picker>
+	      							</div>
+	      						</div>
+	      					</div>
+	      				</li>
+	      				<li>
+	      					<div class="">
+	      						<div class="col-lg-3">
+	      							<h4 class="pd-left"><b>To</b></h4>
+	      						</div>
+	      						<div class="col-lg-9">
+	      							<div class="cstm-mg">
+	      								<angular2-date-picker [(ngModel)]="toDate1" [settings]="settings"></angular2-date-picker>
+	      							</div>
+	      						</div>
+	      					</div>
+	      				</li>
+	      				<li class="text-right brder-cstm">
+	      					<div class="col-lg-12">
+	      						<button class="btn btn-go" (click)="go()">Go</button>
+	      					</div>
+	      				</li>
+	      				<li class="li-cstm"> <a href="javascript:void(0);"> For Past</a> </li>
+	      				<!-- <li class="{{getClass(0)}}" (click)="activatetab(0)" class="active"> <a href="javascript:void(0);"> Today </a> </li> -->
+	      				<li class="{{getClass(1)}}" (click)="activatetab(1)"> <a href="javascript:void(0);"> 1 Week &nbsp;<small *ngIf="activatedtab==1">({{fromDate | date: 'dd/LL/yy'}} - {{toDate | date: 'dd/LL/yy'}})</small> </a> </li>
+	      				<li class="{{getClass(2)}}" (click)="activatetab(2)"> <a href="javascript:void(0);"> 2 Weeks &nbsp;<small *ngIf="activatedtab==2">({{fromDate | date: 'dd/LL/yy'}} - {{toDate | date: 'dd/LL/yy'}})</small>  </a> </li>
+	      				<li class="{{getClass(3)}}" (click)="activatetab(3)"> <a href="javascript:void(0);"> 1 Month &nbsp;<small *ngIf="activatedtab==3">({{fromDate | date: 'dd/LL/yy'}} - {{toDate | date: 'dd/LL/yy'}})</small> </a> </li>
+	      				<li class="{{getClass(4)}}" (click)="activatetab(4)"> <a href="javascript:void(0);"> 3 Month &nbsp;<small *ngIf="activatedtab==4">({{fromDate | date: 'dd/LL/yy'}} - {{toDate | date: 'dd/LL/yy'}})</small></a> </li>
+	      				<li class="{{getClass(5)}}" (click)="activatetab(5)"> <a href="javascript:void(0);"> 6 Month &nbsp;<small *ngIf="activatedtab==5">({{fromDate | date: 'dd/LL/yy'}} - {{toDate | date: 'dd/LL/yy'}})</small></a> </li>
+	      				<li class="{{getClass(6)}}" (click)="activatetab(6)"> <a href="javascript:void(0);"> 1 Year &nbsp;<small *ngIf="activatedtab==6">({{fromDate | date: 'dd/LL/yy'}} - {{toDate | date: 'dd/LL/yy'}})</small></a> </li>
+	      				<li class="{{getClass(7)}}" (click)="activatetab(7)"> <a href="javascript:void(0);"> All </a> </li>
+	      			</ul>
+	      		</div>
+	      	</div>
+
+	      	<div class="cus-content-wrapper">
+	      		<div class="cus-content">
+	      			<div class="">
+	      				<div class="row">
+	      					<div class="col-lg-6">
+	      						<ul class="nav nav-tabs cstm-ul-new">
+	      							<li class="active"><a data-toggle="tab" href="#home-cstm">Consultation Collection</a></li>
+	      							<li><a data-toggle="tab" href="#menu1-cstm">Patient Details</a></li>
+	      						</ul>
+	      						<div class="tab-content">
+	      							<div id="home-cstm" class="tab-pane fade in active">
+	      								<div class="cstm-pad">
+	      									<div class="table-responsive">
+	      										<div class="">
+	      											<table class="table tb-1 tb-pd-hi">
+	      												<tbody>
+	      													<tr class="">
+	      														<td width="350px">Consultation Collection</td>
+	      														<td width="5px"><h4><b>:</b></h4></td>
+	      														<td><b>{{getData(totalCollection)}} &nbsp;</b></td>
+	      													</tr>
+	      													<tr class="evn">
+	      														<td width="350px">Max collection in a day </td>
+	      														<td width="5px"><h4><b>:</b></h4></td>
+	      														<td><b>{{getData(maxSaleOfDay)}} &nbsp;</b><span>({{maxCollectionDate | date: 'dd/MM/yyyy'}})</span></td>
+	      													</tr>
+	      													<tr class="">
+	      														<td width="350px">Min collection in a day </td>
+	      														<td width="5px"><h4><b>:</b></h4></td>
+	      														<td><b>{{getData(minSaleOfDay)}} &nbsp;</b><span>({{minCollectionDate | date: 'dd/MM/yyyy'}})</span></td>
+	      													</tr>
+	      													<tr class="evn">
+	      														<td width="350px">Avg. daily collection</td>
+	      														<td width="5px"><h4><b>:</b></h4></td>
+	      														<td><b>{{getData(totalCollection/dateDiff)}} &nbsp;</b></td>
+	      													</tr>
+	      													<tr>
+	      														<td width="350px">Avg collection per patient</td>
+	      														<td width="5px"><h4><b>:</b></h4></td>
+	      														<td><b>{{getData(avgCollection)}} &nbsp;</b></td>
+	      													</tr>
+	      													<tr class="evn">
+	      														<td width="350px">Total Prescriptions</td>
+	      														<td width="5px"><h4><b>:</b></h4></td>
+	      														<td><b>{{getData(totalPrescriptions)}} &nbsp;</b></td>
+	      													</tr>
+	      													<tr class="">
+	      														<td width="350px">Max Prescriptions in a day </td>
+	      														<td width="5px"><h4><b>:</b></h4></td>
+	      														<td><b>{{maxPrescofDay}} &nbsp;</b><span>({{maxPresconDate | date: 'dd/MM/yyyy'}})</span></td>
+	      													</tr>
+	      													<tr class="evn">
+	      														<td width="350px">Min Prescriptions in a day </td>
+	      														<td width="5px"><h4><b>:</b></h4></td>
+	      														<td><b>{{minPrescOfDay}} &nbsp;</b><span>({{minPresconDate | date: 'dd/MM/yyyy'}})</span></td>
+	      													</tr>
+	      													<tr>		
+	      														<tr>
+	      															<td width="350px">Avg daily Prescriptions</td>
+	      															<td width="5px"><h4><b>:</b></h4></td>
+	      															<td><b>{{getData(getDataCeil((totalPrescriptions+totalRegPatients)/dateDiff))}}</b></td>
+	      														</tr>		
+	      														<tr class="evn">
+	      															<td width="350px">Total OTG Prescriptions</td>
+	      															<td width="5px"><h4><b>:</b></h4></td>
+	      															<td><b>{{TotalOTGPrescriptionslength}}</b>
+	      																<span class="clr-blue" data-toggle="modal" data-target="#myModal5">View</span>
+	      															</td>
+	      														</tr>
+	      													</tbody>
+	      												</table>
+	      											</div>
+	      										</div>
+	      									</div>
+	      								</div>
+	      								<div id="menu1-cstm" class="tab-pane fade">
+	      									<div class="cstm-pad">
+	      										<div class="table-responsive">
+	      											<div class="">
+	      												<table class="table tb-1 my-tab-1">
+	      													<tbody>
+	      														<tr >
+	      															<td width="350px">Total patients</td>
+	      															<td width="5px"><h4><b>:</b></h4></td>
+	      															<td><b>{{getData(UniquePatientArray.length)}}</b></td>
+	      														</tr>
+	      														<tr >
+	      															<td width="350px">Old Patients</td>
+	      															<td width="5px"><h4><b>:</b></h4></td>
+	      															<td><b>{{getData(OldPatientArray)}}</b></td>
+	      														</tr>
+	      														<tr class="evn">
+	      															<td width="350px">New Patients</td>
+	      															<td width="5px"><h4><b>:</b></h4></td>
+	      															<td><b>{{UniquePatientArray.length-OldPatientArray}} &nbsp; </b></td>
+	      														</tr>
+	      														<tr >
+	      															<td width="350px">Males</td>
+	      															<td width="5px"><h4><b>:</b></h4></td>
+	      															<td><b>{{totalMale}} &nbsp;</b><small>({{getData(totalMalePercentage)}}%)</small></td>
+	      														</tr>
+	      														<tr class="evn">
+	      															<td width="350px">Females</td>
+	      															<td width="5px"><h4><b>:</b></h4></td>
+	      															<td><b>{{totalFemale}} &nbsp;</b><small>({{getData(totalFemalePercentage)}}%)</small></td>
+	      														</tr>
+	      														<tr >
+	      															<td width="350px">Avg. Patient Age (Yrs)</td>
+	      															<td width="5px"><h4><b>:</b></h4></td>
+	      															<td><b>{{getData(avgAge)}} &nbsp;</b></td>
+	      														</tr>
+	      														<tr class="evn">
+	      															<td width="350px">Walk in patients</td>
+	      															<td width="5px"><h4><b>:</b></h4></td>
+	      															<td><b>{{totalWalkIn}} &nbsp;</b><small>({{getData(totalWalkInPercentage)}}%)</small></td>
+	      														</tr>
+	      														<tr >
+	      															<td width="350px">Appointment patients</td>
+	      															<td width="5px"><h4><b>:</b></h4></td>
+	      															<td><b>{{totalAppointment}} &nbsp;</b><small>({{getData(totalAppointmentPercentage)}}%)</small></td>
+	      														</tr>
+	      														<tr class="evn">
+	      															<td width="350px">Emergency patients</td>
+	      															<td width="5px"><h4><b>:</b></h4></td>
+	      															<td><b>{{totalEmergency}} &nbsp;</b><small>({{getData(totalEmergencyPercentage)}}%)</small></td>
+	      														</tr>
+	      													</tbody>
+	      												</table>
+	      												<h5 class="cstm-heading">PATIENT</h5> 
+	      												<div class="chart-diagnos chart-box wrap-canavas" *ngIf="!loading">
+	      													<canvas baseChart class="can-vas"
+	      													[datasets]="lineChartData1"
+	      													[labels]="lineChartLabels1"
+	      													[options]="lineChartOptions"
+	      													[colors]="lineChartColors"
+	      													[legend]="lineChartLegend"
+	      													[chartType]="lineChartType"
+	      													(chartHover)="chartHovered($event)"
+	      													(chartClick)="chartClicked($event)"></canvas>
+	      												</div>
+	      											</div>
+	      										</div>
+	      									</div>
+	      								</div>
+	      							</div>
+	      						</div>
+	      						<h5 class="cstm-heading">COLLECTION</h5> 
+	      						<div class="col-lg-6 brdr-left">
+	      							<div class="chart-diagnos chart-box wrap-canavas" *ngIf="!loading">
+	      								<canvas baseChart
+	      								[datasets]="lineChartData"
+	      								[labels]="lineChartLabels"
+	      								[options]="lineChartOptions"
+	      								[colors]="lineChartColors"
+	      								[legend]="lineChartLegend"
+	      								[chartType]="lineChartType"
+	      								(chartHover)="chartHovered($event)"
+	      								(chartClick)="chartClicked($event)"></canvas>
+	      							</div>
+	      							<div class="table-responsive">
+	      								<table class="table tb-1 tb-2">
+	      									<tbody>
+	      										<tr class="evn">
+	      											<td width="350px">Shift-1</td>
+	      											<td width="5px"><h4><b>:</b></h4></td>
+	      											<td><b>{{shiftOne}} &nbsp; </b><span><b></b> ({{getData(shiftOnepercentage)}}%)</span></td>
+	      										</tr>
+	      										<tr>
+	      											<td width="350px">Shift-2
+	      											</td>
+	      											<td width="5px"><h4><b>:</b></h4></td>
+	      											<td><b>{{shiftTwo}}  &nbsp;</b>({{getData(shiftTwopercentage)}}%)</td>
+	      										</tr>
+	      										<tr>
+	      											<td width="350px">Shift-3
+	      											</td>
+	      											<td width="5px"><h4><b>:</b></h4></td>
+	      											<td><b>{{shiftThree}}  &nbsp;</b>({{getData(shiftThreepercentage)}}%)</td>
+	      										</tr>
+								     <!--  <tr class="">
+								        <td width="350px"><span>Top 20 Diagnosis</span></td>
+								        <td width="5px"><h4><b>:</b></h4></td>
+								        <td>
+								        	<b  class="clr-blue" data-toggle="modal" data-target="#myModal">View </b>
+								        	
+								        	</td>
+								        </tr> -->
+								        <tr class="evn">
+								        	<td width="350px">
+								        		<span>Referred  Patients (TO)</span>
+
+								        	</td>
+								        	<td width="5px"><h4><b>:</b></h4></td>
+								        	<td><b>{{dataReferralTo.length}} &nbsp;</b> <span (click)="viewReferralPatients(1)" class="clr-blue" data-toggle="modal" data-target="#myModal4">View</span></td>
+								        </tr>
+								        <tr>
+								        	<td width="350px">Referred Patients (FROM)</td>
+								        	<td width="5px"><h4><b>:</b></h4></td>
+								        	<td><b>{{dataReferralFrom.length}} &nbsp;</b><span (click)="viewReferralPatients(2)" class="clr-blue" data-toggle="modal" data-target="#myModal4">View</span></td>
+								        </tr>
+								        <tr>
+								        	<td width="350px">Frequent Patients (visited Thrice or more) </td>
+								        	<td width="5px"><h4><b>:</b></h4></td>
+								        	<td><b>{{freqPatientArray.length}} &nbsp;</b><span class="clr-blue"  data-toggle="modal" data-target="#myModal3">View</span></td>
+								        </tr>
+								      <!-- <tr>
+								        <td width="350px">Frequent Patients (>=3 Times)</td>
+								        <td width="5px"><h4><b>:</b></h4></td>
+								        <td><b>5 &nbsp;</b><span class="clr-blue">Views</span></td>
+								    </tr> -->
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</div>
+<div class="container footer-cstm-an">
+	<div class="row">
+		<div class="col-lg-6 text-center">
+			<div>
+				<p>TOP AREA : <b>Sector 78, NOIDA ( 18</b> Patients <b>), 30%</b> </p>
+			</div>
+		</div>
+		<div class="col-lg-6 text-center">
+			<div>
+				<p>PATIENT INFLOW TREND :  <b>Rising:</b> Falling : Steady</p>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- Top 20 Diagnosis View -->
+<div class="modal fade" id="myModal" role="dialog">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-body cstm-md-bdy">          	
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<div class="cstm-tab">
+					<table class="table tb-1 table-bordered">
+						<tbody>
+							<tr class="cstm-tr-2">
+								<td class="text-center" width="80px"><b>Sr no</b></td>
+								<td class="text-center"><b>Diagnosis</b></td>
+								<td class="text-center"><b>Number of Patients</b></td>
+								<td class="text-center"><b>Percentages</b></td>
+							</tr>
+							<tr class="{{getClassMap(data,i)}}" *ngFor="let data of diagnosisArray | slice:0:20;let i = index; ">
+								<td class="text-center" width="80px">{{i+1}}</td>
+								<td class="text-left">{{data.value}}</td>
+								<td class="text-center">{{data.occurrence}}</td>
+								<td class="text-center">{{getData(data.percentage)}}%</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>      
+			</div>
+		</div>
+	</div>
+</div>
+<!-- Referred Patients (TO) -->
+<div class="modal fade" id="myModal1" role="dialog1">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-body cstm-md-bdy">          	
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<div class="cstm-tab">
+					<table class="table tb-1 table-bordered">
+						<tbody>
+							<tr class="cstm-tr-2">
+								<td class="text-center" width="80px"><b>Sr no</b></td>
+								<td class="text-center"><b>Diagnosis</b></td>
+								<td class="text-center"><b>Number of Patients</b></td>
+								<td class="text-center"><b>Percentages</b></td>
+							</tr>
+							<tr class="{{getClassMap(data,i)}}" *ngFor="let data of diagnosisArray | slice:0:20;let i = index; ">
+								<td class="text-center" width="80px">{{i+1}}</td>
+								<td class="text-left">{{data.value}}</td>
+								<td class="text-center">{{data.occurrence}}</td>
+								<td class="text-center">{{getData(data.percentage)}}%</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>      
+			</div>
+		</div>
+	</div>
+</div>
+<!-- Referred Patients (FROM) -->
+<div class="modal fade" id="myModal2" role="dialog2">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-body cstm-md-bdy">          	
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<div class="cstm-tab">
+					<table class="table tb-1 table-bordered">
+						<tbody>
+							<tr class="cstm-tr-2">
+								<td class="text-center" width="80px"><b>Sr no</b></td>
+								<td class="text-center"><b>Diagnosis</b></td>
+								<td class="text-center"><b>Number of Patients</b></td>
+								<td class="text-center"><b>Percentages</b></td>
+							</tr>
+							<tr class="{{getClassMap(data,i)}}" *ngFor="let data of diagnosisArray | slice:0:20;let i = index; ">
+								<td class="text-center" width="80px">{{i+1}}</td>
+								<td class="text-left">{{data.value}}</td>
+								<td class="text-center">{{data.occurrence}}</td>
+								<td class="text-center">{{getData(data.percentage)}}%</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>      
+			</div>
+		</div>
+	</div>
+</div>
+<!-- Frequent Patients (>=2Visits) -->
+<div class="modal fade" id="myModal3" role="dialog3">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-body cstm-md-bdy">          	
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<div class="cstm-tab">
+					<table class="table tb-1 table-bordered">
+						<tbody>
+							<tr class="cstm-tr-2">
+								<td class="text-center" width="80px"><b>Sr no</b></td>
+								<td class="text-center"><b>Patient Name</b></td>
+								<td class="text-center"><b>No of Visits</b></td>
+								<td class="text-center"><b>Phone Number</b></td>
+							</tr>
+							<tr class="{{getClassMap(data,i)}}" *ngFor="let data of freqPatientArray;let i = index; ">
+								<td class="text-center" width="80px">{{i+1}}</td>
+								<td class="text-left">{{data.name}}</td>
+								<td class="text-center">{{data.count}}</td>
+								<td class="text-center">{{data.phone}}</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>      
+			</div>
+		</div>
+	</div>
+</div>
+<!-- Referral Patients -->
+<div class="modal fade" id="myModal4" role="dialog4">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content cstm-popup modal-lg">
+			<div class="modal-body cstm-md-bdy">          	
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<div class="cstm-tab">
+					<table class="table tb-1 table-bordered">
+						<tbody>
+							<tr class="cstm-tr-2">
+								<td class="text-center" width="50px"><b>Sr no</b></td>
+								<td class="text-center" width="250px"><b>Doctor Name</b></td>
+								<td class="text-center" width="150px"><b>Date</b></td>
+								<td class="text-center" width="250px"><b>Patient Name</b></td>
+								<td class="text-center" width="150px"><b>Phone</b></td>
+								<td class="text-center" width="300px"><b>Note</b></td>
+							</tr>
+							<tr class="{{getClassMap(data,i)}}" *ngFor="let data of referralPatientArray;let i = index; ">
+								<td class="text-center" width="50px">{{i+1}}</td>
+								<td class="text-left" width="250px">{{data.name}}</td>
+								<td class="text-left" width="150px">{{data.date | date: 'dd/MM/yyyy'}}</td>
+								<td class="text-left" width="250px">{{data.patientName}}</td>
+								<td class="text-center" width="150px">{{data.phone}}</td>
+								<td class="text-center" width="300px">{{data.note}}</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>      
+			</div>
+		</div>
+	</div>
+</div>
+<!-- Referral Patients -->
+<div class="modal fade" id="myModal5" role="dialog4">
+	<div class="modal-dialog">
+		<div class="modal-content cstm-popup">
+			<div class="modal-body cstm-md-bdy">          	
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<div class="cstm-tab">
+					<table class="table tb-1 table-bordered">
+						<tbody>
+							<tr class="cstm-tr-2">
+								<td class="text-center" width="80px"><b>Sr no</b></td>
+								<td class="text-center"><b>Patient Name</b></td>
+								<td class="text-center"><b>Patient Phone</b></td>
+								<td class="text-center"><b>Date</b></td>
+								<td class="text-center"><b>Prescription</b></td>
+							</tr>
+							<tr class="{{getClassMap(data,i)}}" *ngFor="let data of TotalOTGPrescriptions;let i = index; ">
+								<td class="text-center" width="80px">{{i+1}}</td>
+								<td class="text-left">{{data.registration.pateintName}}</td>
+								<td class="text-center">{{data.registration.pateintPhone}}</td>
+								<td class="text-left">{{data.createdAt | date: 'dd/MM/yyyy'}}</td>
+								<td class="text-center">
+									<button *ngIf="!data.image"  class="text-center btn btn-success cursr" (click)="openPrescriptionPreview(data)">View</button>
+									<button *ngIf="data.image"  class="text-center btn btn-success cursr" (click)="dispensedPatientSelectedOpen(data)">View</button>
+
+								</td>
+
+							</tr>
+						</tbody>
+					</table>
+				</div>      
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade cus-preview" id="previewModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" >
+	<div class="modal-dialog" role="document">
+		<div class="modal-content show-default">
+			<div class="modal-header">
+				<div>
+					<h4 class="modal-title"> Preview </h4>
+				</div>
+				<div class="text-center">
+					<button type="button" class="btn-sm btn btn-custom" (click)="createPdf()"> Print </button>
+				</div>
+				<div>
+					<button type="button" class="pull-right btn-sm btn btn-custom btn-outline" data-dismiss="modal" aria-label="Close"> Close </button>
+				</div>
+			</div>
+			<div class="modal-body">
+				<div class="row">
+					<div class="presc-modal-body">
+						<div class="pad-view">
+							<div class="padview-header">
+								<div class="pad-view-flx col-lg-4">
+									<div class="form-group doctor-name" *ngIf="checkOptionOfPad('Doctor_name')">
+										<h1 id="translated_doctorName"> Dr<span class="notranslate">.</span> {{doctorData?.first_name}} </h1>
+									</div>
+									<div class="form-group qual">
+										<p class="color-purple">
+											<span *ngIf="checkOptionOfPad('Specialization')">({{doctorData?.specialization}})</span>
+											<br>
+											<span *ngIf="checkOptionOfPad('Qualifications')">
+												<span *ngFor="let data of doctorData?.qualification;let i = index">
+													{{data?.value}} <span *ngIf="i!=doctorData?.qualification?.length-1">,</span>
+												</span>
+											</span>
+										</p>
+										<p *ngIf="checkOptionOfPad('registration_no')"> Registration: <span class="color-purple"> {{doctorData?.registration_no}} </span> </p>
+										<p *ngIf="checkOptionOfPad('Professional_affiliation')">
+											<span class="color-purple" *ngFor="let pa of doctorData?.professional_affiliation;let i=index">
+												{{pa.value}}<span *ngIf="i!=doctorData?.professional_affiliation?.length-1">,</span>
+											</span>
+										</p>
+									</div>
+								</div>
+								<div class="pad-view-flx col-lg-8">
+									<ul class="clinic-detail">
+										<li class="clinic-name" *ngIf="checkOptionOfPad('Clinic_name')">
+											<h1 id="translated_clinicName"> {{doctorsDetails?.clinic_details?.clinic_name}} </h1>
+										</li>
+										<li *ngIf="doctorsDetails?.clinic_details?.address">{{doctorsDetails?.clinic_details?.address}}, {{doctorsDetails?.clinic_details?.area}}, {{doctorsDetails?.clinic_details?.city}}, {{doctorsDetails?.clinic_details?.state}}</li>
+										<li class="li-cstm">
+											<div class="row" *ngIf="doctorsDetails?.clinic_details?.landline || doctorsDetails?.clinic_details?.mobile">
+												<div class="col-lg-12">
+													<h4 class="for-apt"> For appointments </h4>
+													<p *ngIf="doctorsDetails?.clinic_details?.landline"> Tel: {{doctorsDetails?.clinic_details?.std_code}}-{{doctorsDetails?.clinic_details?.landline}}</p>
+													<p> Mb: +91-{{doctorsDetails?.clinic_details?.mobile}} </p>
+												</div>
+											</div>
+										</li>
+									</ul>
+								</div>
+							</div>
+							<p class="text-center">
+								<label id="translated_appointmentText"> {{getHeaderText()}} </label>
+							</p>
+							<div class="padview-body">
+								<div class="col-md-2 col-sm-2 col-xs- p-0">
+									<div class="emergency-wrap">
+										<div class="form-group emrgency-consult" *ngIf="dispensedPatient?.type=='Emergency'">
+											<p class="small" id="translated_emergencyText"><i> Emergency Consultation </i> </p>
+										</div>
+										<div class="form-group schdl" *ngIf="checkOptionOfPad('Clinic_schedule')">
+											<h5 class="color-blue"> Schedule: </h5>
+											<div class="form-group span-txt" *ngFor="let shift of allShifts">
+												<span><strong style="display:block; width:110px;"> {{shift.day}}: </strong>
+													<span class="mrgin-r" *ngFor="let time of shift.shifts"> 
+														[
+														<span *ngIf="time?.fromTime?.hour=='0'">{{time?.fromTime?.hour}}0:</span>
+														<span *ngIf="time?.fromTime?.hour!='0'">{{time?.fromTime?.hour}}:</span>
+														<span *ngIf="time?.fromTime?.minute=='0'">{{time?.fromTime?.minute}}0 –</span>
+														<span *ngIf="time?.fromTime?.minute!='0'">{{time?.fromTime?.minute}} –</span>
+														<span *ngIf="time?.toTime?.hour=='0'">{{time?.toTime?.hour}}0:</span>
+														<span *ngIf="time?.toTime?.hour!='0'">{{time?.toTime?.hour}}:</span>
+														<span *ngIf="time?.toTime?.minute=='0'">{{time?.toTime?.minute}}0</span>
+														<span *ngIf="time?.toTime?.minute!='0'">{{time?.toTime?.minute}}</span> ]
+													</span>
+													<br>
+												</span>
+											</div>
+											<div class="form-group" *ngFor="let shift of allShiftsClosed">
+												<span><strong> {{shift?.day}}: </strong> Closed 
+												</span>
+											</div>
+										</div>
+										<div id="translated_treatmentText" *ngIf="checkOptionOfPad('Available_treatments')">
+											<h5 class="color-blue"> Available Treatments: </h5>
+											<ul style="padding-left:15px!important;">
+												<li *ngFor="let treat of doctorData?.expertise">{{treat?.value}}</li>
+											</ul>
+										</div>
+										<div *ngIf="doctorData?.clinic_services_status=='Yes' && checkOptionOfPad('Available_services')" id="translated_servicesText">
+											<h5 class="color-blue"> Available Services: </h5>
+											<ul style="padding-left:15px!important;">
+												<li *ngIf="doctorData?.clinic_services?.Clinic_Pharmacy">Pharmacy</li>
+												<li *ngIf="doctorData?.clinic_services?.Clinic_IPD">IPD</li>
+												<li *ngFor="let cs of doctorData?.clinic_services?.ClinicServicesDetail"> {{cs}} </li>
+												<li *ngFor="let cs of doctorData?.clinic_services?.OtherClinicService"> {{cs?.value}} </li>
+											</ul>
+										</div>
+									</div>
+								</div>
+								<div class="col-md-10 col-sm-10 col-xs-10 p-0" style="font-size: 10px;">
+									<div class="padview-bodyright">
+										<ul class="padview-body-header">
+											<li>
+												<div class="text-underline"> Prescription ID </div>
+												<div class="strong">{{prescription_id}}</div>
+											</li>
+											<li>
+												<div class="text-underline"> Name </div>
+												<div class="strong"> {{dispensedPatient?.pateintName | uppercase}} </div>
+											</li>
+											<li>
+												<div class="text-underline"> Age/Sex </div>
+												<div class="strong"> {{dispensedPatient?.age}} / {{dispensedPatient?.gender}} </div>
+											</li>
+											<li>
+												<div class="text-underline"> Weight </div>
+												<div class="strong" *ngIf="dispensedPatient?.weight"> {{dispensedPatient?.weight}} Kg </div>
+											</li>
+											<li>
+												<div class="text-underline"> Height </div>
+												<div class="strong" *ngIf="dispensedPatient?.height"> {{dispensedPatient?.height}} cm </div>
+											</li>
+											<li>
+												<div class="strong"> {{DischargeDate | date: 'dd/MMM/yyyy'}}</div>
+											</li>
+										</ul>
+										<ul class="padview-patient">
+											<li class="img-patient">
+												<img src="{{pateintPicPath}}{{dispensedPatient?.pateintPic}}" class="img-responsive" *ngIf="dispensedPatient.pateintPic" />
+												<img src="./assets/imgs/no-person.jpg" class="img-responsive" *ngIf="!dispensedPatient?.pateintPic" />
+											</li>
+											<li *ngIf="preConditionComplete==true && finalPreConditions?.length>0">
+												<div class="pat-heading"><span id="translated_PreCondHeading"> Existing health status </span> </div>
+												<ul class="pat-type">
+													<li *ngFor="let data of finalPreConditions"> {{data}} </li>
+												</ul>
+											</li>
+											<li *ngIf="bodyIndicatorComplete==true && bodyIndicatorSelected?.length>0">
+												<div class="pat-heading"><span id="translated_BIHeading"> Body Indicators</span> </div>
+												<ul class="pat-type">
+													<li *ngFor="let data of bodyIndicatorSelected"> {{data}}
+													</li>
+												</ul>
+											</li>
+											<li *ngIf="finalAllergy?.length>0">
+												<div class="pat-heading"><span id="translated_allergyHeading"> Allergy</span> </div>
+												<ul class=" pat-type">
+													<li *ngFor="let data of finalAllergy"> {{data}} </li>
+												</ul>
+											</li>
+										</ul>
+										<div class="middle-body">
+											<div class="">
+												<div class="number-div" *ngIf="findingsSelected?.length>0">
+													<div class="pat-heading"><span id="translated_PTHeading"> Patient's Complaints</span> </div>
+													<ul class="numberol">
+														<li *ngFor="let data of findingsSelected"> {{data?.value}} </li>
+													</ul>
+												</div>
+												<div class="number-div" *ngIf="symptomsComplete==true && symptomsSelected?.length>0">
+													<div class="pat-heading"><span id="translated_sympHeading"> Symptoms</span> </div>
+													<ul class="numberol">
+														<li *ngFor="let data of symptomsSelected"> {{data?.value}} </li>
+													</ul>
+												</div>
+												<div class="number-div" *ngIf="diagnosisComplete==true && diagnosisSelected?.length>0">
+													<div class="pat-heading"><span id="translated_diagnosisHeading"> Diagnosis</span> </div>
+													<ul class="numberol">
+														<li *ngFor="let data of diagnosisSelected">{{data?.value}}</li>
+													</ul>
+												</div>
+											</div>
+											<div class="" *ngIf="medicationComplete==true">
+												<div class="padview-medic" id="translated_medication">
+													<div class="pat-heading"><span> Medicines</span> </div>
+													<ol style="padding-left:10px">
+														<li *ngFor="let data of tempMedicationArray">
+															<span *ngIf="data?.name=='Tablet' || data?.name=='Capsule' || data?.name=='Cream' || data?.name=='Ointment' || data?.name=='Aerosols' || data?.name=='Powder' || data?.name=='MouthWash'">
+																{{data?.short_name}}<b class="notranslate"> {{data?.med_name[0].value}} </b>-{{data?.frequency}} <span class="notranslate"> X </span> {{data?.duration}} days <span *ngIf="data?.specialInstruction!=null"> ({{data?.specialInstruction}})</span>
+																<span *ngIf="data?.med_info">
+																	<p class="help-note" *ngIf="data?.med_info?.length>0">({{data?.med_info[0]?.value}}<span *ngIf="data?.med_info?.length>1"> / {{data?.med_info[1]?.value}}</span>)</p>
+																</span>
+															</span>
+															<span *ngIf="data?.name=='Syrup' || data?.name=='Suspension' || data?.name=='Emulsion' || data?.name=='Solution'">
+																{{data?.short_name}}<b class="notranslate"> {{data?.med_name[0]?.value}} </b>- {{data?.dosage}}ml <span class="notranslate"> X </span> {{data?.frequency}} <span class="notranslate"> X </span> {{data?.duration}} days <span *ngIf="data?.specialInstruction!=null"> ({{data?.specialInstruction}})</span>
+																<span *ngIf="data?.med_info">
+																	<p class="help-note" *ngIf="data?.med_info?.length>0">({{data?.med_info[0]?.value}}<span *ngIf="data?.med_info?.length>1"> / {{data?.med_info[1]?.value}}</span>)</p>
+																</span>
+															</span>
+															<span *ngIf="data?.name=='Injection' || data?.name=='Gel' || data?.name=='Lotion'">
+																{{data?.short_name}}<b class="notranslate"> {{data?.med_name[0]?.value}} </b><span *ngIf="data?.mode"> ({{data?.mode}}) </span> -{{data?.frequency}} <span class="notranslate"> X </span> {{data?.duration}} days <span *ngIf="data?.specialInstruction!=null"> ({{data?.specialInstruction}})</span><span *ngIf="data?.mode"> ({{data?.mode}}) </span>
+																<span *ngIf="data?.med_info">
+																	<p class="help-note" *ngIf="data?.med_info?.length>0">({{data?.med_info[0]?.value}}<span *ngIf="data?.med_info?.length>1"> / {{data?.med_info[1]?.value}}</span>)</p>
+																</span>
+															</span>
+															<span *ngIf="data?.name=='Drops'">
+																{{data?.short_name}}<b class="notranslate"> {{data?.med_name[0].value}} </b>-{{data?.quantity}} drops <span class="notranslate"> X </span> {{data?.frequency}} <span class="notranslate"> X </span> {{data?.duration}} days <span *ngIf="data?.specialInstruction!=null"> ({{data?.specialInstruction}})</span>
+																<span *ngIf="data?.med_info">
+																	<p class="help-note" *ngIf="data?.med_info?.length>0">({{data?.med_info[0]?.value}}<span *ngIf="data?.med_info?.length>1"> / {{data?.med_info[1]?.value}}</span>)</p>
+																</span>
+															</span>
+														</li>
+													</ol>
+												</div>
+												<div class="number-div vac-div">
+													<div *ngIf="finalCurrentVaccinationArray?.length>0 || finalDueVaccinationArray?.length>0">
+														<div class="pat-heading" id="translated_VaccinationHeading"> <span> Vaccination</span> </div>
+														<ul *ngIf="finalCurrentVaccinationArray?.length>0" class="medicationol">
+															<div><b>Current</b></div>
+															<li *ngFor="let data of finalCurrentVaccinationArray">{{data}}</li>
+														</ul>
+														<ul *ngIf="finalDueVaccinationArray?.length>0" class="medicationol">
+															<strong>Due </strong>
+															<!-- <span *ngIf="finalDueVaccinationArray.length>0"><strong>Due </strong>({{vaccinationDate.toString().substr(4,11)}}) -->
+																<!-- </span> -->
+																<li *ngFor="let data of finalDueVaccinationArray">{{data}}</li>
+															</ul>
+														</div>
+														<div class="" *ngIf="instructionsComplete==true && instructionsSelected?.length>0" id="translated_instHeading">
+															<div class="pat-heading"> <span> Instructions</span> </div>
+															<ul class="numberol" start="1">
+																<li *ngFor="let data of instructionsSelected">{{data}}</li>
+															</ul>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div class="third-body">
+												<div class="number-div" *ngIf="investigationIndicatorComplete==true && investigationArray?.length">
+													<div class="pat-heading"> <span id="translated_invHeading"> Investigation</span> </div>
+													<ol class="numberol pl10">
+														<li *ngFor="let data of investigationArray">
+															<span *ngIf="data?.name != 'Mammography' && data?.name!= 'Uroflowmetry' && data?.name != 'ECG' && data?.name != 'EEG' && data?.name != 'TMT' && data?.name != 'Echo'">
+																<span *ngIf="data?.name!='Others'">{{data?.name}} - </span><span *ngFor="let value of data?.values;let i = index">{{value.value}} 
+																	<span *ngIf="i!=data?.values?.length-1">\</span>
+																</span>
+															</span>
+															<span *ngIf="data?.name == 'Mammography' || data?.name== 'Uroflowmetry' || data?.name == 'ECG' || data?.name == 'EEG' || data?.name == 'TMT' || data?.name == 'Echo'">
+																<span *ngIf="data?.name!='Others'">{{data?.name}} - </span> {{data?.values}}
+															</span>
+														</li>
+													</ol>
+												</div>
+												<div class="number-div" *ngIf="treatmentComplete==true" id="translated_OTHeading">
+													<div class="pat-heading"> <span> Other Treatments</span> </div>
+													<ul class="numberol">
+														<li *ngFor="let data of treatmentArray;let i =index">
+															<span *ngIf="data?.name=='Lifestyle Changes'">
+																{{data?.name}} - <span *ngFor="let value of data?.lifestyle;let j = index">{{value.value}} <span *ngIf="j!=data?.lifestyle?.length-1">\</span></span>
+															</span>
+															<span *ngIf="data?.name=='Physiotherapy' || data?.name=='Fomentation'">
+																{{data?.name}} - {{data?.Frequency}} for {{data?.Duration}} days <span *ngIf="data?.SpecialInstruction!=null"> ({{data?.SpecialInstruction}})</span>
+															</span>
+															<span *ngIf="data?.name=='Plaster'">
+																<span class="notranslate">{{data?.name}}</span> - on <span class="notranslate">{{data?.Injury_Area}}</span> of {{data?.plaster_type}} for {{data?.Duration}} days
+															</span>
+															<span *ngIf="data?.name=='Gargle' || data?.name=='Dressing' || data?.name=='Bandage' || data?.name=='Other'">
+																<span *ngIf="data?.name!='Other'">{{data?.name}} - </span>{{data?.med_name[0]?.value}} {{data?.Frequency}} for {{data?.Duration}} days <span *ngIf="data?.SpecialInstruction!=null"> ({{data?.SpecialInstruction}})</span>
+															</span>
+															<span>
+																{{data?.value}}
+															</span>
+														</li>
+													</ul>
+												</div>
+											</div>
+											<div class="note-box">
+												<div class="note-innerbox">
+													<div class="note-innerdiv">
+														<div class="number-div" *ngIf="surgeryComplete==true && surgerySelectedArray?.length>0">
+															<div class="pat-heading"> <span id="translated_surgHeading"> Recommended Surgery</span> </div>
+															<ul class="numberol">
+																<li *ngFor="let data of surgerySelectedArray">{{data?.sub_speciality | titlecase}} - {{data?.procedure_name[0]?.value}}</li>
+															</ul>
+														</div>
+														<div class="number-div" *ngIf="referDoctorName?.first_name" style="padding:0 30px;">
+															<div class="pat-heading"> <span> Referred To</span> </div>
+															<p> {{referDoctorName?.first_name}} </p>
+														</div>
+													</div>
+												</div>
+												<div class="" *ngIf="eyePresComplete==true">
+													<div class="pat-heading"> <span id="translated_eyeHeading"> Eye Prescription</span> </div>
+													<div class="table-responsive">
+														<table class="table table-bordered table-striped cstm-table">
+															<thead>
+																<tr>
+																	<th> Eye </th>
+																	<th> Sphere </th>
+																	<th> Cylinder </th>
+																	<th> Axis </th>
+																	<th> Add </th>
+																	<th> PD (mm) </th>
+																</tr>
+															</thead>
+															<tbody>
+																<tr>
+																	<td> Right (OD): </td>
+																	<td> {{finalRightOD.sphere}} </td>
+																	<td> {{finalRightOD.cylinder}} </td>
+																	<td> {{finalRightOD.axis}} </td>
+																	<td> {{finalRightOD.add}} </td>
+																	<td> {{finalRightOD.pd}} </td>
+																</tr>
+																<tr>
+																	<td> Left (OS): </td>
+																	<td> {{finalLeftOD.sphere}} </td>
+																	<td> {{finalLeftOD.cylinder}} </td>
+																	<td> {{finalLeftOD.axis}} </td>
+																	<td> {{finalLeftOD.add}} </td>
+																	<td> {{finalLeftOD.pd}} </td>
+																</tr>
+															</tbody>
+														</table>
+													</div>
+												</div>
+											</div>
+											<div class="third-body">
+												<div class="number-div" *ngIf="followDaysComplete == true">
+													<div class="pat-heading"> <span> Follow Up</span></div>
+													<p> Please come again after {{finalfollowUpDays}} days for consultation </p>
+													<p class="small"> On {{followUpDay}} {{followUpMonth}} , {{followUpYear}}</p>
+												</div>
+											</div>
+											<div class="forth-body">
+												<div class="padview-confee" *ngIf="checkOptionOfPad('Consultation_duration')">
+													<div class="cons-time">Consultation Duration: {{minutes}} min {{seconds}} sec </div>
+												</div>
+												<div class="signature" *ngIf="checkOptionOfPad('Signature')">(Signature)</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="padview-footer" *ngIf="checkOptionOfPad('Footer_note')">
+									<div class="col-md-12 col-sm-12 col-xs-12">
+										<div class="padview-powered">
+											<div style="float:left; color:#ccc;">Powered by doctm</div>
+											<div style="float:right; color:#ccc;">For prescription visit www.mydoctm.com </div>
+										</div>
+									</div>
+									<div class="col-md-12 col-sm-4 col-xs-12" id="translated_footer">
+										<div class="legal">
+											<h3>{{getFooterText()}}</h3>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<div class="modal fade cus-preview" id="uploadedPrescriptionModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" *ngIf="dispensedPatientSelected">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content modal-lg">
+				<div class="modal-header">
+					<div>
+
+						<div class="col-lg-4">
+							<h3 class="modal-title">Prescription</h3>
+
+						</div>
+						<div class="col-lg-4 text-center">
+							<button type="button" class="btn-sm btn btn-custom" (click)="printImage()"> Print </button>
+						</div>
+						<div class="col-lg-4">
+							<button type="button" class="pull-right btn-sm btn btn-custom btn-outline" data-dismiss="modal" aria-label="Close"> Close </button>
+						</div>
+
+						<div class="modal-body" id="previewModalImage">
+							<div class="">
+								<div class="col-lg-12 text-center">
+									<div class="">
+
+										<img style="object-fit: contain;" src="{{uploadedPrescriptionPath}}{{dispensedPatientSelected?.image}}">
+									</div>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>

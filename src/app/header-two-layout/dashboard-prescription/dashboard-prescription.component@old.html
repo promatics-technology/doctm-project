@@ -1,0 +1,254 @@
+<div class="dashboard-sec">
+	<div class="dashboard-prescription">
+		<div class="col-md-12 col-sm-12 col-xs-12">
+			
+			<div class="dashboard-card">
+				<div class="dashboard-perscpt">
+					<h3>Patients In Queue:</h3>
+				</div>
+                
+               <div class="email-container list-group" dnd-sortable-container [sortableData]="listOne">
+                    <div class="col-sm-3">
+                        <div class="panel panel-success">
+                            <div class="panel-heading">
+                                Favorite drinks
+                            </div>
+                            <div class="panel-body">
+                                <ul class="list-group" dnd-sortable-container [sortableData]="listOne">
+                                    <li *ngFor="let item of listOne; let i = index" class="list-group-item" dnd-sortable [sortableIndex]="i">
+                                      <span dnd-sortable-handle>=</span>&nbsp;
+                                      {{item}}
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                My prefences:<br/>
+                                <span *ngFor="let item of listOne; let i = index">{{i + 1}}) {{item}}<br/></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+        				<div class="md-tab">
+                            <!-- Nav tabs -->
+                            <ul class="nav nav-tabs" role="tablist">
+                                <li role="presentation" class="active"><a href="javascript:void(0)" aria-controls="dispensed" role="tab"> Dispensed Patients (13) </a></li>
+                            </ul>
+                            
+                            <!-- Tab panes -->
+                            <div class="tab-content">
+                                <div role="tabpanel" class="tab-pane active" id="dispensed">
+                                    <ul class="pending_ul">
+                                        <li>
+                                            <a href="javascript:void(0)">
+                                                <div class="patient-number"><span> 1. </span></div>
+                                                <img src="./assets/imgs/avatar2.jpg" class="img-responsive" />
+                                                <div class="patient-text">
+                                                    <p class="patient-name"> Patient Name </p>
+                                                    <p class="patient-date"> 12/03/2018 36/F </p>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:void(0)">
+                                                <div class="patient-number"><span> 2. </span></div>
+                                                <img src="./assets/imgs/avatar3.jpg" class="img-responsive" />
+                                                <div class="patient-text">
+                                                    <p class="patient-name"> Patient Name </p>
+                                                    <p class="patient-date"> 12/03/2018 36/M </p>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:void(0)">
+                                                <div class="patient-number"><span> 3. </span></div>
+                                                <img src="./assets/imgs/avatar3.jpg" class="img-responsive" />
+                                                <div class="patient-text">
+                                                    <p class="patient-name"> Patient Name </p>
+                                                    <p class="patient-date"> 12/03/2018 36/M </p>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:void(0)">
+                                                <div class="patient-number"><span> 4. </span></div>
+                                                <img src="./assets/imgs/avatar2.jpg" class="img-responsive" />
+                                                <div class="patient-text">
+                                                    <p class="patient-name"> Patient Name </p>
+                                                    <p class="patient-date"> 12/03/2018 36/F </p>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:void(0)">
+                                                <div class="patient-number"><span> 5. </span></div>
+                                                <img src="./assets/imgs/avatar3.jpg" class="img-responsive" />
+                                                <div class="patient-text">
+                                                    <p class="patient-name"> Patient Name </p>
+                                                    <p class="patient-date"> 12/03/2018 36/M </p>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:void(0)">
+                                                <div class="patient-number"><span> 6. </span></div>
+                                                <img src="./assets/imgs/avatar3.jpg" class="img-responsive" />
+                                                <div class="patient-text">
+                                                    <p class="patient-name"> Patient Name </p>
+                                                    <p class="patient-date"> 12/03/2018 36/M </p>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:void(0)">
+                                                <div class="patient-number"><span> 7. </span></div>
+                                                <img src="./assets/imgs/avatar3.jpg" class="img-responsive" />
+                                                <div class="patient-text">
+                                                    <p class="patient-name"> Patient Name </p>
+                                                    <p class="patient-date"> 12/03/2018 36/M </p>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:void(0)">
+                                                <div class="patient-number"><span> 8. </span></div>
+                                                <img src="./assets/imgs/avatar2.jpg" class="img-responsive" />
+                                                <div class="patient-text">
+                                                    <p class="patient-name"> Patient Name </p>
+                                                    <p class="patient-date"> 12/03/2018 36/F </p>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:void(0)">
+                                                <div class="patient-number"><span> 9. </span></div>
+                                                <img src="./assets/imgs/avatar2.jpg" class="img-responsive" />
+                                                <div class="patient-text">
+                                                    <p class="patient-name"> Patient Name </p>
+                                                    <p class="patient-date"> 12/03/2018 36/F </p>
+                                                </div>
+                                            </a>
+                                        </li>
+                                    </ul>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <div class="md-tab">
+                            <!-- Nav tabs -->
+                            <ul class="nav nav-tabs" role="tablist">
+                                <li role="presentation" class="active"><a href="javascript:void(0)" aria-controls="pending" role="tab">Pending Patients (35) </a></li>
+                            </ul>
+                            <!-- Tab panes -->
+                            <div class="tab-content">
+                                <div role="tabpanel" class="tab-pane active" id="pending">
+                                    <ul class="pending_ul">
+                                        <li>
+                                            <a href="javascript:void(0)">
+                                                <div class="patient-number"><span> 10. </span></div>
+                                                <img src="./assets/imgs/avatar2.jpg" class="img-responsive" />
+                                                <div class="patient-text">
+                                                    <p class="patient-name"> Patient Name </p>
+                                                    <p class="patient-date"> 36/F </p>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:void(0)">
+                                                <div class="patient-number"><span> 11. </span></div>
+                                                <img src="./assets/imgs/avatar2.jpg" class="img-responsive" />
+                                                <div class="patient-text">
+                                                    <p class="patient-name"> Patient Name </p>
+                                                    <p class="patient-date"> 36/F </p>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:void(0)">
+                                                <div class="patient-number"><span> 12. </span></div>
+                                                <img src="./assets/imgs/avatar2.jpg" class="img-responsive" />
+                                                <div class="patient-text">
+                                                    <p class="patient-name"> Patient Name </p>
+                                                    <p class="patient-date"> 36/F </p>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:void(0)">
+                                                <div class="patient-number"><span> 13. </span></div>
+                                                <img src="./assets/imgs/avatar2.jpg" class="img-responsive" />
+                                                <div class="patient-text">
+                                                    <p class="patient-name"> Patient Name </p>
+                                                    <p class="patient-date"> 36/F </p>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:void(0)">
+                                                <div class="patient-number"><span> 14. </span></div>
+                                                <img src="./assets/imgs/avatar2.jpg" class="img-responsive" />
+                                                <div class="patient-text">
+                                                    <p class="patient-name"> Patient Name </p>
+                                                    <p class="patient-date"> 36/F </p>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:void(0)">
+                                                <div class="patient-number"><span> 15. </span></div>
+                                                <img src="./assets/imgs/avatar2.jpg" class="img-responsive" />
+                                                <div class="patient-text">
+                                                    <p class="patient-name"> Patient Name </p>
+                                                    <p class="patient-date"> 36/F </p>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:void(0)">
+                                                <div class="patient-number"><span> 16. </span></div>
+                                                <img src="./assets/imgs/avatar2.jpg" class="img-responsive" />
+                                                <div class="patient-text">
+                                                    <p class="patient-name"> Patient Name </p>
+                                                    <p class="patient-date"> 36/F </p>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:void(0)">
+                                                <div class="patient-number"><span> 17. </span></div>
+                                                <img src="./assets/imgs/avatar2.jpg" class="img-responsive" />
+                                                <div class="patient-text">
+                                                    <p class="patient-name"> Patient Name </p>
+                                                    <p class="patient-date"> 36/F </p>
+                                                </div>
+                                            </a>
+                                        </li>
+                                                                            
+
+                                    </ul>
+
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+                
+
+			</div>
+
+		</div>
+
+  	</div>
+</div>

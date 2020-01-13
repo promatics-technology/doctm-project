@@ -1,0 +1,96 @@
+<div class="loader-box" *ngIf="loading">
+    <img src="./assets/imgs/load.gif" />
+</div>
+<div class="cstm-hdr container-fluid">
+	<div class="row">
+        <div  class="col-lg-2 cstm-hdr-1">
+            <div  class="dashboard-header-logo">
+                <img _ngcontent-c3="" class="img-responsive" src="./assets/imgs/logoDoctm.png"
+                routerLink="/header-five-layout/dashboard-pharmacy">
+            </div>
+          <!--   <div >
+                <div _ngcontent-c3="" class="dshbrd-btn">
+                    <button  class="btn btn-custom" routerLink="/header-five-layout/dashboard-pharmacy" tabindex="0"> Dashboard </button>
+                </div>
+            </div> -->
+        </div>
+        <div class="col-lg-9">
+             <h3 class="dt">
+                {{day}} {{month}} , {{year}}
+                <small>
+                    {{hoursIST}}:{{getMin()}}
+                </small>
+            </h3>
+        </div>
+		<div class="col-lg-10 col-lg-offset-1 cstm-form">
+            <form [formGroup]="detailsForm">
+    			<div class="row">
+            		<div class="col-lg-6">
+            			<div class="form-group text-left cstm-input">
+        				    <label for="usr" class="txt-theme">Name of Pharmacy*</label>
+        				    <input type="text" class="form-control" value="" placeholder="Medical Store" [(ngModel)]="reqData.pharmacyName" required=""  [formControl]="detailsForm.controls['pharmacyName']">
+    					</div>
+                        <p style="color: #FF0000" *ngIf="!detailsForm.controls['pharmacyName'].valid  && ( detailsForm.controls['pharmacyName'].touched)">Invalid Pharmacy Name !!!</p>
+            		</div>
+            		<div class="col-lg-6">
+            			<div class="form-group text-left cstm-input">
+    				      <label for="pwd" class="txt-theme">Pharmacy Address*</label>
+    				      <input type="text" class="form-control" value=""  [(ngModel)]="reqData.address" placeholder="M4/32, Awadh Vihar Colony, Lucknow"[formControl]="detailsForm.controls['address']">
+    				    </div>
+                        <p style="color: #FF0000" *ngIf="!detailsForm.controls['address'].valid  && ( detailsForm.controls['address'].touched)">Invalid Pharmacy Address !!!</p>
+            		</div>
+            		<div class="col-lg-6">
+            			<div class="form-group text-left cstm-input">
+    				      <label for="pwd" class="txt-theme">Pharmacy Phone*</label>
+    				      <input type="text" maxlength="10" class="form-control" value="" [(ngModel)]="reqData.phone"  placeholder="9876543210" pattern="[0-9]+" [formControl]="detailsForm.controls['phone']">
+    				    </div>
+                        <p style="color: #FF0000" *ngIf="!detailsForm.controls['phone'].valid  && ( detailsForm.controls['phone'].touched)">Invalid Phone Number !!!</p>
+            		</div>
+            		<div class="col-lg-6">
+            			<div class="form-group text-left cstm-input">
+    				      <label for="pwd" class="txt-theme">Drug License Number*</label>
+    				      <input type="text" class="form-control" value=""  [(ngModel)]="reqData.drugLicense" placeholder="XXXXXX000029 /  XXXXXX000029" [formControl]="detailsForm.controls['drugLicense']">
+    				    </div>
+                        <p style="color: #FF0000" *ngIf="!detailsForm.controls['drugLicense'].valid  && ( detailsForm.controls['drugLicense'].touched)">Invalid Drug License Number !!!</p>
+            		</div>
+            		<div class="col-lg-12">
+            			<div class="form-group text-left cstm-input">
+    				      <label for="pwd" class="txt-theme">GSTIN Number*</label>
+    				      <input type="text" class="form-control" value="" [(ngModel)]="reqData.gstinNumber" placeholder="XXXXXX000029 /  XXXXXX000029"  [formControl]="detailsForm.controls['gstinNumber']"> 
+    				    </div>
+                        <p style="color: #FF0000" *ngIf="!detailsForm.controls['gstinNumber'].valid  && ( detailsForm.controls['gstinNumber'].touched)">Invalid GSTIN Number !!!</p>
+            		</div>
+            		<div class="col-lg-6">
+            			<div class="form-group text-left cstm-input">
+    				      <label for="pwd" class="txt-theme">Terms & Conditions 1</label>
+    				      <input type="text" class="form-control" value="" placeholder="" [formControl]="detailsForm.controls['conditionOne']" [(ngModel)]="reqData.conditionOne">
+    				    </div>
+            		</div>
+            		<div class="col-lg-6">
+            			<div class="form-group text-left cstm-input">
+    				      <label for="pwd" class="txt-theme">Terms & Conditions 2</label>
+    				      <input type="text" class="form-control" value="" placeholder="" [formControl]="detailsForm.controls['conditionTwo']" [(ngModel)]="reqData.conditionTwo">
+    				    </div>
+            		</div>
+            		<div class="col-lg-6">
+            			<div class="form-group text-left cstm-input">
+    				      <label for="pwd" class="txt-theme">Terms & Conditions 3</label>
+    				      <input type="text" class="form-control" value="" placeholder="" [formControl]="detailsForm.controls['conditionThree']" [(ngModel)]="reqData.conditionThree">
+    				    </div>
+            		</div>
+            		<div class="col-lg-6">
+            			<div class="form-group text-left cstm-input">
+    				      <label for="pwd" class="txt-theme">Terms & Conditions 4</label>
+    				      <input type="text" class="form-control" value="" placeholder="" [formControl]="detailsForm.controls['conditionFour']" [(ngModel)]="reqData.conditionFour">
+    				    </div>
+            		</div>
+            		<div  class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="signup-card text-center">
+                            <button class="btn btn-custom" type="submit" [disabled]="!detailsForm.valid" (click)="saveDetails()"> Submit </button>
+                        </div>
+                    </div>
+            	</div>
+            </form>
+		</div>
+	</div>
+</div>

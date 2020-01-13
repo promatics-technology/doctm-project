@@ -1,0 +1,138 @@
+<div class="loader-box" *ngIf="loading">
+    <img src="./assets/imgs/load.gif" />
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="bta-wrap text-center">
+                <button class="btn btn-cstm cstm-grin">
+                    To
+                </button>
+                <button class="btn btn-cstm cstm-ornge">
+                    SMS Left 450 / 500
+                </button>
+                <button class="btn btn-cstm cstm-grin">
+                    Purchase SMS Pack
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-5 text-center"><br>
+            <h4 class="mg-t-0"><b>Pateient selection based on</b></h4>
+            <small>(You cn choose multiple selection)</small>
+            <div class="row">
+                <div class="col-lg-7 col-lg-offset-3 text-left"><br>
+                    <label class="cstm-checkbox">Age
+                        <input type="checkbox" checked="checked" name="radio" [(ngModel)]="checkAge">
+                        <span class="checkmark"></span>
+                    </label>
+                    <!-- <label class="cstm-checkbox">Gender
+					  <input type="checkbox" name="radio">
+					  <span class="checkmark"></span>
+					</label> -->
+                    <!-- <label class="cstm-checkbox">Diagnosis
+					  <input type="checkbox" name="radio">
+									  <span class="checkmark"></span>
+									</label> -->
+                    <label class="cstm-checkbox">Follow-ups
+                        <br><small class="fader">(In next 30 days)</small>
+                        <input type="checkbox" name="radio" name="followUps" [(ngModel)]="checkfollowUp" value="followUps">
+                        <span class="checkmark"></span>
+                    </label>
+                    <label class="cstm-checkbox">Appointments
+                        <br><small class="fader">(In next 30 days)</small>
+                        <input type="checkbox" name="radio" name="appointments" [(ngModel)]="checkAppointments" value="appointments">
+                        <span class="checkmark"></span>
+                    </label>
+                    <label class="cstm-checkbox">Frequent patients
+                        <br><small class="fader">(More than 3 visits in last 2 months)</small>
+                        <input type="checkbox" name="radio" name="freqPatients" [(ngModel)]="checkFreqPatients" value="freqPatients">
+                        <span class="checkmark"></span>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <form [formGroup]="sendSmsForm">
+                <br>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="cstm-input">
+                            <input type="text" name="" placeholder="To" class="form-control input-lg" required="" max="100" min="0" maxlength="3" pattern="[0-9]+" [(ngModel)]="smsDetails.fromAge" [formControl]="sendSmsForm.controls['fromAge']">
+                            <p style="color: #FF0000" *ngIf="!sendSmsForm.controls['fromAge'].valid  && (sendSmsForm.controls['fromAge'].touched)">Invalid age !!!</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="cstm-input">
+                            <input type="text" name="" placeholder="To" class="form-control input-lg" required="" max="100" min="0" maxlength="3" pattern="[0-9]+" [(ngModel)]="smsDetails.toAge" [formControl]="sendSmsForm.controls['toAge']">
+                            <p style="color: #FF0000" *ngIf="!sendSmsForm.controls['toAge'].valid  && (sendSmsForm.controls['toAge'].touched)">Invalid age !!!</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-4"><br>
+                        <label class="cstm-checkbox">All
+                            <input type="radio" checked="checked" name="gender" value="All" [(ngModel)]="smsDetails.gender" [formControl]="sendSmsForm.controls['gender']">
+                            <span class="checkmark"></span>
+                        </label>
+                    </div>
+                    <div class="col-lg-4"><br>
+                        <label class="cstm-checkbox">Male
+                            <input type="radio" name="gender" value="Male" [(ngModel)]="smsDetails.gender" [formControl]="sendSmsForm.controls['gender']">
+                            <span class="checkmark"></span>
+                        </label>
+                    </div>
+                    <div class="col-lg-4"><br>
+                        <label class="cstm-checkbox">Female
+                            <input type="radio" name="gender" value="Female" [(ngModel)]="smsDetails.gender" [formControl]="sendSmsForm.controls['gender']">
+                            <span class="checkmark"></span>
+                        </label>
+                    </div>
+                    <!-- <div class="col-lg-6">
+			        <select class="form-control txtfield" [(ngModel)]="smsDetails.sendTo" [formControl]="sendSmsForm.controls['sendTo']">
+                        <option selected disabled="" selected=""> Select one</option>
+                        <option value="CARDIOLOGIST"> CARDIOLOGIST </option>
+                        <option value="DENTIST"> DENTIST </option>
+                        <option value="DERMATOLOGIST"> DERMATOLOGIST </option>
+                        <option value="DIABETOLOGIST"> DIABETOLOGIST </option>
+                        <option value="DIETICIAN"> DIETICIAN </option>
+                        <option value="E.N.T.">E.N.T.</option>
+                    </select>
+				</div> -->
+                    <!-- <div class="col-lg-6">
+					<select class="form-control txtfield">
+                        <option selected disabled="" selected=""> Select V</option>
+                        <option value="CARDIOLOGIST"> CARDIOLOGIST </option>
+                        <option value="DENTIST"> DENTIST </option>
+                        <option value="DERMATOLOGIST"> DERMATOLOGIST </option>
+                        <option value="DIABETOLOGIST"> DIABETOLOGIST </option>
+                        <option value="DIETICIAN"> DIETICIAN </option>
+                        <option value="E.N.T.">E.N.T.</option>
+                    </select>
+				</div> -->
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            <h4 class="thm-clr">COMPOSE</h4>
+                            <!-- <textarea ></textarea> -->
+                            <textarea class="form-control" rows="5" id="comment" required="" [(ngModel)]="smsDetails.compose" name="content" [formControl]="sendSmsForm.controls['composeSms']"></textarea>
+                        </div>
+                        <p style="color: #FF0000" *ngIf="!sendSmsForm.controls['composeSms'].valid  && (sendSmsForm.controls['composeSms'].touched)">Invalid message !!!</p>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="container footer-cstm-an">
+    <div class="row">
+        <div class="col-lg-6 text-center">
+            <div>
+                <h4>Number of patients selected: <b>{{patientSelected}}</b></h4>
+            </div>
+        </div>
+        <div class="col-lg-6 text-center">
+            <div>
+                <button class="btn btn-cstm" [disabled]="!sendSmsForm.valid" (click)="sendSMS()">SEND</button>
+            </div>
+        </div>
+    </div>
+</div>

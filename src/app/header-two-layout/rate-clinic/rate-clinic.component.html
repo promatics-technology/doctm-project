@@ -1,0 +1,81 @@
+
+<div class="text-center">
+	<p class="head-p">Rate the clinic</p>
+	<br>
+
+	<div class="">
+		<div  class="col-md-5 col-lg-offset-1">
+			<div class="signup-card signup-smartasst">
+				<h3  class="text-center m-b-30">What our happy users have to say</h3>
+				<p>Give your rating and comments here. You are also requested to upload your image with our home page, or prescription page or any other page u like. Please browse the picture from the button given</p>
+			</div>
+			<div class="row">
+				<div class="col-lg-12">
+					<h3  class="text-center m-b-30">Sample Image</h3>
+					<div class="signup-card signup-smartasst">
+						<img *ngIf="rateImage.rateUs_Image" src="{{rate_us_pic_sample}}{{rateImage.rateUs_Image}}" width="500px;"  class="user-avatar img-fluid rounded-circle" />
+
+						<!-- <img  [src]="reqData.rate_us" width="130px" *ngIf="reqData.rate_us"  class="user-avatar img-fluid rounded-circle" /> -->
+						<img *ngIf="!rateImage.rateUs_Image"  src="https://goodereader.com/blog/uploads/images/5-star-systempp_w400_h267.jpg" class="img-responsive custm-img" width="500px;">
+					</div>
+				</div>
+			</div>
+			
+		</div>
+		
+		<div class="col-lg-5 text-center">
+
+			<!-- <div class="image-upload" >
+			<label for="file-input">
+			<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+			</label>
+
+			<input type="file" (change)="onuploadMedicalCert($event,i)" accept=".jpg,.jpeg, .png" />
+			</div>
+			</div>
+
+			</div>
+		-->
+		<!-- {{rate_us_pic}}{{rateImage.rateUs_Image}} -->
+		<div class="">
+			<div class="col-lg-12 text-center" >
+				<!-- <div *ngIf = "rateImage.rateUs_Image && !doc_image" class="img-rnd">
+					<img   src="{{rate_us_pic}}{{rateImage.rateUs_Image}}" width="150px" class="user-avatar img-fluid rounded-circle" />
+
+				</div> -->
+				<div *ngIf = "!doc_image" class="img-rnd">
+					<img  src="./assets/imgs/no-person.jpg" width="150px" class="user-avatar img-fluid rounded-circle" />
+				</div>
+				<div *ngIf = "doc_image" class="img-rnd">
+					<img  [src]="doc_image" width="150px" class="user-avatar img-fluid rounded-circle" />
+				</div>
+				<div class="">
+					<div class="col-lg-12">
+
+						<button class="btn btn-primary cstm-put">Browse
+							<input type="file" (change)="onuploadMedicalCert($event,i)" accept=".jpg,.jpeg, .png" />
+						</button>
+					</div>
+				</div>
+				<div class="image-upload" >
+							<!-- <label for="file-input">
+								<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+							</label> -->
+							<br>
+						</div>
+					</div>
+
+				</div>
+
+
+				<ngx-stars [size]="5" [color]="'#FFD700'" [initialStars]="getThisDocData.rating" (ratingOutput)="onRatingSet($event)"></ngx-stars>
+				<p>Rating {{totalRating}} out of 5</p>
+				<div class="form-group cstm-txt-ar">
+					<label for="comment">Comment:</label>
+					<textarea class="form-control" [(ngModel)] ="setMessage" s="5" id="comment" rows="5" style="width:70%;"></textarea>
+				</div> 
+				<br>
+				<button (click) = "save()" class="btn btn-sve">Submit</button>	
+				<!-- <img src="{{rate_us_pic}}{{DocData.doc_image}}" class="img-responsive" /> -->
+			</div>
+		</div>

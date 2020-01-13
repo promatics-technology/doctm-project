@@ -1,0 +1,114 @@
+<div class="loader-box" *ngIf="loading">
+    <img src="./assets/imgs/load.gif" />
+</div>
+<div class="cstm-hdr">
+	<div class="">
+		<div  class="col-lg-2">
+			<div  class="dashboard-header-logo" tabindex="0" ng-reflect-router-link="/header-five-layout/dashboard-">
+				<img _ngcontent-c3="" class="img-responsive" src="./assets/imgs/logoDoctm.png" routerLink="/header-five-layout/dashboard-pharmacy">
+			</div>
+			<div >
+				<div _ngcontent-c3="" class="dshbrd-btn">
+					<button  class="btn btn-custom" routerLink="/header-five-layout/dashboard-pharmacy" tabindex="0" ng-reflect-router-link="/header-five-layout/dashboard-"> Dashboard</button>
+				</div>
+			</div>
+		</div>
+		<div class="col-lg-10">
+			<div class="row cstm-row">
+				<!-- <div class="col-lg-12">
+					<div class="form-group cstm-txt">
+					    <input type="text" readonly="" class="form-control text-center" placeholder="STOCK AS ON {{today | date:'d MMM yyyy'}}">
+					</div>
+				</div> -->
+				<!-- <div class="col-lg-6">
+					<div class="form-group">
+					    <input type="text" class="form-control" placeholder="TO DATE">
+					</div>
+				</div> -->
+				<div class="col-lg-10">
+					<div class="form-group">
+					    <input type="text" class="form-control" (input)="search()" [(ngModel)]="searchInput"  placeholder="Search by Product Name">
+					</div>
+				</div>
+				<div class="col-lg-2 cstm-input">
+					<button class="btn btn-custom" (input)="searchUser()">Search </button>
+				</div>
+			</div>
+		</div>
+	
+	</div>
+</div>
+<div class="stock-tab">
+	<div class="col-lg-12">
+		<div class="tbl-cntrol stock-tab-tb">
+		<table class="table table-bordered" matSort (matSortChange)="sortData($event)" *ngIf="sortedData.length>0">
+		    <thead class="new-thd">
+		    <tr>
+		       <!--  <th width="10%" class="text-center">Type</th>
+		        <th width="20%" class="text-center">Product</th>
+		        <th width="10%" class="text-center">Packing</th>
+		        <th width="10%" class="text-center">Batch</th>
+		        <th width="10%" class="text-center">M.R.P./P</th>
+		        <th width="10%" class="text-center">Current Stock</th>
+		        <th width="10%" class="text-center">P.Rate/P</th>
+		        <th width="10%" class="text-center">P.Value</th> -->
+		        <th mat-sort-header="type" width="9%" class="{{getTableHeaderClass(2)}} text-center" (click)="setTableHeaderClass(2)"><h4 style="width: 100%; text-align: center;">Type</h4></th>
+		       <th mat-sort-header="product" width="14%" class="{{getTableHeaderClass(1)}} text-center" (click)="setTableHeaderClass(1)"><h4 style="width: 100%; text-align: center;">Product</h4></th> 
+		        <th mat-sort-header="packing" width="8%" class="{{getTableHeaderClass(3)}} text-center" (click)="setTableHeaderClass(3)"><h4 style="width: 100%; text-align: center;">Packing</h4></th>
+		        <th mat-sort-header="batch" width="9%" class="{{getTableHeaderClass(4)}} text-center" (click)="setTableHeaderClass(4)"><h4 style="width: 100%; text-align: center;">Batch</h4></th>
+		         <th mat-sort-header="mrp" width="8%" class="{{getTableHeaderClass(8)}} text-center" (click)="setTableHeaderClass(8)"><h4 style="width: 100%; text-align: center;">M.R.P./P</h4></th>
+		        <th mat-sort-header="stock" width="8%" class="{{getTableHeaderClass(5)}} text-center" (click)="setTableHeaderClass(5)"><h4 style="width: 100%; text-align: center;">Stock</h4></th>
+		        <th mat-sort-header="p_rate" width="9%" class="{{getTableHeaderClass(6)}} text-center" (click)="setTableHeaderClass(6)"><h4 style="width: 100%; text-align: center;">P.Rate/P</h4></th>
+		        <th mat-sort-header="pvalue" width="8%" class="{{getTableHeaderClass(9)}} text-center" (click)="setTableHeaderClass(9)"><h4 style="width: 100%; text-align: center;">P.Value</h4></th>
+		        <th mat-sort-header="value" width="9%" class="{{getTableHeaderClass(7)}} text-center" (click)="setTableHeaderClass(7)"><h4 style="width: 100%; text-align: center;">S.Value</h4></th>
+		    </tr>
+		    </thead>
+			    <tbody class="new-tbdy">
+					<tr *ngFor="let item of sortedData">
+						<td width="9%" class="text-center">{{item.type}}</td>
+						<td width="14%" class="text-center vr-mid">{{item.product}}</td>
+						<td width="8%" class="text-center vr-mid">{{item.pack_units}} x {{item.pack_quantity}}</td>
+						<td width="9%" class="text-center vr-mid">{{item.batch}}</td>
+						<td width="8%" class="text-center vr-mid">{{item.mrp}}</td>
+						<td width="8%" class="text-center vr-mid">
+							<span *ngIf="item.newPacking || item.newPackingReminder">{{item.newPacking}} <b>: </b>{{item.newPackingReminder}}</span>
+							<span *ngIf="!item.newPacking && !item.newPackingReminder" style="color: red"><small><b>Not in Stock</b></small></span>
+						</td>
+						<td width="9%" class="text-center vr-mid">{{getData(item.cost)}}</td>
+						<td width="8%" class="text-center vr-mid">{{getData(item.present_prate)}}</td>
+						<td width="9%" class="text-center vr-mid">{{getData(item.present_mrate)}}</td>
+					</tr>
+			    </tbody>
+			</table>
+			<div class="col-lg-12" *ngIf="sortedData.length<1">
+                <h3 class="text-center">No data found ...</h3>
+            </div> 
+		</div>
+	</div>
+
+</div>
+
+
+<div class="col-lg-12  cstm-footer foot-stock">
+	<div class="btn-wrap text-center">
+		<button class="btn btn-custom" *ngIf="sortedData">
+			<div> Total Product Items </div>
+			<div class="ex-txt">{{totalProducts.length}}</div>
+		</button>
+		<button class="btn btn-custom">
+			<div> Purchase Value of Stock </div>
+			<div class="ex-txt">{{getData(purchaseValue)}}</div>
+		</button>
+		<button class="btn btn-custom">
+			<div>Sales Value of Stock </div>
+			<div class="ex-txt">{{getData(salesValue)}}</div>
+		</button>
+		<button class="btn btn-custom">
+			<div>Profit Value of Stock </div>
+			<div class="ex-txt">{{getData(salesValue-purchaseValue)}} </div>
+		</button>
+		<button class="btn btn-custom  btn-grin-2" (click)="exportPdf()">
+			<div> Export </div>
+		</button>
+	</div>
+</div>

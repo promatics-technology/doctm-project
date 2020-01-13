@@ -1,0 +1,108 @@
+<div *ngIf="loading" class="loader-box">
+    <img src="./assets/imgs/load.gif"/>
+</div>
+<div class="dashboard-sec">
+    <div class="dashboard-prescription">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="">
+                <div class="">
+                        <div class="col-lg-8">
+                            <div class="inner-tab">
+                                <ul class="nav nav-tabs cstm-my-tab" role="tablist">
+                                    <li role="presentation" [ngClass]="(doctor._id == consultationDoctor)?'active':''" *ngFor="let doctor of dataDoctors;let i =index"><a href="#pd" aria-controls="total" role="tab" data-toggle="tab" (click)="findPatientsForDiagnostics(doctor._id)"> <span *ngIf="i!=dataDoctors.length-1">Dr.</span> {{getDoctorFirstName(doctor.first_name)}}</a></li>
+                                    <!-- <li role="presentation" class="" *ngFor="let doctor of doctorsOfSameClinic"><a href="#pd" aria-controls="total" role="tab" data-toggle="tab" (click)="findPatientsForDiagnostics(doctor._id)"> Dr. {{getDoctorFirstName(doctor.first_name)}}</a></li> -->
+                                </ul>
+                            </div>
+                        </div>
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Search by Mobile or Patient name" (input)="search()" [(ngModel)]="searchInput" >
+                        </div>
+                    </div>
+                    <!-- <div class="col-lg-2">
+                        <div class="main-date">
+                            <h4 class="dt">
+                                {{day}} {{month}} , {{year}}
+                                <small>
+                                    {{hoursIST}}:{{getMin()}}
+                                </small>
+                            </h4>
+                        </div>
+                    </div> -->
+                </div>
+                <div class="patient-panel">
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6 col-xs-12 tb-1">
+                            <table matSort (matSortChange)="sortData($event)" cellpadding="20px" class="table cstm-table">
+                                <thead class="table-head">
+                                    <tr>
+                                        <th class="th-back " colspan="2">
+                                        <div class="th-pd"> <h5>WAITING ORDERS ({{waitingOrders.length}})</h5
+                                        ></div></th>
+                                    </tr>
+                                  <tr>
+                                    <th mat-sort-header="prescription_id" class="th-back brdr-right"><h5>PRESCRIPTION-ID</h5></th>
+                                    <th mat-sort-header="registration" class="th-back"><h5>PATIENT NAME</h5></th>
+                                  </tr>
+                               </thead>
+                            </table> 
+                            <div class="table-wrap">
+                                <table>
+                                    <tbody class="tbod-max-w">
+                                        <tr class="table-row" *ngFor="let item of sortedData; let i= index;" >
+                                            <td class="text-center" (click)="goForPharmacy(item)">{{item.prescription_id}}</td> 
+                                            <td class="text-center" (click)="goForPharmacy(item)">{{item.registration.pateintName}}</td>
+                                        </tr>
+                                    </tbody> 
+                                </table>  
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-12 tb-1">                           
+                                <table matSort (matSortChange)="sortData1($event)" cellpadding="20px" class="table cstm-table">
+                                    <thead class="table-head">
+                                        <tr>
+                                            <th class="th-back " colspan="3">
+                                            <div class="th-pd"> <h5>SALES ORDERS ({{waitingOrders1.length}})</h5></div></th>
+                                        </tr>
+                                      <tr>
+                                        <th mat-sort-header="prescription_id" class="th-back brdr-right"><h5>PRESCRIPTION-ID</h5></th>
+                                        <th mat-sort-header="registration" class="th-back brdr-right"><h5>PATIENT NAME</h5></th>
+                                        <th mat-sort-header="pharmacy_sales" class="th-back"><h5> SALES(Rs.)</h5></th>
+                                      </tr>
+                                   </thead>
+                                </table>  
+                                <div class="table-wrap">
+                                    <table>
+                                          <tbody class="tbod-max-w">
+                                          <tr class="table-row tab-2" *ngFor="let item of sortedData1; let i= index;" >
+                                            <td class="text-center" (click)="receivedPayment(item)">{{item.prescription_id}}</td> 
+                                            <td class="text-center" (click)="receivedPayment(item)">{{item.registration.pateintName}}</td>
+                                            <td class="text-center" (click)="receivedPayment(item)">{{item.investigation_cost}}</td>
+                                          </tr>
+                                          </tbody>
+                                    </table>  
+                            </div>                     
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-cstm">
+                    <!-- <div class="row"> -->
+                    <div class="col-lg-6 text-center" *ngIf="!loading">
+                        <div class="btn red-btn div_btn">
+                            TODAY'S SALES : Rs.{{getData(totalSales)}}
+                        </div>
+                    </div>
+                    <div class="col-lg-6 text-center" *ngIf="!loading">
+                        <!-- <div class="btn green-btn">
+                            TODAY'S PROFIT : Rs.{{getData(totalSales)}}
+                        </div> -->
+                        <div class="btn green-btn div_btn">
+                            SALE ORDER: {{totalSalesCount}}
+                        </div>
+                    </div>
+                    <!--  </div> -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

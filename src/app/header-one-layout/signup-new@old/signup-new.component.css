@@ -1,0 +1,112 @@
+.instruction-ul {
+    float: left;
+    width: 100%;
+}
+.instruction-ul ul {
+    list-style-type: none;
+    display: inline-block;
+    float: left;
+    width: 100%;
+    padding-left: 15px;
+    margin: 10px 0;
+}
+.instruction-ul ul li {
+    float: left;
+    width: 50%;
+    position: relative;
+}
+.instruction-ul > ul > li.passed{
+    color: green;
+}
+.instruction-ul > ul > li.passed::after {
+    position: absolute;
+    top: -2px;
+    left: -18px;
+    content: "\f00c";
+    font-family: 'fontawesome';
+    color: green;
+}
+.fieldDesign .input-group-addon {
+    background-color: #fff;
+    border: 1px solid rgba(56, 94, 138, 1);
+    border-radius: 6px 0 0 6px;
+}
+.input-group.fieldDesign .txtfield {
+    height: 40px;
+    box-shadow: none;
+    border-radius: 0px 6px 6px 0px !important;
+    border: 1px solid rgba(56, 94, 138, 1);
+}
+.input-group.fieldDesign label.labelFloat {
+    position: absolute;
+    left: 55px;
+    z-index: 9;
+}
+.input-group.fieldDesign p {
+    color: #FF0000;
+    position: absolute;
+    top: 41px;
+    left: 0;
+}
+.success-upload .fa.fa-check {
+    color: #009900;
+}
+span.input-group-addon.input-btn.success-upload {
+    padding: 8px 10px;
+    float: right;
+    display: inline-block;
+    text-align: center;
+    width: 35px;
+}
+
+.color-blue{
+    color: #01b0f0;
+}
+/** 21 Sep **/
+.shift-trash.ok-btn-prnt.m-b-5 {
+    border: none;
+    /*background-color: #f70f0f;*/
+    /*color: #fff;*/
+    color: red;
+    border-radius: 4PX;
+    height: auto;
+    width: 30px;
+    height: unset;
+    padding: 2px 0px;
+}
+.shift-trash.ok-btn-prnt.m-b-5 img{
+    max-width: 50px!important;
+}
+.wrapper-div-cstm {
+    float: left;
+    width: 100%;
+    padding: 15px;
+    border: 1px solid #ccc;
+    margin-bottom: 20px;
+}
+.Week-name {
+    float: left;
+    width: 100%;
+    margin-bottom: 5px;
+}
+.week-name-wrp {
+    float: left;
+    width: 50%;
+    font-weight: bold;
+}
+
+.week-time-wrap {
+    float: left;
+    width: 50%;
+}
+.week-time {
+    float: left;
+    width: auto;
+    margin-right: 10px;
+}
+.resend-link{
+    text-align: center;
+    text-decoration: none;
+    font-weight: bold;
+}
+/** 21 Sep **/

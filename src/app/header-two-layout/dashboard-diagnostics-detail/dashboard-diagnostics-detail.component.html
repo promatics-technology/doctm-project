@@ -1,0 +1,677 @@
+<div class="analytics-sec">
+	
+	<div class="ipd-deatil-sec">
+		<div class="md-tab">
+	      	<!-- Nav tabs -->
+	      	<ul class="nav nav-tabs" role="tablist">
+	          	<li role="presentation"><a href="javascript:void(0);" routerLink="/header-two-layout/dashboard-consultation-prescription"> Consultation </a></li>
+	          	<li role="presentation" class="active"><a href="javascript:void(0);" routerLink="/header-two-layout/dashboard-pharmacy-detail"> Clinic Services </a></li>
+	      	</ul>
+	    </div>
+
+	    <div class="inner-tab">
+	    	<!-- Nav tabs -->
+	      	<ul class="nav nav-tabs" role="tablist">
+	          	<li role="presentation"><a href="javascript:void(0);" routerLink="/header-two-layout/dashboard-pharmacy-detail"> Pharmacy </a></li>
+	          	<li role="presentation" class="active"><a href="javascript:void(0);" routerLink="/header-two-layout/dashboard-diagnostics-detail"> Diagnostics </a></li>
+	          	<li role="presentation"><a href="javascript:void(0);" routerLink="/header-two-layout/dashboard-ipd-detail"> IPD </a></li>
+	      	</ul>
+	    </div>
+
+	    <div class="ipd-body">
+	    	<div class="cus-sidebar-wrapper">
+	    		<div class="cus-sidebar">
+	    			<ul>
+	    				<li class="{{getClass(0)}}" (click)="activatetab(0)" class="active"> <a href="javascript:void(0);"> Current </a> </li>
+	    				<li class="{{getClass(1)}}" (click)="activatetab(1)"> <a href="javascript:void(0);"> 7 Days </a> </li>
+	    				<li class="{{getClass(2)}}" (click)="activatetab(2)"> <a href="javascript:void(0);"> 14 Days </a> </li>
+	    				<li class="{{getClass(3)}}" (click)="activatetab(3)"> <a href="javascript:void(0);"> 1 Month </a> </li>
+	    				<li class="{{getClass(4)}}" (click)="activatetab(4)"> <a href="javascript:void(0);"> 3 Month </a> </li>
+	    				<li class="{{getClass(5)}}" (click)="activatetab(5)"> <a href="javascript:void(0);"> 6 Month </a> </li>
+	    				<li class="{{getClass(6)}}" (click)="activatetab(6)"> <a href="javascript:void(0);"> 1 Year </a> </li>
+	    				<li class="{{getClass(7)}}" (click)="activatetab(7)"> <a href="javascript:void(0);"> Max </a> </li>
+	    			</ul>
+	    		</div>
+	    	</div>
+
+    		<div class="cus-content-wrapper">
+    			<div class="cus-content">
+
+	    			<div class="" *ngIf="activatedtab==0">
+	    				
+	    				<div class="chart-diagnos chart-box">
+		    				<canvas baseChart
+			                [datasets]="lineChartData"
+			                [labels]="lineChartLabels"
+			                [options]="lineChartOptions"
+			                [colors]="lineChartColors"
+			                [legend]="lineChartLegend"
+			                [chartType]="lineChartType"
+			                (chartHover)="chartHovered($event)"
+			                (chartClick)="chartClicked($event)"></canvas>
+			            </div>
+			            <div class="row">
+			    			<div class="form-group col-md-6 col-sm-6 col-xs-12">
+			    				<label> Total Diagnostics Sales </label>
+			    				<p> Rs. 8575.0 (+1456.0) (75 orders) </p>
+			    			</div>
+			    			<div class="form-group col-md-6 col-sm-6 col-xs-12">
+			    				<label> Total prescription sales (all doctors)  </label>
+			    				<p> Rs. 6500.0 (76%) </p>
+			    			</div>
+			    			<div class="form-group col-md-6 col-sm-6 col-xs-12">
+			    				<label> Total Standalone Sales </label>
+			    				<p> Rs.2075.0 (24%) </p>
+			    			</div>
+			    			<div class="form-group col-md-6 col-sm-6 col-xs-12">
+			    				<label> Patients using Clinic Diagnostics </label>
+			    				<p> 54/64 (85%) </p>
+			    			</div>
+			    			
+
+			    			<div class="col-md-12 col-sm-12 col-xs-12">
+			    				<h4> Doctor-wise break-up </h4>
+			    			</div>
+
+			    			<div class="table-responsive col-md-12 col-sm-12 col-xs-12">
+			    				<table class="table table-striped">
+			    					<thead>
+			    						<tr>
+			    							<th> Clinic Doctor Name </th>
+			    							<th> Sales Contribution (Rs.) </th>
+			    							<th> Patients using clinic Pharmacy </th>
+			    							<th> Medication Cost/patient(Rs.) </th>
+			    						</tr>
+			    					</thead>
+			    					<tbody>
+			    						<tr>
+			    							<td> Dr. Deepak Gupta (admin) </td>
+			    							<td> 3000 (50%) </td>
+			    							<td> 22/28 (79%) </td>
+			    							<td> 3000/22 = 136 </td>
+			    						</tr>
+			    						<tr>
+			    							<td> Dr. Deepak Gupta (admin) </td>
+			    							<td> 3000 (50%) </td>
+			    							<td> 22/28 (79%) </td>
+			    							<td> 3000/22 = 136 </td>
+			    						</tr>
+			    						<tr>
+			    							<td> Dr. Deepak Gupta (admin) </td>
+			    							<td> 3000 (50%) </td>
+			    							<td> 22/28 (79%) </td>
+			    							<td> 3000/22 = 136 </td>
+			    						</tr>
+			    						<tr>
+			    							<td> Dr. Deepak Gupta (admin) </td>
+			    							<td> 3000 (50%) </td>
+			    							<td> 22/28 (79%) </td>
+			    							<td> 3000/22 = 136 </td>
+			    						</tr>
+			    					</tbody>
+			    				</table>
+			    			</div>
+
+			    		</div>
+
+	    			</div>
+			    	
+			    	<div class="" *ngIf="activatedtab==1">
+			    		
+			    		<div class="row">
+			    			<div class="form-group col-md-6 col-sm-6 col-xs-12">
+			    				<label> Total Diagnostics Sales </label>
+			    				<p> Rs. 38575.0 (400 orders) </p>
+			    			</div>
+			    			<div class="form-group col-md-6 col-sm-6 col-xs-12">
+			    				<label> Total prescription sales (all doctors) </label>
+			    				<p> Rs. 26500.0 (76%) </p>
+			    			</div>
+			    			<div class="form-group col-md-6 col-sm-6 col-xs-12">
+			    				<label> Total Standalone Sales </label>
+			    				<p> Rs.12075.0 (24%) </p>
+			    			</div>
+			    			<div class="form-group col-md-6 col-sm-6 col-xs-12">
+			    				<label> Patient turnout at Diagnostics (%) </label>
+			    				<p> 354/417 (85%) </p>
+			    			</div>
+			    			<div class="form-group col-md-6 col-sm-6 col-xs-12">
+			    				<label> Maximum Sale in a day </label>
+			    				<p> Rs. 18575.0 </p>
+			    			</div>
+			    			<div class="form-group col-md-6 col-sm-6 col-xs-12">
+			    				<label> Minimum Sale in a day </label>
+			    				<p> Rs. 6500.0 </p>
+			    			</div>
+			    			<div class="form-group col-md-6 col-sm-6 col-xs-12">
+			    				<label> Average daily Sales </label>
+			    				<p> Rs.10075.0 </p>
+			    			</div>
+			    			
+			    			<div class="col-md-12 col-sm-12 col-xs-12">
+			    				<h4> Doctor-wise break-up </h4>
+			    			</div>
+
+			    			<div class="table-responsive col-md-12 col-sm-12 col-xs-12">
+			    				<table class="table table-striped">
+			    					<thead>
+			    						<tr>
+			    							<th> Clinic Doctor Name </th>
+			    							<th> Sales Contribution (Rs.) </th>
+			    							<th> Patient turnout at clinic pharmacy </th>
+			    							<th> Medication Cost/patient (Rs.) </th>
+			    						</tr>
+			    					</thead>
+			    					<tbody>
+			    						<tr>
+			    							<td> Dr. Deepak Gupta (admin) </td>
+			    							<td> 13000 (46%) </td>
+			    							<td> 122/158 (78%) </td>
+			    							<td> 13000/122 = 116 </td>
+			    						</tr>
+			    						<tr>
+			    							<td> Dr. Deepak Gupta (admin) </td>
+			    							<td> 13000 (46%) </td>
+			    							<td> 122/158 (78%) </td>
+			    							<td> 13000/122 = 116 </td>
+			    						</tr>
+			    						<tr>
+			    							<td> Dr. Deepak Gupta (admin) </td>
+			    							<td> 13000 (46%) </td>
+			    							<td> 122/158 (78%) </td>
+			    							<td> 13000/122 = 116 </td>
+			    						</tr>
+			    						<tr>
+			    							<td> Dr. Deepak Gupta (admin) </td>
+			    							<td> 13000 (46%) </td>
+			    							<td> 122/158 (78%) </td>
+			    							<td> 13000/122 = 116 </td>
+			    						</tr>
+
+			    					</tbody>
+			    				</table>
+			    			</div>
+
+			    		</div>
+
+			    	</div>
+
+			    	<div class="" *ngIf="activatedtab==2">
+			    		<div class="row">
+			    			<div class="form-group col-md-6 col-sm-6 col-xs-12">
+			    				<label> Total Diagnostics Sales </label>
+			    				<p> Rs. 38575.0 (400 orders) </p>
+			    			</div>
+			    			<div class="form-group col-md-6 col-sm-6 col-xs-12">
+			    				<label> Total prescription sales (all doctors) </label>
+			    				<p> Rs. 26500.0 (76%) </p>
+			    			</div>
+			    			<div class="form-group col-md-6 col-sm-6 col-xs-12">
+			    				<label> Total Standalone Sales </label>
+			    				<p> Rs.12075.0 (24%) </p>
+			    			</div>
+			    			<div class="form-group col-md-6 col-sm-6 col-xs-12">
+			    				<label> Patient turnout at Diagnostics (%) </label>
+			    				<p> 354/417 (85%) </p>
+			    			</div>
+			    			<div class="form-group col-md-6 col-sm-6 col-xs-12">
+			    				<label> Maximum Sale in a day </label>
+			    				<p> Rs. 18575.0 </p>
+			    			</div>
+			    			<div class="form-group col-md-6 col-sm-6 col-xs-12">
+			    				<label> Minimum Sale in a day </label>
+			    				<p> Rs. 6500.0 </p>
+			    			</div>
+			    			<div class="form-group col-md-6 col-sm-6 col-xs-12">
+			    				<label> Average daily Sales </label>
+			    				<p> Rs.10075.0 </p>
+			    			</div>
+			    			
+			    			<div class="col-md-12 col-sm-12 col-xs-12">
+			    				<h4> Doctor-wise break-up </h4>
+			    			</div>
+
+			    			<div class="table-responsive col-md-12 col-sm-12 col-xs-12">
+			    				<table class="table table-striped">
+			    					<thead>
+			    						<tr>
+			    							<th> Clinic Doctor Name </th>
+			    							<th> Sales Contribution (Rs.) </th>
+			    							<th> Patient turnout at clinic pharmacy </th>
+			    							<th> Medication Cost/patient (Rs.) </th>
+			    						</tr>
+			    					</thead>
+			    					<tbody>
+			    						<tr>
+			    							<td> Dr. Deepak Gupta (admin) </td>
+			    							<td> 13000 (46%) </td>
+			    							<td> 122/158 (78%) </td>
+			    							<td> 13000/122 = 116 </td>
+			    						</tr>
+			    						<tr>
+			    							<td> Dr. Deepak Gupta (admin) </td>
+			    							<td> 13000 (46%) </td>
+			    							<td> 122/158 (78%) </td>
+			    							<td> 13000/122 = 116 </td>
+			    						</tr>
+			    						<tr>
+			    							<td> Dr. Deepak Gupta (admin) </td>
+			    							<td> 13000 (46%) </td>
+			    							<td> 122/158 (78%) </td>
+			    							<td> 13000/122 = 116 </td>
+			    						</tr>
+			    						<tr>
+			    							<td> Dr. Deepak Gupta (admin) </td>
+			    							<td> 13000 (46%) </td>
+			    							<td> 122/158 (78%) </td>
+			    							<td> 13000/122 = 116 </td>
+			    						</tr>
+			    						
+			    					</tbody>
+			    				</table>
+			    			</div>
+
+			    		</div>
+			    	</div>
+
+			    	<div class="" *ngIf="activatedtab==3">
+			    		<div class="row">
+			    			<div class="form-group col-md-6 col-sm-6 col-xs-12">
+			    				<label> Total Diagnostics Sales </label>
+			    				<p> Rs. 38575.0 (400 orders) </p>
+			    			</div>
+			    			<div class="form-group col-md-6 col-sm-6 col-xs-12">
+			    				<label> Total prescription sales (all doctors) </label>
+			    				<p> Rs. 26500.0 (76%) </p>
+			    			</div>
+			    			<div class="form-group col-md-6 col-sm-6 col-xs-12">
+			    				<label> Total Standalone Sales </label>
+			    				<p> Rs.12075.0 (24%) </p>
+			    			</div>
+			    			<div class="form-group col-md-6 col-sm-6 col-xs-12">
+			    				<label> Patient turnout at Diagnostics (%) </label>
+			    				<p> 354/417 (85%) </p>
+			    			</div>
+			    			<div class="form-group col-md-6 col-sm-6 col-xs-12">
+			    				<label> Maximum Sale in a day </label>
+			    				<p> Rs. 18575.0 </p>
+			    			</div>
+			    			<div class="form-group col-md-6 col-sm-6 col-xs-12">
+			    				<label> Minimum Sale in a day </label>
+			    				<p> Rs. 6500.0 </p>
+			    			</div>
+			    			<div class="form-group col-md-6 col-sm-6 col-xs-12">
+			    				<label> Average daily Sales </label>
+			    				<p> Rs.10075.0 </p>
+			    			</div>
+			    			
+			    			<div class="col-md-12 col-sm-12 col-xs-12">
+			    				<h4> Doctor-wise break-up </h4>
+			    			</div>
+
+			    			<div class="table-responsive col-md-12 col-sm-12 col-xs-12">
+			    				<table class="table table-striped">
+			    					<thead>
+			    						<tr>
+			    							<th> Clinic Doctor Name </th>
+			    							<th> Sales Contribution (Rs.) </th>
+			    							<th> Patient turnout at clinic pharmacy </th>
+			    							<th> Medication Cost/patient (Rs.) </th>
+			    						</tr>
+			    					</thead>
+			    					<tbody>
+			    						<tr>
+			    							<td> Dr. Deepak Gupta (admin) </td>
+			    							<td> 13000 (46%) </td>
+			    							<td> 122/158 (78%) </td>
+			    							<td> 13000/122 = 116 </td>
+			    						</tr>
+			    						<tr>
+			    							<td> Dr. Deepak Gupta (admin) </td>
+			    							<td> 13000 (46%) </td>
+			    							<td> 122/158 (78%) </td>
+			    							<td> 13000/122 = 116 </td>
+			    						</tr>
+			    						<tr>
+			    							<td> Dr. Deepak Gupta (admin) </td>
+			    							<td> 13000 (46%) </td>
+			    							<td> 122/158 (78%) </td>
+			    							<td> 13000/122 = 116 </td>
+			    						</tr>
+			    						<tr>
+			    							<td> Dr. Deepak Gupta (admin) </td>
+			    							<td> 13000 (46%) </td>
+			    							<td> 122/158 (78%) </td>
+			    							<td> 13000/122 = 116 </td>
+			    						</tr>
+			    						
+			    					</tbody>
+			    				</table>
+			    			</div>
+
+			    		</div>
+			    	</div>
+
+			    	<div class="" *ngIf="activatedtab==4">
+			    		<div class="row">
+			    			<div class="form-group col-md-6 col-sm-6 col-xs-12">
+			    				<label> Total Diagnostics Sales </label>
+			    				<p> Rs. 38575.0 (400 orders) </p>
+			    			</div>
+			    			<div class="form-group col-md-6 col-sm-6 col-xs-12">
+			    				<label> Total prescription sales (all doctors) </label>
+			    				<p> Rs. 26500.0 (76%) </p>
+			    			</div>
+			    			<div class="form-group col-md-6 col-sm-6 col-xs-12">
+			    				<label> Total Standalone Sales </label>
+			    				<p> Rs.12075.0 (24%) </p>
+			    			</div>
+			    			<div class="form-group col-md-6 col-sm-6 col-xs-12">
+			    				<label> Patient turnout at Diagnostics (%) </label>
+			    				<p> 354/417 (85%) </p>
+			    			</div>
+			    			<div class="form-group col-md-6 col-sm-6 col-xs-12">
+			    				<label> Maximum Sale in a day </label>
+			    				<p> Rs. 18575.0 </p>
+			    			</div>
+			    			<div class="form-group col-md-6 col-sm-6 col-xs-12">
+			    				<label> Minimum Sale in a day </label>
+			    				<p> Rs. 6500.0 </p>
+			    			</div>
+			    			<div class="form-group col-md-6 col-sm-6 col-xs-12">
+			    				<label> Average daily Sales </label>
+			    				<p> Rs.10075.0 </p>
+			    			</div>
+			    			
+			    			<div class="col-md-12 col-sm-12 col-xs-12">
+			    				<h4> Doctor-wise break-up </h4>
+			    			</div>
+
+			    			<div class="table-responsive col-md-12 col-sm-12 col-xs-12">
+			    				<table class="table table-striped">
+			    					<thead>
+			    						<tr>
+			    							<th> Clinic Doctor Name </th>
+			    							<th> Sales Contribution (Rs.) </th>
+			    							<th> Patient turnout at clinic pharmacy </th>
+			    							<th> Medication Cost/patient (Rs.) </th>
+			    						</tr>
+			    					</thead>
+			    					<tbody>
+			    						<tr>
+			    							<td> Dr. Deepak Gupta (admin) </td>
+			    							<td> 13000 (46%) </td>
+			    							<td> 122/158 (78%) </td>
+			    							<td> 13000/122 = 116 </td>
+			    						</tr>
+			    						<tr>
+			    							<td> Dr. Deepak Gupta (admin) </td>
+			    							<td> 13000 (46%) </td>
+			    							<td> 122/158 (78%) </td>
+			    							<td> 13000/122 = 116 </td>
+			    						</tr>
+			    						<tr>
+			    							<td> Dr. Deepak Gupta (admin) </td>
+			    							<td> 13000 (46%) </td>
+			    							<td> 122/158 (78%) </td>
+			    							<td> 13000/122 = 116 </td>
+			    						</tr>
+			    						<tr>
+			    							<td> Dr. Deepak Gupta (admin) </td>
+			    							<td> 13000 (46%) </td>
+			    							<td> 122/158 (78%) </td>
+			    							<td> 13000/122 = 116 </td>
+			    						</tr>
+			    						
+			    					</tbody>
+			    				</table>
+			    			</div>
+
+			    		</div>
+			    	</div>
+
+			    	<div class="" *ngIf="activatedtab==5">
+			    		<div class="row">
+			    			<div class="form-group col-md-6 col-sm-6 col-xs-12">
+			    				<label> Total Diagnostics Sales </label>
+			    				<p> Rs. 38575.0 (400 orders) </p>
+			    			</div>
+			    			<div class="form-group col-md-6 col-sm-6 col-xs-12">
+			    				<label> Total prescription sales (all doctors) </label>
+			    				<p> Rs. 26500.0 (76%) </p>
+			    			</div>
+			    			<div class="form-group col-md-6 col-sm-6 col-xs-12">
+			    				<label> Total Standalone Sales </label>
+			    				<p> Rs.12075.0 (24%) </p>
+			    			</div>
+			    			<div class="form-group col-md-6 col-sm-6 col-xs-12">
+			    				<label> Patient turnout at Diagnostics (%) </label>
+			    				<p> 354/417 (85%) </p>
+			    			</div>
+			    			<div class="form-group col-md-6 col-sm-6 col-xs-12">
+			    				<label> Maximum Sale in a day </label>
+			    				<p> Rs. 18575.0 </p>
+			    			</div>
+			    			<div class="form-group col-md-6 col-sm-6 col-xs-12">
+			    				<label> Minimum Sale in a day </label>
+			    				<p> Rs. 6500.0 </p>
+			    			</div>
+			    			<div class="form-group col-md-6 col-sm-6 col-xs-12">
+			    				<label> Average daily Sales </label>
+			    				<p> Rs.10075.0 </p>
+			    			</div>
+			    			
+			    			<div class="col-md-12 col-sm-12 col-xs-12">
+			    				<h4> Doctor-wise break-up </h4>
+			    			</div>
+
+			    			<div class="table-responsive col-md-12 col-sm-12 col-xs-12">
+			    				<table class="table table-striped">
+			    					<thead>
+			    						<tr>
+			    							<th> Clinic Doctor Name </th>
+			    							<th> Sales Contribution (Rs.) </th>
+			    							<th> Patient turnout at clinic pharmacy </th>
+			    							<th> Medication Cost/patient (Rs.) </th>
+			    						</tr>
+			    					</thead>
+			    					<tbody>
+			    						<tr>
+			    							<td> Dr. Deepak Gupta (admin) </td>
+			    							<td> 13000 (46%) </td>
+			    							<td> 122/158 (78%) </td>
+			    							<td> 13000/122 = 116 </td>
+			    						</tr>
+			    						<tr>
+			    							<td> Dr. Deepak Gupta (admin) </td>
+			    							<td> 13000 (46%) </td>
+			    							<td> 122/158 (78%) </td>
+			    							<td> 13000/122 = 116 </td>
+			    						</tr>
+			    						<tr>
+			    							<td> Dr. Deepak Gupta (admin) </td>
+			    							<td> 13000 (46%) </td>
+			    							<td> 122/158 (78%) </td>
+			    							<td> 13000/122 = 116 </td>
+			    						</tr>
+			    						<tr>
+			    							<td> Dr. Deepak Gupta (admin) </td>
+			    							<td> 13000 (46%) </td>
+			    							<td> 122/158 (78%) </td>
+			    							<td> 13000/122 = 116 </td>
+			    						</tr>
+			    						
+			    					</tbody>
+			    				</table>
+			    			</div>
+
+			    		</div>
+			    	</div>
+
+			    	<div class="" *ngIf="activatedtab==6">
+			    		<div class="row">
+			    			<div class="form-group col-md-6 col-sm-6 col-xs-12">
+			    				<label> Total Diagnostics Sales </label>
+			    				<p> Rs. 38575.0 (400 orders) </p>
+			    			</div>
+			    			<div class="form-group col-md-6 col-sm-6 col-xs-12">
+			    				<label> Total prescription sales (all doctors) </label>
+			    				<p> Rs. 26500.0 (76%) </p>
+			    			</div>
+			    			<div class="form-group col-md-6 col-sm-6 col-xs-12">
+			    				<label> Total Standalone Sales </label>
+			    				<p> Rs.12075.0 (24%) </p>
+			    			</div>
+			    			<div class="form-group col-md-6 col-sm-6 col-xs-12">
+			    				<label> Patient turnout at Diagnostics (%) </label>
+			    				<p> 354/417 (85%) </p>
+			    			</div>
+			    			<div class="form-group col-md-6 col-sm-6 col-xs-12">
+			    				<label> Maximum Sale in a day </label>
+			    				<p> Rs. 18575.0 </p>
+			    			</div>
+			    			<div class="form-group col-md-6 col-sm-6 col-xs-12">
+			    				<label> Minimum Sale in a day </label>
+			    				<p> Rs. 6500.0 </p>
+			    			</div>
+			    			<div class="form-group col-md-6 col-sm-6 col-xs-12">
+			    				<label> Average daily Sales </label>
+			    				<p> Rs.10075.0 </p>
+			    			</div>
+			    			
+			    			<div class="col-md-12 col-sm-12 col-xs-12">
+			    				<h4> Doctor-wise break-up </h4>
+			    			</div>
+
+			    			<div class="table-responsive col-md-12 col-sm-12 col-xs-12">
+			    				<table class="table table-striped">
+			    					<thead>
+			    						<tr>
+			    							<th> Clinic Doctor Name </th>
+			    							<th> Sales Contribution (Rs.) </th>
+			    							<th> Patient turnout at clinic pharmacy </th>
+			    							<th> Medication Cost/patient (Rs.) </th>
+			    						</tr>
+			    					</thead>
+			    					<tbody>
+			    						<tr>
+			    							<td> Dr. Deepak Gupta (admin) </td>
+			    							<td> 13000 (46%) </td>
+			    							<td> 122/158 (78%) </td>
+			    							<td> 13000/122 = 116 </td>
+			    						</tr>
+			    						<tr>
+			    							<td> Dr. Deepak Gupta (admin) </td>
+			    							<td> 13000 (46%) </td>
+			    							<td> 122/158 (78%) </td>
+			    							<td> 13000/122 = 116 </td>
+			    						</tr>
+			    						<tr>
+			    							<td> Dr. Deepak Gupta (admin) </td>
+			    							<td> 13000 (46%) </td>
+			    							<td> 122/158 (78%) </td>
+			    							<td> 13000/122 = 116 </td>
+			    						</tr>
+			    						<tr>
+			    							<td> Dr. Deepak Gupta (admin) </td>
+			    							<td> 13000 (46%) </td>
+			    							<td> 122/158 (78%) </td>
+			    							<td> 13000/122 = 116 </td>
+			    						</tr>
+			    						
+			    					</tbody>
+			    				</table>
+			    			</div>
+
+			    		</div>
+			    	</div>
+
+			    	<div class="" *ngIf="activatedtab==7">
+			    		<div class="row">
+			    			<div class="form-group col-md-6 col-sm-6 col-xs-12">
+			    				<label> Total Diagnostics Sales </label>
+			    				<p> Rs. 38575.0 (400 orders) </p>
+			    			</div>
+			    			<div class="form-group col-md-6 col-sm-6 col-xs-12">
+			    				<label> Total prescription sales (all doctors) </label>
+			    				<p> Rs. 26500.0 (76%) </p>
+			    			</div>
+			    			<div class="form-group col-md-6 col-sm-6 col-xs-12">
+			    				<label> Total Standalone Sales </label>
+			    				<p> Rs.12075.0 (24%) </p>
+			    			</div>
+			    			<div class="form-group col-md-6 col-sm-6 col-xs-12">
+			    				<label> Patient turnout at Diagnostics (%) </label>
+			    				<p> 354/417 (85%) </p>
+			    			</div>
+			    			<div class="form-group col-md-6 col-sm-6 col-xs-12">
+			    				<label> Maximum Sale in a day </label>
+			    				<p> Rs. 18575.0 </p>
+			    			</div>
+			    			<div class="form-group col-md-6 col-sm-6 col-xs-12">
+			    				<label> Minimum Sale in a day </label>
+			    				<p> Rs. 6500.0 </p>
+			    			</div>
+			    			<div class="form-group col-md-6 col-sm-6 col-xs-12">
+			    				<label> Average daily Sales </label>
+			    				<p> Rs.10075.0 </p>
+			    			</div>
+			    			
+			    			<div class="col-md-12 col-sm-12 col-xs-12">
+			    				<h4> Doctor-wise break-up </h4>
+			    			</div>
+
+			    			<div class="table-responsive col-md-12 col-sm-12 col-xs-12">
+			    				<table class="table table-striped">
+			    					<thead>
+			    						<tr>
+			    							<th> Clinic Doctor Name </th>
+			    							<th> Sales Contribution (Rs.) </th>
+			    							<th> Patient turnout at clinic pharmacy </th>
+			    							<th> Medication Cost/patient (Rs.) </th>
+			    						</tr>
+			    					</thead>
+			    					<tbody>
+			    						<tr>
+			    							<td> Dr. Deepak Gupta (admin) </td>
+			    							<td> 13000 (46%) </td>
+			    							<td> 122/158 (78%) </td>
+			    							<td> 13000/122 = 116 </td>
+			    						</tr>
+			    						<tr>
+			    							<td> Dr. Deepak Gupta (admin) </td>
+			    							<td> 13000 (46%) </td>
+			    							<td> 122/158 (78%) </td>
+			    							<td> 13000/122 = 116 </td>
+			    						</tr>
+			    						<tr>
+			    							<td> Dr. Deepak Gupta (admin) </td>
+			    							<td> 13000 (46%) </td>
+			    							<td> 122/158 (78%) </td>
+			    							<td> 13000/122 = 116 </td>
+			    						</tr>
+			    						<tr>
+			    							<td> Dr. Deepak Gupta (admin) </td>
+			    							<td> 13000 (46%) </td>
+			    							<td> 122/158 (78%) </td>
+			    							<td> 13000/122 = 116 </td>
+			    						</tr>
+			    						
+			    					</tbody>
+			    				</table>
+			    			</div>
+
+			    		</div>
+			    	</div>
+
+	    		</div>
+	    	</div>
+
+
+
+	    </div>
+
+	</div>
+
+</div>
+

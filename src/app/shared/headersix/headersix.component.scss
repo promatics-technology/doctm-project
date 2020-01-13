@@ -1,0 +1,115 @@
+//  .dashboard-subscription button.btn-1,
+//  .dashboard-subscription button.btn-2,
+//  .dashboard-subscription button.btn-3{
+//  	padding:4px 35px; 
+//  	color:#fff;
+//  	border-radius:6px;
+// 	margin-right:15px;
+// 	transition:300ms;
+//  }
+//  .dashboard-subscription button.btn-1:hover,
+//  .dashboard-subscription button.btn-2:hover,
+//  .dashboard-subscription button.btn-3:hover{
+// 	-webkit-box-shadow: 1px 6px 16px -1px rgba(0,0,0,0.33);
+// 	-moz-box-shadow: 1px 6px 16px -1px rgba(0,0,0,0.33);
+// 	box-shadow: 1px 6px 16px -1px rgba(0,0,0,0.33);
+// }
+//  .dashboard-subscription button.btn-1{
+//  	background-color:#92D050;
+//  }
+//   .dashboard-subscription button.btn-2{
+//  	background-color:#00B0F0;
+//  }
+//  .dashboard-subscription button.btn-3{
+//  	background-color:#E36C09;
+//  }
+.btn-custom {
+	color: #002160;
+	position: relative;
+	padding: 8px 30px;
+	border-radius: 4px;
+	font-size: 18px;
+	min-width: 150px;
+	font-weight: 700;
+	text-transform: uppercase;
+
+	border: 1px solid #002160;
+	transition: all 0.3s ease 0s;
+	box-shadow: 0 2px 2px 0 rgba(39, 80, 176, 0.14), 0 3px 1px -2px rgba(39, 87, 176, 0.2), 0 1px 5px 0 rgba(39, 74, 176, 0.12);
+}
+.dashboard-btns button {
+	border-radius: 10px;
+	border: 1px solid #bdbdbd;
+	color: #fff;
+	-webkit-box-shadow: 0 2px 2px 0 rgba(39, 80, 176, 0.14), 0 3px 1px -2px rgba(39, 87, 176, 0.2), 0 1px 5px 0 rgba(39, 74, 176, 0.12), inset 0 3px 3px rgba(255, 255, 255, 0.9);
+	-moz-box-shadow: 0 2px 2px 0 rgba(39, 80, 176, 0.14), 0 3px 1px -2px rgba(39, 87, 176, 0.2), 0 1px 5px 0 rgba(39, 74, 176, 0.12), inset 0 3px 3px rgba(255, 255, 255, 0.9);
+	-o-box-shadow: 0 2px 2px 0 rgba(39, 80, 176, 0.14), 0 3px 1px -2px rgba(39, 87, 176, 0.2), 0 1px 5px 0 rgba(39, 74, 176, 0.12), inset 0 3px 3px rgba(255, 255, 255, 0.9);
+}
+.dashboard-btns button:hover {
+	box-shadow: 0 16px 26px -10px rgba(0, 34, 96, 0.56), 0 4px 25px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(156, 39, 176, 0.2);
+}	
+.dashboard-btns button.btn-1{
+	background: linear-gradient(to top, rgb(134, 173, 68), rgb(150, 195, 78), rgb(161, 210, 83));
+}
+.dashboard-btns button.btn-2{
+	background: linear-gradient(to top, rgb(57, 96, 157), rgb(70, 115, 189), rgb(78, 127, 211));
+}
+
+.dashboard-btns button.btn.btn-custom.btn-3{
+	background: linear-gradient(to top, rgb(226, 127, 42), rgb(246, 141, 47), rgb(254, 156, 52));
+}
+
+.cstm-caret {
+    display: inline-block;
+    width: 0;
+    cursor: pointer;
+    position: absolute;
+    height: 0;
+    margin-left: 4px;
+    color: #000;
+    top: 70.5px;
+    background-color: #01b0f0;
+    z-index: 9;
+    right: 20px;
+    margin-bottom: 9px;
+    vertical-align: middle;
+    border-top: 12px dashed;
+    border-right: 10px solid transparent;
+    border-left: 10px solid transparent;
+}
+.cstm-caret-big {
+    display: inline-block;
+    width: 0;
+    cursor: pointer;
+    position: absolute;
+    height: 0;
+    margin-left: 4px;
+    color: #000;
+    top: 22px;
+    background-color: #01b0f0;
+    z-index: 1;
+    right: 5px;
+    margin-bottom: 9px;
+    vertical-align: middle;
+    border-top: 17px dashed;
+    border-right: 14px solid transparent;
+    border-left: 14px solid transparent;
+}
+.cstm-crt-wrap {
+    position: relative;
+}
+.regis-modal-body .select-opt .disabled {
+    color: #ddd;
+}
+.select-doctor{
+    background-color: #01b0f0;
+    margin-top: 55px;
+    color: #fff;
+    margin-bottom: 15px;
+}
+h3.dt{
+    color:#416bb1;
+}
+h3.dt > span{
+    color:#000;
+}

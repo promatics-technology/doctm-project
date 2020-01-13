@@ -1,0 +1,151 @@
+.cus-sidebar-wrapper{
+    transform: translateX(-15px);
+}
+.cus-sidebar-wrapper .cus-sidebar{
+	width:209px;
+}
+.col-left{
+	padding-right:0px; 
+}
+.col-ryt{
+	padding-left:0px;
+}
+.cstm-table table th{
+	padding:10px 5px; 
+	border-right:1px solid #777;
+	background-color: #c5d8f1;
+	transition: 300ms;
+}
+.cstm-table table th:hover{
+	padding:10px 5px; 
+	border-right:1px solid #777;
+	background-color:#000;
+	color:  #c5d8f1;
+}
+.cstm-table table{
+	border-color: #777;
+}
+.map{
+	margin-top: -20px;
+}
+.mg-t-0{
+	margin-top: 0px;
+}
+.thm-clr{
+	color: #00b0f0;
+}
+.footer-cstm-an{
+	position: fixed;
+    float: left;
+    width: 100%;
+    bottom: 0;
+    background: #fff;
+    border-top: 1px solid #d6d6d6;
+    padding-top: 8px;
+}
+.btn-cstm{
+	background-color: #00b0f0;
+	border-radius: 6px;
+	color:#000;
+	box-shadow: none;
+	margin-bottom:8px; 
+	padding: 7px 22px;
+	width: 250px;
+	font-size: 22px;
+	transition: 50ms;
+}
+.btn-cstm:hover{
+	background-color:#000;
+	color:#fff; 
+}
+span.bl{
+  /*color:#00b0f0!important;*/
+  color: rgb(91,131,252);
+}
+span.grin{
+  /*color:green!important;*/
+  color: rgb(90,252,124);
+}
+span.red{
+  /*color:red!important;*/
+  color: rgb(252,102,88);
+}
+
+.mt-table h3{
+	margin-top: 0px;
+}
+.cstm-tr{
+	background-color: #000;
+	color:#fff;
+	text-align: center;
+}
+.cstm-tr-2{
+	background-color:#d7e4e3;
+}
+.cstm-tr-2 td{
+	border-right:1px solid #bbb; 
+}
+.cstm-tr-2 td:last-child {
+ border-right: none;
+}
+.cstm-tr-3{
+	border-bottom:1px solid #bbb; 
+}
+.cstm-tr-3 td{
+	border-right:1px solid #bbb; 
+}
+.cstm-tr-3 td:last-child {
+ border-right: none;
+}
+.close{
+	font-size: 35px;
+}
+.modal-body{
+	padding-top: 0px;
+	padding-bottom: 0px;
+}
+.cstm-tab{
+	min-height: 0.1px;
+	max-height: 500px;
+	overflow-y: scroll;
+	margin-top: 25px;
+}
+.cstm-md-bdy{
+	position: relative;
+}
+.cstm-md-bdy button{
+	position: absolute;
+	top: -30px;
+    right: 8px;
+}
+.cus-sidebar-wrapper .cus-sidebar{
+	height: initial;
+}
+.h3-mrgn h3{
+	margin:3px 0px;
+}
+.h3-mrgn{
+	margin-bottom: 25px;
+}
+.modal.fade .modal-dialog {
+  transform: translate3d(0, 100vh, 0);
+  transition: 700ms;
+}
+
+.modal.in .modal-dialog {
+  transform: translate3d(0, 0, 0);
+  transition: 700ms;
+}
+.evn{
+	background-color:#eff3ef;
+}
+.out{
+	background-color:#9cacc0;
+}
+.cus-sidebar{
+	width:100%!important;
+}
+.btn-stts{
+	position: static!important;
+	margin-bottom: 10px!important;	
+}

@@ -1,0 +1,189 @@
+<div class="loader-box" *ngIf="loading">
+	<img src="./assets/imgs/load.gif" />
+</div>
+<div class="analytics-sec">
+	
+	<div class="ipd-deatil-sec">
+	    <div class="inner-tab">
+	      	<ul class="nav nav-tabs new-ul-1" role="tablist">
+	      		<li role="presentation"  class="clz"><a href="javascript:void(0);" routerLink="/header-two-layout/clinic-summary-opd"> <div>OPD</div><small> (All Doctors)</small> </a></li>
+	      		<li role="presentation" *ngIf="doctorData.clinic_services.Clinic_Pharmacy==true"><a href="javascript:void(0);" routerLink="/header-two-layout/clinic-summary-pharmacy">Pharmacy</a></li>
+	      		<li role="presentation" *ngIf="doctorData.clinic_services.Clinic_Diagnostics==true"><a href="javascript:void(0);" routerLink="/header-two-layout/clinic-summary-diagnostic"> Diagnostics </a></li>
+	      		<li role="presentation" class="active" *ngIf="doctorData.clinic_services.Clinic_IPD==true"><a href="javascript:void(0);" routerLink="/header-two-layout/clinic-summary-ipd"> IPD </a></li>
+	      		<li role="presentation"><a href="javascript:void(0);" routerLink="/header-two-layout/clinic-summary-all">Summary</a></li>
+	      	</ul>
+	    </div>
+	    <div class="ipd-body">
+	      	<div class="cus-sidebar-wrapper side-bar-cstm">
+	      		<div class="cus-sidebar">
+	      			<ul> 
+	      				<li>
+	      					<div class="">
+	      						<div class="col-lg-3">
+	      							<h4 class="pd-left"><b>From</b></h4>
+	      						</div>
+	      						<div class="col-lg-9">
+	      							<div class="cstm-mg">
+	      								<angular2-date-picker [(ngModel)]="fromDate1" [settings]="settings"></angular2-date-picker>
+	      							</div>
+	      						</div>
+	      					</div>
+	      				</li>
+	      				<li>
+	      					<div class="">
+	      						<div class="col-lg-3">
+	      							<h4 class="pd-left"><b>To</b></h4>
+	      						</div>
+	      						<div class="col-lg-9">
+	      							<div class="cstm-mg">
+	      								<angular2-date-picker [(ngModel)]="toDate1" [settings]="settings"></angular2-date-picker>
+	      							</div>
+	      						</div>
+	      					</div>
+	      				</li>
+	      				<li class="text-right brder-cstm">
+    						<div class="col-lg-12 text-center">
+	      						<button class="btn btn-go" (click)="go()">Go</button>
+	      					</div>
+	      				</li>
+	      				<li class="li-cstm"> <a href="javascript:void(0);"> For Past</a> </li>
+	      				<!-- <li class="{{getClass(0)}}" (click)="activatetab(0)" class="active"> <a href="javascript:void(0);"> Current </a> </li> -->
+	      				<li class="{{getClass(1)}}" (click)="activatetab(1)"> <a href="javascript:void(0);"> 1 Week &nbsp;<small *ngIf="activatedtab==1">({{fromDate | date: 'dd/LL/yy'}} - {{toDate | date: 'dd/LL/yy'}})</small> </a> </li>
+	      				<li class="{{getClass(2)}}" (click)="activatetab(2)"> <a href="javascript:void(0);"> 2 Weeks &nbsp;<small *ngIf="activatedtab==2">({{fromDate | date: 'dd/LL/yy'}} - {{toDate | date: 'dd/LL/yy'}})</small>  </a> </li>
+	      				<li class="{{getClass(3)}}" (click)="activatetab(3)"> <a href="javascript:void(0);"> 1 Month &nbsp;<small *ngIf="activatedtab==3">({{fromDate | date: 'dd/LL/yy'}} - {{toDate | date: 'dd/LL/yy'}})</small> </a> </li>
+	      				<li class="{{getClass(4)}}" (click)="activatetab(4)"> <a href="javascript:void(0);"> 3 Month &nbsp;<small *ngIf="activatedtab==4">({{fromDate | date: 'dd/LL/yy'}} - {{toDate | date: 'dd/LL/yy'}})</small></a> </li>
+	      				<li class="{{getClass(5)}}" (click)="activatetab(5)"> <a href="javascript:void(0);"> 6 Month &nbsp;<small *ngIf="activatedtab==5">({{fromDate | date: 'dd/LL/yy'}} - {{toDate | date: 'dd/LL/yy'}})</small></a> </li>
+	      				<li class="{{getClass(6)}}" (click)="activatetab(6)"> <a href="javascript:void(0);"> 1 Year &nbsp;<small *ngIf="activatedtab==6">({{fromDate | date: 'dd/LL/yy'}} - {{toDate | date: 'dd/LL/yy'}})</small></a> </li>
+	      				<li class="{{getClass(7)}}" (click)="activatetab(7)"> <a href="javascript:void(0);"> All </a> </li>
+	      			</ul>
+	      		</div>
+	      	</div>
+	      	<div class="stock-tab">
+				<div class="col-lg-10 col-lg-offset-2">
+					<ul class="nav nav-tabs cstm-ul-new cstm-ul-new-width">
+						<li class="active"><a data-toggle="tab" href="#home-cstm">IPD Book</a></li>
+						<li><a data-toggle="tab" href="#menu2-cstm">BREAK UP</a></li>
+					</ul>
+					<div class="tab-content">
+					    <div id="home-cstm" class="tab-pane fade in active">
+					    	<div class="row">
+					    		<div class="col-lg-12">
+					    			<br>
+					    			<!-- <div class=""> -->
+										<div style="min-height: 10px; max-height:425px; overflow-y: scroll;">
+								            <table class="table table-bordered" matSort (matSortChange)="sortData($event)" >
+								               <thead class="new-thd tab-copy">
+								                    <tr>
+								                        <th mat-sort-header="date" width="4%" class="{{getTableHeaderClass(1)}} text-center" (click)="setTableHeaderClass(1)"><h4 style="width: 100%; text-align: center;">SNo</h4>
+								                        </th>
+								                        <th mat-sort-header="patientName " width="16%" class="{{getTableHeaderClass(2)}} text-center" (click)="setTableHeaderClass(2)"><h4 style="width: 100%; text-align: center;">Patient Name</h4>
+								                        </th>
+								                        <th mat-sort-header="procedure " width="10%" class="{{getTableHeaderClass(7)}} text-center" (click)="setTableHeaderClass(7)"><h4 style="width: 100%; text-align: center;">Procedure</h4>
+								                        </th>
+								                        <th mat-sort-header="first_name " width="18%" class="{{getTableHeaderClass(3)}} text-center" (click)="setTableHeaderClass(3)"><h4 style="width: 100%; text-align: center;">Doctor</h4>
+								                        </th>
+								                        <th mat-sort-header="createdAt " width="10%" class="{{getTableHeaderClass(4)}} text-center" (click)="setTableHeaderClass(4)"><h4 style="width: 100%; text-align: center;">Admission</h4>
+								                        </th>
+								                        <th mat-sort-header="discharge_date " width="10%" class="{{getTableHeaderClass(5)}} text-center" (click)="setTableHeaderClass(5)"><h4 style="width: 100%; text-align: center;">Dishcharge</h4>
+								                        </th>
+								                        <th mat-sort-header="duration_days " width="10%" class="{{getTableHeaderClass(6)}} text-center" (click)="setTableHeaderClass(6)"><h4 style="width: 100%; text-align: center;">Dur(day:hrs)</h4>
+								                        </th>
+								                        <th width="10%" mat-sort-header=invoice class="{{getTableHeaderClass(8)}} text-center" (click)="setTableHeaderClass(8)"><h4 style="width: 100%; text-align: center;">Invoice No.</h4>
+								                        </th>
+								                         <th width="7%" mat-sort-header="total_bill" class="{{getTableHeaderClass(9)}} text-center" (click)="setTableHeaderClass(9)"><h4 style="width: 100%; text-align: center;">Bill Amount</h4>
+								                        </th>
+								                    </tr>
+								               </thead>
+												<tbody class="tab-copy-tr">
+
+													<tr class="table-row"  *ngFor="let item of sortedData; let i= index;">
+														<td width="60px">{{i+1}}</td>
+														<td>{{item.patientName}}</td> 
+														<td>{{item.procedure}}</td>
+														<td>{{item.consultDoc.first_name}}</td>
+														<td>{{item.createdAt | date:'d MMM yy ,H:mm'}}</td>
+														<td>
+															<span *ngIf="item.discharge_date">{{item.discharge_date | date:'d MMM yy ,H:mm'}}</span>
+														</td>
+														<td><span *ngIf="item.discharge_date">{{item.duration_days}} days {{item.duration_hours}} hrs</span></td>
+														<td>
+															<span *ngIf="item.discharge_date">{{item.id}}</span>
+														</td>
+														<td>{{item.total_bill}}</td>
+													</tr>
+												</tbody>
+								            </table>
+										</div>
+										<div class="row cstm-footer new-set-footer"  *ngIf="patinetlist.length>0">
+											<div class="col-md-4 col-sm-4 col-xs-12 text-center">
+												<div class="sub-total-div">
+													<h3><p>Total patients admitted: <b>{{patinetlist.length}}</b></p></h3>
+												</div>
+											</div>
+											<div class="col-md-4 col-sm-4 col-xs-12 text-center">
+												<div class="sub-total-div">
+													<h3><p>Total Occupancy Hours: <b>{{totalOccupancy}}</b></p></h3>
+												</div>
+											</div>
+											<div class="col-md-4 col-sm-4 col-xs-12 text-center">
+												<div class="sub-total-div">
+													<h3><p>Total Bill Value: <b>Rs. {{totalBill}} </b></p></h3>
+												</div>
+											</div>
+										</div>
+    								<!-- </div> -->
+					    		</div>
+					    	</div>
+					    </div>
+					    <div id="menu2-cstm" class="tab-pane fade">
+					    	<br>
+					      	<div class="row">
+					      		<div class="col-lg-12" id="previewModalPdf">
+					      			<div style="min-height:29em;">
+					      				<table class="table table-bordered tab-12">
+											<thead class="high-light-clr">
+												<th class="text-left">Consulting Doctor</th>
+												<th class="text-center">Patients Admitted</th>
+												<th class="text-center">Patients Discharged</th>
+												<th class="text-center">IPD Revenue (Rs.)</th>
+												<th class="text-center">Admission Duration (Hrs)</th>
+											</thead>
+											<tbody>
+												<tr *ngFor="let op of dataArray">
+													<td  class="text-left">Dr. {{getDoctorName(op._id)}}</td>
+													<td  class="text-center">{{op.patientNotDischarge.length}}<small> ({{getData(getPercentage(op.patientNotDischarge.length,patientAdmitted)) }}%)</small></td>
+													<td  class="text-center">{{op.patientDischarge.length}}</td>
+													<td  class="text-center">{{op.total_sales_amount}} <small>({{getData(getPercentage(op.total_sales_amount,ipdRevenue))}} %)</small></td>
+													<td  class="text-center">{{op.admisssionHours}}<small> ({{getData(getPercentage(op.admisssionHours,totalAdmissionHours))}} %)</small></td>
+												</tr>
+												<tr class="high-light-clr">
+													<td  class="text-left"><b>IPD Aggregate</b> </td>
+													<td  class="text-center"><b>{{patientAdmitted}}</b></td>
+													<td  class="text-center"><b>{{patientDischarge}}</b></td>
+													<td  class="text-center"><b>{{ipdRevenue}}</b></td>
+													<td  class="text-center"><b>{{totalAdmissionHours}}</b></td>
+												</tr>
+											</tbody>
+										</table>
+					      			</div>	
+					      		</div>
+					      		<div class="col-lg-12">
+									<div class="row">
+										<div class="col-lg-12 text-right">
+											<button class="btn btn-custom btn-grin" (click) = "createPdf()">
+												<div> PRINT </div>
+											</button>
+											<!-- <button class="btn btn-custom btn-grin" (click) = "exportPdf()">
+												<div> PRINT </div>
+											</button> -->
+										</div>
+									</div>
+								</div>
+							</div>
+					    </div>
+					</div>
+				</div>
+			</div>
+	    </div>
+	  </div>
+	</div>

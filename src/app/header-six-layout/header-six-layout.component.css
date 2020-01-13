@@ -1,0 +1,43 @@
+
+.cstm-caret {
+    display: inline-block;
+    width: 0;
+    cursor: pointer;
+    position: absolute;
+    height: 0;
+    margin-left: 4px;
+    color: #000;
+    top: 17.5px;
+    background-color: #01b0f0;
+    z-index: 9;
+    right: 20px;
+    margin-bottom: 9px;
+    vertical-align: middle;
+    border-top: 12px dashed;
+    border-right: 10px solid transparent;
+    border-left: 10px solid transparent;
+}
+.cstm-caret-big {
+    display: inline-block;
+    width: 0;
+    cursor: pointer;
+    position: absolute;
+    height: 0;
+    margin-left: 4px;
+    color: #000;
+    top: 22px;
+    background-color: #01b0f0;
+    z-index: 1;
+    right: 5px;
+    margin-bottom: 9px;
+    vertical-align: middle;
+    border-top: 17px dashed;
+    border-right: 14px solid transparent;
+    border-left: 14px solid transparent;
+}
+.cstm-crt-wrap {
+    position: relative;
+}
+.regis-modal-body .select-opt .disabled {
+    color: #ddd;
+}

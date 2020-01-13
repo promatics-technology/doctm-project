@@ -1,0 +1,38 @@
+<div class="loader-box" *ngIf="loading">
+	<img src="./assets/imgs/load.gif" />
+</div>
+<div class="analytics-sec">
+	<div class="ipd-deatil-sec">
+		<div class="ipd-body">
+			<div class="cus-sidebar-wrapper side-bar-cstm">
+				<div class="cus-sidebar">
+					<h4 class="cstm-tr">Category</h4>
+					<ul *ngFor = "let list of getCategoryArray; let i = index">
+						<li class="{{getClass(i)}}" (click) = "showByCategory(list.category, i)"> <a>{{list.category}}</a> </li>
+					</ul>
+				</div>
+			</div>
+			<div class="cus-content-wrapper">
+				<div class="cus-content">
+					<div class="row" >
+						<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12" *ngFor = "let list of filteredDataVideo">
+							<div class="video-wrap">
+								<video *ngIf="list.video" oncontextmenu="return false;"  class="plyrID" controls playsinline controlsList="nodownload"  poster="{{tutorialData}}{{list.poster}}">
+									<source  src="https://doctmapi.gagzweblab.xyz/public/tutorials_file/{{list.video}}" type="video/mp4" size="576">
+									</video>
+									<div class="txt-video">
+										<h4>{{list.caption}}</h4>
+										<p>{{list.description}}</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+	

@@ -1,0 +1,74 @@
+<section class="login-sec">
+
+	<div class="container p-0">
+
+		<div class="login-panel">
+			<div class="col-md-offset-1 col-md-10 col-sm-12 col-xs-12">
+				<div class="row">
+					
+					<div class="col-md-6 col-sm-6 col-xs-12">
+						<div class="login-left">
+							<h1> Welcome</h1>
+							<h1> to </h1> 
+							<h1> doctm </h1> 
+							<h1> SmartPharmacy </h1> 
+						</div>
+					</div>
+					
+					<form [formGroup]="loginForm">
+						<div class="m-t-40 col-md-6 col-sm-6 col-xs-12"> 
+							<div class="login-right newform-margin">
+								<div class="form-group col-md-12 col-sm-12 col-xs-12">
+									<div class="fieldDesign">
+										<input id="field1" type="text" class="form-control txtfield" name="" required="" [(ngModel)]="loginData.doctm_clinic_id" [formControl]="loginForm.controls['doctm_clinic_id']" />
+										<p style="color: #FF0000" *ngIf="!loginForm.controls['doctm_clinic_id'].valid  && ( loginForm.controls['doctm_clinic_id'].touched)">Invalid Id  !!!</p>
+										<label for="field1" class="labelFloat"> User ID </label>
+									</div>
+								</div>
+								<div class="form-group col-md-12 col-sm-12 col-xs-12">
+									<div class="fieldDesign">
+										<input id="field2" type="password" class="form-control txtfield" name="" required="" [(ngModel)]="loginData.password" [formControl]="loginForm.controls['password']" />
+										<label for="field2" class="labelFloat"> Password </label>
+									</div>
+								</div>
+								<div class="form-group col-md-12 col-sm-12 col-xs-12">
+									<div class="fieldDesign">
+										<re-captcha (resolved)="resolved($event, 'step1')" siteKey="6LdBQZoUAAAAACukEUlsU0fnfOcFdXQYuyAcpO9J"></re-captcha>									</div>
+								</div>
+								<div class="form-group col-md-6 col-sm-6 col-xs-12">
+									<div class="checkbox">
+										<label><input type="checkbox" name="" [(ngModel)]="remember_me" [formControl]="loginForm.controls['remember_me']" /> Remember me </label>
+									</div>
+								</div>
+								<div class="form-group col-md-6 col-sm-6 col-xs-12">
+									<a href="javascript:void(0)" routerLink="/header-one-layout/forgot-password/pharmacy" class="forgt_pass"> Forgot Password? </a>
+								</div>
+
+								<div class="form-group col-md-12 col-sm-12 col-xs-12 text-center">
+									<button class="btn btn-custom" type="submit" [disabled]="!loginForm.valid || !captcha_step_1" (click)="LoginSmartPharmacy()"> Submit </button>
+								</div>
+							</div>
+
+						</div>
+					</form>
+
+				</div>
+
+				<div class="row">
+					<div class="m-t-40 col-md-12 col-sm-12 col-xs-12">
+						<div class="col-md-6 col-sm-6 col-xs-12 dwnld-login">
+							<h1> Download doctm SmartClinic App </h1>
+						</div>
+						<div class="col-md-6 col-sm-6 col-xs-12 googlePlay-login">
+							<a href="#"> <img src="./assets/imgs/googlePlay.png" class="img-responsive" /> </a>
+						</div>
+					</div>
+				</div>
+				
+			</div>
+
+		</div>
+
+	</div>
+
+</section>

@@ -1,0 +1,110 @@
+<div class="loader-box" *ngIf="loading">
+    <img src="./assets/imgs/load.gif" />
+</div>
+<div class="cstm-hdr">
+	<div class="">
+		<div  class="col-lg-2">
+			<div  class="dashboard-header-logo" tabindex="0" ng-reflect-router-link="/header-five-layout/dashboard-">
+				<img class="img-responsive" src="./assets/imgs/logoDoctm.png" routerlink="/header-five-layout/dashboard-pharmacy">
+			</div>
+			<div >
+				<div class="dshbrd-btn">
+					<button  class="btn btn-custom" routerLink="/header-five-layout/dashboard-pharmacy" tabindex="0" ng-reflect-router-link="/header-five-layout/dashboard-"> Dashboard </button>
+				</div>
+			</div>
+		</div>
+		<div class="col-lg-5">
+	        <div class="">
+	           <div class="cstm-drpdown-cnsulted-doc">
+	                <span  class="caret cstm-caret-big"></span>
+	                <select [(ngModel)]="optionSelected" (change)="selectOne($event)">
+	                    <option selected="" value="0">PRODUCT EXPIRED</option>
+	                    <option value="1" >PRODUCT EXPIRING IN 3 MONTHS  </option>
+	                    <option value="2">PRODUCT EXPIRING IN 6 MONTHS</option>                   
+	                </select>
+	            </div>
+	        </div>
+	    </div>
+		<div class="col-lg-3">
+	        <div class="">
+	           <div class="cstm-put">
+	           		<input type="text" name="" class="form-control" placeholder="Search by product" (input)="search()" [(ngModel)]="searchInput" >
+	           </div>
+	        </div>
+	    </div>
+	</div>
+</div>
+<div class="stock-tab">
+	<div class="col-lg-12">
+		<div class="tbl-cntrol">
+			<table class="table table-bordered" matSort (matSortChange)="sortData($event)" *ngIf="sortedData.length>0" >
+			    <thead class="new-thd">
+			   		<tr>
+				        <th mat-sort-header="product" width="20%" class="{{getTableHeaderClass(1)}} text-center" (click)="setTableHeaderClass(1)"><h4 style="width: 100%; text-align: center;">Product</h4></th>
+				        <th mat-sort-header="type" width="10%" class="{{getTableHeaderClass(2)}} text-center" (click)="setTableHeaderClass(2)"><h4 style="width: 100%; text-align: center;">Type</h4></th>
+				        <th mat-sort-header="packing" width="10%" class="{{getTableHeaderClass(3)}} text-center" (click)="setTableHeaderClass(3)"><h4 style="width: 100%; text-align: center;">Packing</h4></th>
+				        <th mat-sort-header="expiry" width="10%" class="{{getTableHeaderClass(8)}} text-center" (click)="setTableHeaderClass(8)"><h4 style="width: 100%; text-align: center;">Expiry</h4></th>
+				        <th mat-sort-header="batch" width="10%" class="{{getTableHeaderClass(4)}} text-center" (click)="setTableHeaderClass(4)"><h4 style="width: 100%; text-align: center;">Batch</h4></th>
+				        <th mat-sort-header="stock" width="10%" class="{{getTableHeaderClass(5)}} text-center" (click)="setTableHeaderClass(5)"><h4 style="width: 100%; text-align: center;">Stock</h4></th>
+				        <th mat-sort-header="p_rate" width="10%" class="{{getTableHeaderClass(6)}} text-center" (click)="setTableHeaderClass(6)"><h4 style="width: 100%; text-align: center;">P.Rate/P</h4></th>
+				        <th mat-sort-header="value" width="10%" class="{{getTableHeaderClass(7)}} text-center" (click)="setTableHeaderClass(7)"><h4 style="width: 100%; text-align: center;">P.Value</h4></th>
+				        <th width="10%" *ngIf="optionSelected==0"><h4 style="width: 100%; text-align: center;">Action</h4></th>
+			    	</tr>
+			    </thead>
+			    <tbody class="new-tbdy">
+					<tr *ngFor="let list of sortedData">
+						<td width="20%" class="text-center">{{list.product}}</td>
+						<td width="10%" class="text-center">{{list.type}}</td>
+						<td width="10%" class="text-center">{{list.pack_units}} x {{list.pack_quantity}}</td>
+						<td width="10%" class="text-center">{{list.month}}/{{list.year}}</td>
+						<td width="10%" class="text-center">{{list.batch}}</td>
+						<td width="10%" class="text-center">{{list.newPacking}} <b>: </b>{{list.newPackingReminder}}</td>
+						<td width="10%" class="text-center">{{getData(list.cost)}}</td>
+						<td width="10%" class="text-center">{{list.present_prate}}</td>
+						<td width="10%" class="text-center" *ngIf="optionSelected==0"><i class="fa fa-trash dlt-icon" (click)="DeleteExpiredStock(list)"></i></td>
+					</tr>
+				</tbody>		    
+			</table>			
+	    	<div class="col-lg-12" *ngIf="sortedData.length<1">
+             	<h3 class="text-center">No product found ...</h3>
+            </div> 
+		</div>
+	</div>
+	<div class="col-lg-8 col-lg-offset-2 col-md-12  col-sm-12 col-xs-12 cstm-footer">
+		<div class="btn-wrap row">
+			<div class="col-lg-5 col-md-5 col-sm-4 col-xs-12 text-center">
+				<button class="btn btn-custom btn-b"  *ngIf="optionSelected==0">
+					<div>Expired products valuation: {{expireValuation}}</div>
+				</button>
+				<button class="btn btn-custom btn-b"  *ngIf="optionSelected==1">
+					<div>Expiring products valuation: {{expireValuationAfterThree}}</div>
+				</button>
+				<button class="btn btn-custom btn-b"  *ngIf="optionSelected==2">
+					<div>Expiring products valuation: {{expireValuationAfterSix}}</div>
+				</button>
+			</div>
+			<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 text-center">
+				<button class="btn btn-custom btn-b"  *ngIf="optionSelected==0">
+					<div>Total Product Items: {{totalProducts.length}}</div>
+				</button>
+				<button class="btn btn-custom btn-b"  *ngIf="optionSelected==1">
+					<div>Total Product Items: {{totalProducts.length}}</div>
+				</button>
+				<button class="btn btn-custom btn-b"  *ngIf="optionSelected==2">
+					<div>Total Product Items: {{totalProducts.length}}</div>
+				</button>
+			</div>
+			<div class="col-lg-3 col-md-3 col-sm-4 col-xs-12 text-center ">
+				<button class="btn btn-custom btn-grin" *ngIf="optionSelected==0" (click)="exportPdf()">
+					<div>Export</div>
+				</button>
+				<button class="btn btn-custom btn-grin" *ngIf="optionSelected==1" (click)="exportPdf()">
+					<div>Export</div>
+				</button>
+				<button class="btn btn-custom btn-grin" *ngIf="optionSelected==2" (click)="exportPdf()">
+					<div>Export</div>
+				</button>
+			</div>
+		</div>
+	</div>
+</div>

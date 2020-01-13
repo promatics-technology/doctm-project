@@ -1,0 +1,344 @@
+<div class="loader-box" *ngIf="loading">
+    <img src="./assets/imgs/load.gif" />
+</div>
+<div class="cstm-hdr">
+    <div class="">
+            <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
+                <div class="dashboard-header-logo" tabindex="0" ng-reflect-router-link="/header-six-layout/dashboard-diagnostic-">
+                    <img _ngcontent-c3="" class="img-responsive" src="./assets/imgs/logoDoctm.png" routerLink="/header-six-layout/dashboard-diagnostic">
+    			</div>
+                <div>
+                    <div _ngcontent-c3="" class="dshbrd-btn mg_btm-10">
+                        <button class="btn btn-custom" routerLink="/header-six-layout/dashboard-diagnostic" tabindex="0" ng-reflect-router-link="/header-six-layout/dashboard-diagnostic-"> Dashboard </button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-8 col-md-8 col-sm-9 col-xs-12">
+                <div class="select-duration">
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6 col-xs-12 pd-none">
+                            <div class="col-md-12 col-sm-12 col-xs-12 pd-none">
+                                <label class=" col-md-3 col-sm-3 col-xs-12 text-right txt_left" style="font-size: 20px;">From:</label>
+                                <div class="col-md-9  col-sm-9 col-xs-12">
+                                    <angular2-date-picker [(ngModel)]="fromDate" [settings]="settings"></angular2-date-picker>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-12 pd-none">
+                            <div class="col-md-12 col-sm-12 col-xs-12 pd-none">
+                                <label class=" col-md-3 col-sm-3 col-xs-12 text-right txt_left" style="font-size: 20px;">To:</label>
+                                <div class="col-md-9  col-sm-9 col-xs-12">
+                                    <angular2-date-picker [(ngModel)]="toDate" [settings]="settings"></angular2-date-picker>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-2 col-sm-3 col-xs-12">
+                <div class="select-duration btn-go">
+                    <button class="btn ok-btn" type="button" (click)='viaDate()'> Go </button>
+                </div>
+            </div>
+            <div class="col-lg-8 col-md-8 col-sm-9 col-xs-12">
+                <!-- <div class="col-lg-12"> -->
+                <div class="form-group mr-top">
+                    <input type="text" class="form-control" [(ngModel)]="searchInput" placeholder="Search by Patient name, Receipt Number" (keyup)="onKey($event)">
+                </div>
+                <!-- </div> -->
+            </div>
+            <div class="col-lg-2 col-md-2 col-sm-3 col-xs-12 cstm-input srch-cstm">
+                <button class="btn btn-custom" (click)="SearchByPartyNameOrBill()">Search </button>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="stock-tab" style="float:left; width:100%;">
+        <div class="col-lg-12">
+            <div style="max-height: 10px; max-height: 380px; overflow-y: scroll;">
+                <table class="table table-bordered" matSort (matSortChange)="sortData($event)" *ngIf="sortedData.length>0">
+                    <thead class="new-thd">
+                        <tr>
+                            <th mat-sort-header="date" width="10%" class="{{getTableHeaderClass(1)}} text-center" (click)="setTableHeaderClass(1)"><h4 style="width: 100%; text-align: center;">Date</h4>
+                            </th>
+                            <th mat-sort-header="invoice" width="12%" class="{{getTableHeaderClass(2)}} text-center" (click)="setTableHeaderClass(2)"><h4 style="width: 100%; text-align: center;">Receipt Number</h4>
+                            </th>
+                            <th mat-sort-header="patient" width="10%" class="{{getTableHeaderClass(7)}} text-center" (click)="setTableHeaderClass(7)"><h4 style="width: 100%; text-align: center;">Patient Name</h4>
+                            </th>
+                            <th mat-sort-header="amount" width="10%" class="{{getTableHeaderClass(3)}} text-center" (click)="setTableHeaderClass(3)"><h4 style="width: 100%; text-align: center;">Sales Amount</h4>
+                            </th>
+                            <th width="10%" class="text-center"><h4>Action</h4></th>
+                        </tr>
+                    </thead>
+                    <tbody class="new-tbdy">
+                        <tr *ngFor="let item of salesBookArray;let i = index">
+                            <td width="10%" class="text-center">{{getTimeFiveAndHalfHoursBefore(item.createdAt) | date:'d MMM yy ,h:mm a'}}</td>
+                            <td width="12%" class="text-center">{{item.id}}</td>
+                            <td width="10%" class="text-center">
+                                <span *ngIf="item.walkin_patient">{{item.patient_name}}</span>
+                                <span *ngIf="!item.walkin_patient">{{item.dispensed_patient_id.registration.pateintName}}</span>
+                            </td>
+                            <td width="10%" class="text-center">{{getData(item.total_amount)}}</td>
+                            <td  width="10%" class="text-center">
+                                <button class="btn btn-info" (click)="viewData(item,i)">View</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="col-lg-12" *ngIf="sortedData.length<1">
+                    <h3 class="text-center">No data found ...</h3>
+                </div> 
+            </div>
+     
+        </div>
+        <div class="col-lg-6 col-lg-offset-3 cstm-footer text-center">
+            <div class="btn-wrap">
+                <button class="btn btn-custom btn-ornge">
+                    <div> Total Orders</div>
+                    <div>{{salesBookArray.length}}</div>
+                </button>
+                <button class="btn btn-custom">
+                    <div> Total Sale</div>
+                    <div>{{getData(totalAmount)}}</div>
+                </button>
+                <button class="btn btn-custom btn-grin btn-grin-2" (click)="exportPdf()">
+                    <div> EXPORT </div>
+                </button>
+            </div>
+        </div>
+    </div>
+
+<!-- Modal -->
+<div class="modal fade" id="view-sales-order-modal-diagnostics" role="dialog">
+    <div class="modal-dialog modal-prnt" *ngIf="returnPurchaseArray.opt.length>0">
+      <div class="modal-content modal-lg modal-cstm">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h3 class="modal-title text-center">{{salesBookArray[this.selectedIndex].patient}}</h3>
+          <h4 class="modal-title text-center">Receipt No - {{salesBookArray[this.selectedIndex].id}}</h4>
+        </div>
+        <div class="modal-body">
+            <div class="stock-tab">
+                <div class="col-lg-12">
+                    <div class="table tab-stock tab-stock-2">
+                        <table>
+                            <thead class="table-head tble-new">
+                                <tr>
+                                    <th class="text-center"><h4>Type</h4></th>
+                                    <th class="text-center"><h4>Product Name</h4></th>
+                                    <th class="text-center"><h4>M.R.P</h4></th>
+                                    <th class="text-center"><h4>Disc%</h4></th>
+                                    <th class="text-center"><h4>Amount</h4></th>
+                                </tr>
+                            </thead>
+                        </table>
+                        <table style="width:100%;">
+                            <tr class="mg-top" *ngFor="let tr of returnPurchaseArray.opt;let i = index;">
+                                <td width="240px">
+                                    <div class="trans-input">
+                                        <input type="text" placeholder="" class="cstm-put" value="{{returnPurchaseArray.opt[i]}}" readonly="">
+                                    </div>
+                                </td>
+                                <td width="240px">
+                                    <div class="pro-trans-input">
+                                        <input type="text" placeholder="" class="cstm-put" value="{{returnPurchaseArray.product[i]}}" readonly="">
+                                    </div>
+                                </td>
+                                <td width="240px">
+                                    <div class="trans-input">
+                                        <input type="text" placeholder="" class="cstm-put" value="{{returnPurchaseArray.mrp[i]}}" readonly="">
+                                    </div>
+                                </td>
+                                <td width="240px">
+                                    <div class="trans-input">
+                                        <input type="text" placeholder="" class="cstm-put" value="{{returnPurchaseArray.discount[i]}}" readonly="">
+                                    </div>
+                                </td>
+                                <td width="240px">
+                                    <div class="trans-input">
+                                        <input type="text" placeholder="0" class="cstm-put" value="{{returnPurchaseArray.amount[i]}}"  readonly="">
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+         <div class="col-lg-4 col-lg-offset-4 col-md-4 col-md-offset-4 col-sm-12 col-xs-12 text-center">
+            <div class="row">
+                <div class="col-lg-6">
+                    <h4 class="mg-top">Total Amount</h4>
+                </div>
+                <div class="col-lg-6">
+                    <button class="btn data-div" readonly="" disabled="">
+                        <div>{{patientAmount}}</div>
+                    </button>
+                </div>
+                <div class="text-center col-xs-12">
+                    <br>
+                       <button class="btn btn-custom" data-dismiss="modal" (click)="exportPdfDetail()">
+                            <div> PRINT </div>
+                        </button>
+                </div>
+            </div>
+         </div>
+      
+        </div>
+        <div  class="clearfix"></div>
+      </div>      
+    </div>
+</div>    
+
+<!-- show the pdf -->
+<div class="modal fade" id="pdfmodal" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content modal-lg modal-cstm">
+        <div class="modal-body">
+            <div class="modal-body"><div class="" id="pdfmodal2" >
+                <table width="700" style="border:1px solid #4d4d4d; border-right:1px solid #4d4d4d;">
+                    <tr style="border-bottom: 1px solid #4d4d4d;">
+                        <td style="text-align: left;" colspan="2">
+
+                            <h3 style="margin-top: 10px; padding-left:15px; font-weight: lighter;">GST Invoice </h3>
+
+                        </td>
+                        <td style="text-align:right;" colspan="2">
+
+                            <h5 style="padding-right:15px; font-weight: lighter;">GSTIN: {{reqData.gstinNumber}}</h5>
+
+                        </td>
+                    </tr>
+                    <tr  style="border-bottom: 1px solid #4d4d4d;">
+                        <td style="padding-left: 10px; padding-top: 10px; padding-bottom: 10px; border-right: 1px solid #4d4d4d;">
+                            <h3 style="text-transform: uppercase;text-align:left; margin-top: 0px ">
+                                {{reqData.diagnosticsName}}
+                            </h3>
+                            <h5 style="text-transform: uppercase;text-align:left; ">
+                                {{reqData.address}}
+                            </h5>
+                            <h5>Phone: {{reqData.phone}}</h5>
+                            <h5>DL. No.: {{reqData.drugLicense}}</h5>
+                        </td>
+                        <td style="padding-left: 10px; padding-top: 10px; padding-bottom: 10px;">
+                            <h5 style="text-transform: uppercase;text-align:left; margin-top: 0px;">
+                                Inv No
+                            </h5>
+                            <h5 style="text-transform: uppercase;text-align:left; ">
+                                Patient Name:
+                            </h5>
+                            <h5 style="text-transform: uppercase;text-align:left; ">
+                                P .mob
+                            </h5>
+                            <h5 style="text-transform: uppercase;text-align:left;">Dr. name</h5>
+                            <h5 style="text-transform: uppercase;text-align:left;">time</h5>
+                        </td>
+
+                        <td colspan="1" style="padding-left: 10px; padding-top: 10px; padding-bottom: 10px;border-right: 1px solid #4d4d4d;">
+                            <h4 style="text-transform: uppercase;text-align:left; margin-top: 0px;">
+                                : {{invoiceNo}}
+                            </h4>
+                            <h5 style="text-transform: uppercase;text-align:left; ">
+                                : {{patientNameNew}}
+                            </h5>
+                            <h5 style="text-transform: uppercase;text-align:left; ">
+                                : {{patient_mobile}}
+                            </h5>
+                            <h5 style="text-transform: uppercase;text-align:left;" *ngIf="docName">: {{getDoctorName(docName)}}</h5>
+                            <h5 style="text-transform: uppercase;text-align:left;" *ngIf="!docName">: Self</h5>
+                            <h5 style="text-transform: uppercase;text-align:left;">: {{oldDate | date:'mediumDate' }} {{today | date:'shortTime' }}</h5>
+                        </td>
+                    </tr>
+                </table>
+                <table width="700" style="border:1px solid #4d4d4d; border-right:1px solid #4d4d4d; border-top: transparent;">
+                    <tr>
+                        <td style="padding:5px; text-align:center; border-right:1px solid #4d4d4d; border-bottom: 1px solid #4d4d4d; font-weight: bold; background-color: grey;">Sr.</td>
+                        <td style="padding:5px; text-align:center; border-right:1px solid #4d4d4d; border-bottom: 1px solid #4d4d4d; font-weight: bold; background-color: grey;">Type</td>
+                        <td style="padding:5px; text-align:center; border-right:1px solid #4d4d4d; border-bottom: 1px solid #4d4d4d; font-weight: bold; background-color: grey;">Product Name</td>
+                        <td style="padding:5px; text-align:center; border-right:1px solid #4d4d4d; border-bottom: 1px solid #4d4d4d; font-weight: bold; background-color: grey;">MRP</td>
+                        <td style="padding:5px; text-align:center; border-right:1px solid #4d4d4d; border-bottom: 1px solid #4d4d4d; font-weight: bold; background-color: grey;">Disc. %</td>
+                        <td style="padding:5px; text-align:center; border-right:1px solid #4d4d4d; border-bottom: 1px solid #4d4d4d; font-weight: bold; background-color: grey;">Amount</td>
+                    </tr>
+                    <tr *ngFor="let tr of returnPurchaseArray.opt;let i = index;">
+                        <td style="padding:5px; text-align:center; border-right:1px solid #4d4d4d;">{{i+1}}</td>
+                        <td style="padding:5px; text-align:center; border-right:1px solid #4d4d4d;">{{returnPurchaseArray.opt[i]}}</td>
+                        <td style="padding:5px; text-align:center; border-right:1px solid #4d4d4d;">{{returnPurchaseArray.product[i]}}</td>
+                        <td style="padding:5px; text-align:center; border-right:1px solid #4d4d4d;">{{returnPurchaseArray.mrp[i]}}</td>
+                        <td style="padding:5px; text-align:center; border-right:1px solid #4d4d4d;">{{returnPurchaseArray.discount[i]}}</td>
+                        <td style="padding:5px; text-align:center; border-right:1px solid #4d4d4d;">{{returnPurchaseArray.amount[i]}}</td>
+                    </tr>
+                </table>
+                <table width="700" style="border:1px solid #4d4d4d; border-top:transparent;border-bottom: transparent;" >
+                    <tr  style="">
+                        <td style="padding-left: 10px; padding-top: 1px; padding-bottom: 1px;" width="500px;">
+                            <h4 style="text-transform: uppercase;padding-top:15px;text-align:left; float: left; width:50%; margin-top:-45px;">
+                                TOTAL ITEMS
+                            </h4>
+                            <h4 style="text-transform: uppercase;padding-top:15px;text-align:right;  float: right; width:50%;margin-top:-45px;" *ngIf="returnPurchaseArray.opt">
+                                {{returnPurchaseArray.opt.length}}
+                            </h4>
+                        </td>
+                        <td style="padding-right: 10px; padding-top: 1px; padding-bottom: 1px;" width="200px;">
+                            <table width="450px">
+                                <tr  style="">
+                                    <td style="padding-right: 10px; width:80%; padding-top: 1px; padding-bottom: 1px;">
+                                        <h4 style="text-transform: uppercase;text-align:right; ">
+                                            SUB TOTAL
+                                        </h4>
+                                    </td>
+                                    <td style="padding-right: 10px; width:20%; padding-top: 1px; padding-bottom: 1px;">
+                                        <h4 style="text-transform: uppercase;text-align:right; ">
+                                            {{subTotal}}
+                                        </h4>
+                                    </td>
+                                </tr>
+                                <tr  style="">
+                                    <td style="padding-right: 10px; width:80%; padding-top: 1px; padding-bottom: 1px;">
+                                        <h4 style="text-transform: uppercase;text-align:right; ">
+                                            GRAND TOTAL
+                                        </h4>
+                                    </td>
+                                    <td style="padding-right: 10px; width:20%; padding-top: 1px; padding-bottom: 1px;">
+                                        <h4 style="text-transform: uppercase;text-align:right; ">
+                                            {{subTotal}}
+                                        </h4>
+                                    </td>
+                                </tr>
+                                
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+                <table width="700" style="border:1px solid #4d4d4d; border-right:1px solid #4d4d4d;border-top:transparent;">
+                    <tr  style="border-top:1px solid #4d4d4d; border-bottom:1px solid #4d4d4d;">
+                        <td  style="padding-left: 10px; padding-top: 10px; padding-bottom: 10px;">
+                            <h4 style="text-transform: titlecase;text-align:left; ">
+                                 {{subTotal|showInWords}} Only
+                            </h4>
+                        </td>
+                    </tr>
+                </table>
+                <table width="700" style="border:1px solid #4d4d4d; border-right:1px solid #4d4d4d;border-top:transparent;">
+                    <tr  style="">
+                        <td  style="width:70%;padding-left: 10px; padding-top: 10px; padding-bottom: 10px; padding-right: 1px;">
+                            <h4>
+                                <h4><b>Terms & Conditions</b></h4>
+                                <p style="font-size: 14px; margin:8px 0px;" *ngIf="diagnosticsData.dataSmartDiagnostics.term1">{{diagnosticsData.dataSmartDiagnostics.term1}}</p>
+                                <p style="font-size: 14px; margin:8px 0px;" *ngIf="diagnosticsData.dataSmartDiagnostics.term2">{{diagnosticsData.dataSmartDiagnostics.term2}}</p>
+                                <p style="font-size: 14px; margin:8px 0px;" *ngIf="diagnosticsData.dataSmartDiagnostics.term3">{{diagnosticsData.dataSmartDiagnostics.term3}}</p>
+                                <p style="font-size: 14px; margin:8px 0px;" *ngIf="diagnosticsData.dataSmartDiagnostics.term4">{{diagnosticsData.dataSmartDiagnostics.term4}}</p>
+                            </h4>
+                        </td>
+                        <td style="width:30%;text-align: right;">
+                            <div style="margin-top: 100px;padding-right: 10px;">For {{reqData.diagnosticsName}}</div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+      </div>      
+    </div>
+</div>

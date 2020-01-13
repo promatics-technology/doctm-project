@@ -1,0 +1,101 @@
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12 text-center">
+            <br>
+            <button (click)="viewCalender()" style="margin-left: 33em;" class="btn btn-custom">Set OPD Holidays</button>
+            <h4><b>List of holidays</b></h4>
+        </div>
+		
+        <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-12 col-xs-12">
+               <br>
+            <div>
+                <div class="">
+                    <table class="table tb-1 tb-pd-hi">
+                        <tbody >
+                            <tr class="">
+                                <td class="text-left" width="33%"><h4>Sr no.</h4></td>
+                                <td  class="text-center" width="33%"><h4>
+                                        Day
+                                </h4></td>
+                                <td class="text-right" width="33%"><h4>
+                                  Date
+                                </h4></td>
+                            </tr>
+                            <tr class="evn" *ngFor = "let list of showListOfHoliday ;let i = index">
+                                <td class="text-left" width="33%"><h4>{{i+1}}.</h4></td>
+                                <td class="text-center" width="33%"><h4>
+                                    {{list.start | date: 'EEEE'}}
+                                </h4></td>
+                                <td  class="text-right" width="33%"><h4>
+                                  {{list.start | date: 'dd/MM/yyyy'}}
+                                </h4></td>
+                            </tr>
+                           
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- <div class="modal fade cus-modal" id="CalendarOpen" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header" *ngIf="calendarOptions">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <h4>Set Holiday</h4>
+               
+            </div>
+            <div class="modal-body">
+                <div *ngIf="calendarOptions"  id="calendar">
+                    <a href="javascript:void(0)" class="cstm-calender-opt"  id="calendar">
+                         <ng-fullcalendar  #ucCalendar [options]="calendarOptions" (eventClick)="eventClick1($event.detail)" (eventDrop)="updateEvent1($event.detail)"
+                        (eventResize)="updateEvent1($event.detail)" (clickButton)="clickButton1($event.detail)" (select)="updateEvent1($event.detail)"  [(eventsModel)]="events1" (unselect)="unselect1($event.detail)"></ng-fullcalendar>
+                    </a>
+                </div>
+            </div>
+            <button class="btn btn-custom" style="margin-left: 9em;" (click) = "setHoliday()">save</button>
+            <br>
+        </div>
+    </div>
+</div> -->
+<!-- <div class="footer">
+    <button (click)="viewCalender()" style="margin-left: 33em;" class="btn btn-custom">View Holidays</button>
+</div> -->
+<!-- 
+<div *ngIf="calendarOptions1">
+                    <a href="javascript:void(0)" class="cstm-calender-opt">
+                         <ng-fullcalendar #ucCalendar [options]="calendarOptions1" (eventClick)="eventClick($event.detail)" (eventDrop)="updateEvent($event.detail)"
+        (eventResize)="updateEvent($event.detail)" (clickButton)="clickButton($event.detail)"></ng-fullcalendar>
+                    </a>
+                </div> -->
+
+                <!-- appointmeny calender model --> 
+<div class="modal fade cus-modal" id="appointmentCalenderApntList" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header" *ngIf="calendarOptions1">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <h4>Click date to set OPD holiday, double click to remove</h4>
+                <!-- <h4 class="modal-title"> Registration Form </h4> -->
+            </div>
+            <div class="modal-body">
+                <div *ngIf="calendarOptions1">
+                    <a href="javascript:void(0)" class="cstm-calender-opt">
+                        <ng-fullcalendar #ucCalendar1 [options]="calendarOptions1" (eventDrop)="updateEvent($event.detail)" (eventResize)="updateEvent($event.detail)" (clickButton)="clickButton($event.detail)" (select)="select1($event.detail)" (eventClick)="eventClick1($event.detail, $event.detail)" (dblclick) = "eventClick1($event.detail)" [(eventsModel)]="events"></ng-fullcalendar>
+                    </a>
+                </div>
+            </div>
+            <!-- <button class="btn btn-custom" style="margin-left: 9em;" (click) = "setHoliday()">save</button> -->
+        </div>
+    </div>
+</div>
+
+<!-- <div class="footer">
+    <button (click)="viewCalender()" style="margin-left: 33em;" class="btn btn-custom">View Holidays</button>
+</div> -->

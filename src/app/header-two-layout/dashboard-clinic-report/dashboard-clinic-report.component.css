@@ -1,0 +1,228 @@
+.cus-content-wrapper{
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
+.hding > h3{
+    margin: 0px;
+    padding:15px 0px;
+    background-color: #d9e0dd; 
+}
+.hding  h5.btm{
+    margin: 0px;
+    padding:15px 0px;
+    background-color: #d9e0dd; 
+}
+.cstm-tbl{
+    width: 100%;
+}
+.clr-blue{
+    color: #00b0f0;
+}
+.clr-vlt{
+    color: #5c62af;
+}
+.tb-1{
+    margin-top:15px;
+}
+.tb-1 tr td{
+    padding:2px 8px;
+    vertical-align: middle; 
+}
+.cstm-tbl tr{
+    height:40px;
+}
+.footer-cstm-an{
+    position: fixed;
+    float: left;
+    width: 100%;
+    bottom:0px;
+    background: #00b0f0;
+    color:#fff;
+    z-index: 99;
+    padding-top: 8px;
+}
+.mt-table h3{
+    margin-top: 0px;
+}
+.cstm-tr{
+    background-color:#92d050;
+    color:#fff;
+    text-align: center;
+}
+.cstm-tr-2{
+    background-color:#c5d8f1;
+}
+.cstm-tr-2 td{
+    border-right:1px solid #bbb; 
+}
+.cstm-tr-2 td:last-child {
+ border-right: none;
+}
+.cstm-tr-3{
+    border-bottom:1px solid #bbb; 
+}
+.cstm-tr-3 td{
+    border-right:1px solid #bbb; 
+}
+.cstm-tr-3 td:last-child {
+ border-right: none;
+}
+.color-red {
+    color: #ff0000;
+    transform: translateY(-8px);
+}
+.cstm-tr-4{
+    background-color: #f2dada;
+}
+.cstm-mg{
+    margin-top: 5px;
+}
+.btn-go{
+    background-color: transparent;
+    border: 1px solid #002160;
+    margin-bottom: 5px;
+    min-width: 62%;
+}
+.btn-go:hover{
+    -webkit-transition: 300ms;
+    transition: 300ms;
+    background: #98C74F;
+    border-color: #98C74F;
+    color: #fff;
+}
+.li-cstm a{
+    text-align: center!important;
+    background: #000!important;
+    color: #fff!important;
+    font-size: 16px!important;
+    font-weight: inherit!important;
+    padding: 6px!important;
+}
+.cus-sidebar{
+    height: inherit!important;
+}
+
+
+.side-bar-cstm{
+    z-index: 99;
+}
+.res-tab-2{
+    max-height: 225px;
+}
+.cstm-ul-new li{
+    width:170px;
+}
+.cstm-ul-new li a{
+    background-color:transparent;
+    color:#000;
+    padding:10px;
+    cursor: pointer;
+    border-radius: 0px;
+    border-bottom: 2px solid transparent; 
+    text-align: center;
+}
+.cstm-ul-new li.active a{
+    background-color: #e0e0e0;
+    color: #000;
+    border-bottom: 2px solid #00b0f0;
+}
+.cstm-tab-5{
+    padding:0px 15px;
+    padding-bottom: 15px; 
+}
+
+
+/* The cstm chkmark */
+.cstm-chkmark {
+    margin-top: 10px;
+    margin-right: 35px;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom:8px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: normal;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Hide the browser's default checkbox */
+.cstm-chkmark input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 20px;
+  width: 20px;
+  background-color: #eee;
+}
+
+/* On mouse-over, add a grey background color */
+.cstm-chkmark:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+
+/* When the checkbox is checked, add a blue background */
+.cstm-chkmark input:checked ~ .checkmark {
+  background-color: #00b0f0;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the checkmark when checked */
+.cstm-chkmark input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the checkmark/indicator */
+.cstm-chkmark .checkmark:after {
+  left:7px;
+  top: 4px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+.cstm-tab-5{
+    min-height: 410px;
+    max-height: 410px;
+    overflow-y: scroll;
+}
+.cus-sidebar>ul>li>a {
+    padding: 13px;
+}
+.btn-grin{
+    background-color: rgb(251,212,180)!important;
+    color: #000!important;
+    margin-bottom:8px;
+    padding-right:40px!important;
+    padding-left: 40px!important;
+}
+.btn-pink{
+    background-color: rgb(155,187,89)!important;
+    color: #000!important;
+    margin-bottom: 8px;
+    padding-right:40px!important;
+    padding-left: 40px!important;
+}
+/*table {
+  border: 1px solid #989898;
+}*/

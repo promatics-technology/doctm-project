@@ -1,0 +1,792 @@
+@media (min-width: 768px) {
+    .cus-modal .modal-dialog {
+        width: 480px;
+    }
+    .sphere-modal .modal-dialog {
+        width: 600px;
+    }
+    .axis-modal .modal-dialog {
+        width: 720px;
+    }
+    #vaccinationScheduleModal .modal-dialog {
+        width: 920px;
+    }
+    #medicationModal .modal-dialog, #treatmentModal .modal-dialog, #investigationModal .modal-dialog, #surgeryModal .modal-dialog {
+        width: 750px;
+        margin: 5px auto;
+    }
+    #frequencyModal .modal-dialog, #treatfrequencyModal .modal-dialog {
+        width: 590px;
+    }
+
+   
+}
+@media (max-width: 991px) {
+    div.modal-dialog.cstm_proper{
+        display: initial!important;
+       
+    }
+    .wr_btn button{
+        margin: 5px 0px;
+    }
+    div.modal-dialog.cstm_proper .modal-content{
+         margin:0px 15px; 
+    }
+    header .navbar-brand>img {
+        height: 44px;
+    }
+    header .navbar-default .navbar-toggle {
+        display: block;
+    }
+    header .navbar-default .navbar-collapse.collapse {
+        display: none !important;
+    }
+    header .navbar-default .navbar-collapse.collapse.in {
+        display: block !important;
+    }
+    header .navbar-default .navbar-header {
+        float: none;
+        margin-right: -15px;
+        margin-left: -15px;
+    }
+    header .navbar-default .navbar-nav>li>a {
+        padding: 15px 8px;
+    }
+    .signup-clinicServc .sub_checkboxul>li {
+        width: 32%;
+    }
+    ul.upload-ul.clinicDoc>li {
+        width: 35%;
+    }
+    .consult-scheduleul>li {
+        width: 100%;
+    }
+    .dashboard-boxul>li {
+        width: 33.33%;
+        flex: 1 1 33.33%;
+    }
+    .list-bedul>li {
+        width: auto;
+    }
+    .list-bedul>li.blue {
+        padding-right: 70px;
+    }
+    .beds-panel ul>li {
+        flex: 1 1 25%;
+    }
+    .inner-tab .nav-tabs>li>a {
+        min-width: 130px;
+        padding: 15px 5px;
+    }
+    .inner-col {
+        flex-direction: column;
+        align-items: normal;
+    }
+    .cont-custm{
+        width:initial;
+    }
+    .inner-tab ul.nav.nav-tabs{
+        display: initial;
+    }
+    .tabs-cstm li{
+        width:100%;
+    }
+    .beds-panel ul  li{
+    -webkit-box-flex: 1!important;
+    -ms-flex: 1 1 34.69%!important;
+    flex: 1 1 34.69%!important;
+    float: left!important;
+    max-width:initial!important; 
+    margin-bottom: 15px;
+    padding: 5px;
+    }
+    .dashboard-header-pthree button.btn-custom{
+        font-size: 12px;
+        margin: 5px 0px;
+        padding: 6px;
+    }
+    .cstm-col-mg{
+        margin-bottom: 15px;
+    }
+    
+   
+}
+
+@media (max-width:700px){
+
+.dashboard-header-pthree{
+    display: initial;
+}
+.pat-app-modal-form{
+    width: initial !important;
+    right: 0px!important;
+}
+    }
+@media (max-width: 800px) {
+    .pad-content-wrapper .pad-content, .pad-bottomfooter {
+        margin-left: 265px;
+    }
+    .customize-pad-sidebar, .pad-bottombody {
+        width: 250px;
+    }
+    .search-patient{
+        width:85%!important;
+    }
+    .p-search-btn{
+        width:13%!important;
+    }
+}
+@media (min-width: 768px) and (max-width: 991px) {
+    header .navbar-default .navbar-nav>li>a {
+        padding: 25px 8px;
+    }
+    .whyUs-sec .benefit {
+        min-height: 250px;
+    }
+}
+@media (max-width: 935px) {
+    .pad-header, .pad-footer {
+        flex-wrap: wrap;
+    }
+    /*.pad-header > div:nth-child(3) {
+        border-right: 1px solid rgb(70,170,197);
+    }*/
+    .three-col>div.allergy {
+        border-right: 0;
+    }
+    .pad-wrap {
+        flex-direction: column;
+    }
+    .pad-row>div {
+        border-right: 0;
+    }
+    .pad-row>div.two-col {
+        border-bottom: 1px solid #222;
+    }
+}
+@media (max-width: 852px) {
+    /*.pad-footer > div:nth-child(4){
+        border-right: 1px solid rgb(246, 146, 64);
+    }*/
+    .dashboard-header-two>div.dashboard-btns {
+        width: 100%;
+        text-align: center;
+        margin-bottom: 10px;
+    }
+}
+@media (max-width: 767px) {
+    .srch-cstm button{
+        margin-top: 0px!important;
+        margin-bottom:10px!important;
+    }
+    .btn-go button{
+        margin-top: 15px;
+    }
+    .txt-lft{
+        text-align:left!important; 
+    }
+    .txt-cnt{
+        text-align: center;
+    }
+    #stck-prchse-header .modal-dialog{
+        display: initial!important;
+        text-align:center!important;
+    }
+     #stck-prchse-header .modal-dialog div.col-lg-3{
+        text-align:center!important;
+    }
+    .cstm-mr{
+        margin-top: 22px;
+        margin-bottom: 10px;
+    }
+    .cstm-mr input{
+        font-size: 12px;
+    }
+    header .navbar-default .navbar-nav>li>a.btn-theme {
+        margin-right: 15px;
+    }
+    header .navbar-default .navbar-nav li.cus-dropdown>.dropdown-menu {
+        position: relative;
+        box-shadow: none;
+    }
+    header .navbar-default .navbar-nav>li.cus-dropdown .dropdown-menu .dropdown-menu {
+        right: 0;
+        left: auto;
+        top: -3px;
+    }
+    header .navbar-default .navbar-nav li.signin_dropdown>.dropdown-menu {
+        top: 0;
+    }
+    .whyUs-sec .wrap-div img {
+        width: 70px;
+    }
+    .download-app {
+        margin-left: 0;
+    }
+    .testimonial-sec .saying {
+        width: 100%;
+        max-width: 100%;
+        margin: 0 15px;
+    }
+    .forgt_pass {
+        float: left;
+    }
+    .whyus-box {
+        flex: 0 1 50%;
+    }
+    .features-innerbox>div {
+        width: 100%;
+    }
+    .features-innerbox {
+        display: flex;
+        flex-direction: column;
+    }
+    .feature-right {
+        order: 1;
+        padding-left: 0;
+    }
+    .features-innerbox>div:last-child {
+        border: 0;
+    }
+    .footer-sec .footer-links li a {
+        padding: 5px 8px;
+    }
+    .footer-container {
+        margin-bottom: 10px;
+    }
+    .footer-sec {
+        padding: 10px;
+    }
+    .login-left {
+        padding: 10px 0;
+    }
+    .login-left>h1 {
+        font-size: 24px;
+    }
+    .dwnld-login h1 {
+        font-size: 26px;
+    }
+    .googlePlay-login img {
+        max-width: 180px;
+    }
+    .signup-sidebar-wrapper {
+        position: relative;
+    }
+    .signup-sidebar-wrapper .signup-sidbar {
+        width: 100%;
+        margin-right: 0;
+    }
+    .signup-content-wrapper .signup-content {
+        margin-left: 0;
+    }
+    .signup-sidebar-wrapper .signup-sidbar {
+        height: auto;
+    }
+    .smartasstFooter .btn-outline {
+        margin-bottom: 15px;
+        display: inline-block;
+        vertical-align: top;
+    }
+    .signup-clinicBeds {
+        padding-left: 35px;
+        width: 100%;
+        float: left;
+    }
+    .upload-ul>li {
+        width: 100%;
+    }
+    .dashboard-boxul>li {
+        flex: 1 1 50%;
+        width: 50%;
+    }
+    .patient-icons>a {
+        text-align: left;
+    }
+    .patient-icons {
+        margin-bottom: 10px;
+    }
+    .patient-wrap {
+        float: left;
+        margin-bottom: 10px;
+    }
+    .dashboard .cus-sidebar-wrapper {
+        top: 0;
+    }
+    .cus-sidebar-wrapper {
+        position: relative;
+    }
+    .cus-sidebar-wrapper .cus-sidebar {
+        width: 100%;
+        height: auto;
+        margin-right: 0;
+    }
+    .cus-content-wrapper .cus-content {
+        margin: 0;
+    }
+    .cus-datetimepicker .wc-date-popover.banner-true .wc-date-row {
+        font-size: 14vw;
+    }
+    .cus-datetimepicker .wc-date-popover.banner-true .wc-month-row {
+        font-size: 3vw;
+    }
+    .inner-tab ul.nav.nav-tabs {
+      /*  overflow: auto;*/
+    }
+    .pad-list>li.half-li span.cross-ico {
+        right: 7%;
+    }
+    select{
+        font-size: 
+    }
+    .in-progress{
+        width:100%!important;
+        border-right: transparent!important;
+    }
+    .footer-cstm{
+        position: static!important;
+    }
+    .cstm-table thead{
+        width: 100%!important;
+    }
+    .inner-tab li{
+        width:50%;
+    }
+    .table-wrap table{
+        width:initial!important;
+    }
+    .tbod-max-w{
+        width:100%!important;
+    }
+}
+@media (max-width: 680px) {
+    .customize-pad-sidebar {
+        width: 100%;
+        padding: 15px 0;
+        margin-right: 0;
+    }
+    .pad-content-wrapper .pad-content {
+        margin-left: 0;
+    }
+    .pad-bottombody {
+        width: 100%;
+    }
+    .pad-bottomfooter {
+        margin-left: 0;
+    }
+}
+@media (max-width: 640px) {
+    .wizard-navigation>ul {
+        flex-direction: column;
+    }
+    .appointment-heading{
+        font-size: 18px!important;
+        width: 84%!important;
+        padding: 15px 0px!important;
+
+    }
+
+    .moving-tab {
+        display: none;
+    }
+    .slider-txt h1 {
+        font-size:22px;
+    }
+    .slider-txt h2 {
+        font-size:17px;
+    }
+    .footer-sec .footer-links li {
+        width: 100%;
+    }
+    .whyus-box {
+        flex: 0 1 100%;
+    }
+    .welcomename {
+        font-size:12px!important;
+    }
+  /*  .dashboard-header-two>div {
+        width: 50%;
+    }*/
+    .dashboard-header-logo img.img-responsive {
+        width: 110px;
+    }
+    .dashboard-header-smartclinic {
+        font-size:27px;
+        text-align:center;
+   /*     padding-right: 15px;*/
+    }
+    .dashboard-signout>a {
+        font-size: 11px;
+    }
+    .close-dashboard-sidebar .navbar-toggle .icon-bar {
+        width: 20px;
+        height: 2px;
+    }
+    .dashboard-header-one .navbar-toggle .icon-bar+.icon-bar {
+        margin-top: 5px;
+    }
+    .page-sidebar-wrapper .dashbrd-sidbar {
+        height: calc(100vh - 47px);
+        top: 45px;
+    }
+    .close-dashboard-sidebar .navbar-toggle .icon-bar:first-child {
+        transform: translate(0, 7px) rotate(45deg);
+    }
+    .close-dashboard-sidebar .navbar-toggle .icon-bar:nth-child(3) {
+        transform: translate(0, -7px) rotate(-45deg);
+    }
+}
+@media (max-width: 540px) {
+    .cus-datetimepicker .wc-date-popover.banner-true .wc-month-row {
+        padding: 0px 0px 0px 0px;
+        font-size: 7vw;
+    }
+    .nbtnn{
+        font-size: 10px;
+    }
+    .cus-datetimepicker .wc-date-popover.banner-true .wc-date-row {
+        width: 37%;
+    }
+    .cus-datetimepicker angular2-date-picker .winkel-calendar .banner-true>.time-view {
+        top: 210px;
+    }
+    .signup-clinicBeds>div {
+        width: 50%;
+    }
+    .dashboard-boxul>li {
+        flex: 1 1 100%;
+        width: 100%;
+    }
+    .md-tab .nav-tabs {
+        flex-direction: column;
+    }
+    .list-bedul {
+        flex-wrap: wrap;
+    }
+    .list-bedul>li {
+        flex: 1 1 auto;
+    }
+    .inner-tab ul.nav.nav-tabs {
+        flex-wrap: wrap;
+    }
+    .inner-tab .nav-tabs>li {
+        flex: 1 1 auto;
+    }
+    .beds-panel ul>li {
+        flex: 1 1 50%;
+    }
+    ul.allergy-ul>li {
+        flex: 1 1 50%;
+    }
+    ul.allergy-ul>li:nth-child(1) {
+        border-top: 2px solid rgba(0, 0, 0, 0.1);
+    }
+    ul.allergy-ul>li:nth-child(2) {
+        border-top: 2px solid rgba(0, 0, 0, 0.1);
+    }
+    ul.allergy-ul>li:nth-child(3n+1) {
+        border: 1px solid rgba(0, 0, 0, 0.1);
+    }
+    ul.allergy-ul>li:nth-child(2n+1) {
+        border-left: 2px solid rgba(0, 0, 0, 0.1);
+    }
+    .axis-modal-body .sphere-ul>li {
+        flex: 1 1 9.8%;
+        -webkit-flex: 1 1 9.8%;
+        -moz-flex: 1 1 9.8%;
+        -o-flex: 1 1 9.8%;
+    }
+    .smartassistant-panel{
+        padding: 0px;
+    }
+}
+@media (max-width: 520px) {
+    .signup-clinicServc .sub_checkboxul>li {
+        width: 49%;
+    }
+    .cstm-drpdown-cnsulted-doc select{
+        font-size: 14px!important;    
+    }
+    
+    .cstm-drpdown-cnsulted-doc .cstm-caret-big{
+        top:35px!important;
+    }
+    ul.upload-ul.clinicDoc>li {
+        width: 100%;
+    }
+    .addschedul-box .schedul-box {
+        padding: 15px;
+        font-size: 20px;
+    }
+    .day_schedule label.checkbox-inline {
+        width: 45.33%;
+    }
+    .ico_cal i{
+        font-size:10px!important;
+    }
+    .pad-row {
+        -moz-column-count: 1;
+        -webkit-column-count: 1;
+        column-count: 1;
+    }
+    .list-bedul > li{
+    width: 100%!important;
+    }
+    .pat-reg-form label{
+        display: block;
+    }
+    .pat-reg-form label.checkbox-inline {
+        width:100%;
+    }
+    .pat-reg-form{
+        padding: 0px;
+    }
+    .cstm-drpdown-cnsulted-doc .crt_big{
+        top:14px!important;
+    }
+}
+@media (max-width: 420px) {
+    .clinicform-form {
+        padding: 50px 0px;
+    }
+     .day_schedule{
+        padding-left:5px; 
+    }
+    .signup-contentHead{
+        font-size: 18px;
+    }
+    .txt-div{
+        text-align: center;
+    }
+    .slider-txt .smart_heading>h1 {
+        font-size: 50px;
+    }
+    .signup-clinicServc .sub_checkboxul>li {
+        width: 100%;
+    }
+    .signup-clinicServc .sub_checkboxul {
+        padding-left: 20px;
+    }
+    .medicalReg .input-btn {
+        float: left;
+    }
+    .precond-ul {
+        flex-direction: column;
+    }
+    .precond-ul>li {
+        width: 100%;
+        flex: 1 1 33.33%;
+        -webkit-flex: 1 1 100%;
+        -moz-flex: 1 1 100%;
+        -o-flex: 1 1 100%;
+    }
+    .allergy-wrap>ul>li {
+        flex-direction: column;
+    }
+    .allergy-wrap>ul .allergy-left {
+        padding: 10px 0;
+        flex-basis: auto;
+    }
+    .presc-ul>li {
+        width: 100%;
+        flex: 1 1 100%;
+        -webkit-flex: 1 1 100%;
+        -moz-flex: 1 1 100%;
+        -o-flex: 1 1 100%;
+    }
+    .axis-modal-body .sphere-ul>li {
+        flex: 1 1 16.8%;
+        -webkit-flex: 1 1 16.8%;
+        -moz-flex: 1 1 16.8%;
+        -o-flex: 1 1 16.8%;
+    }
+    .add-modal-body .sphere-ul>li {
+        flex: 1 1 13%;
+        -webkit-flex: 1 1 13%;
+        -moz-flex: 1 1 13%;
+        -o-flex: 1 1 13%;
+    }
+     .beds-panel ul  li{
+    -webkit-box-flex: 1!important;
+    -ms-flex: 1 1  95.69%!important;
+    flex: 1 1  95.69%!important;
+    float: left!important;
+    max-width:initial!important; 
+    margin-bottom: 15px;
+    padding: 5px;
+    }
+    .tablecell-schedule{
+        display: block;
+    }
+    .dashboard-header-logo img.img-responsive {
+    margin-top: 10px;
+    }
+     .pending_ul li a{
+        padding: 0px!important;
+    }
+     .patient-number{
+       display: block;
+       top: 5px;
+        font-size: 15px;
+    }
+   .pending_ul>li>a img {
+        margin-left: 20px;
+        margin-right:5px;
+        margin-top:2.5px; 
+    }
+    .pd-0{
+        padding:0px!important; 
+    }
+}
+@media (max-width:1199px){
+     .foot-btm,
+     .fix-footer,
+     .footer-cstm-1{
+        position: static!important;
+    }
+
+    .nn-5 tr{
+        table-layout: unset!important;
+    }
+    .div_btn{
+        margin:8px 0px;
+    }
+    .clinicform-content h1{
+        text-align: left!important;
+    }
+    .foot-sb{
+        position: static!important;
+    }
+
+    .my-cstm-cl select{
+        margin:5px 0px!important; 
+    }
+    .my-cstm-cl button{
+        margin:5px 0px!important; 
+    }
+    .cstm-table thead.table-head{
+        width:100%!important;
+    }
+    .new-wrap{
+        margin:0px 8px;
+        overflow: scroll;
+        margin-bottom: 20px;
+    }
+    .new-wrap .table-scroll-outside{
+        overflow-y: visible!important;
+        overflow-x: visible!important;
+    }
+    .btn-wrap button{
+        margin: 10px 0px;
+    }
+    .stock-tab{
+        overflow:scroll;
+    }
+    .table-scroll-outside.table-two{
+        overflow:visible!important;
+    }
+     .my_tab_6{
+        overflow:scroll!important;
+    }
+    .my_tab_5{
+        overflow:visible!important;
+    }
+    .tbl-cntrol{
+        margin-top: 5px;
+        overflow-x: scroll!important;
+        overflow-y: scroll!important;
+    }
+    .cstm-table .table-head{
+        table-layout: unset!important;
+    }
+    .dashboard-subscription{
+        text-align: center!important;
+    }
+    .cstm-caret-big-pharmacy{
+        top:15px!important;
+    }
+    .cstm-table .tb-pharmacy{
+        table-layout: fixed!important;
+    }
+    .tab_progress{
+        overflow : scroll;
+    }
+  
+}
+@media (max-width:768px){
+    .pd-none{
+        padding:0px!important;
+        padding-right:5px!important; 
+    }
+    .mg-all{
+        margin:8px 0px;
+    }
+    .cstm-my-tab li{
+        width:100%!important;
+    } 
+    .smartassitant-sec-footer{
+        position: static!important;
+    }   
+    .smartassitant-sec-footer h5.pull-left{
+         float:none!important;
+    }
+    .cstm-modal-lg{
+        width:96%!important;
+    }
+    .td-width{
+        width:100px;
+    }
+    .stock-tab-tb{
+        overflow:scroll!important;
+        margin-top: 5px;
+    }
+    .txt-lft,
+    .txt_left{
+        text-align: left!important;
+    }
+    .mdl-dlg{
+        margin:0px!important;
+       width:100%!important;
+    }
+    .mdl-dlg > .modal-content{
+        width: 100%!important; 
+    }
+    .copyright-text{
+        text-align:center;
+    }
+    .social-links li a{
+        padding: 8px 12px;
+    }
+    .hd-small{
+        font-size: 15px!important;
+    }
+    .txt_m_cen{
+        text-align: center;
+
+    }
+    .mg-t{
+        margin:5px 0px;
+    }
+    .show-some-text p{
+        margin-top: -5px!important;
+    }
+    .mg-none input,
+    .in-dt,
+    #btn_stck-p,
+    .new-reg button{
+        margin:10px 0px!important;
+    }
+}
+@media (max-width:991px){
+    .mg_btm-10{
+        margin-bottom: 10px;
+    }
+}
+@media (max-width:1250px){
+    .pop_tab{
+        width:initial!important;
+    }
+    .tbdy_book tr td,
+    .tbdy_book tr th{
+        width:100%!important;
+    }
+}

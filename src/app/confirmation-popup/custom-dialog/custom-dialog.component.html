@@ -1,0 +1,16 @@
+<div>
+    <h2 mat-dialog-title>{{data.header}}</h2>
+    <div mat-dialog-content>
+        <p *ngIf="data.body">{{data.body}}</p>
+        <p *ngIf="data.body1">{{data.body1}}</p>
+        <p *ngIf="data.body2">{{data.body2}}</p>
+        <p *ngIf="data.body3">{{data.body3}}</p>
+    </div>
+    <div mat-dialog-actions>
+        <button mat-button (click)="okClick()" tabindex="2" class="btn btn-success" *ngIf="!data.btn1" >Yes </button>
+        <button mat-button (click)="onNoClick()" tabindex="-1" class="btn btn-danger" *ngIf="!data.btn2" style="margin-left:20px;">No</button>
+		
+		<button mat-button (click)="okClick()" tabindex="2" class="btn btn-success" *ngIf="data.btn1" >{{data.btn1}} </button>
+        <button mat-button (click)="onNoClick()" tabindex="-1" class="btn btn-danger" *ngIf="data.btn2" style="margin-left:20px;">{{data.btn2}}</button>
+    </div>
+</div>

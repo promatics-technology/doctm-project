@@ -1,0 +1,142 @@
+
+<div class="aoi-sec">
+
+	<ul class="aoi-filter">
+		<li>
+			<select class="form-control txtfield">
+				<option> Today </option>
+				<option> 7 Days </option>
+				<option> 14 Days </option>
+				<option> 1 Month </option>
+				<option> 3 Months </option>
+				<option> 6 Months </option>
+			</select>
+		</li>
+		<li>
+			<p> 30 </p>
+			<div> Area </div>
+		</li>
+		<li>
+			<p> 65 </p>
+			<div> Patients </div>
+		</li>
+		<li>
+			<p> 25 </p>
+			<div> Top Area </div>
+			<div> Sec-78, Noida </div>
+		</li>
+		<li>
+			<p> 05 </p>
+			<div> Out Station Patients </div>
+		</li>
+	</ul>
+
+	<div class="aoi-map">
+		<agm-map 
+		  [latitude]="lat"
+		  [longitude]="lng"
+		  [zoom]="zoom"
+		  [disableDefaultUI]="false"
+		  [zoomControl]="false">
+
+		  	<agm-marker 
+		      	*ngFor="let m of markers; let i = index"
+		      	(markerClick)="clickedMarker(m.label, i)"
+		      	[latitude]="m.lat"
+		      	[longitude]="m.lng"
+		      	[label]="m.label"
+		      	[markerDraggable]="m.draggable"
+		      	(dragEnd)="markerDragEnd(m, $event)">
+		      
+			    <agm-info-window>
+			      	<strong>InfoWindow content</strong>
+			    </agm-info-window>
+		    
+	  		</agm-marker>
+		  
+		  	<agm-circle [latitude]="lat + 0.3" [longitude]="lng" 
+		      	[radius]="100000"
+		      	[fillColor]="'red'"
+		      	[circleDraggable]="false"
+		      	[editable]="false">
+		  	</agm-circle>
+
+		</agm-map>
+
+		<div class="tabular-view">
+			<div class="col-md-offset-3 col-md-6 col-sm-offset-1 col-sm-10 col-xs-12">
+				<div class="tabular-table" *ngIf="tableview==true">
+					<div class="table-responsive">
+						<table class="table table-striped table-bordered">
+							<thead>
+								<tr>
+									<th> # </th>
+									<th> Area Name </th>
+									<th> Number of patients </th>
+									<th> % of total patients </th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td> 1. </td>
+									<td> Sector 51, Noida </td>
+									<td> 32 </td>
+									<td> 26.87 </td>
+								</tr>
+								<tr>
+									<td> 2. </td>
+									<td> Sector 51, Noida </td>
+									<td> 23 </td>
+									<td> 19.3 </td>
+								</tr>
+								<tr>
+									<td> 3. </td>
+									<td> Okhla </td>
+									<td> 14 </td>
+									<td> 12.6 </td>
+								</tr>
+								<tr>
+									<td> 4. </td>
+									<td> Shaheen bagh </td>
+									<td> 15 </td>
+									<td> 11.7 </td>
+								</tr>
+								<tr>
+									<td> 5. </td>
+									<td> Sector 19, Dwarka </td>
+									<td> 13 </td>
+									<td> 10.1 </td>
+								</tr>
+								<tr>
+									<td> 6. </td>
+									<td> Lajpat Nagar </td>
+									<td> 12 </td>
+									<td> 10.1 </td>
+								</tr>
+								<tr>
+									<td> 7. </td>
+									<td> Sector 23, Dwarka </td>
+									<td> 10 </td>
+									<td> 8.4 </td>
+								</tr>
+								<tr>
+									<td>  </td>
+									<td> Total Patients </td>
+									<td> 119 </td>
+									<td> 110 </td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			
+				<div class="tabular-btn">
+					<button class="btn btn-custom" *ngIf="tableview==false" (click)="tableView()"> Show Tabluar View </button>
+					<button class="btn btn-custom" *ngIf="tableview==true" (click)="tableView()"> Hide Tabluar View </button>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+</div>

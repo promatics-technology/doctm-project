@@ -1,0 +1,437 @@
+<div class="loader-box" *ngIf="loading">
+    <img src="./assets/imgs/load.gif" />
+</div>
+<div class="analytics-sec">
+	
+	<div class="ipd-deatil-sec">
+	<!-- 	<div class="md-tab">
+	      
+	      	<ul class="nav nav-tabs" role="tablist">
+	          	<li role="presentation" class="active"><a href="javascript:void(0);" routerLink="/header-two-layout/dashboard-consultation-prescription"> Consultation </a></li>
+	          	<li role="presentation"><a href="javascript:void(0);" routerLink="/header-two-layout/dashboard-pharmacy-detail"> Clinic Services </a></li>
+	      	</ul>
+	    </div> -->
+
+	    <div class="inner-tab">
+	    	<!-- Nav tabs -->
+	      	<ul class="nav nav-tabs" role="tablist">
+	          	<li role="presentation" class="active"><a href="javascript:void(0);" routerLink="/header-two-layout/dashboard-progress"> Patient </a></li>
+	          	<li role="presentation"><a href="javascript:void(0);" routerLink="/header-two-layout/dashboard-progress-time"> Time</a></li>
+	          	<li role="presentation"><a href="javascript:void(0);" routerLink="/header-two-layout/dashboard-progress-prescription">Prescription</a></li>
+				<li role="presentation"><a href="javascript:void(0);" routerLink="/header-two-layout/dashboard-progress-pharmacy"> Pharmacy</a></li>
+	          	<li role="presentation"><a href="javascript:void(0);" routerLink="/header-two-layout/dashboard-progress-diagnosis"> Diagnostics </a></li>
+	          	<li role="presentation"><a href="javascript:void(0);" routerLink="/header-two-layout/dashboard-progress-ipd"> IPD </a></li>
+	      	</ul>
+	    </div>
+
+	    <div class="ipd-body">
+	    	<!-- <div class="cus-sidebar-wrapper side-bar-cstm">
+	    		<div class="cus-sidebar">
+	    			<ul> 
+	    				<li>
+	    					<div class="">
+	    						<div class="col-lg-3">
+	    							<h4 class="pd-left"><b>From</b></h4>
+	    						</div>
+	    						<div class="col-lg-9">
+	    							<div class="cstm-mg">
+	    								<angular2-date-picker [(ngModel)]="fromDate1" [settings]="settings"></angular2-date-picker>
+	    							</div>
+	    						</div>
+	    					</div>
+	    				</li>
+	    				<li>
+	    					<div class="">
+	    						<div class="col-lg-3">
+	    							<h4 class="pd-left"><b>To</b></h4>
+	    						</div>
+	    						<div class="col-lg-9">
+	    							<div class="cstm-mg">
+	    								<angular2-date-picker [(ngModel)]="toDate1" [settings]="settings"></angular2-date-picker>
+	    							</div>
+	    						</div>
+	    					</div>
+	    				</li>
+	    				<li class="text-right brder-cstm">
+	    					<div class="col-lg-12">
+	    						<button class="btn btn-go" (click)="go()">Go</button>
+	    					</div>
+	    				</li>
+	    				<li class="li-cstm"> <a href="javascript:void(0);"> For Past</a> </li>
+	    				<li class="{{getClass(1)}}" (click)="activatetab(1)"> <a href="javascript:void(0);"> 1 Week &nbsp;<small *ngIf="activatedtab==1">({{fromDate | date: 'dd/LL/yy'}} - {{toDate | date: 'dd/LL/yy'}})</small> </a> </li>
+	    				<li class="{{getClass(2)}}" (click)="activatetab(2)"> <a href="javascript:void(0);"> 2 Weeks &nbsp;<small *ngIf="activatedtab==2">({{fromDate | date: 'dd/LL/yy'}} - {{toDate | date: 'dd/LL/yy'}})</small>  </a> </li>
+	    				<li class="{{getClass(3)}}" (click)="activatetab(3)"> <a href="javascript:void(0);"> 1 Month &nbsp;<small *ngIf="activatedtab==3">({{fromDate | date: 'dd/LL/yy'}} - {{toDate | date: 'dd/LL/yy'}})</small> </a> </li>
+	    				<li class="{{getClass(4)}}" (click)="activatetab(4)"> <a href="javascript:void(0);"> 3 Month &nbsp;<small *ngIf="activatedtab==4">({{fromDate | date: 'dd/LL/yy'}} - {{toDate | date: 'dd/LL/yy'}})</small></a> </li>
+	    				<li class="{{getClass(5)}}" (click)="activatetab(5)"> <a href="javascript:void(0);"> 6 Month &nbsp;<small *ngIf="activatedtab==5">({{fromDate | date: 'dd/LL/yy'}} - {{toDate | date: 'dd/LL/yy'}})</small></a> </li>
+	    				<li class="{{getClass(6)}}" (click)="activatetab(6)"> <a href="javascript:void(0);"> 1 Year &nbsp;<small *ngIf="activatedtab==6">({{fromDate | date: 'dd/LL/yy'}} - {{toDate | date: 'dd/LL/yy'}})</small></a> </li>
+	    				<li class="{{getClass(7)}}" (click)="activatetab(7)"> <a href="javascript:void(0);"> All </a> </li>
+	    			</ul>
+	    		</div>
+	    	</div>
+ -->
+    		<div class="cus-content-wrapper">
+    			<div class="cus-content">
+	    			<div class="">
+	    				<div class="row">
+	    					<div class="col-lg-6">
+	    						 <ul class="nav nav-tabs cstm-ul-new">
+								    <li class="active"><a data-toggle="tab" href="#home-cstm">Collection</a></li>
+								    <li><a data-toggle="tab" href="#menu1-cstm">Patient</a></li>
+								  </ul>
+								  <div class="tab-content">
+								    <div id="home-cstm" class="tab-pane fade in active">
+								    	<div class="cstm-pad">
+						        			<div class="table-responsive">
+			    								<div class="">
+													<table class="table tb-1 tb-pd-hi">
+														<tbody>
+															<tr class="">
+															<td width="350px">Consultation Collection</td>
+															<td width="5px"><h4><b>:</b></h4></td>
+															<td><b>{{totalCollection}} &nbsp;</b></td>
+															</tr>
+															<tr class="evn">
+															<td width="350px">Max collection in a day </td>
+															<td width="5px"><h4><b>:</b></h4></td>
+															<td><b>{{maxSaleOfDay}} &nbsp;</b><span>({{maxCollectionDate | date: 'dd/MM/yyyy'}})</span></td>
+															</tr>
+															<tr class="">
+															<td width="350px">Min collection in a day </td>
+															<td width="5px"><h4><b>:</b></h4></td>
+															<td><b>{{minSaleOfDay}} &nbsp;</b><span>({{minCollectionDate | date: 'dd/MM/yyyy'}})</span></td>
+															</tr>
+															<tr class="evn">
+															<td width="350px">Avg. daily collection</td>
+															<td width="5px"><h4><b>:</b></h4></td>
+															<td><b>{{getData(totalCollection/dateDiff)}} &nbsp;</b></td>
+															</tr>
+															<tr>
+															<td width="350px">Avg collection per patient</td>
+															<td width="5px"><h4><b>:</b></h4></td>
+															<td><b>{{getData(avgCollection)}} &nbsp;</b></td>
+															</tr>
+															<tr class="evn">
+															<td width="350px">Total Prescriptions</td>
+															<td width="5px"><h4><b>:</b></h4></td>
+															<td><b>{{getData(totalPrescriptions + totalRegPatients)}} &nbsp;</b></td>
+															</tr>
+															<tr class="">
+															<td width="350px">Max Prescriptions in a day </td>
+															<td width="5px"><h4><b>:</b></h4></td>
+															<td><b>{{maxPrescofDay}} &nbsp;</b><span>({{maxPresconDate | date: 'dd/MM/yyyy'}})</span></td>
+															</tr>
+															<tr class="evn">
+															<td width="350px">Min Prescriptions in a day </td>
+															<td width="5px"><h4><b>:</b></h4></td>
+															<td><b>{{minPrescOfDay}} &nbsp;</b><span>({{minPresconDate | date: 'dd/MM/yyyy'}})</span></td>
+															</tr>
+															<tr>		
+															<tr>
+															<td width="350px">Avg daily Prescriptions</td>
+															<td width="5px"><h4><b>:</b></h4></td>
+															<td><b>{{getData(getDataCeil((totalPrescriptions+totalRegPatients)/dateDiff))}}</b></td>
+															</tr>
+														</tbody>
+													</table>
+												</div>
+				    						</div>
+								    	</div>
+								    </div>
+								    <div id="menu1-cstm" class="tab-pane fade">
+								   		<div class="cstm-pad">
+								   			<div class="table-responsive">
+			    								<div class="">
+													<table class="table tb-1 my-tab-1">
+														<tbody>
+															<tr >
+															<td width="350px">Total patients</td>
+															<td width="5px"><h4><b>:</b></h4></td>
+															<td><b>{{getData(UniquePatientArray.length)}}</b></td>
+															</tr>
+															<tr class="evn">
+															<td width="350px">New patients added</td>
+															<td width="5px"><h4><b>:</b></h4></td>
+															<td><b>{{newPatients}} &nbsp; </b></td>
+															</tr>
+															<tr >
+															<td width="350px">Males</td>
+															<td width="5px"><h4><b>:</b></h4></td>
+															<td><b>{{totalMale}} &nbsp;</b><small>({{getData(totalMalePercentage)}}%)</small></td>
+															</tr>
+															<tr class="evn">
+															<td width="350px">Females</td>
+															<td width="5px"><h4><b>:</b></h4></td>
+															<td><b>{{totalFemale}} &nbsp;</b><small>({{getData(totalFemalePercentage)}}%)</small></td>
+															</tr>
+															<tr >
+															<td width="350px">Avg. Patient Age (Yrs)</td>
+															<td width="5px"><h4><b>:</b></h4></td>
+															<td><b>{{getData(avgAge)}} &nbsp;</b></td>
+															</tr>
+															<tr class="evn">
+															<td width="350px">Walk in patients</td>
+															<td width="5px"><h4><b>:</b></h4></td>
+															<td><b>{{totalWalkIn}} &nbsp;</b><small>({{getData(totalWalkInPercentage)}}%)</small></td>
+															</tr>
+															<tr >
+															<td width="350px">Appointment patients</td>
+															<td width="5px"><h4><b>:</b></h4></td>
+															<td><b>{{totalAppointment}} &nbsp;</b><small>({{getData(totalAppointmentPercentage)}}%)</small></td>
+															</tr>
+															<tr class="evn">
+															<td width="350px">Emergency patients</td>
+															<td width="5px"><h4><b>:</b></h4></td>
+															<td><b>{{totalEmergency}} &nbsp;</b><small>({{getData(totalEmergencyPercentage)}}%)</small></td>
+															</tr>
+														</tbody>
+													</table>
+													<h5 class="cstm-heading">PATIENT</h5> 
+													<div class="chart-diagnos chart-box wrap-canavas" *ngIf="!loading">
+								    				<canvas baseChart class="can-vas"
+									                [datasets]="lineChartData1"
+									                [labels]="lineChartLabels1"
+									                [options]="lineChartOptions"
+									                [colors]="lineChartColors"
+									                [legend]="lineChartLegend"
+									                [chartType]="lineChartType"
+									                (chartHover)="chartHovered($event)"
+									                (chartClick)="chartClicked($event)"></canvas>
+									            </div>
+												</div>
+				    						</div>
+								   		</div>
+								    </div>
+								  </div>
+	    					</div>
+	    					<h5 class="cstm-heading">COLLECTION</h5> 
+	    					<div class="col-lg-6 brdr-left">
+	    						<div class="chart-diagnos chart-box wrap-canavas" *ngIf="!loading">
+				    				<canvas baseChart
+					                [datasets]="lineChartData"
+					                [labels]="lineChartLabels"
+					                [options]="lineChartOptions"
+					                [colors]="lineChartColors"
+					                [legend]="lineChartLegend"
+					                [chartType]="lineChartType"
+					                (chartHover)="chartHovered($event)"
+					                (chartClick)="chartClicked($event)"></canvas>
+					            </div>
+				            	<div class="table-responsive">
+								  <table class="table tb-1 tb-2">
+								    <tbody>
+								      <tr class="evn">
+								        <td width="350px">Shift-1</td>
+								        <td width="5px"><h4><b>:</b></h4></td>
+								        <td><b>{{shiftOne}} &nbsp; </b><span><b></b> ({{getData(shiftOnepercentage)}}%)</span></td>
+								      </tr>
+								      <tr>
+								        <td width="350px">Shift-2
+								       </td>
+								        <td width="5px"><h4><b>:</b></h4></td>
+								        <td><b>{{shiftTwo}}  &nbsp;</b>({{getData(shiftTwopercentage)}}%)</td>
+								      </tr>
+								      <tr>
+								        <td width="350px">Shift-3
+								       </td>
+								        <td width="5px"><h4><b>:</b></h4></td>
+								        <td><b>{{shiftThree}}  &nbsp;</b>({{getData(shiftThreepercentage)}}%)</td>
+								      </tr>
+								     <!--  <tr class="">
+								        <td width="350px"><span>Top 20 Diagnosis</span></td>
+								        <td width="5px"><h4><b>:</b></h4></td>
+								        <td>
+								        	<b  class="clr-blue" data-toggle="modal" data-target="#myModal">View </b>
+								        	
+								        	</td>
+								      </tr> -->
+								      <tr class="evn">
+								        <td width="350px">
+								        	<span>Referred  Patients (TO)</span>
+
+								        </td>
+								        <td width="5px"><h4><b>:</b></h4></td>
+								        <td><b>{{dataReferralTo.length}} &nbsp;</b> <span (click)="viewReferralPatients(1)" class="clr-blue" data-toggle="modal" data-target="#myModal4">View</span></td>
+								      </tr>
+								      <tr>
+								        <td width="350px">Referred Patients (FROM)</td>
+								        <td width="5px"><h4><b>:</b></h4></td>
+								        <td><b>{{dataReferralFrom.length}} &nbsp;</b><span (click)="viewReferralPatients(2)" class="clr-blue" data-toggle="modal" data-target="#myModal4">View</span></td>
+								      </tr>
+								    <tr>
+								        <td width="350px">Frequent Patients (>=2Visits) </td>
+								        <td width="5px"><h4><b>:</b></h4></td>
+								        <td><b>{{freqPatientArray.length}} &nbsp;</b><span class="clr-blue"  data-toggle="modal" data-target="#myModal3">View</span></td>
+								      </tr>
+								      <!-- <tr>
+								        <td width="350px">Frequent Patients (>=3 Times)</td>
+								        <td width="5px"><h4><b>:</b></h4></td>
+								        <td><b>5 &nbsp;</b><span class="clr-blue">Views</span></td>
+								      </tr> -->
+								    </tbody>
+								  </table>
+								</div>
+	    					</div>
+	    				</div>
+	    			</div>
+				</div>
+	    	</div>
+	    </div>
+	</div>
+<div class="container footer-cstm-an">
+	<div class="row">
+		<div class="col-lg-6 text-center">
+			<div>
+				<p>TOP AREA : <b>Sector 78, NOIDA ( 18</b> Patients <b>), 30%</b> </p>
+			</div>
+		</div>
+		<div class="col-lg-6 text-center">
+			<div>
+				<p>PATIENT INFLOW TREND :  <b>Rising:</b> Falling : Steady</p>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- Top 20 Diagnosis View -->
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-body cstm-md-bdy">          	
+      	 	<button type="button" class="close" data-dismiss="modal">&times;</button>
+      		<div class="cstm-tab">
+				<table class="table tb-1 table-bordered">
+				    <tbody>
+						<tr class="cstm-tr-2">
+							<td class="text-center" width="80px"><b>Sr no</b></td>
+							<td class="text-center"><b>Diagnosis</b></td>
+							<td class="text-center"><b>Number of Patients</b></td>
+							<td class="text-center"><b>Percentages</b></td>
+						</tr>
+						<tr class="{{getClassMap(data,i)}}" *ngFor="let data of diagnosisArray | slice:0:20;let i = index; ">
+							<td class="text-center" width="80px">{{i+1}}</td>
+							<td class="text-left">{{data.value}}</td>
+							<td class="text-center">{{data.occurrence}}</td>
+							<td class="text-center">{{getData(data.percentage)}}%</td>
+						</tr>
+					</tbody>
+				</table>
+      		</div>      
+        </div>
+      </div>
+    </div>
+</div>
+<!-- Referred Patients (TO) -->
+<div class="modal fade" id="myModal1" role="dialog1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-body cstm-md-bdy">          	
+      	 	<button type="button" class="close" data-dismiss="modal">&times;</button>
+      		<div class="cstm-tab">
+				<table class="table tb-1 table-bordered">
+				    <tbody>
+						<tr class="cstm-tr-2">
+							<td class="text-center" width="80px"><b>Sr no</b></td>
+							<td class="text-center"><b>Diagnosis</b></td>
+							<td class="text-center"><b>Number of Patients</b></td>
+							<td class="text-center"><b>Percentages</b></td>
+						</tr>
+						<tr class="{{getClassMap(data,i)}}" *ngFor="let data of diagnosisArray | slice:0:20;let i = index; ">
+							<td class="text-center" width="80px">{{i+1}}</td>
+							<td class="text-left">{{data.value}}</td>
+							<td class="text-center">{{data.occurrence}}</td>
+							<td class="text-center">{{getData(data.percentage)}}%</td>
+						</tr>
+					</tbody>
+				</table>
+      		</div>      
+        </div>
+      </div>
+    </div>
+</div>
+<!-- Referred Patients (FROM) -->
+<div class="modal fade" id="myModal2" role="dialog2">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-body cstm-md-bdy">          	
+      	 	<button type="button" class="close" data-dismiss="modal">&times;</button>
+      		<div class="cstm-tab">
+				<table class="table tb-1 table-bordered">
+				    <tbody>
+						<tr class="cstm-tr-2">
+							<td class="text-center" width="80px"><b>Sr no</b></td>
+							<td class="text-center"><b>Diagnosis</b></td>
+							<td class="text-center"><b>Number of Patients</b></td>
+							<td class="text-center"><b>Percentages</b></td>
+						</tr>
+						<tr class="{{getClassMap(data,i)}}" *ngFor="let data of diagnosisArray | slice:0:20;let i = index; ">
+							<td class="text-center" width="80px">{{i+1}}</td>
+							<td class="text-left">{{data.value}}</td>
+							<td class="text-center">{{data.occurrence}}</td>
+							<td class="text-center">{{getData(data.percentage)}}%</td>
+						</tr>
+					</tbody>
+				</table>
+      		</div>      
+        </div>
+      </div>
+    </div>
+</div>
+<!-- Frequent Patients (>=2Visits) -->
+<div class="modal fade" id="myModal3" role="dialog3">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-body cstm-md-bdy">          	
+      	 	<button type="button" class="close" data-dismiss="modal">&times;</button>
+      		<div class="cstm-tab">
+				<table class="table tb-1 table-bordered">
+				    <tbody>
+						<tr class="cstm-tr-2">
+							<td class="text-center" width="80px"><b>Sr no</b></td>
+							<td class="text-center"><b>Patient Name</b></td>
+							<td class="text-center"><b>No of Visits</b></td>
+							<td class="text-center"><b>Phone Number</b></td>
+						</tr>
+						<tr class="{{getClassMap(data,i)}}" *ngFor="let data of freqPatientArray;let i = index; ">
+							<td class="text-center" width="80px">{{i+1}}</td>
+							<td class="text-left">{{data.name}}</td>
+							<td class="text-center">{{data.count}}</td>
+							<td class="text-center">{{data.phone}}</td>
+						</tr>
+					</tbody>
+				</table>
+      		</div>      
+        </div>
+      </div>
+    </div>
+</div>
+<!-- Referral Patients -->
+<div class="modal fade" id="myModal4" role="dialog4">
+    <div class="modal-dialog">
+      <div class="modal-content cstm-popup">
+        <div class="modal-body cstm-md-bdy">          	
+      	 	<button type="button" class="close" data-dismiss="modal">&times;</button>
+      		<div class="cstm-tab">
+				<table class="table tb-1 table-bordered">
+				    <tbody>
+						<tr class="cstm-tr-2">
+							<td class="text-center" width="80px"><b>Sr no</b></td>
+							<td class="text-center"><b>Doctor Name</b></td>
+							<td class="text-center"><b>Date</b></td>
+							<td class="text-center"><b>Patient Name</b></td>
+							<td class="text-center"><b>Phone</b></td>
+							<td class="text-center"><b>Note</b></td>
+						</tr>
+						<tr class="{{getClassMap(data,i)}}" *ngFor="let data of referralPatientArray;let i = index; ">
+							<td class="text-center" width="80px">{{i+1}}</td>
+							<td class="text-left">{{data.name}}</td>
+							<td class="text-left">{{data.date | date: 'dd/MM/yyyy'}}</td>
+							<td class="text-left">{{data.patientName}}</td>
+							<td class="text-center">{{data.phone}}</td>
+							<td class="text-center">{{data.note}}</td>
+						</tr>
+					</tbody>
+				</table>
+      		</div>      
+        </div>
+      </div>
+    </div>
+</div>

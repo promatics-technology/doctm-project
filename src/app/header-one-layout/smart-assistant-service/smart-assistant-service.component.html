@@ -1,0 +1,23 @@
+<div class="loader-box" *ngIf="loading">
+    <img src="./assets/imgs/load.gif" />
+</div>
+<section class="abt-us" style="background-image: url('./assets/imgs/slider-1.jpg');">
+    <h3>Smart Assistant</h3>
+</section>
+
+
+<div class="col-lg-6 col-lg-offset-1">
+	<section class="abt-txt">
+		<div>
+			<div innerHtml="{{getData}}"></div>
+		</div>
+	</section>
+</div>
+<div class="col-lg-4" style="padding: 15px;">
+<div *ngIf = "!getImage">
+	<img  src="./assets/imgs/no-person.jpg" class="" style="height:100%;width:100%;object-fit:cover;">
+</div>
+<div *ngIf = "getImage">
+	<img  src="{{image}}{{getImage}}" class="" style="height:100%;width:100%;object-fit:cover;"/>
+</div>
+</div>

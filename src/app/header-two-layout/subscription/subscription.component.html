@@ -1,0 +1,162 @@
+<!-- new sec-1 -->
+<!--{{subscriptionInfo | json}} -->
+<div class="container sec-1">
+	<div class="row">
+		<div class="col-lg-5 col-lg-offset-1">
+			<h3 class="text-center txt-theme">Current Plan</h3>
+			<div class="crnt-paln">
+				<ul>
+					<li><i [ngClass]="currentPlan=='trial' ? 'fa fa-check chk' :'fa fa-check chk op' "></i> Trial <small class="txt-theme" *ngIf="currentPlan=='trial'">(upto {{dd}}<sup>{{th}}</sup> {{month}} {{year}} )</small></li>
+					<li><i [ngClass]="currentPlan=='Monthly' ? 'fa fa-check chk' :'fa fa-check chk op' "></i>  Monthly  <small class="txt-theme" *ngIf="currentPlan=='Monthly'">(upto {{dd}}<sup>{{th}}</sup> {{month}} {{year}} )</small> </li>
+					<li><i [ngClass]="currentPlan=='Quarterly' ? 'fa fa-check chk' :'fa fa-check chk op' "></i> Quarterly <small class="txt-theme" *ngIf="currentPlan=='Querterly'">(upto {{dd}}<sup>{{th}}</sup> {{month}} {{year}} )</small> </li>
+					<li><i [ngClass]="currentPlan=='Yearly' ? 'fa fa-check chk' :'fa fa-check chk op' "></i> Yearly  <small class="txt-theme" *ngIf="currentPlan=='Yearly'">(upto {{dd}}<sup>{{th}}</sup> {{month}} {{year}} )</small></li>
+				</ul>
+			</div>
+		</div>
+		<div class="col-lg-5">
+		
+			<h3 class="text-center txt-theme">Current Services</h3>
+			<div class="crnt-paln">
+				<ul *ngIf="currentPlan!='trial'">
+				<li  *ngFor="let p of plan?.services; let i=index"><i [ngClass]="checkService(p.services_name) ? 'fa fa-check chk' :'fa fa-check chk op'"></i> <span *ngIf="getDiscount(p)!=0" style="font-size:14px; font-weignt:bold">{{p.services_name}} (₹ {{getPrice(p.baseRate)}} with {{getDiscount(p)}} % discount)</span> <span *ngIf="getDiscount(p)==0" style="font-size:14px; font-weignt:bold">{{p.services_name}} (₹ {{getPrice(p.baseRate)}})</span></li>
+				</ul>
+				
+				<ul *ngIf="currentPlan=='trial' && doctorData.type_of_doctor=='admin_doctor'">
+					<li><i class="fa fa-check chk"></i> StartClinic + Assistant</li>
+					<li><i [ngClass]="doctorData?.clinic_services?.Clinic_Pharmacy ? 'fa fa-check chk' :'fa fa-check chk op'"></i> StartPharmacy</li>
+					<li><i [ngClass]="doctorData?.clinic_services?.Clinic_Diagnostics ? 'fa fa-check chk' :'fa fa-check chk op'"></i> SmartDiagostics</li>
+					<li><i [ngClass]="doctorData?.clinic_services?.Clinic_IPD ? 'fa fa-check chk' :'fa fa-check chk op'"></i> SmartIPD</li>
+				</ul>
+				
+				<ul *ngIf="currentPlan=='trial' && doctorData.type_of_doctor=='normal_doctor'">
+					<li><i class="fa fa-check chk"></i> StartClinic + Assistant</li>
+					<li><i [ngClass]="doctorData?.clinic_services?.Clinic_Pharmacy ? 'fa fa-check chk' :'fa fa-check chk op'"></i> StartPharmacy</li>
+					<li><i [ngClass]="doctorData?.clinic_services?.Clinic_Diagnostics ? 'fa fa-check chk' :'fa fa-check chk op'"></i> SmartDiagostics</li>
+					<li><i [ngClass]="doctorData?.clinic_services?.Clinic_IPD ? 'fa fa-check chk' :'fa fa-check chk op'"></i> SmartIPD</li>
+				</ul>
+			</div>
+		</div>
+		
+		<div class="col-lg-12" style="padding-top:20px;">
+			<div class="text-center">
+			<button class="btn btn-grin btn-success" (click)="openChangePopUp()">CHANGE / RENEW *</button>
+			</div>
+		</div>
+		<!--{{doctorData | json}} -->
+		<div class="col-lg-12">
+			<div class="ftr_new text-center">
+				<h1>Total Subscription Amount : <span class="rd-clr">₹ {{subTotal}}</span></h1>
+				<h1>Plan Expiry - <span class="txt-theme">{{dd}}<sup>{{th}}</sup> {{month}}, {{year}} : </span><span class="rd-clr">{{left_days}} Days Left</span></h1>
+				<a href="javascript:void(0);"  [ngClass]="data_saved==false ? 'sve_rchrge disabled' : 'sve_rchrge' " (click)="save()">SAVE AND RECHARGE</a>
+				<small>* Note: Changing your current plan or services will start a NEW plan  from the date of change replacing the existing one.</small>
+			</div> 
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="myModal" role="dialog" data-backdrop="static">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content brdr-radius">
+          <!--button type="button" class="close" data-dismiss="modal">&times;</button-->
+        <div class="modal-body">
+        <div class="row">
+        <div class="col-lg-12">
+        <h3 class="text-center txt-theme hdr">Choose Subscription Plan</h3>
+        </div>
+<div class="col-lg-6">
+<h3 class="text-center txt-theme hdr">Choose Plan</h3>
+<div class="crnt-paln crnt-plan-2">
+<label class="rdio">Trial
+ <input type="radio" checked="checked" name="radio" value="trial" [(ngModel)]="currentPlan" (change)="fetchPricing($event)" [disabled]="!isTrial">
+ <span class="checkmark"></span>
+</label>
+<label class="rdio">Monthly
+ <input type="radio" name="radio" value="Monthly" [(ngModel)]="currentPlan" (change)="fetchPricing($event)">
+ <span class="checkmark"></span>
+</label>
+<label class="rdio"> Quarterly
+ <input type="radio" name="radio" value="Quarterly" [(ngModel)]="currentPlan" (change)="fetchPricing($event)">
+ <span class="checkmark"></span>
+</label>
+<label class="rdio">Yearly
+ <input type="radio" name="radio" value="Yearly" [(ngModel)]="currentPlan" (change)="fetchPricing($event)">
+ <span class="checkmark"></span>
+</label>
+</div>
+</div>
+<div class="col-lg-6">
+<h3 class="text-center txt-theme hdr">Choose Services</h3>
+<div class="crnt-paln crnt-plan-2" *ngIf="currentPlan!='trial' && doctorData.type_of_doctor=='normal_doctor'">
+<label class="chk_cstm_5" *ngFor="let p of plan?.services"><span *ngIf="getDiscount(p)" style="font-size:14px; font-weignt:bold">{{p.services_name}} (₹ {{getPrice(p.baseRate)}} with {{getDiscount(p)}} % discount)</span> <span *ngIf="getDiscount(p)==0" style="font-size:14px; font-weignt:bold">{{p.services_name}} (₹ {{getPrice(p.baseRate)}})</span>
+ <input type="checkbox" *ngIf="p.services_name=='SmartClinic'" (change)="updatePricing(getPrice(p.baseRate), $event, p)" [checked]="checkService('SmartClinic')"/>
+ <input type="checkbox" *ngIf="p.services_name=='SmartPharmacy'" [disabled]="adminDoctor?.clinic_services?.Clinic_Pharmacy!=true" (change)="updatePricing(getPrice(p.baseRate), $event, p)" [checked]="checkService(p.sevices_name)" />
+ <input type="checkbox" *ngIf="p.services_name=='Smart IPD'" [disabled]=" adminDoctor.clinic_services.Clinic_IPD!=true" (change)="updatePricing(getPrice(p.baseRate), $event, p)" [checked]="checkService(p.sevices_name)"/>
+ <input type="checkbox" *ngIf="p.services_name=='Smart Diagnostics'" [disabled]=" adminDoctor.clinic_services.Clinic_Diagnostics!=true" (change)="updatePricing(getPrice(p.baseRate), $event, p)" [checked]="checkService(p.sevices_name)"/>
+ <span class="checkmark-2"></span>
+</label>
+</div>
+
+
+<div class="crnt-paln crnt-plan-2" *ngIf="currentPlan!='trial' && doctorData.type_of_doctor=='admin_doctor'">
+<label class="chk_cstm_5" *ngFor="let p of plan?.services"><span *ngIf="getDiscount(p)!=0" style="font-size:14px; font-weignt:bold">{{p.services_name}} (₹ {{getPrice(p.baseRate)}} with {{getDiscount(p)}} % discount)</span> <span *ngIf="getDiscount(p)==0" style="font-size:14px; font-weignt:bold">{{p.services_name}} (₹ {{getPrice(p.baseRate)}})</span>
+ <input type="checkbox" (change)="updatePricing(getPrice(p.baseRate), $event, p)" [checked]="checkService(p.services_name)" />
+ <span class="checkmark-2"></span>
+</label>
+</div>
+
+<div class="crnt-paln crnt-plan-2" *ngIf="currentPlan=='trial' && doctorData.type_of_doctor=='admin_doctor'">
+<label class="chk_cstm_5">Smart Clinic + Smart Pharmacy
+ <input type="checkbox" [checked]="checkService('SmartClinic')"/>
+ <span class="checkmark-2"></span>
+</label>
+<label class="chk_cstm_5" > StartPharmacy
+ <input type="checkbox" [checked]="checkService('SmartPharmacy')">
+ <span class="checkmark-2"></span>
+</label>
+<label class="chk_cstm_5">SmartDiagostics
+ <input type="checkbox" [checked]="checkService('SmartDiagnostics')">
+ <span class="checkmark-2"></span>
+</label>
+<label class="chk_cstm_5">SmartIPD
+ <input type="checkbox" [checked]="checkService('SmartIPD')">
+ <span class="checkmark-2"></span>
+</label>
+</div>
+
+<div class="crnt-paln crnt-plan-2" *ngIf="currentPlan=='trial' && doctorData.type_of_doctor=='normal_doctor'">
+<label class="chk_cstm_5">Smart Clinic + Smart Pharmacy
+ <input type="checkbox" [checked]="checkService('SmartClinic')"/>
+ <span class="checkmark-2"></span>
+</label>
+<label class="chk_cstm_5"> SmartPharmacy
+ <input type="checkbox" [disabled]="adminDoctor?.clinic_services?.Clinic_Pharmacy!=true" [checked]="checkService('SmartPharmacy')">
+ <span class="checkmark-2"></span>
+</label>
+<label class="chk_cstm_5" >SmartDiagostics
+ <input type="checkbox" [disabled]="adminDoctor?.clinic_services?.Clinic_Diagnostics!=true" [checked]="checkService('SmartDiagnostics')">
+ <span class="checkmark-2"></span>
+</label>
+<label class="chk_cstm_5" >SmartIPD
+ <input type="checkbox" [disabled]="adminDoctor?.clinic_services?.Clinic_IPD!=true" [checked]="checkService('SmartIPD')">
+ <span class="checkmark-2"></span>
+</label>
+</div>
+
+</div>
+	<div class="col-lg-12">
+		<div class="ftr_new text-center">
+		<h3>Total Subscription Amount : <span class="rd-clr">₹ {{subTotal}}</span></h3>
+		<h3 *ngIf="dd">Plan Expiry - <span class="txt-theme">{{dd}}<sup>{{th}}</sup> {{month}}, {{year}} : </span><span class="rd-clr">{{left_days}} Days Left</span></h3>
+			<div class="pop_up">
+			<button class="btn btn-success" (click)="saveData(1)" [disabled]="checkDisabled()">SAVE</button>&nbsp;&nbsp;&nbsp;
+			<button class="btn btn-danger" (click)="saveData(0)">CANCEL</button>
+			</div>
+		</div> 
+	</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+

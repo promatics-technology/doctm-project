@@ -1,0 +1,55 @@
+<div class="loader-box" *ngIf="loading">
+    <img src="./assets/imgs/load.gif" />
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-6 col-lg-offset-3">
+            <form [formGroup]="sendSmsForm">
+                <br><br><br><br>
+                <div class="row">
+                    <div class="col-lg-1">
+                        <div style="margin-top: 10px;font-size: 18px;">+91</div>
+                    </div>
+                	<div class="col-lg-5">
+                        <div class="cstm-input">
+
+                            <input type="text" name="" placeholder="Enter Mobile Number" class="form-control input-lg" minlength="10" maxlength="10" pattern="[0-9]+" [(ngModel)] = "smsDetails.phone" [formControl]="sendSmsForm.controls['phone']">
+                           <p style="color: #FF0000" *ngIf="!sendSmsForm.controls['phone'].valid  && (sendSmsForm.controls['phone'].touched)">Invalid phone number !!!</p>
+                        </div>
+                    </div>
+                   
+                    <div class="col-lg-1">
+                         <div style="margin-top: 10px;font-size: 18px;">or</div>
+                    </div>
+                    <div class="col-lg-5">
+                        <div class="cstm-input">
+                            <input id="field2" type="text" class="form-control input-lg" value = 96855 name="" placeholder="Enter Email" [(ngModel)]="smsDetails.email" [formControl]="sendSmsForm.controls['email1']" />
+                            <p style="color: #FF0000" *ngIf="!sendSmsForm.controls['email1'].valid  && ( sendSmsForm.controls['email1'].touched)">Invalid email ID !!!</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-12 col-xs-12">
+                        <br>
+                    	<div class="form-group">
+						  <label for="comment">Message:</label>
+						  <textarea class="form-control" rows="11" disabled="" id="comment" [(ngModel)] = "smsDetails.message" [formControl]="sendSmsForm.controls['message']" style="display:none"></textarea>
+						  <div style="border:1px solid #c1c1c1;padding:8px; text-align:justify">Check out this amazing medical practice platform for your clinic. Its <b>easy-to-use, 
+secure</b> and <b>fully customizable</b> to your needs. It integrates all your clinic services not only to deliver best patient experience but also to keep you fully informed anytime, anywhere. You can <a href='javascript:void(0);'>Download</a> the app from the playstore or register yourself on <a href='https://mydoctm.com' target="_blank">https://mydoctm.com</a></div>
+						  <p style="color: #FF0000" *ngIf="!sendSmsForm.controls['message'].valid  && (sendSmsForm.controls['message'].touched)">Invalid message !!!</p>
+						</div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="container footer-cstm-an">
+    <div class="row">
+<!--         <div class="col-lg-6 text-center">
+        </div> -->
+        <div class="col-lg-12 text-center">
+            <div>
+                <button class="btn btn-cstm" [disabled]="!sendSmsForm.valid" (click)="sendSMS()">SEND</button>
+            </div>
+        </div>
+    </div>
+</div>

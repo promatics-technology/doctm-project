@@ -1,0 +1,23 @@
+.cstm-input input{
+	border-radius: 6px;
+	border: 1px solid rgba(56, 94, 138, 1);
+	height: 40px;
+}
+h3.dt{
+    color:#416bb1;
+    text-align: center;
+}
+h3.dt > span{
+    color:#000;
+    text-align: center;
+}
+.cstm-hdr{
+	
+    margin-top: 5px;
+}
+.cstm-form{
+	margin-top: 15px;
+}
+/*.cstm-hdr-1{
+	margin-left: -7em;
+}*/

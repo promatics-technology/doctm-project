@@ -1,0 +1,1468 @@
+<section>
+	<div class="container">
+		<div class="cus-content-wrapper">
+			<div class="cus-content">
+				<div class="">
+					<div class="inner-tab">
+				    	<!-- Nav tabs -->
+				      	<ul class="nav nav-tabs cstm-my-tab" role="tablist">
+				      		<li role="presentation" class="{{getClassTab('pd')}}"><a href="#pd" aria-controls="total" role="tab" data-toggle="tab"> Patient Details</a></li>
+				          	<li role="presentation" class="{{getClassTab('billing')}}"><a href="#billing" aria-controls="general" role="tab" data-toggle="tab">Billing</a></li>
+				          	<li role="presentation" class="{{getClassTab('dis-med')}}"><a href="#dis-med" aria-controls="semiprivate" role="tab" data-toggle="tab"> Discharge Medications</a></li>
+				          	<li role="presentation" class="{{getClassTab('dis-ins')}}"><a href="#dis-ins" aria-controls="private" role="tab" data-toggle="tab">Discharge Instructions </a></li>
+				          	<li role="presentation" class="{{getClassTab('doc-note')}}"><a href="#doc-note" aria-controls="private" role="tab" data-toggle="tab">Doctor Note </a></li>
+				        </ul>
+
+				      	<!-- Tab panes -->
+				      	<div class="tab-content">
+				      		<div role="tabpanel" class="tab-pane active" id="pd">
+				      			<div class=" ">
+				      				<div class="row">
+							    		<div class="col-md-12 col-sm-12 col-xs-12">
+							    			<div class="patient-popup">
+							    				<div class="row">
+								        			<div class="col-lg-6 col-lg-offset-6 text-right nxt-btn">
+								        				<div class="dshbrd-btn">
+															<a href="#billing" aria-controls="general" role="tab" data-toggle="tab" class="btn btn-custom" (click)="changeCurrentTab('billing')">Next</a>
+														</div>
+								        			</div>
+								        		</div>
+							    				<div class="pat-center">
+								    				<div class="pat-img">
+								    					<img src="./assets/imgs/no-person.jpg" class="img-responsive" *ngIf="!patientDataForDischarge.imgSrc"/>
+						                                <img src="{{pateintPicPath}}{{patientDataForDischarge.imgSrc}}" class="img-responsive" *ngIf="patientDataForDischarge.imgSrc"/>
+								    				</div>
+								    				<p> {{patientDataForDischarge.patientName}} ({{patientDataForDischarge.gender}}), {{patientDataForDischarge.age}}Y </p>
+								    			</div>
+								    			<!-- <p> <label>Bed number:</label> 
+								    				<span *ngIf="patientDataForDischarge.type=='general'">G</span>
+								    				<span *ngIf="patientDataForDischarge.type=='semi_private'">SP</span>
+								    				<span *ngIf="patientDataForDischarge.type=='private'">P</span>
+								    			-{{patientDataForDischarge.bed_number}} </p>
+								    			<p> <label>Ailment/Procedure: </label> {{patientDataForDischarge.procedure}} </p>
+								    			<p> <label>Patient ID:</label> {{patientDataForDischarge.id}} </p>
+								    			<p *ngIf="patientDataForDischarge.prescription_id"> <label>Prescription ID:</label> {{patientDataForDischarge.prescription_id}} </p>
+								    			<p *ngIf="!patientDataForDischarge.prescription_id"> <label>Prescription ID:</label> -- </p>
+								    			<p> <label>Mobile Number:</label> +91-{{patientDataForDischarge.phone}} </p>
+								    			<p> <label>Admit date and Time:</label> {{patientDataForDischarge.createdAt | date:'d MMM yy ,h:mm a' }} </p> -->
+								    			<!-- <table style="width: 65%;" class="table-bordered table-cstm" align="center">
+								    				<tr>
+								    					<th>Bed Number</th>
+								    					<td>
+								    						<span *ngIf="patientDataForDischarge.type=='general'">G</span>
+								    						<span *ngIf="patientDataForDischarge.type=='semi_private'">SP</span>
+								    						<span *ngIf="patientDataForDischarge.type=='private'">P</span>-{{patientDataForDischarge.bed_number}}
+								    					</td>
+								    				</tr>
+								    				<br>
+								    				<tr>
+								    					<th>Ailment/Procedure</th>
+								    					<td> {{patientDataForDischarge.procedure}}</td>
+								    				</tr>
+								    				<br>
+								    				<tr *ngIf="patientDataForDischarge.prescription_id">
+								    					<th>Prescription ID</th>
+								    					<td> {{patientDataForDischarge.prescription_id}}</td>
+								    				</tr>
+								    				<br>
+								    				<tr>
+								    					<th>Mobile Number</th>
+								    					<td> +91-{{patientDataForDischarge.phone}}</td>
+								    				</tr>
+								    				<br>
+								    				<tr>
+								    					<th>Admit date and Time</th>
+								    					<td>{{patientDataForDischarge.createdAt | date:'d MMM yy ,h:mm a' }} </td>
+								    				</tr>
+								    			</table> -->
+								    				<table style="width: 80%" class="table-bordered my-tab my-tab1" >
+								    					<tr>
+								    						<th>Bed Number</th>
+								    						<td>
+								    							<span *ngIf="patientDataForDischarge.type=='general'">G</span>
+									    						<span *ngIf="patientDataForDischarge.type=='semi_private'">SP</span>
+									    						<span *ngIf="patientDataForDischarge.type=='private'">P</span>-{{patientDataForDischarge.bed_number}}
+									    					</td>
+								    					</tr>
+								    					<tr>
+								    						<th>Ailment/Procedure</th>
+								    						<td> {{patientDataForDischarge.procedure}}</td>
+								    					</tr>
+								    					<tr *ngIf="patientDataForDischarge.prescription_id">
+								    						<th>Prescription ID</th>
+								    						<td> {{patientDataForDischarge.prescription_id}}</td>
+								    					</tr>
+								    					<tr>
+								    						<th>Mobile Number</th>
+								    						<td> +91-{{patientDataForDischarge.phone}}</td>
+								    					</tr>
+								    					<tr>
+								    						<th>Admit date and Time</th>
+								    						<td> {{patientDataForDischarge.createdAt | date:'d MMM yy ,h:mm a' }}</td>
+								    					</tr>
+									    			</table>
+							    			</div>
+							    		</div>
+					        		</div>
+					        		
+				      			</div>
+				          	</div>
+				          	<div role="tabpanel" class="tab-pane" id="billing">
+				      			<div class=" ">
+				      				<div class="row">
+							    		<div class="col-md-12 col-sm-12 col-xs-12">
+							    			<div class="patient-popup">
+							    				<div class="row">
+								        			<div class="col-lg-6 col-lg-offset-6 text-right nxt-btn">
+								        				<div class="dshbrd-btn">
+															<a href="#dis-med" aria-controls="general" role="tab" data-toggle="tab" class="btn btn-custom" (click)="changeCurrentTab('dis-med')">Next</a>
+														</div>
+								        			</div>
+								        		</div>
+							    				<div class="col-md-2 col-sm-2 col-xs-12 p-0">
+								    				<div class="discharge pat-img ">
+								    					<img src="./assets/imgs/no-person.jpg" class="img-responsive" *ngIf="!patientDataForDischarge.imgSrc"/>
+						                                <img src="{{pateintPicPath}}{{patientDataForDischarge.imgSrc}}" class="img-responsive" *ngIf="patientDataForDischarge.imgSrc"/>
+								    				</div>
+							    				</div>
+							    				<div class="col-md-10 col-sm-10 col-xs-12 p-r-0">
+								    				<div class="discharge-detail">
+								    					<!-- <div class="row">
+									    					<div class="col-md-6 col-sm-6 col-xs-12">
+										    					<div class="detail-list">
+										    						<p><b>Name:<span> {{patientDataForDischarge.patientName}}</span></b></p>
+										    						<p><b>Doctor:<span> {{doctorData.first_name}} </span></b></p>
+										    						<p><b>Patient Id:<span> {{patientDataForDischarge.id}}</span></b></p>
+										    					</div>
+									    					</div>
+									    					<div class="col-md-6 col-sm-6 col-xs-12">
+										    					<div class="detail-list">
+										    						<p><b>Age/Gender:<span> {{patientDataForDischarge.age}}/{{patientDataForDischarge.gender}}</span></b></p>
+										    						<p><b>Mobile:<span> +91 {{patientDataForDischarge.phone}}</span></b></p>
+										    					</div>
+									    					</div>
+									    				</div> -->
+									    				<table style="width: 80%" class="table-bordered my-tab my-tab2">
+									    					<tr>
+									    						<th>Name</th>
+									    						<td> {{patientDataForDischarge.patientName}}</td>
+									    					</tr>
+									    					<tr>
+									    						<th>Bed Number</th>
+									    						<td>
+									    							<span *ngIf="patientDataForDischarge.type=='general'">G</span>
+										    						<span *ngIf="patientDataForDischarge.type=='semi_private'">SP</span>
+										    						<span *ngIf="patientDataForDischarge.type=='private'">P</span>-{{patientDataForDischarge.bed_number}}
+										    					</td>
+									    					</tr>
+									    					<tr>
+									    						<th>Doctor</th>
+									    						<td> {{doctorData.first_name}}</td>
+									    					</tr>
+									    					<tr>
+									    						<th>Invoice number</th>
+									    						<td> {{patientDataForDischarge.id}}</td>
+									    					</tr>
+									    					<tr>
+									    						<th>Age/Gender</th>
+									    						<td> {{patientDataForDischarge.age}}/{{patientDataForDischarge.gender}}</td>
+									    					</tr>
+									    					<tr>
+									    						<th>Advance received</th>
+									    						<td> {{patientDataForDischarge.advanceReceived}}</td>
+									    					</tr>
+									    					<tr>
+									    						<th>Mobile:</th>
+									    						<td> +91 {{patientDataForDischarge.phone }}</td>
+									    					</tr>
+									    					<tr>
+									    						<th>Date Of Admission</th>
+									    						<td> {{patientDataForDischarge.createdAt | date:'d MMM yy ,h:mm a' }}</td>
+									    					</tr>
+									    					<tr>
+									    						<th>Date Of Discharge</th>
+									    						<td class="cstm"> 
+								    								<angular2-date-picker [(ngModel)]="dischargeDate" [settings]="settings" (onDateSelect)="onDateSelect($event)" class="pulll-left"></angular2-date-picker>
+															    	<ngb-timepicker [(ngModel)]="discharegeTime" [spinners]="false" class="ng-tm" (ngModelChange)="onTimeChange()"></ngb-timepicker>	
+									    						</td>
+									    					</tr>
+									    					<tr *ngIf="discharegeTime != null">
+									    						<th>Admission Duration</th>
+									    						<td> {{getDifferenceInDays()}} days {{getDifferenceInHours()}} hrs</td>
+									    					</tr>
+									    				</table>
+									    				<!-- <div class="row">
+									    					<div class="col-md-12 col-sm-12 col-xs-12">
+										    					<div class="detail-list">
+										    						<p>Date Of Admission:<span> {{patientDataForDischarge.createdAt | date:'d MMM yy ,h:mm a' }}</span></p>
+										    						<div class="row">
+										    							<div class="col-lg-4">
+											    							<p>Date Of Discharge:</p>
+											    						</div>
+											    						<div class="col-lg-4 dt-pick">
+											    							<angular2-date-picker [(ngModel)]="dischargeDate" [settings]="settings" (onDateSelect)="onDateSelect($event)" class="pulll-left"></angular2-date-picker>
+											    							<ngb-timepicker [(ngModel)]="discharegeTime" [spinners]="false" class="ng-tm"></ngb-timepicker>
+											    						</div>			    						
+										    						</div>
+										    						<p>Admission Duration:<span> {{getDifferenceInDays()}} days {{getDifferenceInHours()}} hrs</span></p>	
+										    					</div>
+									    					</div>
+									    				</div> -->
+								    				</div>
+							    				</div>
+							    			</div>
+							    		</div>
+					        		</div>
+					        		<div class="row">
+							    		<div class="col-md-12  col-sm-12 col-xs-12 text-left">
+							    			<div class="patient-popup chrges">
+								    			<h4>Occupancy Charges(a): 
+								    				<span> 
+								    					<input type="number" name="" class="form-control input-cstm" [(ngModel)]="occupancyCharges" (blur)="calculateCharges()">
+								    				</span>
+								    			</h4>
+							    			</div>
+							    		</div>
+					        		</div>
+					        		<div class="row">
+					        			<div class="col-md-12 col-sm-12 col-xs-12">
+					        				<div class="patient-popup discharge-popup">
+					        					<h4>Other Charges (b):</h4>
+					        					<table class="table table-striped table-bordered table-responsive">
+												    <thead>
+												      <tr>
+													        <th>Date : Time</th>
+													        <th width="100px">Activity</th>
+													        <th>Description</th>
+													        <th width="80px">Unit</th>
+													        <th width="80px">Rate</th>
+													        <th width="70px">Amount</th>
+												      </tr>
+												    </thead>
+												    <tbody>
+												      <tr *ngFor="let activity of patientActivities; let i = index;" >
+												        <td width="130px"> 
+												        	{{activity.createdAt | date:'d MMM yy ,h:mm a' }}
+												    	</td>
+												        <td width="100px"> 
+												        	<!-- <div class="form-group"> -->
+												        	{{activity.type}}
+												        	<!-- </div> -->
+												    	</td>
+												        <td> 
+												        	<input type="text" name="" class="form-control input-cstm" [(ngModel)]="activity.instruction">
+												    	</td>
+												    	<td width="80px">
+												    		<input type="number" name="" class="form-control input-cstm" [(ngModel)]="activity.unit" (blur)="calculateCharges()" >	
+												    	</td>
+												        <td width="80px"> 
+												        	<input type="number" name="" class="form-control input-cstm" [(ngModel)]="activity.rate" (blur)="calculateCharges()" >
+												    	</td>
+												        <td width="70px"> 
+												        	{{activity.amount}}
+												    	</td>
+												      <tr class="cstm-tr">
+													        <td colspan="5" class="text-right">Total (b)</td>
+													        <td>{{totalActivitiesAmount}}</td>
+												      </tr>
+												      <tr class="cstm-tr">
+													        <td colspan="5" class="text-right">Gross Total (a+b)</td>
+													        <td>{{totalActivitiesAmount+occupancyCharges}}</td>
+												      </tr>
+												      <tr class="cstm-tr">
+													        <td colspan="5" class="text-right">Advance Received</td>
+													        <td>{{patientDataForDischarge.advanceReceived}}</td>
+												      </tr>
+												      <tr class="cstm-tr" *ngIf="refundAmount>0">
+													    	<td colspan="5" class="text-right">Total Refund</td>
+													        <td>{{refundAmount}}</td>
+												      </tr>
+												      <tr class="cstm-tr">
+													        <td colspan="5" class="text-right">Total Outstanding</td>
+													        <td>{{totalActivitiesOutstandingAmount}}</td>
+												      </tr>
+												    </tbody>
+												  </table>
+					        				</div>
+					        			</div>
+					        		</div>
+					        		
+				      			</div>
+				          	</div>
+				          	<div role="tabpanel" class="tab-pane" id="dis-med">
+				      			<div class="wrap-tab-cont">
+				      				<div class="row">
+				      					
+					                    <div class="medication-modal-body wrap-div">
+					                    	<div class="row">
+							        			<div class="col-lg-6 col-lg-offset-6 text-right nxt-btn">
+							        				<div class="dshbrd-btn">
+														<a href="#dis-ins" aria-controls="general" role="tab" data-toggle="tab" class="btn btn-custom" (click)="changeCurrentTab('dis-ins')">Next</a>
+													</div>
+							        			</div>
+							        		</div>
+					                        <div class="sidebar-preset">
+					                            <ul class="presetul">
+					                                <li class="{{mediClass(0)}}" (click)="medicaTab(0,'Tablet')"> Tablet </li>
+					                                <li class="{{mediClass(1)}}" (click)="medicaTab(1,'Capsule')"> Capsule </li>
+					                                <li class="{{mediClass(2)}}" (click)="medicaTab(2,'Syrup')"> Syrup </li>
+					                                <li class="{{mediClass(3)}}" (click)="medicaTab(3,'Suspension')"> Suspension </li>
+					                                <li class="{{mediClass(4)}}" (click)="medicaTab(4,'Emulsion')"> Emulsion </li>
+					                                <li class="{{mediClass(5)}}" (click)="medicaTab(5,'Solution')"> Solution </li>
+					                                <li class="{{mediClass(6)}}" (click)="medicaTab(6,'Injection')"> Injection </li>
+					                                <li class="{{mediClass(7)}}" (click)="medicaTab(7,'Cream')"> Cream </li>
+					                                <li class="{{mediClass(14)}}" (click)="medicaTab(14,'Ointment')"> Ointment </li>
+					                                <li class="{{mediClass(8)}}" (click)="medicaTab(8,'Gel')"> Gel </li>
+					                                <li class="{{mediClass(13)}}" (click)="medicaTab(13,'Lotion')"> Lotion </li>
+					                                <li class="{{mediClass(9)}}" (click)="medicaTab(9,'Drops')"> Drops </li>
+					                                <li class="{{mediClass(10)}}" (click)="medicaTab(10,'Aerosols')"> Aerosols &amp; Inhalent </li>
+					                                <li class="{{mediClass(11)}}" (click)="medicaTab(11,'Powder')"> Powder &amp; Granule </li>
+					                                <li class="{{mediClass(12)}}" (click)="medicaTab(12,'Mouthwash')"> Mouthwash &amp; Gargle </li>
+					                            </ul>
+					                        </div>
+					                        <div class="medicine-body">
+					                            <div class="medicine-wrap">
+					                                <div class="" *ngIf="medicationStatus[0].status==true">
+					                                    <div class="medic-heading" >
+					                                        <div class="medicHead"> Tablet </div>
+					                                    </div>
+					                                    <ul class="medicine-list">
+					                                        <li *ngFor="let data of medicationTabArray;let i =index">
+					                                            <div class="flex-rowdiv medication-form">
+					                                                <div class="form-group medicinfo">
+					                                                    <tag-input class="selectize-qual" [maxItems]="1" [addOnBlur]="true" (keyup)="onTextChangeOfMedName('Tablet',$event.target.value)" (onRemove)="onRemoveMedName('TabletInfo',medication.tab[i])" (onAdd)="openFrequencyModalFromMed('TabletInfo',medication.tab[i])" [(ngModel)]='medication.tab[i].med_name' placeholder="Medicine Name" [separatorKeyCodes]="[188]" secondaryPlaceholder="Medicine Name" theme='bootstrap'>
+					                                                        <tag-input-dropdown [showDropdownIfEmpty]="true" [keepOpen]="false" [offset]="'30 0'" [appendToBody]="false" [autocompleteItems]="doctorMedicationTabletDB"></tag-input-dropdown>
+					                                                    </tag-input>
+					                                                </div>
+					                                                <div class="form-group frequency">
+					                                                    <div data-target="#combinedModal2" data-toggle="modal" (click)="openFrequencyModal(medication.tab[i])"><span class="{{getMedFrequencyClass(medication.tab[i].frequency)}}">{{medication.tab[i].frequency}}</span></div>
+					                                                </div>
+					                                                <div class="form-group duration">
+					                                                    <div data-target="#combinedModal2" data-toggle="modal" (click)="openFrequencyModal(medication.tab[i])"><span class="{{getMedDurationClass(medication.tab[i].duration)}}">{{medication.tab[i].duration}}</span></div>
+					                                                </div>
+					                                            </div>
+					                                            <div class="medicinfo">
+					                                                <tag-input class="selectize-qual" [addOnBlur]="true" [maxItems]="2" [(ngModel)]='medication.tab[i].med_info' [onlyFromAutocomplete]="true" placeholder="Add more" [separatorKeyCodes]="[188]" secondaryPlaceholder="Medicine Info" theme='bootstrap'>
+					                                                    <tag-input-dropdown [showDropdownIfEmpty]="true" [keepOpen]="false" [offset]="'30 0'" [appendToBody]="false" [autocompleteItems]="doctorMedicationTabletInfoDB"></tag-input-dropdown>
+					                                                </tag-input>
+					                                            </div>
+					                                            <div class="medic-control medic-left">
+					                                                {{i+1}}
+					                                            </div>
+					                                            <div class="medic-control medic-right">
+					                                                <div class="li-close" (click)="removeMoreTab('Tab',i)"> <i class="fa fa-minus"></i> </div>
+					                                                <div *ngIf="i == medicationTabArray.length-1" class="li-close plus" (click)="addMoreTab('Tab')"> <i class="fa fa-plus"></i> </div>
+					                                            </div>
+					                                        </li>
+					                                    </ul>
+					                                </div>
+					                                <div class="" *ngIf="medicationStatus[1].status==true">
+					                                    <div class="medic-heading" >
+					                                        <div class="medicHead"> Capsule </div>
+					                                    </div>
+					                                    <ul class="medicine-list">
+					                                        <li *ngFor="let data of medicationCapArray;let i =index">
+					                                            <div class="flex-rowdiv medication-form">
+					                                                <div class="form-group medicinfo">
+					                                                    <tag-input class="selectize-qual" [maxItems]="1" [addOnBlur]="true" (keyup)="onTextChangeOfMedName('Capsule',$event.target.value)" (onRemove)="onRemoveMedName('CapsuleInfo',medication.cap[i])" (onAdd)="openFrequencyModalFromMed('CapsuleInfo',medication.cap[i])" [(ngModel)]='medication.cap[i].med_name' placeholder="Medicine Name" [separatorKeyCodes]="[188]" secondaryPlaceholder="Medicine Name" theme='bootstrap'>
+					                                                        <tag-input-dropdown [showDropdownIfEmpty]="true" [keepOpen]="false" [offset]="'30 0'" [appendToBody]="false" [autocompleteItems]="doctorMedicationCapsuleDB"></tag-input-dropdown>
+					                                                    </tag-input>
+					                                                </div>
+					                                                <div class="form-group frequency">
+					                                                    <div data-target="#combinedModal2" data-toggle="modal" (click)="openFrequencyModal(medication.cap[i])"><span class="{{getMedFrequencyClass(medication.cap[i].frequency)}}">{{medication.cap[i].frequency}}</span></div>
+					                                                </div>
+					                                                <div class="form-group duration">
+					                                                    <div data-target="#combinedModal2" data-toggle="modal" (click)="openFrequencyModal(medication.cap[i])"><span class="{{getMedDurationClass(medication.cap[i].duration)}}">{{medication.cap[i].duration}}</span></div>
+					                                                </div>
+					                                            </div>
+					                                            <div class="medicinfo">
+					                                                <tag-input class="selectize-qual" [addOnBlur]="true" [maxItems]="2" [(ngModel)]='medication.cap[i].med_info' [onlyFromAutocomplete]="true" placeholder="Add more" [separatorKeyCodes]="[188]" secondaryPlaceholder="Medicine Info" theme='bootstrap'>
+					                                                    <tag-input-dropdown [showDropdownIfEmpty]="true" [keepOpen]="false" [offset]="'30 0'" [appendToBody]="false" [autocompleteItems]="doctorMedicationCapsuleInfoDB"></tag-input-dropdown>
+					                                                </tag-input>
+					                                            </div>
+					                                            <div class="medic-control medic-left">
+					                                                {{i+1}}
+					                                            </div>
+					                                            <div class="medic-control medic-right">
+					                                                <div class="li-close" (click)="removeMoreTab('Cap',i)"> <i class="fa fa-minus"></i> </div>
+					                                                <div class="li-close plus" *ngIf="i == medicationCapArray.length-1" (click)="addMoreTab('Cap')"> <i class="fa fa-plus"></i> </div>
+					                                            </div>
+					                                        </li>
+					                                    </ul>
+					                                </div>
+					                                <div class="" *ngIf="medicationStatus[2].status==true">
+					                                    <div class="medic-heading" >
+					                                        <div class="medicHead"> Syrup </div>
+					                                    </div>
+					                                    <ul class="medicine-list">
+					                                        <li *ngFor="let data of medicationSypArray;let i =index">
+					                                            <div class="flex-rowdiv medication-form">
+					                                                <div class="form-group medicinfo">
+					                                                    <tag-input class="selectize-qual" [maxItems]="1" [addOnBlur]="true" (keyup)="onTextChangeOfMedName('Syrup',$event.target.value)" (onRemove)="onRemoveMedName('SyrupInfo',medication.syp[i])" (onAdd)="openFrequencyModalFromMed('SyrupInfo',medication.syp[i])" [(ngModel)]='medication.syp[i].med_name' placeholder="Medicine Name" [separatorKeyCodes]="[188]" secondaryPlaceholder="Medicine Name" theme='bootstrap'>
+					                                                        <tag-input-dropdown [showDropdownIfEmpty]="true" [keepOpen]="false" [offset]="'30 0'" [appendToBody]="false" [autocompleteItems]="doctorMedicationSyrupDB"></tag-input-dropdown>
+					                                                    </tag-input>
+					                                                </div>
+					                                                <div class="form-group frequency">
+					                                                    <div data-target="#combinedModal4" data-toggle="modal" (click)="openFrequencyModal(medication.syp[i])"><span class="{{getMedFrequencyClass(medication.syp[i].frequency)}}">{{medication.syp[i].frequency}}</span></div>
+					                                                </div>
+					                                                <div class="form-group frequency duration">
+					                                                    <div data-toggle="modal" data-target="#combinedModal4" (click)="openFrequencyModal(medication.syp[i])"><span class="{{getMedDosageClass(medication.syp[i].dosage)}}">{{medication.syp[i].dosage}} (ml) </span></div>
+					                                                </div>
+					                                                <div class="form-group duration">
+					                                                    <div data-target="#combinedModal4" data-toggle="modal" (click)="openFrequencyModal(medication.syp[i])"><span class="{{getMedDurationClass(medication.syp[i].duration)}}">{{medication.syp[i].duration}}</span></div>
+					                                                </div>
+					                                            </div>
+					                                            <div class="medicinfo">
+					                                                <tag-input class="selectize-qual" [addOnBlur]="true" [maxItems]="2" [(ngModel)]='medication.syp[i].med_info' [onlyFromAutocomplete]="true" placeholder="Add more" [separatorKeyCodes]="[188]" secondaryPlaceholder="Medicine Info" theme='bootstrap'>
+					                                                    <tag-input-dropdown [showDropdownIfEmpty]="true" [keepOpen]="false" [offset]="'30 0'" [appendToBody]="false" [autocompleteItems]="doctorMedicationSyrupInfoDB"></tag-input-dropdown>
+					                                                </tag-input>
+					                                            </div>
+					                                            <div class="medic-control medic-left">
+					                                                {{i+1}}
+					                                            </div>
+					                                            <div class="medic-control medic-right">
+					                                                <div class="li-close" (click)="removeMoreTab('Syp',i)"> <i class="fa fa-minus"></i> </div>
+					                                                <div class="li-close plus" *ngIf="i == medicationSypArray.length-1" (click)="addMoreTab('Syp')"> <i class="fa fa-plus"></i> </div>
+					                                            </div>
+					                                        </li>
+					                                    </ul>
+					                                </div>
+					                                <div class="" *ngIf="medicationStatus[3].status==true">
+					                                    <div class="medic-heading" >
+					                                        <div class="medicHead"> Suspension </div>
+					                                    </div>
+					                                    <ul class="medicine-list">
+					                                        <li *ngFor="let data of medicationSuspArray;let i =index">
+					                                            <div class="flex-rowdiv medication-form">
+					                                                <div class="form-group medicinfo">
+					                                                    <tag-input class="selectize-qual" [maxItems]="1" [addOnBlur]="true" (keyup)="onTextChangeOfMedName('Suspension',$event.target.value)" (onRemove)="onRemoveMedName('SuspensionInfo',medication.susp[i])" (onAdd)="openFrequencyModalFromMed('SuspensionInfo',medication.susp[i])" [(ngModel)]='medication.susp[i].med_name' placeholder="Medicine Name" [separatorKeyCodes]="[188]" secondaryPlaceholder="Medicine Name" theme='bootstrap'>
+					                                                        <tag-input-dropdown [showDropdownIfEmpty]="true" [keepOpen]="false" [offset]="'30 0'" [appendToBody]="false" [autocompleteItems]="doctorMedicationSuspensionDB"></tag-input-dropdown>
+					                                                    </tag-input>
+					                                                </div>
+					                                                <div class="form-group frequency">
+					                                                    <div data-target="#combinedModal4" data-toggle="modal" (click)="openFrequencyModal(medication.susp[i])"><span class="{{getMedFrequencyClass(medication.susp[i].frequency)}}">{{medication.susp[i].frequency}}</span></div>
+					                                                </div>
+					                                                <div class="form-group frequency duration">
+					                                                    <div data-toggle="modal" data-target="#combinedModal4" (click)="openFrequencyModal(medication.susp[i])"><span class="{{getMedDosageClass(medication.susp[i].dosage)}}">{{medication.susp[i].dosage}} (ml) </span></div>
+					                                                </div>
+					                                                <div class="form-group duration">
+					                                                    <div data-target="#durationModal" data-toggle="modal" (click)="openFrequencyModal(medication.susp[i])"><span class="{{getMedDurationClass(medication.susp[i].duration)}}">{{medication.susp[i].duration}}</span></div>
+					                                                </div>
+					                                            </div>
+					                                            <div class="medicinfo">
+					                                                <tag-input class="selectize-qual" [addOnBlur]="true" [maxItems]="2" [(ngModel)]='medication.susp[i].med_info' [onlyFromAutocomplete]="true" placeholder="Add more" [separatorKeyCodes]="[188]" secondaryPlaceholder="Medicine Info" theme='bootstrap'>
+					                                                    <tag-input-dropdown [showDropdownIfEmpty]="true" [keepOpen]="false" [offset]="'30 0'" [appendToBody]="false" [autocompleteItems]="doctorMedicationSuspensionInfoDB"></tag-input-dropdown>
+					                                                </tag-input>
+					                                            </div>
+					                                            <div class="medic-control medic-left">
+					                                                {{i+1}}
+					                                            </div>
+					                                            <div class="medic-control medic-right">
+					                                                <div class="li-close" (click)="removeMoreTab('Susp',i)"> <i class="fa fa-minus"></i> </div>
+					                                                <div class="li-close plus" *ngIf="i == medicationSuspArray.length-1" (click)="addMoreTab('Susp')"> <i class="fa fa-plus"></i> </div>
+					                                            </div>
+					                                        </li>
+					                                    </ul>
+					                                </div>
+					                                <div class="" *ngIf="medicationStatus[4].status==true">
+					                                    <div class="medic-heading" >
+					                                        <div class="medicHead"> Emulsion </div>
+					                                    </div>
+					                                    <ul class="medicine-list">
+					                                        <li *ngFor="let data of medicationEmulsnArray;let i =index">
+					                                            <div class="flex-rowdiv medication-form">
+					                                                <div class="form-group medicinfo">
+					                                                    <tag-input class="selectize-qual" [maxItems]="1" [addOnBlur]="true" (keyup)="onTextChangeOfMedName('Emulsion',$event.target.value)" (onRemove)="onRemoveMedName('EmulsionInfo',medication.emulsn[i])" (onAdd)="openFrequencyModalFromMed('EmulsionInfo',medication.emulsn[i])" [(ngModel)]='medication.emulsn[i].med_name' placeholder="Medicine Name" [separatorKeyCodes]="[188]" secondaryPlaceholder="Medicine Name" theme='bootstrap'>
+					                                                        <tag-input-dropdown [showDropdownIfEmpty]="true" [keepOpen]="false" [offset]="'30 0'" [appendToBody]="false" [autocompleteItems]="doctorMedicationEmulsionDB"></tag-input-dropdown>
+					                                                    </tag-input>
+					                                                </div>
+					                                                <div class="form-group frequency">
+					                                                    <div data-target="#combinedModal4" data-toggle="modal" (click)="openFrequencyModal(medication.emulsn[i])"><span class="{{getMedFrequencyClass(medication.emulsn[i].frequency)}}">{{medication.emulsn[i].frequency}}</span></div>
+					                                                </div>
+					                                                <div class="form-group frequency duration">
+					                                                    <div data-toggle="modal" data-target="#combinedModal4" (click)="openFrequencyModal(medication.emulsn[i])"><span class="{{getMedDosageClass(medication.emulsn[i].dosage)}}">{{medication.emulsn[i].dosage}} (ml) </span></div>
+					                                                </div>
+					                                                <div class="form-group duration">
+					                                                    <div data-target="#combinedModal4" data-toggle="modal" (click)="openFrequencyModal(medication.emulsn[i])"><span class="{{getMedDurationClass(medication.emulsn[i].duration)}}">{{medication.emulsn[i].duration}}</span></div>
+					                                                </div>
+					                                            </div>
+					                                            <div class="medicinfo">
+					                                                <tag-input class="selectize-qual" [addOnBlur]="true" [maxItems]="2" [(ngModel)]='medication.emulsn[i].med_info' [onlyFromAutocomplete]="true" placeholder="Add more" [separatorKeyCodes]="[188]" secondaryPlaceholder="Medicine Info" theme='bootstrap'>
+					                                                    <tag-input-dropdown [showDropdownIfEmpty]="true" [keepOpen]="false" [offset]="'30 0'" [appendToBody]="false" [autocompleteItems]="doctorMedicationEmulsionInfoDB"></tag-input-dropdown>
+					                                                </tag-input>
+					                                            </div>
+					                                            <div class="medic-control medic-left">
+					                                                {{i+1}}
+					                                            </div>
+					                                            <div class="medic-control medic-right">
+					                                                <div class="li-close" (click)="removeMoreTab('Emulsn',i)"> <i class="fa fa-minus"></i> </div>
+					                                                <div class="li-close plus" *ngIf="i == medicationEmulsnArray.length-1" (click)="addMoreTab('Emulsn')"> <i class="fa fa-plus"></i> </div>
+					                                            </div>
+					                                        </li>
+					                                    </ul>
+					                                </div>
+					                                <div class="" *ngIf="medicationStatus[5].status==true">
+					                                    <div class="medic-heading" >
+					                                        <div class="medicHead"> Solution </div>
+					                                    </div>
+					                                    <ul class="medicine-list">
+					                                        <li *ngFor="let data of medicationSolutionArray;let i =index">
+					                                            <div class="flex-rowdiv medication-form">
+					                                                <div class="form-group medicinfo">
+					                                                    <tag-input class="selectize-qual" [maxItems]="1" [addOnBlur]="true" (keyup)="onTextChangeOfMedName('Solution',$event.target.value)" (onRemove)="onRemoveMedName('SolutionInfo',medication.tab[i])" (onAdd)="openFrequencyModalFromMed('SolutionInfo',medication.solution[i])" [(ngModel)]='medication.solution[i].med_name' placeholder="Medicine Name" [separatorKeyCodes]="[188]" secondaryPlaceholder="Medicine Name" theme='bootstrap'>
+					                                                        <tag-input-dropdown [showDropdownIfEmpty]="true" [keepOpen]="false" [offset]="'30 0'" [appendToBody]="false" [autocompleteItems]="doctorMedicationSolutionDB"></tag-input-dropdown>
+					                                                    </tag-input>
+					                                                </div>
+					                                                <div class="form-group frequency">
+					                                                    <div data-target="#combinedModal4" data-toggle="modal" (click)="openFrequencyModal(medication.solution[i])"><span class="{{getMedFrequencyClass(medication.solution[i].frequency)}}">{{medication.solution[i].frequency}}</span></div>
+					                                                </div>
+					                                                <div class="form-group frequency duration">
+					                                                    <div data-toggle="modal" data-target="#combinedModal4" (click)="openFrequencyModal(medication.solution[i])"><span class="{{getMedDosageClass(medication.solution[i].dosage)}}">{{medication.solution[i].dosage}} (ml) </span></div>
+					                                                </div>
+					                                                <div class="form-group duration">
+					                                                    <div data-target="#combinedModal4" data-toggle="modal" (click)="openFrequencyModal(medication.solution[i])"><span class="{{getMedDurationClass(medication.solution[i].duration)}}">{{medication.solution[i].duration}}</span></div>
+					                                                </div>
+					                                            </div>
+					                                            <div class="medicinfo">
+					                                                <tag-input class="selectize-qual" [addOnBlur]="true" [maxItems]="2" [(ngModel)]='medication.solution[i].med_info' [onlyFromAutocomplete]="true" placeholder="Add more" [separatorKeyCodes]="[188]" secondaryPlaceholder="Medicine Info" theme='bootstrap'>
+					                                                    <tag-input-dropdown [showDropdownIfEmpty]="true" [keepOpen]="false" [offset]="'30 0'" [appendToBody]="false" [autocompleteItems]="doctorMedicationSolutionInfoDB"></tag-input-dropdown>
+					                                                </tag-input>
+					                                            </div>
+					                                            <div class="medic-control medic-left">
+					                                                {{i+1}}
+					                                            </div>
+					                                            <div class="medic-control medic-right">
+					                                                <div class="li-close" (click)="removeMoreTab('Solution',i)"> <i class="fa fa-minus"></i> </div>
+					                                                <div class="li-close plus" *ngIf="i == medicationSolutionArray.length-1" (click)="addMoreTab('Solution')"> <i class="fa fa-plus"></i> </div>
+					                                            </div>
+					                                        </li>
+					                                    </ul>
+					                                </div>
+					                                <div class="" *ngIf="medicationStatus[6].status==true">
+					                                    <div class="medic-heading" >
+					                                        <div class="medicHead"> Injection </div>
+					                                    </div>
+					                                    <ul class="medicine-list">
+					                                        <li *ngFor="let data of medicationInjArray;let i =index">
+					                                            <div class="flex-rowdiv medication-form">
+					                                                <div class="form-group medicinfo">
+					                                                    <tag-input class="selectize-qual" [maxItems]="1" [addOnBlur]="true" (keyup)="onTextChangeOfMedName('Injection',$event.target.value)" (onRemove)="onRemoveMedName('InjectionInfo',medication.injection[i])" (onAdd)="openFrequencyModalFromMed('InjectionInfo',medication.injection[i])" [(ngModel)]='medication.injection[0].med_name' placeholder="Medicine Name" [separatorKeyCodes]="[188]" secondaryPlaceholder="Medicine Name" theme='bootstrap'>
+					                                                        <tag-input-dropdown [showDropdownIfEmpty]="true" [keepOpen]="false" [offset]="'30 0'" [appendToBody]="false" [autocompleteItems]="doctorMedicationInjectionDB"></tag-input-dropdown>
+					                                                    </tag-input>
+					                                                </div>
+					                                                <div class="form-group frequency">
+					                                                    <div data-target="#combinedModal" data-toggle="modal" (click)="openFrequencyModal(medication.injection[i])"><span class="{{getMedFrequencyClass(medication.injection[i].frequency)}}">{{medication.injection[i].frequency}}</span></div>
+					                                                </div>
+					                                                <div class="form-group frequency duration">
+					                                                    <div data-target="#combinedModal" data-toggle="modal" (click)="openFrequencyModal(medication.injection[i])"><span class="{{getMedModeClass(medication.injection[i].mode)}}">{{medication.injection[i].mode}}</span></div>
+					                                                </div>
+					                                                <div class="form-group duration">
+					                                                    <div data-target="#combinedModal" data-toggle="modal" (click)="openFrequencyModal(medication.injection[i])"><span class="{{getMedDurationClass(medication.injection[i].duration)}}">{{medication.injection[i].duration}}</span></div>
+					                                                </div>
+					                                            </div>
+					                                            <div class="medicinfo">
+					                                                <tag-input class="selectize-qual" [addOnBlur]="true" [maxItems]="2" [(ngModel)]='medication.injection[i].med_info' [onlyFromAutocomplete]="true" placeholder="Add more" [separatorKeyCodes]="[188]" secondaryPlaceholder="Medicine Info" theme='bootstrap'>
+					                                                    <tag-input-dropdown [showDropdownIfEmpty]="true" [keepOpen]="false" [offset]="'30 0'" [appendToBody]="false" [autocompleteItems]="doctorMedicationInjectionInfoDB"></tag-input-dropdown>
+					                                                </tag-input>
+					                                            </div>
+					                                            <div class="medic-control medic-left">
+					                                                {{i+1}}
+					                                            </div>
+					                                            <div class="medic-control medic-right">
+					                                                <div class="li-close" (click)="removeMoreTab('Inj',i)"> <i class="fa fa-minus"></i> </div>
+					                                                <div class="li-close plus" *ngIf="i == medicationInjArray.length-1" (click)="addMoreTab('Inj')"> <i class="fa fa-plus"></i> </div>
+					                                            </div>
+					                                        </li>
+					                                    </ul>
+					                                </div>
+					                                <div class="" *ngIf="medicationStatus[7].status==true">
+					                                    <div class="medic-heading" >
+					                                        <div class="medicHead"> Cream </div>
+					                                    </div>
+					                                    <ul class="medicine-list">
+					                                        <li *ngFor="let data of medicationCreamArray;let i =index">
+					                                            <div class="flex-rowdiv medication-form">
+					                                                <div class="form-group medicinfo">
+					                                                    <tag-input class="selectize-qual" [maxItems]="1" [addOnBlur]="true" (keyup)="onTextChangeOfMedName('Cream',$event.target.value)" (onRemove)="onRemoveMedName('CreamInfo',medication.cream[i])" (onAdd)="openFrequencyModalFromMed('CreamInfo',medication.cream[i])" [(ngModel)]='medication.cream[i].med_name' placeholder="Medicine Name" [separatorKeyCodes]="[188]" secondaryPlaceholder="Medicine Name" theme='bootstrap'>
+					                                                        <tag-input-dropdown [showDropdownIfEmpty]="true" [keepOpen]="false" [offset]="'30 0'" [appendToBody]="false" [autocompleteItems]="doctorMedicationCreamDB"></tag-input-dropdown>
+					                                                    </tag-input>
+					                                                </div>
+					                                                <div class="form-group frequency">
+					                                                    <div data-target="#combinedModal2" data-toggle="modal" (click)="openFrequencyModal(medication.cream[i])"><span class="{{getMedFrequencyClass(medication.cream[i].frequency)}}">{{medication.cream[i].frequency}}</span></div>
+					                                                </div>
+					                                                <div class="form-group duration">
+					                                                    <div data-target="#combinedModal2" data-toggle="modal" (click)="openFrequencyModal(medication.cream[i])"><span class="{{getMedDurationClass(medication.cream[i].duration)}}">{{medication.cream[i].duration}}</span></div>
+					                                                </div>
+					                                                <!-- <span class="li-close"> <i class="material-icons" (click)="removeMoreTab('Cream',i)"> remove </i> </span> -->
+					                                            </div>
+					                                            <div class="medicinfo">
+					                                                <tag-input class="selectize-qual" [addOnBlur]="true" [maxItems]="2" [(ngModel)]='medication.cream[i].med_info' [onlyFromAutocomplete]="true" placeholder="Add more" [separatorKeyCodes]="[188]" secondaryPlaceholder="Medicine Info" theme='bootstrap'>
+					                                                    <tag-input-dropdown [showDropdownIfEmpty]="true" [keepOpen]="false" [offset]="'30 0'" [appendToBody]="false" [autocompleteItems]="doctorMedicationCreamInfoDB"></tag-input-dropdown>
+					                                                </tag-input>
+					                                            </div>
+					                                            <div class="medic-control medic-left">
+					                                                {{i+1}}
+					                                            </div>
+					                                            <div class="medic-control medic-right">
+					                                                <div class="li-close" (click)="removeMoreTab('Cream',i)"> <i class="fa fa-minus"></i> </div>
+					                                                <div class="li-close plus" *ngIf="i == medicationCreamArray.length-1" (click)="addMoreTab('Cream')"> <i class="fa fa-plus"></i> </div>
+					                                            </div>
+					                                        </li>
+					                                    </ul>
+					                                </div>
+					                                <div class="" *ngIf="medicationStatus[8].status==true">
+					                                    <div class="medic-heading" >
+					                                        <div class="medicHead"> Gel </div>
+					                                    </div>
+					                                    <ul class="medicine-list">
+					                                        <li *ngFor="let data of medicationGelArray;let i =index">
+					                                            <div class="flex-rowdiv medication-form">
+					                                                <div class="form-group medicinfo">
+					                                                    <tag-input class="selectize-qual" [maxItems]="1" [addOnBlur]="true" (keyup)="onTextChangeOfMedName('Gel',$event.target.value)" (onRemove)="onRemoveMedName('GelInfo',medication.gel[i])" (onAdd)="openFrequencyModalFromMed('GelInfo',medication.gel[i])" [(ngModel)]='medication.gel[i].med_name' placeholder="Medicine Name" [separatorKeyCodes]="[188]" secondaryPlaceholder="Medicine Name" theme='bootstrap'>
+					                                                        <tag-input-dropdown [showDropdownIfEmpty]="true" [keepOpen]="false" [offset]="'30 0'" [appendToBody]="false" [autocompleteItems]="doctorMedicationGelDB"></tag-input-dropdown>
+					                                                    </tag-input>
+					                                                </div>
+					                                                <div class="form-group duration">
+					                                                    <div data-target="#combinedModal2" data-toggle="modal" (click)="openFrequencyModal(medication.gel[i])"><span class="{{getMedFrequencyClass(medication.gel[i].frequency)}}">{{medication.gel[i].frequency}}</span></div>
+					                                                </div>
+					                                                <!--  <div class="form-group frequency duration">
+					                                                    <div data-target="#quantityModal" data-toggle="modal" (click)="openFrequencyModal(medication.gel[i])"> {{medication.gel[i].quantity}} </div>
+					                                                </div> -->
+					                                                <div class="form-group duration">
+					                                                    <div data-target="#combinedModal2" data-toggle="modal" (click)="openFrequencyModal(medication.gel[i])"><span class="{{getMedDurationClass(medication.gel[i].duration)}}">{{medication.gel[i].duration}}</span></div>
+					                                                </div>
+					                                            </div>
+					                                            <div class="medicinfo">
+					                                                <tag-input class="selectize-qual" [addOnBlur]="true" [maxItems]="2" [(ngModel)]='medication.gel[i].med_info' [onlyFromAutocomplete]="true" placeholder="Add more" [separatorKeyCodes]="[188]" secondaryPlaceholder="Medicine Info" theme='bootstrap'>
+					                                                    <tag-input-dropdown [showDropdownIfEmpty]="true" [keepOpen]="false" [offset]="'30 0'" [appendToBody]="false" [autocompleteItems]="doctorMedicationGelInfoDB"></tag-input-dropdown>
+					                                                </tag-input>
+					                                            </div>
+					                                            <div class="medic-control medic-left">
+					                                                {{i+1}}
+					                                            </div>
+					                                            <div class="medic-control medic-right">
+					                                                <div class="li-close" (click)="removeMoreTab('Gel',i)"> <i class="fa fa-minus"></i> </div>
+					                                                <div class="li-close plus" *ngIf="i == medicationGelArray.length-1" (click)="addMoreTab('Gel')"> <i class="fa fa-plus"></i> </div>
+					                                            </div>
+					                                        </li>
+					                                    </ul>
+					                                </div>
+					                                <div class="" *ngIf="medicationStatus[9].status==true">
+					                                    <div class="medic-heading">
+					                                        <div class="medicHead"> Drops </div>
+					                                    </div>
+					                                    <ul class="medicine-list">
+					                                        <li *ngFor="let data of medicationDropsArray;let i =index">
+					                                            <div class="flex-rowdiv medication-form">
+					                                                <div class="form-group medicinfo">
+					                                                    <tag-input class="selectize-qual" [maxItems]="1" [addOnBlur]="true" (keyup)="onTextChangeOfMedName('Drops',$event.target.value)" (onRemove)="onRemoveMedName('DropsInfo',medication.drops[i])" (onAdd)="openFrequencyModalFromMed('DropsInfo',medication.drops[i])" [(ngModel)]='medication.drops[i].med_name' placeholder="Medicine Name" [separatorKeyCodes]="[188]" secondaryPlaceholder="Medicine Name" theme='bootstrap'>
+					                                                        <tag-input-dropdown [showDropdownIfEmpty]="true" [keepOpen]="false" [offset]="'30 0'" [appendToBody]="false" [autocompleteItems]="doctorMedicationDropsDB"></tag-input-dropdown>
+					                                                    </tag-input>
+					                                                </div>
+					                                                <div class="form-group duration">
+					                                                    <div data-target="#combinedModal3" data-toggle="modal" (click)="openFrequencyModal(medication.drops[i])"><span class="{{getMedFrequencyClass(medication.drops[i].frequency)}}">{{medication.drops[i].frequency}}</span></div>
+					                                                </div>
+					                                                <div class="form-group frequency duration">
+					                                                    <div data-target="#combinedModal3" data-toggle="modal" (click)="openFrequencyModal(medication.drops[i])"><span class="{{getMedQuantityClass(medication.drops[i].quantity)}}">{{medication.drops[i].quantity}}</span></div>
+					                                                </div>
+					                                                <div class="form-group duration">
+					                                                    <div data-target="#combinedModal3" data-toggle="modal" (click)="openFrequencyModal(medication.drops[i])"><span class="{{getMedDurationClass(medication.drops[i].duration)}}">{{medication.drops[i].duration}}</span></div>
+					                                                </div>
+					                                            </div>
+					                                            <div class="medicinfo">
+					                                                <tag-input class="selectize-qual" [addOnBlur]="true" [maxItems]="2" [(ngModel)]='medication.drops[i].med_info' [onlyFromAutocomplete]="true" placeholder="Add more" [separatorKeyCodes]="[188]" secondaryPlaceholder="Medicine Info" theme='bootstrap'>
+					                                                    <tag-input-dropdown [showDropdownIfEmpty]="true" [keepOpen]="false" [offset]="'30 0'" [appendToBody]="false" [autocompleteItems]="doctorMedicationDropsDB"></tag-input-dropdown>
+					                                                </tag-input>
+					                                            </div>
+					                                            <div class="medic-control medic-left">
+					                                                {{i+1}}
+					                                            </div>
+					                                            <div class="medic-control medic-right">
+					                                                <div class="li-close" (click)="removeMoreTab('Drops',i)"> <i class="fa fa-minus"></i> </div>
+					                                                <div class="li-close plus" *ngIf="i == medicationDropsArray.length-1" (click)="addMoreTab('Drops')"> <i class="fa fa-plus"></i> </div>
+					                                            </div>
+					                                        </li>
+					                                    </ul>
+					                                </div>
+					                                <div class="" *ngIf="medicationStatus[10].status==true">
+					                                    <div class="medic-heading">
+					                                        <div class="medicHead"> Aerosols &amp; Inhalent </div>
+					                                    </div>
+					                                    <ul class="medicine-list">
+					                                        <li *ngFor="let data of medicationAerosolsArray;let i =index">
+					                                            <div class="flex-rowdiv medication-form">
+					                                                <div class="form-group medicinfo">
+					                                                    <tag-input class="selectize-qual" [maxItems]="1" [addOnBlur]="true" (keyup)="onTextChangeOfMedName('Aerosols',$event.target.value)" (onRemove)="onRemoveMedName('AerosolsInfo',medication.aerosols[i])" (onAdd)="openFrequencyModalFromMed('AerosolsInfo',medication.aerosols[i])" [(ngModel)]='medication.aerosols[i].med_name' placeholder="Medicine Name" [separatorKeyCodes]="[188]" secondaryPlaceholder="Medicine Name" theme='bootstrap'>
+					                                                        <tag-input-dropdown [showDropdownIfEmpty]="true" [keepOpen]="false" [offset]="'30 0'" [appendToBody]="false" [autocompleteItems]="doctorMedicationAerosolsDB"></tag-input-dropdown>
+					                                                    </tag-input>
+					                                                </div>
+					                                                <div class="form-group frequency">
+					                                                    <div data-target="#combinedModal2" data-toggle="modal" (click)="openFrequencyModal(medication.aerosols[i])"><span class="{{getMedFrequencyClass(medication.aerosols[i].frequency)}}">{{medication.aerosols[i].frequency}}</span></div>
+					                                                </div>
+					                                                <div class="form-group duration">
+					                                                    <div data-target="#combinedModal2" data-toggle="modal" (click)="openFrequencyModal(medication.aerosols[i])"><span class="{{getMedDurationClass(medication.aerosols[i].duration)}}">{{medication.aerosols[i].duration}}</span></div>
+					                                                </div>
+					                                            </div>
+					                                            <div class="medicinfo">
+					                                                <tag-input class="selectize-qual" [addOnBlur]="true" [maxItems]="2" [(ngModel)]='medication.aerosols[i].med_info' [onlyFromAutocomplete]="true" placeholder="Add more" [separatorKeyCodes]="[188]" secondaryPlaceholder="Medicine Info" theme='bootstrap'>
+					                                                    <tag-input-dropdown [showDropdownIfEmpty]="true" [keepOpen]="false" [offset]="'30 0'" [appendToBody]="false" [autocompleteItems]="doctorMedicationAerosolsInfoDB"></tag-input-dropdown>
+					                                                </tag-input>
+					                                            </div>
+					                                            <div class="medic-control medic-left">
+					                                                {{i+1}}
+					                                            </div>
+					                                            <div class="medic-control medic-right">
+					                                                <div class="li-close" (click)="removeMoreTab('Aerosols',i)"> <i class="fa fa-minus"></i> </div>
+					                                                <div class="li-close plus" *ngIf="i == medicationAerosolsArray.length-1" (click)="addMoreTab('Aerosols')"> <i class="fa fa-plus"></i> </div>
+					                                            </div>
+					                                        </li>
+					                                    </ul>
+					                                </div>
+					                                <div class="" *ngIf="medicationStatus[11].status==true">
+					                                    <div class="medic-heading">
+					                                        <div class="medicHead"> Powder &amp; Granule </div>
+					                                    </div>
+					                                    <ul class="medicine-list">
+					                                        <li *ngFor="let data of medicationPowderArray;let i =index">
+					                                            <div class="flex-rowdiv medication-form">
+					                                                <div class="form-group medicinfo">
+					                                                    <tag-input class="selectize-qual" [maxItems]="1" [addOnBlur]="true" (keyup)="onTextChangeOfMedName('Powder',$event.target.value)" (onRemove)="onRemoveMedName('PowderInfo',medication.powder[i])" (onAdd)="openFrequencyModalFromMed('PowderInfo',medication.powder[i])" [(ngModel)]='medication.powder[i].med_name' placeholder="Medicine Name" [separatorKeyCodes]="[188]" secondaryPlaceholder="Medicine Name" theme='bootstrap'>
+					                                                        <tag-input-dropdown [showDropdownIfEmpty]="true" [keepOpen]="false" [offset]="'30 0'" [appendToBody]="false" [autocompleteItems]="doctorMedicationPowderDB"></tag-input-dropdown>
+					                                                    </tag-input>
+					                                                </div>
+					                                                <div class="form-group frequency">
+					                                                    <div data-target="#combinedModal2" data-toggle="modal" (click)="openFrequencyModal(medication.powder[i])"><span class="{{getMedFrequencyClass(medication.powder[i].frequency)}}">{{medication.powder[i].frequency}}</span></div>
+					                                                </div>
+					                                                <div class="form-group duration">
+					                                                    <div data-target="#combinedModal2" data-toggle="modal" (click)="openFrequencyModal(medication.powder[i])"><span class="{{getMedDurationClass(medication.powder[i].duration)}}">{{medication.powder[i].duration}}</span></div>
+					                                                </div>
+					                                            </div>
+					                                            <div class="medicinfo">
+					                                                <tag-input class="selectize-qual" [addOnBlur]="true" [maxItems]="2" [(ngModel)]='medication.powder[i].med_info' [onlyFromAutocomplete]="true" placeholder="Add more" [separatorKeyCodes]="[188]" secondaryPlaceholder="Medicine Info" theme='bootstrap'>
+					                                                    <tag-input-dropdown [showDropdownIfEmpty]="true" [keepOpen]="false" [offset]="'30 0'" [appendToBody]="false" [autocompleteItems]="doctorMedicationPowderInfoDB"></tag-input-dropdown>
+					                                                </tag-input>
+					                                            </div>
+					                                            <div class="medic-control medic-left">
+					                                                {{i+1}}
+					                                            </div>
+					                                            <div class="medic-control medic-right">
+					                                                <div class="li-close" (click)="removeMoreTab('Powder',i)"> <i class="fa fa-minus"></i> </div>
+					                                                <div class="li-close plus" *ngIf="i == medicationPowderArray.length-1" (click)="addMoreTab('Powder')"> <i class="fa fa-plus"></i> </div>
+					                                            </div>
+					                                        </li>
+					                                    </ul>
+					                                </div>
+					                                <div class="" *ngIf="medicationStatus[12].status==true">
+					                                    <div class="medic-heading">
+					                                        <div class="medicHead"> Mouthwash &amp; Gargle </div>
+					                                    </div>
+					                                    <ul class="medicine-list">
+					                                        <li *ngFor="let data of medicationMouthWashArray;let i =index">
+					                                            <div class="flex-rowdiv medication-form">
+					                                                <div class="form-group medicinfo">
+					                                                    <tag-input class="selectize-qual" [maxItems]="1" [addOnBlur]="true" (keyup)="onTextChangeOfMedName('Mouthwash',$event.target.value)" (onRemove)="onRemoveMedName('MouthwashInfo',medication.mouthwash[i])" (onAdd)="openFrequencyModalFromMed('MouthWashInfo',medication.mouthwash[i])" [(ngModel)]='medication.mouthwash[i].med_name' placeholder="Medicine Name" [separatorKeyCodes]="[188]" secondaryPlaceholder="Medicine Name" theme='bootstrap'>
+					                                                        <tag-input-dropdown [showDropdownIfEmpty]="true" [keepOpen]="false" [offset]="'30 0'" [appendToBody]="false" [autocompleteItems]="doctorMedicationMouthwashDB"></tag-input-dropdown>
+					                                                    </tag-input>
+					                                                </div>
+					                                                <div class="form-group frequency">
+					                                                    <div data-target="#combinedModal2" data-toggle="modal" (click)="openFrequencyModal(medication.mouthwash[i])"><span class="{{getMedFrequencyClass(medication.mouthwash[i].frequency)}}">{{medication.mouthwash[i].frequency}}</span></div>
+					                                                </div>
+					                                                <div class="form-group duration">
+					                                                    <div data-target="#combinedModal2" data-toggle="modal" (click)="openFrequencyModal(medication.mouthwash[i])"><span class="{{getMedDurationClass(medication.mouthwash[i].duration)}}">{{medication.mouthwash[i].duration}}</span></div>
+					                                                </div>
+					                                            </div>
+					                                            <div class="medicinfo">
+					                                                <tag-input class="selectize-qual" [addOnBlur]="true" [maxItems]="2" [(ngModel)]='medication.mouthwash[i].med_info' [onlyFromAutocomplete]="true" placeholder="Add more" [separatorKeyCodes]="[188]" secondaryPlaceholder="Medicine Info" theme='bootstrap'>
+					                                                    <tag-input-dropdown [showDropdownIfEmpty]="true" [keepOpen]="false" [offset]="'30 0'" [appendToBody]="false" [autocompleteItems]="doctorMedicationMouthwashInfoDB"></tag-input-dropdown>
+					                                                </tag-input>
+					                                            </div>
+					                                            <div class="medic-control medic-left">
+					                                                {{i+1}}
+					                                            </div>
+					                                            <div class="medic-control medic-right">
+					                                                <div class="li-close" (click)="removeMoreTab('MouthWash',i)"> <i class="fa fa-minus"></i> </div>
+					                                                <div class="li-close plus" *ngIf="i == medicationMouthWashArray.length-1" (click)="addMoreTab('MouthWash')"> <i class="fa fa-plus"></i> </div>
+					                                            </div>
+					                                        </li>
+					                                    </ul>
+					                                </div>
+					                                <div class="" *ngIf="medicationStatus[13].status==true">
+					                                    <div class="medic-heading">
+					                                        <div class="medicHead"> Lotion </div>
+					                                    </div>
+					                                    <ul class="medicine-list">
+					                                        <li *ngFor="let data of medicationLotionArray;let i =index">
+					                                            <div class="flex-rowdiv medication-form">
+					                                                <div class="form-group medicinfo">
+					                                                    <tag-input class="selectize-qual" [maxItems]="1" [addOnBlur]="true" (keyup)="onTextChangeOfMedName('Lotion',$event.target.value)" (onRemove)="onRemoveMedName('LotionInfo',medication.lotion[i])" (onAdd)="openFrequencyModalFromMed('LotionInfo',medication.lotion[i])" [(ngModel)]='medication.lotion[i].med_name' placeholder="Medicine Name" [separatorKeyCodes]="[188]" secondaryPlaceholder="Medicine Name" theme='bootstrap'>
+					                                                        <tag-input-dropdown [showDropdownIfEmpty]="true" [keepOpen]="false" [offset]="'30 0'" [appendToBody]="false" [autocompleteItems]="doctorMedicationLotionDB"></tag-input-dropdown>
+					                                                    </tag-input>
+					                                                </div>
+					                                                <div class="form-group duration">
+					                                                    <div data-target="#combinedModal2" data-toggle="modal" (click)="openFrequencyModal(medication.lotion[i])"><span class="{{getMedFrequencyClass(medication.lotion[i].frequency)}}">{{medication.lotion[i].frequency}}</span></div>
+					                                                </div>
+					                                                <div class="form-group duration">
+					                                                    <div data-target="#combinedModal2" data-toggle="modal" (click)="openFrequencyModal(medication.lotion[i])"><span class="{{getMedDurationClass(medication.lotion[i].duration)}}">{{medication.lotion[i].duration}}</span></div>
+					                                                </div>
+					                                            </div>
+					                                            <div class="medicinfo">
+					                                                <tag-input class="selectize-qual" [addOnBlur]="true" [maxItems]="2" [(ngModel)]='medication.lotion[i].med_info' [onlyFromAutocomplete]="true" placeholder="Add more" [separatorKeyCodes]="[188]" secondaryPlaceholder="Medicine Info" theme='bootstrap'>
+					                                                    <tag-input-dropdown [showDropdownIfEmpty]="true" [keepOpen]="false" [offset]="'30 0'" [appendToBody]="false" [autocompleteItems]="doctorMedicationLotionInfoDB"></tag-input-dropdown>
+					                                                </tag-input>
+					                                            </div>
+					                                            <div class="medic-control medic-left">
+					                                                {{i+1}}
+					                                            </div>
+					                                            <div class="medic-control medic-right">
+					                                                <div class="li-close" (click)="removeMoreTab('Lotion',i)"> <i class="fa fa-minus"></i> </div>
+					                                                <div class="li-close plus" *ngIf="i == medicationLotionArray.length-1" (click)="addMoreTab('Lotion')"> <i class="fa fa-plus"></i> </div>
+					                                            </div>
+					                                        </li>
+					                                    </ul>
+					                                </div>
+					                                <div class="" *ngIf="medicationStatus[14].status==true">
+					                                    <div class="medic-heading">
+					                                        <div class="medicHead"> Ointment </div>
+					                                    </div>
+					                                    <ul class="medicine-list">
+					                                        <li *ngFor="let data of medicationOintmentArray;let i =index">
+					                                            <div class="flex-rowdiv medication-form">
+					                                                <div class="form-group medicinfo">
+					                                                    <tag-input class="selectize-qual" [maxItems]="1" [addOnBlur]="true" (keyup)="onTextChangeOfMedName('Ointment',$event.target.value)" (onRemove)="onRemoveMedName('OintmentInfo',medication.ointment[i])" (onAdd)="openFrequencyModalFromMed('OintmentInfo',medication.ointment[i])" [(ngModel)]='medication.ointment[i].med_name' placeholder="Medicine Name" [separatorKeyCodes]="[188]" secondaryPlaceholder="Medicine Name" theme='bootstrap'>
+					                                                        <tag-input-dropdown [showDropdownIfEmpty]="true" [keepOpen]="false" [offset]="'30 0'" [appendToBody]="false" [autocompleteItems]="doctorMedicationOitmentDB"></tag-input-dropdown>
+					                                                    </tag-input>
+					                                                </div>
+					                                                <div class="form-group frequency">
+					                                                    <div data-target="#combinedModal2" data-toggle="modal" (click)="openFrequencyModal(medication.ointment[i])"><span class="{{getMedFrequencyClass(medication.ointment[i].frequency)}}">{{medication.ointment[i].frequency}}</span></div>
+					                                                </div>
+					                                                <div class="form-group duration">
+					                                                    <div data-target="#combinedModal2" data-toggle="modal" (click)="openFrequencyModal(medication.ointment[i])"><span class="{{getMedDurationClass(medication.ointment[i].duration)}}">{{medication.ointment[i].duration}}</span></div>
+					                                                </div>
+					                                            </div>
+					                                            <div class="medicinfo">
+					                                                <tag-input class="selectize-qual" [addOnBlur]="true" [maxItems]="2" [(ngModel)]='medication.ointment[i].med_info' [onlyFromAutocomplete]="true" placeholder="Add more" [separatorKeyCodes]="[188]" secondaryPlaceholder="Medicine Info" theme='bootstrap'>
+					                                                    <tag-input-dropdown [showDropdownIfEmpty]="true" [keepOpen]="false" [offset]="'30 0'" [appendToBody]="false" [autocompleteItems]="doctorMedicationOitmentInfoDB"></tag-input-dropdown>
+					                                                </tag-input>
+					                                            </div>
+					                                            <div class="medic-control medic-left">
+					                                                {{i+1}}
+					                                            </div>
+					                                            <div class="medic-control medic-right">
+					                                                <div class="li-close" (click)="removeMoreTab('Ointment',i)"> <i class="fa fa-minus"></i> </div>
+					                                                <div class="li-close plus" *ngIf="i == medicationOintmentArray.length-1"  (click)="addMoreTab('Ointment')"> <i class="fa fa-plus"></i> </div>
+					                                            </div>
+					                                        </li>
+					                                    </ul>
+					                                </div>
+					                                <!-- <div *ngIf="totalMedicationPresetSelected>0">
+					                                    <div class="" *ngFor="let data of doctorPresetArray;let i =index">
+					                                        <div *ngIf="data.status==true">
+					                                            <div class="selected_preset" *ngFor="let dataPreset of data.newPresetArray;let j =index">
+					                                                <div class="medic-heading">
+					                                                    <div class="medicHead"> {{dataPreset.name}} </div>
+					                                                </div>
+					                                                <ul class="medicine-list">
+					                                                    <li *ngIf="dataPreset.name=='Tablet' || dataPreset.name=='Capsule' || dataPreset.name=='Cream' || dataPreset.name=='Ointment' || dataPreset.name=='Aerosols' || dataPreset.name=='Powder' || dataPreset.name=='MouthWash'">
+					                                                        <div class="flex-rowdiv medication-form">
+					                                                            <div class="form-group medicinfo">
+					                                                                <div class="only-text">{{dataPreset.med_name[0].value}}</div>
+					                                                            </div>
+					                                                            <div class="form-group duration">
+					                                                                <div>{{dataPreset.frequency}}</div>
+					                                                            </div>
+					                                                            <div class="form-group duration">
+					                                                                <div>{{dataPreset.duration}}</div>
+					                                                            </div>
+					                                                        </div>
+					                                                        <div class="form-group medicinfo">
+					                                                            <div class="medic-info only-text" *ngIf="dataPreset.med_info">{{dataPreset.med_info[0].value}}</div>
+					                                                        </div>
+					                                                        <div class="medic-control medic-right">
+					                                                            <div class="li-close" (click)="removeMedPreset(i,j)"> <i class="fa fa-minus"></i> </div>
+					                                                        </div>
+					                                                        <div class="medic-control medic-left">
+					                                                            {{j+1}}
+					                                                        </div>
+					                                                    </li>
+					                                                    <li *ngIf="dataPreset.name=='Syrup' || dataPreset.name=='Suspension' || dataPreset.name=='Emulsion' || dataPreset.name=='Solution'">
+					                                                        <div class="flex-rowdiv medication-form">
+					                                                            <div class="form-group medicinfo">
+					                                                                <div class="only-text">{{dataPreset.med_name[0].value}}</div>
+					                                                            </div>
+					                                                            <div class="form-group duration">
+					                                                                <div>{{dataPreset.frequency}}</div>
+					                                                            </div>
+					                                                            <div class="form-group frequency duration">
+					                                                                <div>{{dataPreset.dosage}}</div>
+					                                                            </div>
+					                                                            <div class="form-group duration">
+					                                                                <div>{{dataPreset.duration}}</div>
+					                                                            </div>
+					                                                        </div>
+					                                                        <div class="form-group medicinfo">
+					                                                            <div class="medic-info only-text" *ngIf="dataPreset.med_info">{{dataPreset.med_info[0].value}}</div>
+					                                                        </div>
+					                                                        <div class="medic-control medic-right">
+					                                                            <div class="li-close" (click)="removeMedPreset(i,j)"> <i class="fa fa-minus"></i> </div>
+					                                                        </div>
+					                                                        <div class="medic-control medic-left">
+					                                                            {{j+1}}
+					                                                        </div>
+					                                                    </li>
+					                                                    <li *ngIf="dataPreset.name=='Injection' || dataPreset.name=='Gel' || dataPreset.name=='Lotion'">
+					                                                        <div class="flex-rowdiv medication-form">
+					                                                            <div class="form-group medicinfo">
+					                                                                <div class="only-text">{{dataPreset.med_name[0].value}}</div>
+					                                                            </div>
+					                                                            <div class="form-group duration">
+					                                                                <div>{{dataPreset.frequency}}</div>
+					                                                            </div>
+					                                                            <div class="form-group duration">
+					                                                                <div>{{dataPreset.duration}}</div>
+					                                                            </div>
+					                                                        </div>
+					                                                        <div class="form-group medicinfo">
+					                                                            <div class="medic-info only-text" *ngIf="dataPreset.med_info">{{dataPreset.med_info[0].value}}</div>
+					                                                        </div>
+					                                                        <div class="medic-control medic-right">
+					                                                            <div class="li-close" (click)="removeMedPreset(i,j)"> <i class="fa fa-minus"></i> </div>
+					                                                        </div>
+					                                                        <div class="medic-control medic-left">
+					                                                            {{j+1}}
+					                                                        </div>
+					                                                    </li>
+					                                                    <li *ngIf="dataPreset.name=='Drops'">
+					                                                        <div class="flex-rowdiv medication-form">
+					                                                            <div class="form-group medicinfo">
+					                                                                <div class="only-text">{{dataPreset.med_name[0].value}}</div>
+					                                                            </div>
+					                                                            <div class="form-group duration">
+					                                                                <div>{{dataPreset.frequency}}</div>
+					                                                            </div>
+					                                                            <div class="form-group frequency duration">
+					                                                                <div>{{dataPreset.quantity}}</div>
+					                                                            </div>
+					                                                            <div class="form-group duration">
+					                                                                <div>{{dataPreset.duration}}</div>
+					                                                            </div>
+					                                                        </div>
+					                                                        <div class="form-group medicinfo">
+					                                                            <div class="medic-info only-text" *ngIf="dataPreset.med_info">{{dataPreset.med_info[0].value}}</div>
+					                                                        </div>
+					                                                        <div class="medic-control medic-right">
+					                                                            <div class="li-close" (click)="removeMedPreset(i,j)"> <i class="fa fa-minus"></i> </div>
+					                                                        </div>
+					                                                        <div class="medic-control medic-left">
+					                                                            {{j+1}}
+					                                                        </div>
+					                                                    </li>
+					                                                </ul>
+					                                            </div>
+					                                        </div>
+					                                    </div>
+					                                </div> -->
+					                            </div>
+					                            <div class="tags-listing-div" *ngIf="medicationpreset==true">
+					                                <fieldset class="fieldset-preset">
+					                                    <legend class="legend-preset">Presets</legend>
+					                                    <ul class="tags-listing" *ngIf="doctorPresetArray && doctorPresetArray.length>0">
+					                                        <li class="{{getMedPresetClass('Medication',i)}}" *ngFor="let data of doctorPresetArray;let i = index" (click)="showHidePreset('Medication',i)"> <a href="javascript:void(0)"> {{data.preset_name}} </a> </li>
+					                                    </ul>
+					                                    <h5 class="text-muted" style="text-align:center" *ngIf="!doctorPresetArray || doctorPresetArray.length<1">
+					                                        No Presets Found, create them on Create Preset page
+					                                    </h5>
+					                                </fieldset>
+					                                <!-- <div class="form-group col-md-12 col-sm-12 col-xs-12 text-center">
+					                                    <button class="btn btn-yellow btn-sm" type="button" (click)="medicatPresets()"> OK </button>
+					                                </div> -->
+					                            </div>
+					                        </div>
+					                    </div>
+					                </div> 
+				      			</div>
+				          	</div>
+				          	<div role="tabpanel" class="tab-pane" id="dis-ins">
+				      			<div class="wrap-tab-cont">
+				      				<div class="row">
+					        			<div class="col-lg-6 col-lg-offset-6 text-right nxt-btn">
+					        				<div class="dshbrd-btn">
+												<a href="#doc-note" aria-controls="general" role="tab" data-toggle="tab" class="btn btn-custom" (click)="changeCurrentTab('doc-note')">Next</a>
+											</div>
+					        			</div>
+					        		</div>
+				      				<h4><b>Wound care</b></h4>
+				      				<div class="row">
+				      					<div class="col-lg-6">
+		      								<div class="form-group">
+		      									<input type="text" name="" class="form-control" placeholder="Type here" [(ngModel)]="woundCare.one">
+		      								</div>
+		      							</div>
+		      							<div class="col-lg-6">
+		      								<div class="form-group">
+		      									<input type="text" name="" class="form-control" placeholder="Type here" [(ngModel)]="woundCare.two">
+		      								</div>
+		      							</div>
+				      				</div>
+				      				<h4><b>Diet</b></h4>
+				      				<div class="row">
+				      					<div class="col-lg-6">
+		      								<div class="form-group">
+		      									<input type="text" name="" class="form-control" placeholder="Type here" [(ngModel)]="diet.one">
+		      								</div>
+		      							</div>
+		      							<div class="col-lg-6">
+		      								<div class="form-group">
+		      									<input type="text" name="" class="form-control" placeholder="Type here" [(ngModel)]="diet.two">
+		      								</div>
+		      							</div>
+				      				</div>
+				      				<h4><b>Lifestyle Changes</b></h4>
+				      				<div class="row">
+				      					<div class="col-lg-6">
+		      								<div class="form-group">
+		      									<input type="text" name="" class="form-control" placeholder="Type here" [(ngModel)]="lifestyle.one">
+		      								</div>
+		      							</div>
+		      							<div class="col-lg-6">
+		      								<div class="form-group">
+		      									<input type="text" name="" class="form-control" placeholder="Type here" [(ngModel)]="lifestyle.two">
+		      								</div>
+		      							</div>
+				      				</div>
+				      				<h4><b>Others</b></h4>
+				      				<div class="row">
+				      					<div class="col-lg-6">
+		      								<div class="form-group">
+		      									<input type="text" name="" class="form-control" placeholder="Type here" [(ngModel)]="others.one">
+		      								</div>
+		      							</div>
+		      							<div class="col-lg-6">
+		      								<div class="form-group">
+		      									<input type="text" name="" class="form-control" placeholder="Type here" [(ngModel)]="others.two">
+		      								</div>
+		      							</div>
+				      				</div>
+				      			</div>
+				      			
+				          	</div>
+				          	<div role="tabpanel" class="tab-pane" id="doc-note">
+				      			<div class="wrap-tab-cont">
+				      				<div class="row">
+				      					<div class="row">
+						        			<div class="col-lg-11 col-lg-offset-6 text-center nxt-btn1">
+						        				<div class="dshbrd-btn" (click)="dischargePatientApprovalByDr()">
+													<a class="btn btn-custom"> Approve </a>
+												</div>
+						        			</div>
+						        		</div>
+							    		<div class="col-md-12 col-sm-10 col-xs-12">
+							    			<div class="patient-popup discharge-popup">
+							    				<label>Doctor Note:</label>
+							    				<div class="discharge-note">
+							    					<textarea class="form-control txtfield" name="" rows="5" placeholder="Note" type="text" [(ngModel)]="doctorNote"></textarea>
+							    				</div>
+							    			</div>
+							    		</div>
+					        		</div>
+				      			</div>
+				          	</div>
+				        </div>
+				    </div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<!-- model -->
+<!-- Combined modal (Injection)-->
+<div class="modal fade combined_modal" id="combinedModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <h4 class="modal-title" *ngIf="currentFrequency && currentFrequency.med_name"> {{currentFrequency.med_name[0].value}}</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="combined_flex">
+                            <div class="frquency_cmbnd">
+                                <h3 class="combined_heading"> Frequency </h3>
+                                <ul class="combined_frequency">
+                                    <li class="{{getFrequencyClass('Once a day')}}" (click)="selectFrequency('Once a day')"> Once a day </li>
+                                    <li class="{{getFrequencyClass('Twice a day')}}" (click)="selectFrequency('Twice a day')"> Twice a day </li>
+                                    <li class="{{getFrequencyClass('Thrice a day')}}" (click)="selectFrequency('Thrice a day')"> Thrice a day </li>
+                                    <li class="{{getFrequencyClass('Four times a day')}}" (click)="selectFrequency('Four times a day')"> Four times a day </li>
+                                    <li class="{{getFrequencyClass('Every Morning')}}" (click)="selectFrequency('Every Morning')"> Every Morning </li>
+                                    <li class="{{getFrequencyClass('Every Night')}}" (click)="selectFrequency('Every Night')"> Every Night </li>
+                                    <li class="{{getFrequencyClass('Once a week')}}" (click)="selectFrequency('Once a week')"> Once a week </li>
+                                    <li class="{{getFrequencyClass('Once a month')}}" (click)="selectFrequency('Once a month')"> Once a month </li>
+                                    <li class="{{getFrequencyClass('Once in two week')}}" (click)="selectFrequency('Once in two week')"> Once in two week </li>
+                                    <li class="{{getFrequencyClass('Every 1 hour')}}" (click)="selectFrequency('Every 1 hour')"> Every 1 hour </li>
+                                    <li class="{{getFrequencyClass('Every 2 hour')}}" (click)="selectFrequency('Every 2 hour')"> Every 2 hour </li>
+                                    <li class="{{getFrequencyClass('Every 3 hour')}}" (click)="selectFrequency('Every 3 hour')"> Every 3 hour </li>
+                                    <li class="{{getFrequencyClass('Every 4 hour')}}" (click)="selectFrequency('Every 4 hour')"> Every 4 hour </li>
+                                    <li class="{{getFrequencyClass('Every 5 hour')}}" (click)="selectFrequency('Every 5 hour')"> Every 5 hour </li>
+                                    <li class="{{getFrequencyClass('Every 6 hour')}}" (click)="selectFrequency('Every 6 hour')"> Every 6 hour </li>
+                                    <li class="{{getFrequencyClass('Alternate day')}}" (click)="selectFrequency('Alternate day')"> Alternate day </li>
+                                    <li class="{{getFrequencyClass('At bed time')}}" (click)="selectFrequency('At bed time')"> At bed time </li>
+                                    <li class="{{getFrequencyClass('SoS')}}" (click)="selectFrequency('SoS')"> SoS </li>
+                                </ul>
+                            </div>
+                            <div class="duration_cmbnd">
+                                <h3 class="combined_heading"> Duration (Days) </h3>
+                                <ul class="combined_duration">
+                                    <li class="{{getDurationClass('1')}}" (click)="selectDuration('1')">1</li>
+                                    <li class="{{getDurationClass('2')}}" (click)="selectDuration('2')">2</li>
+                                    <li class="{{getDurationClass('3')}}" (click)="selectDuration('3')">3</li>
+                                    <li class="{{getDurationClass('4')}}" (click)="selectDuration('4')">4</li>
+                                    <li class="{{getDurationClass('5')}}" (click)="selectDuration('5')">5</li>
+                                    <li class="{{getDurationClass('6')}}" (click)="selectDuration('6')">6</li>
+                                    <li class="{{getDurationClass('7')}}" (click)="selectDuration('7')">7</li>
+                                    <li class="{{getDurationClass('8')}}" (click)="selectDuration('8')">8</li>
+                                    <li class="{{getDurationClass('9')}}" (click)="selectDuration('9')">9</li>
+                                    <li class="{{getDurationClass('10')}}" (click)="selectDuration('10')">10</li>
+                                    <li class="{{getDurationClass('12')}}" (click)="selectDuration('12')">12</li>
+                                    <li class="{{getDurationClass('14')}}" (click)="selectDuration('14')">14</li>
+                                    <li class="{{getDurationClass('15')}}" (click)="selectDuration('15')">15</li>
+                                    <li class="{{getDurationClass('18')}}" (click)="selectDuration('18')">18</li>
+                                    <li class="{{getDurationClass('21')}}" (click)="selectDuration('21')">21</li>
+                                    <li class="{{getDurationClass('25')}}" (click)="selectDuration('25')">25</li>
+                                    <li class="{{getDurationClass('28')}}" (click)="selectDuration('28')">28</li>
+                                    <li class="{{getDurationClass('30')}}" (click)="selectDuration('30')">30</li>
+                                    <li class="{{getDurationClass('35')}}" (click)="selectDuration('35')">35</li>
+                                    <li class="{{getDurationClass('42')}}" (click)="selectDuration('42')">42</li>
+                                    <li class="{{getDurationClass('60')}}" (click)="selectDuration('60')">60</li>
+                                    <li class="{{getDurationClass('90')}}" (click)="selectDuration('90')">90</li>
+                                    <li class="{{getDurationClass('120')}}" (click)="selectDuration('120')">120</li>
+                                    <li class="{{getDurationClass('180')}}" (click)="selectDuration('180')">180</li>
+                                </ul>
+                            </div>
+                            <div class="instr_cmbnd">
+                                <h3 class="combined_heading"> Special Instructions </h3>
+                                <ul class="combined_instruc">
+                                    <li class="{{getFrequencyClassSpecial('After meals')}}" (click)="selectFrequencySpecial('After meals')"> After meals</li>
+                                    <li class="{{getFrequencyClassSpecial('Empty stomach')}}" (click)="selectFrequencySpecial('Empty stomach')"> Empty stomach</li>
+                                    <li class="{{getFrequencyClassSpecial('Before meals')}}" (click)="selectFrequencySpecial('Before meals')"> Before meals</li>
+                                    <li class="{{getFrequencyClassSpecial('As needed')}}" (click)="selectFrequencySpecial('As needed')"> As needed</li>
+                                    <li class="{{getFrequencyClassSpecial('Each night')}}" (click)="selectFrequencySpecial('Each night')"> Each night</li>
+                                    <li class="{{getFrequencyClassSpecial('With milk')}}" (click)="selectFrequencySpecial('With milk')"> With milk</li>
+                                </ul>
+                                <h3 class="combined_heading"> Injection Mode </h3>
+                                <ul class="combined_inject">
+                                    <li class="{{getClassInjection('Intramuscular')}}" (click)="injectionSelected('Intramuscular')"> Intramuscular </li>
+                                    <li class="{{getClassInjection('Intravenous')}}" (click)="injectionSelected('Intravenous')"> Intravenous </li>
+                                    <li class="{{getClassInjection('Intradermal')}}" (click)="injectionSelected('Intradermal')"> Intradermal </li>
+                                    <li class="{{getClassInjection('Subcutaneous')}}" (click)="injectionSelected('Subcutaneous')"> Subcutaneous </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn_green" data-dismiss="modal" data-toggle="modal" type="button" (click)="saveFreqDurInjection()"> Save </button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Combined modal (Tablet) -->
+<div class="modal fade combined_modal" id="combinedModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <h4 class="modal-title" *ngIf="currentFrequency && currentFrequency.med_name"> {{currentFrequency.med_name[0].value}}</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="combined_flex">
+                            <div class="frquency_cmbnd">
+                                <h3 class="combined_heading"> Frequency </h3>
+                                <ul class="combined_frequency">
+                                    <li class="{{getFrequencyClass('Once a day')}}" (click)="selectFrequency('Once a day')"> Once a day </li>
+                                    <li class="{{getFrequencyClass('Twice a day')}}" (click)="selectFrequency('Twice a day')"> Twice a day </li>
+                                    <li class="{{getFrequencyClass('Thrice a day')}}" (click)="selectFrequency('Thrice a day')"> Thrice a day </li>
+                                    <li class="{{getFrequencyClass('Four times a day')}}" (click)="selectFrequency('Four times a day')"> Four times a day </li>
+                                    <li class="{{getFrequencyClass('Every Morning')}}" (click)="selectFrequency('Every Morning')"> Every Morning </li>
+                                    <li class="{{getFrequencyClass('Every Night')}}" (click)="selectFrequency('Every Night')"> Every Night </li>
+                                    <li class="{{getFrequencyClass('Once a week')}}" (click)="selectFrequency('Once a week')"> Once a week </li>
+                                    <li class="{{getFrequencyClass('Once a month')}}" (click)="selectFrequency('Once a month')"> Once a month </li>
+                                    <li class="{{getFrequencyClass('Once in two week')}}" (click)="selectFrequency('Once in two week')"> Once in two week </li>
+                                    <li class="{{getFrequencyClass('Every 1 hour')}}" (click)="selectFrequency('Every 1 hour')"> Every 1 hour </li>
+                                    <li class="{{getFrequencyClass('Every 2 hour')}}" (click)="selectFrequency('Every 2 hour')"> Every 2 hour </li>
+                                    <li class="{{getFrequencyClass('Every 3 hour')}}" (click)="selectFrequency('Every 3 hour')"> Every 3 hour </li>
+                                    <li class="{{getFrequencyClass('Every 4 hour')}}" (click)="selectFrequency('Every 4 hour')"> Every 4 hour </li>
+                                    <li class="{{getFrequencyClass('Every 5 hour')}}" (click)="selectFrequency('Every 5 hour')"> Every 5 hour </li>
+                                    <li class="{{getFrequencyClass('Every 6 hour')}}" (click)="selectFrequency('Every 6 hour')"> Every 6 hour </li>
+                                    <li class="{{getFrequencyClass('Alternate day')}}" (click)="selectFrequency('Alternate day')"> Alternate day </li>
+                                    <li class="{{getFrequencyClass('At bed time')}}" (click)="selectFrequency('At bed time')"> At bed time </li>
+                                    <li class="{{getFrequencyClass('SoS')}}" (click)="selectFrequency('SoS')"> SoS </li>
+                                </ul>
+                            </div>
+                            <div class="duration_cmbnd">
+                                <h3 class="combined_heading"> Duration (Days) </h3>
+                                <ul class="combined_duration">
+                                    <li class="{{getDurationClass('1')}}" (click)="selectDuration('1')">1</li>
+                                    <li class="{{getDurationClass('2')}}" (click)="selectDuration('2')">2</li>
+                                    <li class="{{getDurationClass('3')}}" (click)="selectDuration('3')">3</li>
+                                    <li class="{{getDurationClass('4')}}" (click)="selectDuration('4')">4</li>
+                                    <li class="{{getDurationClass('5')}}" (click)="selectDuration('5')">5</li>
+                                    <li class="{{getDurationClass('6')}}" (click)="selectDuration('6')">6</li>
+                                    <li class="{{getDurationClass('7')}}" (click)="selectDuration('7')">7</li>
+                                    <li class="{{getDurationClass('8')}}" (click)="selectDuration('8')">8</li>
+                                    <li class="{{getDurationClass('9')}}" (click)="selectDuration('9')">9</li>
+                                    <li class="{{getDurationClass('10')}}" (click)="selectDuration('10')">10</li>
+                                    <li class="{{getDurationClass('12')}}" (click)="selectDuration('12')">12</li>
+                                    <li class="{{getDurationClass('14')}}" (click)="selectDuration('14')">14</li>
+                                    <li class="{{getDurationClass('15')}}" (click)="selectDuration('15')">15</li>
+                                    <li class="{{getDurationClass('18')}}" (click)="selectDuration('18')">18</li>
+                                    <li class="{{getDurationClass('21')}}" (click)="selectDuration('21')">21</li>
+                                    <li class="{{getDurationClass('25')}}" (click)="selectDuration('25')">25</li>
+                                    <li class="{{getDurationClass('28')}}" (click)="selectDuration('28')">28</li>
+                                    <li class="{{getDurationClass('30')}}" (click)="selectDuration('30')">30</li>
+                                    <li class="{{getDurationClass('35')}}" (click)="selectDuration('35')">35</li>
+                                    <li class="{{getDurationClass('42')}}" (click)="selectDuration('42')">42</li>
+                                    <li class="{{getDurationClass('60')}}" (click)="selectDuration('60')">60</li>
+                                    <li class="{{getDurationClass('90')}}" (click)="selectDuration('90')">90</li>
+                                    <li class="{{getDurationClass('120')}}" (click)="selectDuration('120')">120</li>
+                                    <li class="{{getDurationClass('180')}}" (click)="selectDuration('180')">180</li>
+                                </ul>
+                            </div>
+                            <div class="instr_cmbnd">
+                                <h3 class="combined_heading"> Special Instructions </h3>
+                                <ul class="combined_instruc">
+                                    <li class="{{getFrequencyClassSpecial('After meals')}}" (click)="selectFrequencySpecial('After meals')"> After meals</li>
+                                    <li class="{{getFrequencyClassSpecial('Empty stomach')}}" (click)="selectFrequencySpecial('Empty stomach')"> Empty stomach</li>
+                                    <li class="{{getFrequencyClassSpecial('Before meals')}}" (click)="selectFrequencySpecial('Before meals')"> Before meals</li>
+                                    <li class="{{getFrequencyClassSpecial('As needed')}}" (click)="selectFrequencySpecial('As needed')"> As needed</li>
+                                    <li class="{{getFrequencyClassSpecial('Each night')}}" (click)="selectFrequencySpecial('Each night')"> Each night</li>
+                                    <li class="{{getFrequencyClassSpecial('With milk')}}" (click)="selectFrequencySpecial('With milk')"> With milk</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn_green" data-dismiss="modal" data-toggle="modal" type="button" (click)="saveFreqDuration()"> Done </button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Combined modal (Drops) -->
+<div class="modal fade combined_modal" id="combinedModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <h4 class="modal-title" *ngIf="currentFrequency && currentFrequency.med_name"> {{currentFrequency.med_name[0].value}}</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="combined_flex">
+                            <div class="frquency_cmbnd">
+                                <h3 class="combined_heading"> Frequency </h3>
+                                <ul class="combined_frequency">
+                                    <li class="{{getFrequencyClass('Once a day')}}" (click)="selectFrequency('Once a day')"> Once a day </li>
+                                    <li class="{{getFrequencyClass('Twice a day')}}" (click)="selectFrequency('Twice a day')"> Twice a day </li>
+                                    <li class="{{getFrequencyClass('Thrice a day')}}" (click)="selectFrequency('Thrice a day')"> Thrice a day </li>
+                                    <li class="{{getFrequencyClass('Four times a day')}}" (click)="selectFrequency('Four times a day')"> Four times a day </li>
+                                    <li class="{{getFrequencyClass('Every Morning')}}" (click)="selectFrequency('Every Morning')"> Every Morning </li>
+                                    <li class="{{getFrequencyClass('Every Night')}}" (click)="selectFrequency('Every Night')"> Every Night </li>
+                                    <li class="{{getFrequencyClass('Once a week')}}" (click)="selectFrequency('Once a week')"> Once a week </li>
+                                    <li class="{{getFrequencyClass('Once a month')}}" (click)="selectFrequency('Once a month')"> Once a month </li>
+                                    <li class="{{getFrequencyClass('Once in two week')}}" (click)="selectFrequency('Once in two week')"> Once in two week </li>
+                                    <li class="{{getFrequencyClass('Every 1 hour')}}" (click)="selectFrequency('Every 1 hour')"> Every 1 hour </li>
+                                    <li class="{{getFrequencyClass('Every 2 hour')}}" (click)="selectFrequency('Every 2 hour')"> Every 2 hour </li>
+                                    <li class="{{getFrequencyClass('Every 3 hour')}}" (click)="selectFrequency('Every 3 hour')"> Every 3 hour </li>
+                                    <li class="{{getFrequencyClass('Every 4 hour')}}" (click)="selectFrequency('Every 4 hour')"> Every 4 hour </li>
+                                    <li class="{{getFrequencyClass('Every 5 hour')}}" (click)="selectFrequency('Every 5 hour')"> Every 5 hour </li>
+                                    <li class="{{getFrequencyClass('Every 6 hour')}}" (click)="selectFrequency('Every 6 hour')"> Every 6 hour </li>
+                                    <li class="{{getFrequencyClass('Alternate day')}}" (click)="selectFrequency('Alternate day')"> Alternate day </li>
+                                    <li class="{{getFrequencyClass('At bed time')}}" (click)="selectFrequency('At bed time')"> At bed time </li>
+                                    <li class="{{getFrequencyClass('SoS')}}" (click)="selectFrequency('SoS')"> SoS </li>
+                                </ul>
+                            </div>
+                            <div class="duration_cmbnd">
+                                <h3 class="combined_heading"> Duration (Days) </h3>
+                                <ul class="combined_duration">
+                                    <li class="{{getDurationClass('1')}}" (click)="selectDuration('1')">1</li>
+                                    <li class="{{getDurationClass('2')}}" (click)="selectDuration('2')">2</li>
+                                    <li class="{{getDurationClass('3')}}" (click)="selectDuration('3')">3</li>
+                                    <li class="{{getDurationClass('4')}}" (click)="selectDuration('4')">4</li>
+                                    <li class="{{getDurationClass('5')}}" (click)="selectDuration('5')">5</li>
+                                    <li class="{{getDurationClass('6')}}" (click)="selectDuration('6')">6</li>
+                                    <li class="{{getDurationClass('7')}}" (click)="selectDuration('7')">7</li>
+                                    <li class="{{getDurationClass('8')}}" (click)="selectDuration('8')">8</li>
+                                    <li class="{{getDurationClass('9')}}" (click)="selectDuration('9')">9</li>
+                                    <li class="{{getDurationClass('10')}}" (click)="selectDuration('10')">10</li>
+                                    <li class="{{getDurationClass('12')}}" (click)="selectDuration('12')">12</li>
+                                    <li class="{{getDurationClass('14')}}" (click)="selectDuration('14')">14</li>
+                                    <li class="{{getDurationClass('15')}}" (click)="selectDuration('15')">15</li>
+                                    <li class="{{getDurationClass('18')}}" (click)="selectDuration('18')">18</li>
+                                    <li class="{{getDurationClass('21')}}" (click)="selectDuration('21')">21</li>
+                                    <li class="{{getDurationClass('25')}}" (click)="selectDuration('25')">25</li>
+                                    <li class="{{getDurationClass('28')}}" (click)="selectDuration('28')">28</li>
+                                    <li class="{{getDurationClass('30')}}" (click)="selectDuration('30')">30</li>
+                                    <li class="{{getDurationClass('35')}}" (click)="selectDuration('35')">35</li>
+                                    <li class="{{getDurationClass('42')}}" (click)="selectDuration('42')">42</li>
+                                    <li class="{{getDurationClass('60')}}" (click)="selectDuration('60')">60</li>
+                                    <li class="{{getDurationClass('90')}}" (click)="selectDuration('90')">90</li>
+                                    <li class="{{getDurationClass('120')}}" (click)="selectDuration('120')">120</li>
+                                    <li class="{{getDurationClass('180')}}" (click)="selectDuration('180')">180</li>
+                                </ul>
+                            </div>
+                            <div class="instr_cmbnd">
+                                <h3 class="combined_heading"> Special Instructions </h3>
+                                <ul class="combined_instruc">
+                                    <li class="{{getFrequencyClassSpecial('After meals')}}" (click)="selectFrequencySpecial('After meals')"> After meals</li>
+                                    <li class="{{getFrequencyClassSpecial('Empty stomach')}}" (click)="selectFrequencySpecial('Empty stomach')"> Empty stomach</li>
+                                    <li class="{{getFrequencyClassSpecial('Before meals')}}" (click)="selectFrequencySpecial('Before meals')"> Before meals</li>
+                                    <li class="{{getFrequencyClassSpecial('As needed')}}" (click)="selectFrequencySpecial('As needed')"> As needed</li>
+                                    <li class="{{getFrequencyClassSpecial('Each night')}}" (click)="selectFrequencySpecial('Each night')"> Each night</li>
+                                    <li class="{{getFrequencyClassSpecial('With milk')}}" (click)="selectFrequencySpecial('With milk')"> With milk</li>
+                                </ul>
+                                <h3 class="combined_heading"> Drop quantity </h3>
+                                <ul class="combined_instruc combined_drop">
+                                    <li *ngFor="let value of quantity_range" [ngClass]="value==tempQuantity ? 'active-cel' : ''" (click)="addTempQuantity(value)"> {{value}} </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn_green" data-dismiss="modal" data-toggle="modal" type="button" (click)="saveFreqDurDrops()"> Save </button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Combined modal (Syrup) -->
+<div class="modal fade combined_modal" id="combinedModal4" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <h4 class="modal-title" *ngIf="currentFrequency && currentFrequency.med_name"> {{currentFrequency.med_name[0].value}}</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="combined_flex">
+                            <div class="frquency_cmbnd">
+                                <h3 class="combined_heading"> Frequency </h3>
+                                <ul class="combined_frequency">
+                                    <li class="{{getFrequencyClass('Once a day')}}" (click)="selectFrequency('Once a day')"> Once a day </li>
+                                    <li class="{{getFrequencyClass('Twice a day')}}" (click)="selectFrequency('Twice a day')"> Twice a day </li>
+                                    <li class="{{getFrequencyClass('Thrice a day')}}" (click)="selectFrequency('Thrice a day')"> Thrice a day </li>
+                                    <li class="{{getFrequencyClass('Four times a day')}}" (click)="selectFrequency('Four times a day')"> Four times a day </li>
+                                    <li class="{{getFrequencyClass('Every Morning')}}" (click)="selectFrequency('Every Morning')"> Every Morning </li>
+                                    <li class="{{getFrequencyClass('Every Night')}}" (click)="selectFrequency('Every Night')"> Every Night </li>
+                                    <li class="{{getFrequencyClass('Once a week')}}" (click)="selectFrequency('Once a week')"> Once a week </li>
+                                    <li class="{{getFrequencyClass('Once a month')}}" (click)="selectFrequency('Once a month')"> Once a month </li>
+                                    <li class="{{getFrequencyClass('Once in two week')}}" (click)="selectFrequency('Once in two week')"> Once in two week </li>
+                                    <li class="{{getFrequencyClass('Every 1 hour')}}" (click)="selectFrequency('Every 1 hour')"> Every 1 hour </li>
+                                    <li class="{{getFrequencyClass('Every 2 hour')}}" (click)="selectFrequency('Every 2 hour')"> Every 2 hour </li>
+                                    <li class="{{getFrequencyClass('Every 3 hour')}}" (click)="selectFrequency('Every 3 hour')"> Every 3 hour </li>
+                                    <li class="{{getFrequencyClass('Every 4 hour')}}" (click)="selectFrequency('Every 4 hour')"> Every 4 hour </li>
+                                    <li class="{{getFrequencyClass('Every 5 hour')}}" (click)="selectFrequency('Every 5 hour')"> Every 5 hour </li>
+                                    <li class="{{getFrequencyClass('Every 6 hour')}}" (click)="selectFrequency('Every 6 hour')"> Every 6 hour </li>
+                                    <li class="{{getFrequencyClass('Alternate day')}}" (click)="selectFrequency('Alternate day')"> Alternate day </li>
+                                    <li class="{{getFrequencyClass('At bed time')}}" (click)="selectFrequency('At bed time')"> At bed time </li>
+                                    <li class="{{getFrequencyClass('SoS')}}" (click)="selectFrequency('SoS')"> SoS </li>
+                                </ul>
+                            </div>
+                            <div class="duration_cmbnd">
+                                <h3 class="combined_heading"> Duration (Days) </h3>
+                                <ul class="combined_duration">
+                                    <li class="{{getDurationClass('1')}}" (click)="selectDuration('1')">1</li>
+                                    <li class="{{getDurationClass('2')}}" (click)="selectDuration('2')">2</li>
+                                    <li class="{{getDurationClass('3')}}" (click)="selectDuration('3')">3</li>
+                                    <li class="{{getDurationClass('4')}}" (click)="selectDuration('4')">4</li>
+                                    <li class="{{getDurationClass('5')}}" (click)="selectDuration('5')">5</li>
+                                    <li class="{{getDurationClass('6')}}" (click)="selectDuration('6')">6</li>
+                                    <li class="{{getDurationClass('7')}}" (click)="selectDuration('7')">7</li>
+                                    <li class="{{getDurationClass('8')}}" (click)="selectDuration('8')">8</li>
+                                    <li class="{{getDurationClass('9')}}" (click)="selectDuration('9')">9</li>
+                                    <li class="{{getDurationClass('10')}}" (click)="selectDuration('10')">10</li>
+                                    <li class="{{getDurationClass('12')}}" (click)="selectDuration('12')">12</li>
+                                    <li class="{{getDurationClass('14')}}" (click)="selectDuration('14')">14</li>
+                                    <li class="{{getDurationClass('15')}}" (click)="selectDuration('15')">15</li>
+                                    <li class="{{getDurationClass('18')}}" (click)="selectDuration('18')">18</li>
+                                    <li class="{{getDurationClass('21')}}" (click)="selectDuration('21')">21</li>
+                                    <li class="{{getDurationClass('25')}}" (click)="selectDuration('25')">25</li>
+                                    <li class="{{getDurationClass('28')}}" (click)="selectDuration('28')">28</li>
+                                    <li class="{{getDurationClass('30')}}" (click)="selectDuration('30')">30</li>
+                                    <li class="{{getDurationClass('35')}}" (click)="selectDuration('35')">35</li>
+                                    <li class="{{getDurationClass('42')}}" (click)="selectDuration('42')">42</li>
+                                    <li class="{{getDurationClass('60')}}" (click)="selectDuration('60')">60</li>
+                                    <li class="{{getDurationClass('90')}}" (click)="selectDuration('90')">90</li>
+                                    <li class="{{getDurationClass('120')}}" (click)="selectDuration('120')">120</li>
+                                    <li class="{{getDurationClass('180')}}" (click)="selectDuration('180')">180</li>
+                                </ul>
+                            </div>
+                            <div class="instr_cmbnd">
+                                <h3 class="combined_heading"> Special Instructions </h3>
+                                <ul class="combined_instruc">
+                                    <li class="{{getFrequencyClassSpecial('After meals')}}" (click)="selectFrequencySpecial('After meals')"> After meals</li>
+                                    <li class="{{getFrequencyClassSpecial('Empty stomach')}}" (click)="selectFrequencySpecial('Empty stomach')"> Empty stomach</li>
+                                    <li class="{{getFrequencyClassSpecial('Before meals')}}" (click)="selectFrequencySpecial('Before meals')"> Before meals</li>
+                                    <li class="{{getFrequencyClassSpecial('As needed')}}" (click)="selectFrequencySpecial('As needed')"> As needed</li>
+                                    <li class="{{getFrequencyClassSpecial('Each night')}}" (click)="selectFrequencySpecial('Each night')"> Each night</li>
+                                    <li class="{{getFrequencyClassSpecial('With milk')}}" (click)="selectFrequencySpecial('With milk')"> With milk</li>
+                                </ul>
+                                <h3 class="combined_heading"> Dosage (ml) </h3>
+                                <ul class="combined_instruc combined_drop combined_dosage">
+                                    <li class="{{getClassDosage('1')}}" (click)="selectDosage('1')"> 1 </li>
+                                    <li class="{{getClassDosage('2')}}" (click)="selectDosage('2')"> 2 </li>
+                                    <li class="{{getClassDosage('3')}}" (click)="selectDosage('3')"> 3 </li>
+                                    <li class="{{getClassDosage('4')}}" (click)="selectDosage('4')"> 4 </li>
+                                    <li class="{{getClassDosage('5')}}" (click)="selectDosage('5')"> 5 </li>
+                                    <li class="{{getClassDosage('1.5')}}" (click)="selectDosage('1.5')"> 1.5 </li>
+                                    <li class="{{getClassDosage('2.5')}}" (click)="selectDosage('2.5')"> 2.5 </li>
+                                    <li class="{{getClassDosage('3.5')}}" (click)="selectDosage('3.5')"> 3.5 </li>
+                                    <li class="{{getClassDosage('4.5')}}" (click)="selectDosage('4.5')"> 4.5 </li>
+                                    <li class="{{getClassDosage('5.5')}}" (click)="selectDosage('5.5')"> 5.5 </li>
+                                    <li class="{{getClassDosage('6')}}" (click)="selectDosage('6')"> 6 </li>
+                                    <li class="{{getClassDosage('7')}}" (click)="selectDosage('7')"> 7 </li>
+                                    <li class="{{getClassDosage('8')}}" (click)="selectDosage('8')"> 8 </li>
+                                    <li class="{{getClassDosage('9')}}" (click)="selectDosage('9')"> 9 </li>
+                                    <li class="{{getClassDosage('10')}}" (click)="selectDosage('10')"> 10 </li>
+                                    <li class="{{getClassDosage('6.5')}}" (click)="selectDosage('6.5')"> 6.5 </li>
+                                    <li class="{{getClassDosage('7.5')}}" (click)="selectDosage('7.5')"> 7.5 </li>
+                                    <li class="{{getClassDosage('8.5')}}" (click)="selectDosage('8.5')"> 8.5 </li>
+                                    <li class="{{getClassDosage('9.5')}}" (click)="selectDosage('9.5')"> 9.5 </li>
+                                    <li class="{{getClassDosage('10.5')}}" (click)="selectDosage('10.5')"> 10.5 </li>
+                                    <li class="{{getClassDosage('11')}}" (click)="selectDosage('11')"> 11 </li>
+                                    <li class="{{getClassDosage('12')}}" (click)="selectDosage('12')"> 12 </li>
+                                    <li class="{{getClassDosage('15')}}" (click)="selectDosage('15')"> 15 </li>
+                                    <li class="{{getClassDosage('20')}}" (click)="selectDosage('20')"> 20 </li>
+                                    <li class="{{getClassDosage('25')}}" (click)="selectDosage('25')"> 25 </li>
+                                    <li class="{{getClassDosage('11.5')}}" (click)="selectDosage('11.5')"> 11.5 </li>
+                                    <li class="{{getClassDosage('12.5')}}" (click)="selectDosage('12.5')"> 12.5 </li>
+                                    <li class="{{getClassDosage('30')}}" (click)="selectDosage('30')"> 30 </li>
+                                    <li class="{{getClassDosage('40')}}" (click)="selectDosage('40')"> 40 </li>
+                                    <li class="{{getClassDosage('50')}}" (click)="selectDosage('50')"> 50 </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn_green" data-dismiss="modal" data-toggle="modal" type="button" (click)="saveFreqDurDosage()"> Save </button>
+            </div>
+        </div>
+    </div>
+</div>

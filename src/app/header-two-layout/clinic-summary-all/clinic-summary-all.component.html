@@ -1,0 +1,146 @@
+<div class="loader-box" *ngIf="loading">
+	<img src="./assets/imgs/load.gif" />
+</div>
+<div class="analytics-sec">
+	
+	<div class="ipd-deatil-sec">
+		<div class="inner-tab">
+			<ul class="nav nav-tabs new-ul-1" role="tablist">
+				<li role="presentation"  class="clz"><a href="javascript:void(0);" routerLink="/header-two-layout/clinic-summary-opd"> <div>OPD</div><small> (All Doctors)</small> </a></li>
+				<li role="presentation"><a href="javascript:void(0);" routerLink="/header-two-layout/clinic-summary-pharmacy">Pharmacy</a></li>
+				<li role="presentation"><a href="javascript:void(0);" routerLink="/header-two-layout/clinic-summary-diagnostic"> Diagnostics </a></li>
+				<li role="presentation"><a href="javascript:void(0);" routerLink="/header-two-layout/clinic-summary-ipd"> IPD </a></li>
+				<li role="presentation" class="active"><a href="javascript:void(0);" routerLink="/header-two-layout/clinic-summary-all">Summary</a></li>
+			</ul>
+		</div>
+		<div class="ipd-body">
+			<div class="cus-sidebar-wrapper side-bar-cstm">
+				<div class="cus-sidebar">
+					<ul> 
+						<li>
+							<div class="">
+								<div class="col-lg-3">
+									<h4 class="pd-left"><b>From</b></h4>
+								</div>
+								<div class="col-lg-9">
+									<div class="cstm-mg">
+										<angular2-date-picker [(ngModel)]="fromDate1" [settings]="settings"></angular2-date-picker>
+									</div>
+								</div>
+							</div>
+						</li>
+						<li>
+							<div class="">
+								<div class="col-lg-3">
+									<h4 class="pd-left"><b>To</b></h4>
+								</div>
+								<div class="col-lg-9">
+									<div class="cstm-mg">
+										<angular2-date-picker [(ngModel)]="toDate1" [settings]="settings"></angular2-date-picker>
+									</div>
+								</div>
+							</div>
+						</li>
+						<li class="text-right brder-cstm">
+							<div class="col-lg-12 text-center">
+								<button class="btn btn-go" (click)="go()">Go</button>
+							</div>
+						</li>
+						<li class="li-cstm"> <a href="javascript:void(0);"> For Past</a> </li>
+						<!-- <li class="{{getClass(0)}}" (click)="activatetab(0)" class="active"> <a href="javascript:void(0);"> Current </a> </li> -->
+						<li class="{{getClass(1)}}" (click)="activatetab(1)"> <a href="javascript:void(0);"> 1 Week &nbsp;<small *ngIf="activatedtab==1">({{fromDate | date: 'dd/LL/yy'}} - {{toDate | date: 'dd/LL/yy'}})</small> </a> </li>
+						<li class="{{getClass(2)}}" (click)="activatetab(2)"> <a href="javascript:void(0);"> 2 Weeks &nbsp;<small *ngIf="activatedtab==2">({{fromDate | date: 'dd/LL/yy'}} - {{toDate | date: 'dd/LL/yy'}})</small>  </a> </li>
+						<li class="{{getClass(3)}}" (click)="activatetab(3)"> <a href="javascript:void(0);"> 1 Month &nbsp;<small *ngIf="activatedtab==3">({{fromDate | date: 'dd/LL/yy'}} - {{toDate | date: 'dd/LL/yy'}})</small> </a> </li>
+						<li class="{{getClass(4)}}" (click)="activatetab(4)"> <a href="javascript:void(0);"> 3 Month &nbsp;<small *ngIf="activatedtab==4">({{fromDate | date: 'dd/LL/yy'}} - {{toDate | date: 'dd/LL/yy'}})</small></a> </li>
+						<li class="{{getClass(5)}}" (click)="activatetab(5)"> <a href="javascript:void(0);"> 6 Month &nbsp;<small *ngIf="activatedtab==5">({{fromDate | date: 'dd/LL/yy'}} - {{toDate | date: 'dd/LL/yy'}})</small></a> </li>
+						<li class="{{getClass(6)}}" (click)="activatetab(6)"> <a href="javascript:void(0);"> 1 Year &nbsp;<small *ngIf="activatedtab==6">({{fromDate | date: 'dd/LL/yy'}} - {{toDate | date: 'dd/LL/yy'}})</small></a> </li>
+						<li class="{{getClass(7)}}" (click)="activatetab(7)"> <a href="javascript:void(0);"> All </a> </li>
+					</ul>
+				</div>
+			</div>
+			<div class="stock-tab">
+				<div class="col-lg-10 col-lg-offset-2">
+					<div class="row">
+						<div class="col-lg-12">
+							<table class="table clinic-tab">
+								<tbody>
+									<tr class="cntrst">
+										<td rowspan="2" class="text-center">
+											<div>Services</div> <div>&</div><div> Doctors</div></td>
+											<td colspan="2" class="text-center"><b>OPD</b></td>
+											<td colspan="2" class="text-center"><b>PHARMACY</b></td>
+											<td colspan="2" class="text-center"><b>DIAGNOSTICS</b></td>
+											<td colspan="2" class="text-center"><b>IPD</b></td>
+											<td rowspan="2" class="text-center"><div>TOTAL </div><small>(Rs.)</small></td>
+										</tr>
+										<tr class="tr-head">
+											<td class="text-center">Collection</td>
+											<td class="text-center">Patients </td>
+											<td class="text-center">Sales</td>
+											<td class="text-center">Profit </td>
+											<td class="text-center">Collection </td>
+											<td class="text-center">Orders </td>
+											<td class="text-center">Collection</td>
+											<td class="text-center">Admission</td>
+										</tr>
+										<tr class="evn" *ngFor="let dr of dataSummaryArray">
+											<td class="text-left"><div>Dr. {{getDoctorName(dr.doctor_id)}}</div></td>
+											<td class="text-center"><div><small>{{dr.collection}}</small></div><div><small>({{dr.collectionPerc}}%)</small></div></td>
+											<td class="text-center"><div><small>{{dr.patients}}</small></div><div><small>({{dr.patientsPerc}}%)</small></div></td>
+											<td class="text-center"><div class="ornge"><small>{{dr.sales}}</small></div><div class="ornge"><small>({{dr.salesPerc}}%)</small></div></td>
+											<td class="text-center"><div><small>{{dr.profit}}</small></div><div><small>({{dr.profitPerc}}%)</small></div></td>
+											<td class="text-center"><div><small>{{dr.collectionDiagnostics}}</small></div><div><small>({{dr.collectionDiagnosticsPerc}}%)</small></div></td>
+											<td class="text-center"><div><small>{{dr.orders}}</small></div><div><small>({{dr.ordersPerc}}%)</small></div></td>
+											<td class="text-center"><div><small>{{dr.collectionIpd}}</small></div><div><small>({{dr.collectionIpdPerc}}%)</small></div></td>
+											<td class="text-center"><div><small>{{dr.ordersIpd}}</small></div><div><small>({{dr.ordersIpdPerc}}%)</small></div></td>
+											<td class="text-center">
+												<div><b>{{dr.totalCollection}}</b></div>
+												<div><b>({{dr.totalCollectionPerc}}%)</b></div>
+											</td>
+										</tr> 
+										<tr>
+											<td class="text-left">Other Sales</td>
+											<td class="text-center">N.A</td>
+											<td class="text-center">N.A</td>
+											<td class="text-center">0</td>
+											<td class="text-center">0</td>
+											<td class="text-center">0</td>
+											<td class="text-center">0</td>
+											<td class="text-center">N.A</td>
+											<td class="text-center">N.A</td>
+											<td class="text-center">0</td>
+										</tr>
+										<tr class="cntrst">
+											<td class="text-center"><div><b>Total</b></div></td>
+											<td class="text-center"><div><b>{{opdCollection}}</b></div></td>
+											<td class="text-center"><div><b>{{patientsArray.length}}</b></div></td>
+											<td class="text-center"><div><b>{{pharmacySales}}</b></div></td>
+											<td class="text-center vlt"><div><b>{{pharmacyProfit}}</b></div></td>
+											<td class="text-center"><div><b>{{diagnosticsCollection}}</b></div></td>
+											<td class="text-center"><div><b>{{diagnosticsOrders}}</b></div></td>
+											<td class="text-center"><div><b>{{ipdCollection}}</b></div></td>
+											<td class="text-center"><div><b>{{ipdAdmission}}</b></div></td>
+											<td class="text-center grin-new"><div><b>{{totalClinicCollection}}</b></div></td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+							<div class="col-lg-12">
+								<div class="row">
+									<br>
+									<div class="col-lg-12 text-right">
+										<button class="btn btn-custom blk">
+											<small>Total clinic collection </small> <span><b>: Rs. {{totalClinicCollection}}</b></span>
+										</button>&nbsp;&nbsp;&nbsp;
+										<button class="btn btn-custom btn-primary" (click)="exportPdf()">  
+											<div>Export</div>
+										</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>

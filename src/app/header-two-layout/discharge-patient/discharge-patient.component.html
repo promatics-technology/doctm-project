@@ -1,0 +1,40 @@
+<section>
+	<div class="container">
+		<div class="cus-content-wrapper">
+			<div class="cus-content">
+				<div class="">
+					<h2 class="text-center">IPD Patient for Discharge Approval</h2>
+					<div role="tabpanel" class="tab-pane active" id="total">
+		      			<div>
+						    <div class="row">
+						        <div class="col-md-12 col-sm-12 col-xs-12">
+						            <div class="beds-panel">
+						                <ul *ngIf="patients.length > 0" class="ul-mine">
+						                    <li *ngFor="let patient of patients;let i = index;">
+						                        <a class="redborder" (click)="openDetail(patient)">
+						                            <p class="red" >
+						                                <span *ngIf="patient.type=='general'">G</span>
+						                                <span *ngIf="patient.type=='private'">P</span>
+						                                <span *ngIf="patient.type=='semi_private'">SP</span>
+						                                -{{patient.bed_number}}
+						                            </p>
+						                            <img class="img-responsive" src="./assets/imgs/icons.png"/>
+						                            <p class="red">
+						                                {{patient.patientName}}
+						                            </p>
+						                        </a>
+						                    </li>
+						                </ul>
+						                <div *ngIf="patients.length==0" class="no-aprl">
+						                	<p>No Approval Request Found...</p>
+						                </div>
+						            </div>
+						        </div>
+						    </div>
+						</div>
+		          	</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>

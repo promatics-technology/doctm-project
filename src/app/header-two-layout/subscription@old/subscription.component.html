@@ -1,0 +1,267 @@
+<div class="container">
+	<div class="row">
+		<div class="col-lg-8 col-lg-offset-2">
+			<div class="tab_subscription">
+				<h5><b *ngIf="start_date">Subscription Date :</b> <span *ngIf="start_date">{{start_date}}</span><span *ngIf="!start_date">Subscription Not Activated</span></h5>
+				<h5 *ngIf="end_date"><b>Expiry / Auto-renew :</b> {{end_date}}</h5>
+				<!--h5 style="color:red;"><b>Your Subscription is Expired <a href="">Click here </a> to renew</b></h5-->
+				<table class="table table-bordered">
+				    <thead>
+				        <tr>
+				            <th class="text-left">S.No</th>
+				            <th class="text-center">Service</th>
+				            <th class="text-right">Price</th>
+				        </tr>
+				    </thead>
+				    <tbody *ngIf="doctorData.services_purchased.length >0 ">
+				        <tr  *ngFor="let purchase of subscriptionData?.purchaseInformation; let i = index" [class]="i%2==0 ? 'evn' : ''">
+				            <td class="text-left">{{i+1}}.</td>
+				            <td class="text-center">{{purchase.Item}}</td>
+				            <td class="text-right">
+				            	<span>&#x20b9; {{purchase.Price}}/-</span>
+							</td>
+				        </tr>
+				        
+				    </tbody>
+					
+					<tbody *ngIf="doctorData.services_purchased.length <=0 ">
+				        <tr  *ngFor="let purchase of services; let i = index" [class]="i%2==0 ? 'evn' : ''">
+				            <td class="text-left">{{i+1}}.</td>
+				            <td class="text-center">{{purchase.Item}}</td>
+				            <td class="text-right">
+				            	<span style="color:red">{{purchase.Price}}</span>
+							</td>
+				        </tr>
+				        
+				    </tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="container footer-cstm-an">
+	<div class="row">
+		<div class="col-lg-2 col-md-2 col-sm-12 col-xs-12 text-center">
+			<div>
+				<h4>Sub Total: &#x20b9; {{subTotal}}/- </h4>
+			</div>
+		</div>
+		<div class="col-lg-2 col-md-2 col-sm-12 col-xs-12 text-center">
+			<div>
+				<h4>| GST 0.0%</h4>
+			</div>
+		</div>
+		<div class="col-lg-2 col-md-2 col-sm-12 col-xs-12 text-center">
+			<div>
+				<h4>| CST 0.0%</h4>
+			</div>
+		</div>
+		<div class="col-lg-2 col-md-2 col-sm-12 col-xs-12 text-center">
+			<div>
+				<h4>Grand Total: &#x20b9; {{ subTotal }}</h4>
+			</div>
+		</div>
+		<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 text-center">
+			<div>
+				<!--button class="btn btn-grin">Renew</button>&nbsp; -->
+				<a *ngIf="doctorData.services_purchased.length>0" href="{{subscriptionData?.subscription.short_url}}" target="_blank" class="btn btn-grin">Show More Information</a>
+				<a *ngIf="doctorData.services_purchased.length<=0" href="javascript:void(0);" routerLink="/header-two-layout/edit-profile/clinic_services" class="btn btn-grin">Subscribe Now</a>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!--table style="width:800px;margin:0 auto;border:1px solid #000;border-bottom:transparent;">
+	<tr>
+		<td style="padding:8px;vertical-align: top;">
+			<img src="./assets/imgs/logoDoctm.png" style="width:150px;height: auto;">
+		</td>
+		<td style="padding:8px;">
+			<div ><b>NBC PHARMACY SDN BNB (company No: 1040000)</b></div>
+			<div ><span>/to 79.A. </span><span class="cls_004">Jakin 552-1i37, Ctamansafa</span></div>
+			<div ><span>TAX INVOICE</span></div>
+			<div ><span>NBC</span></div>
+			<div ><span>474011 Peteling! Jaya, Selangor</span></div>
+		</td>
+		<td style="vertical-align: top;text-align: right;padding:8px;border-right:1px solid #000;">
+			<h4 style="margin-top:0px;margin-bottom: 20px;"><b>TAX INVOICE</b></h4>
+			<div style="width:50%;float:left;">
+				GST ID NO:
+			</div>
+			<div style="width:50%;float:left;">
+				100/100/2015
+			</div>
+			<div style="width:50%;float:left;">
+				Invoice No:
+			</div>
+			<div style="width:50%;float:left;">
+				5898965896589
+			</div>
+			<div style="width:50%;float:left;">
+				Invoice Date:
+			</div>
+			<div style="width:50%;float:left;">
+				15 April 2019
+			</div>
+		</td>
+	</tr>
+	<tr>
+		<td style="padding:2px 8px;" width="200px">
+			<div ><b>Invoice To:</b></div>
+		</td>
+		<td style=" border-right:1px solid #000;" colspan="4">
+			<div ><span>/to 79.A. </span><span class="cls_004">Jakin 552-1i37, Ctamansafa</span></div>
+		</td>
+	</tr>
+	<tr>
+		<td style="padding:2px 8px;" width="200px">
+			<div ><b>Customer Name:</b></div>
+		</td>
+		<td style=" border-right:1px solid #000;" colspan="4">
+			<div ><span>John Doe</span></div>
+		</td>
+	</tr>
+	<tr>
+		<td style="padding:2px 8px;" width="200px">
+			<div ><b>Address</b></div>
+		</td>
+		<td style="border-right:1px solid #000;" colspan="4">
+			<div ><span class="cls_004">Jakin 552-1i37, Ctamansafa</span></div>
+		</td>
+	</tr>
+</table -->
+<!--table style="width:800px;margin:0 auto;border:1px solid #000;border-top:transparent;border-bottom: transparent;">
+	<tr>
+		<td style="height: 30px; border-right: 1px solid #000;" colspan="4"></td>
+	</tr>
+	<tr>
+		<td style="padding:8px;background-color: #efefef;color:#000; text-align: left;">
+			<h4>Date</h4>
+		</td>
+		<td style="padding:8px;background-color: #efefef;color:#000; text-align:center;">
+			<h4>Description</h4>
+		</td>
+		<td style="padding:8px;background-color: #efefef;color:#000; text-align:center;">
+			<h4>Prescriptions</h4>
+		</td>
+		<td style="padding:8px;background-color: #efefef;color:#000; text-align:right;">
+			<h4>Price</h4>
+		</td>
+	</tr>
+	<tr>
+		<td style="padding:8px;color:#000; text-align: left;">
+			<h5>16 April 2019</h5>
+		</td>
+		<td style="padding:8px;color:#000; text-align:center;">
+			<h5 style="margin:0 auto;width:250px;word-break: break-all;">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus aut dolorum, totam ipsa alias consequuntur aliquam.</h5>
+		</td>
+		<td style="padding:8px;color:#000; text-align:center;">
+			<h5 style="margin:0 auto;word-break: break-all;">28.00 TAB</h5>
+		</td>
+		<td style="padding:8px;color:#000; text-align:right;">
+			<h5>280.0</h5>
+		</td>
+	</tr>
+	<tr>
+		<td style="padding:8px;color:#000; text-align: left;">
+			<h5>16 April 2019</h5>
+		</td>
+		<td style="padding:8px;color:#000; text-align:center;">
+			<h5 style="margin:0 auto;width:250px;word-break: break-all;">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus aut dolorum, totam ipsa alias consequuntur aliquam.</h5>
+		</td>
+		<td style="padding:8px;color:#000; text-align:center;">
+			<h5 style="margin:0 auto;word-break: break-all;">28.00 TAB</h5>
+		</td>
+		<td style="padding:8px;color:#000; text-align:right;">
+			<h5>280.0</h5>
+		</td>
+	</tr>
+	<tr>
+		<td style="padding:8px;color:#000; text-align: left;">
+			<h5>16 April 2019</h5>
+		</td>
+		<td style="padding:8px;color:#000; text-align:center;">
+			<h5 style="margin:0 auto;width:250px;word-break: break-all;">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus aut dolorum, totam ipsa alias consequuntur aliquam.</h5>
+		</td>
+		<td style="padding:8px;color:#000; text-align:center;">
+			<h5 style="margin:0 auto;word-break: break-all;">28.00 TAB</h5>
+		</td>
+		<td style="padding:8px;color:#000; text-align:right;">
+			<h5>280.0</h5>
+		</td>
+	</tr>
+	<tr>
+		<td style="padding:8px;color:#000; text-align: left;">
+			<h5>16 April 2019</h5>
+		</td>
+		<td style="padding:8px;color:#000; text-align:center;">
+			<h5 style="margin:0 auto;width:250px;word-break: break-all;">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus aut dolorum, totam ipsa alias consequuntur aliquam.</h5>
+		</td>
+		<td style="padding:8px;color:#000; text-align:center;">
+			<h5 style="margin:0 auto;word-break: break-all;">28.00 TAB</h5>
+		</td>
+		<td style="padding:8px;color:#000; text-align:right;">
+			<h5>280.0</h5>
+		</td>
+	</tr>
+</table-->
+<!--table style="width:800px;margin:0 auto;border:1px solid #000;border-top:transparent;margin-bottom: 20px;">
+	<tr>
+		<td style="width:30%; text-align: right;padding: 8px;">
+			
+		</td>
+		<td style="width:30%; text-align: right;padding: 8px;">
+			
+		</td>
+		<td style="width:20%; text-align: right;padding: 8px;border-top:1px solid #000;">
+			<b>Sub Total</b>	
+		</td>
+		<td style="width:20%; text-align: right;padding: 8px;border-top:1px solid #000;">
+			{{subTotal}}
+		</td>
+	</tr>
+	<tr>
+		<td style="width:30%; text-align: right;padding: 8px;">
+			
+		</td>
+		<td style="width:30%; text-align: right;padding: 8px;">
+			
+		</td>
+		<td style="width:20%; text-align: right;padding: 8px;">
+			<b>Discount 10%</b>	
+		</td>
+		<td style="width:20%; text-align: right;padding: 8px;">
+			0.00
+		</td>
+	</tr>
+	<tr>
+		<td style="width:30%; text-align: right;padding: 8px;">
+			
+		</td>
+		<td style="width:30%; text-align: right;padding: 8px;">
+			
+		</td>
+		<td style="width:20%; text-align: right;padding: 8px;">
+			<b>Tax Rate 10%</b>	
+		</td>
+		<td style="width:20%; text-align: right;padding: 8px;">
+			0.00
+		</td>
+	</tr>
+	<tr>
+		<td style="width:30%; text-align: right;padding: 8px;">
+			
+		</td>
+		<td style="width:30%; text-align: right;padding: 8px;">
+			
+		</td>
+		<td style="width:20%; text-align: right;padding: 8px;">
+			<b>Tax Rate 10%</b>	
+		</td>
+		<td style="width:20%; text-align: right;padding: 8px;">
+			0.00
+		</td>
+	</tr>
+</table-->
+

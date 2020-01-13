@@ -1,0 +1,31 @@
+<div class="loader-box" *ngIf="loading">
+    <img src="./assets/imgs/load.gif" />
+</div>
+<div class="container">
+ <div class="row">
+ 	<div class="col-lg-12">
+ 		<h3 class="text-center">FAQ</h3>
+ 	</div>
+ 	<div class="col-lg-12">
+ 		<div class="bs-example" style="max-height: unset; overflow: unset;">
+		    <div class="panel-group" id="accordion">
+		        <div class="panel panel-default" *ngFor = "let list of getFaqData; let i= index ">
+		            <div class="panel-heading">
+		                <h4 class="panel-title">
+		                    <a data-toggle="collapse" data-parent="#accordion" href=#{{i+1}}><span class="glyphicon glyphicon-menu-right"></span> {{i+1}} &nbsp;{{list.question}}</a>
+		                </h4>
+		            </div>
+		            <div id={{i+1}} class="panel-collapse collapse">
+		                <div class="panel-body">
+		                    <p>{{list.answer}}</p>
+		                </div>
+		            </div>
+		        </div>
+		        
+		    </div>
+		</div>
+ 	</div>
+ </div>
+</div>
+    
+
